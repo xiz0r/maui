@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Maui.Graphics;
 using Microsoft.UI.Xaml.Controls;
 using WBrush = Microsoft.UI.Xaml.Media.Brush;
@@ -12,6 +11,8 @@ namespace Microsoft.Maui.Platform
 		{
 			var date = datePicker.Date;
 			platformDatePicker.UpdateDate(date);
+
+			platformDatePicker.UpdateTextColor(datePicker);
 		}
 
 		public static void UpdateDate(this CalendarDatePicker platformDatePicker, DateTime dateTime)
@@ -40,8 +41,28 @@ namespace Microsoft.Maui.Platform
 		public static void UpdateTextColor(this CalendarDatePicker platformDatePicker, IDatePicker datePicker)
 		{
 			Color textColor = datePicker.TextColor;
-			if (textColor != null)
-				platformDatePicker.Foreground = textColor.ToPlatform();
+
+			WBrush? platformBrush = textColor?.ToPlatform();
+
+			if (platformBrush == null)
+			{
+				platformDatePicker.Resources.RemoveKeys(TextColorResourceKeys);
+				platformDatePicker.ClearValue(DatePicker.ForegroundProperty);
+			}
+			else
+			{
+				platformDatePicker.Resources.SetValueForAllKey(TextColorResourceKeys, platformBrush);
+				platformDatePicker.Foreground = platformBrush;
+			}
 		}
+
+		// ResourceKeys controlling the foreground color of the CalendarDatePicker.
+		// https://docs.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.calendardatepicker?view=windows-app-sdk-1.1
+		static readonly string[] TextColorResourceKeys =
+		{
+			"CalendarDatePickerTextForeground",
+			"CalendarDatePickerTextForegroundDisabled",
+			"CalendarDatePickerTextForegroundSelected"
+		};
 	}
 }

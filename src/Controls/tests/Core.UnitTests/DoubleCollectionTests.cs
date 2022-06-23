@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			DoubleCollection result = _doubleCollectionConverter.ConvertFromInvariantString("10,110 60,10 110,110") as DoubleCollection;
 
-			Assert.IsNotNull(result);
+			Assert.NotNull(result);
 			Assert.Equal(6, result.Count);
 		}
 	}

@@ -51,7 +51,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 						break;
 					case "Date":
 						dateChanged = true;
-						Assert.IsFalse(maximumDateChanged);
+						Assert.False(maximumDateChanged);
 						break;
 				}
 			};
@@ -59,8 +59,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var newDate = new DateTime(2000, 1, 1);
 			picker.MaximumDate = newDate;
 
-			Assert.IsTrue(maximumDateChanged);
-			Assert.IsTrue(dateChanged);
+			Assert.True(maximumDateChanged);
+			Assert.True(dateChanged);
 
 			Assert.Equal(newDate, picker.MaximumDate);
 			Assert.Equal(newDate, picker.Date);
@@ -87,7 +87,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 						break;
 					case "Date":
 						dateChanged = true;
-						Assert.IsFalse(minimumDateChanged);
+						Assert.False(minimumDateChanged);
 						break;
 				}
 			};
@@ -95,8 +95,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var newDate = new DateTime(2000, 1, 1);
 			picker.MinimumDate = newDate;
 
-			Assert.IsTrue(minimumDateChanged);
-			Assert.IsTrue(dateChanged);
+			Assert.True(minimumDateChanged);
+			Assert.True(dateChanged);
 
 			Assert.Equal(newDate, picker.MinimumDate);
 			Assert.Equal(newDate, picker.Date);

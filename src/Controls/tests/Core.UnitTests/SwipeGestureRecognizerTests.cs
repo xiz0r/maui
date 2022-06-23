@@ -81,7 +81,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			((ISwipeGestureController)swipe).SendSwipe(view, totalX: 0, totalY: -175);
 			((ISwipeGestureController)swipe).DetectSwipe(view, SwipeDirection.Up);
-			Assert.IsFalse(detected);
+			Assert.False(detected);
 		}
 	}
 }

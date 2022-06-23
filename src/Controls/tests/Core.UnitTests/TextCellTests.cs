@@ -41,7 +41,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			cell.Command = cmd;
 			cell.OnTapped();
 
-			Assert.IsTrue(executed, "Command was not executed");
+			Assert.True(executed, "Command was not executed");
 		}
 
 		[Fact]
@@ -64,7 +64,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			cell.OnTapped();
 
-			Assert.IsTrue(executed, "Command was not executed");
+			Assert.True(executed, "Command was not executed");
 		}
 
 		[Fact]
@@ -80,7 +80,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				});
 
 			new TextCell { Command = cmd };
-			Assert.IsTrue(tested, "Command.CanExecute was not called");
+			Assert.True(tested, "Command.CanExecute was not called");
 		}
 
 		[Fact]
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var cmd = new Command(() => { }, () => false);
 			var cell = new TextCell { Command = cmd };
-			Assert.IsFalse(cell.IsEnabled, "Cell was not disabled");
+			Assert.False(cell.IsEnabled, "Cell was not disabled");
 		}
 
 		[Fact]
@@ -109,11 +109,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var cell = new TextCell { Command = cmd };
-			Assert.IsFalse(cell.IsEnabled, "Cell was not disabled");
+			Assert.False(cell.IsEnabled, "Cell was not disabled");
 
 			cmd.ChangeCanExecute();
 
-			Assert.IsTrue(cell.IsEnabled, "Cell was not reenabled");
+			Assert.True(cell.IsEnabled, "Cell was not reenabled");
 		}
 
 		[Fact]
@@ -122,7 +122,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var template = new DataTemplate(typeof(TextCell));
 			var content = template.CreateContent();
 
-			Assert.IsNotNull(content);
+			Assert.NotNull(content);
 			Assert.That(content, Is.InstanceOf<TextCell>());
 		}
 

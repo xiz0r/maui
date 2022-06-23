@@ -28,8 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return typeof(UriImageSourceTests).Assembly.GetManifestResourceStream(uri.LocalPath.Substring(1));
 		}
 
-		[Fact]
-		[Ignore("LoadImageFromStream")]
+		[Fact(Skip = "LoadImageFromStream")]
 		public void LoadImageFromStream()
 		{
 			IStreamImageSource loader = new UriImageSource
@@ -41,8 +40,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(79109, s0.Length);
 		}
 
-		[Fact]
-		[Ignore("SecondCallLoadFromCache")]
+		[Fact(Skip = "SecondCallLoadFromCache")]
 		public void SecondCallLoadFromCache()
 		{
 			IStreamImageSource loader = new UriImageSource
@@ -64,8 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Fact]
-		[Ignore("DoNotKeepFailedRetrieveInCache")]
+		[Fact(Skip = "DoNotKeepFailedRetrieveInCache")]
 		public void DoNotKeepFailedRetrieveInCache()
 		{
 			IStreamImageSource loader = new UriImageSource
@@ -75,16 +72,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(0, networkcalls);
 
 			var s0 = loader.GetStreamAsync().Result;
-			Assert.IsNull(s0);
+			Assert.Null(s0);
 			Assert.Equal(1, networkcalls);
 
 			var s1 = loader.GetStreamAsync().Result;
-			Assert.IsNull(s1);
+			Assert.Null(s1);
 			Assert.Equal(2, networkcalls);
 		}
 
-		[Fact]
-		[Ignore("ConcurrentCallsOnSameUriAreQueued")]
+		[Fact(Skip = "ConcurrentCallsOnSameUriAreQueued")]
 		public void ConcurrentCallsOnSameUriAreQueued()
 		{
 			IStreamImageSource loader = new UriImageSource
@@ -119,7 +115,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var urlHash1 = Crc64.ComputeHashString("http://www.optipess.com/wp-content/uploads/2010/08/02_Bad-Comics6-10.png?a=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbasdasdasdasdasasdasdasdasdasd");
 			var urlHash2 = Crc64.ComputeHashString("http://www.optipess.com/wp-content/uploads/2010/08/02_Bad-Comics6-10.png?a=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbasdasdasdasdasasdasdasdasdasd");
-			Assert.IsTrue(urlHash1 == urlHash2);
+			Assert.True(urlHash1 == urlHash2);
 		}
 
 		[Fact]
@@ -127,7 +123,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var urlHash1 = Crc64.ComputeHashString("http://www.optipess.com/wp-content/uploads/2010/08/02_Bad-Comics6-10.png?a=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbasdasdasdasdasasdasdasdasdasd");
 			var urlHash2 = Crc64.ComputeHashString("http://www.optipess.com/wp-content/uploads/2010/08/02_Bad-Comics6-10.png?a=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbasdasdasdasdasasdasda");
-			Assert.IsTrue(urlHash1 != urlHash2);
+			Assert.True(urlHash1 != urlHash2);
 		}
 
 	}

@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				EndPoint = new Point(1, 0)
 			};
 
-			Assert.IsNotNull(linearGradientBrush);
+			Assert.NotNull(linearGradientBrush);
 		}
 
 		[Fact]

@@ -117,7 +117,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item);
 
 			var itemsAreEquals = item.Equals(shell.Items[0]);
-			Assert.IsTrue(itemsAreEquals);
+			Assert.True(itemsAreEquals);
 
 			IShellController shellController = (IShellController)shell;
 			var groups = shellController.GenerateFlyoutGrouping();

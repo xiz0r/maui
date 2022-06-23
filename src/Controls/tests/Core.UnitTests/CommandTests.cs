@@ -167,7 +167,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var command = new Command<FakeChildContext>(context => { }, context => true);
 
-			Assert.IsFalse(command.CanExecute(new FakeParentContext()), "the parameter is of the wrong type");
+			Assert.False(command.CanExecute(new FakeParentContext()), "the parameter is of the wrong type");
 		}
 
 		[Fact]
@@ -175,7 +175,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var command = new Command<int>(context => { }, context => true);
 
-			Assert.IsFalse(command.CanExecute(10.5), "the parameter is of the wrong type");
+			Assert.False(command.CanExecute(10.5), "the parameter is of the wrong type");
 		}
 
 		[Fact]
@@ -183,7 +183,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var command = new Command<FakeChildContext>(context => { }, context => true);
 
-			Assert.IsTrue(command.CanExecute(null), "null is a valid value for a reference type");
+			Assert.True(command.CanExecute(null), "null is a valid value for a reference type");
 		}
 
 		[Fact]
@@ -191,7 +191,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var command = new Command<int?>(context => { }, context => true);
 
-			Assert.IsTrue(command.CanExecute(null), "null is a valid value for a Nullable<int> type");
+			Assert.True(command.CanExecute(null), "null is a valid value for a Nullable<int> type");
 		}
 
 		[Fact]
@@ -199,7 +199,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var command = new Command<int>(context => { }, context => true);
 
-			Assert.IsFalse(command.CanExecute(null), "null is not a valid valid for int");
+			Assert.False(command.CanExecute(null), "null is not a valid valid for int");
 		}
 
 		[Fact]
@@ -209,7 +209,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var command = new Command<FakeChildContext>(context => executions += 1);
 
 			Assert.DoesNotThrow(() => command.Execute(new FakeParentContext()), "the command should not execute, so no exception should be thrown");
-			Assert.IsTrue(executions == 0, "the command should not have executed");
+			Assert.True(executions == 0, "the command should not have executed");
 		}
 
 		[Fact]
@@ -219,7 +219,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var command = new Command<int>(context => executions += 1);
 
 			Assert.DoesNotThrow(() => command.Execute(10.5), "the command should not execute, so no exception should be thrown");
-			Assert.IsTrue(executions == 0, "the command should not have executed");
+			Assert.True(executions == 0, "the command should not have executed");
 		}
 
 		[Fact]
@@ -229,7 +229,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var command = new Command<FakeChildContext>(context => executions += 1);
 
 			Assert.DoesNotThrow(() => command.Execute(null), "null is a valid value for a reference type");
-			Assert.IsTrue(executions == 1, "the command should have executed");
+			Assert.True(executions == 1, "the command should have executed");
 		}
 
 		[Fact]
@@ -239,7 +239,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var command = new Command<int?>(context => executions += 1);
 
 			Assert.DoesNotThrow(() => command.Execute(null), "null is a valid value for a Nullable<int> type");
-			Assert.IsTrue(executions == 1, "the command should have executed");
+			Assert.True(executions == 1, "the command should have executed");
 		}
 
 		[Fact]
@@ -249,7 +249,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var command = new Command<int>(context => executions += 1);
 
 			Assert.DoesNotThrow(() => command.Execute(null), "null is not a valid value for int");
-			Assert.IsTrue(executions == 0, "the command should not have executed");
+			Assert.True(executions == 0, "the command should not have executed");
 		}
 	}
 }

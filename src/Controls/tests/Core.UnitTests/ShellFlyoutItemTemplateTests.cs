@@ -163,7 +163,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label = grid.LogicalChildren.OfType<Label>().First();
 
 			Assert.Equal(Colors.Red, label.BackgroundColor);
-			Assert.IsTrue(VisualStateManager.GoToState(grid, "Selected"));
+			Assert.True(VisualStateManager.GoToState(grid, "Selected"));
 			Assert.Equal(Colors.Green, label.BackgroundColor);
 		}
 

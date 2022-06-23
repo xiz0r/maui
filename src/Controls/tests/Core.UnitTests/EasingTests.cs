@@ -13,8 +13,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(input, Easing.Linear.Ease(input));
 		}
 
-		[Fact]
-		public void AllRunFromZeroToOne([Values(0.0, 1.0)] double val)
+		[Theory]
+		[InlineData(0.0)]
+		[InlineData(1.0)]
+		public void AllRunFromZeroToOne(double val)
 		{
 			const double epsilon = 0.001;
 			Assert.True(Math.Abs(val - Easing.Linear.Ease(val)) < epsilon);

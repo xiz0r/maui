@@ -8,7 +8,7 @@ using AbsoluteLayoutFlags = Microsoft.Maui.Layouts.AbsoluteLayoutFlags;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class AbsoluteLayoutTests : BaseTestFixtureXUnitXUnit
+	public class AbsoluteLayoutTests : BaseTestFixtureXUnit
 	{
 		public AbsoluteLayoutTests()
 		{
@@ -97,15 +97,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		public static IEnumerable<object[]> RelativeData()
 		{
-			List<List<double>> inputs = new List<List<double>> 
-			{ 
-				new() {0.0, 0.2, 0.5, 1.0 },
-				new() {0.0, 0.2, 0.5, 1.0 },
-				new() {0.0, 0.2, 0.5, 1.0 },
-				new() {0.0, 0.2, 0.5, 1.0 }
-			};
-
-			return TestDataHelpers.Combinations(inputs);
+			return TestDataHelpers.Combinations(new List<double>() { 0.0, 0.2, 0.5, 1.0 });
 		}
 
 		[Theory]

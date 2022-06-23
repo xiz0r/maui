@@ -21,7 +21,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Rectangle rectangle = _strokeShapeTypeConverter.ConvertFromInvariantString(value) as Rectangle;
 
-			Assert.IsNotNull(rectangle);
+			Assert.NotNull(rectangle);
 		}
 
 		[TestCase("roundRectangle 12")]
@@ -34,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			RoundRectangle roundRectangle = _strokeShapeTypeConverter.ConvertFromInvariantString(value) as RoundRectangle;
 
-			Assert.IsNotNull(roundRectangle);
+			Assert.NotNull(roundRectangle);
 
 			Assert.AreNotEqual(roundRectangle.CornerRadius.TopLeft, 0);
 			Assert.AreNotEqual(roundRectangle.CornerRadius.TopRight, 0);
@@ -50,8 +50,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Path path = _strokeShapeTypeConverter.ConvertFromInvariantString(value) as Path;
 
-			Assert.IsNotNull(path);
-			Assert.IsNotNull(path.Data);
+			Assert.NotNull(path);
+			Assert.NotNull(path.Data);
 		}
 
 		[TestCase("polygon 10,110 60,10 110,110")]
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Polygon polygon = _strokeShapeTypeConverter.ConvertFromInvariantString(value) as Polygon;
 
-			Assert.IsNotNull(polygon);
+			Assert.NotNull(polygon);
 			Assert.NotZero(polygon.Points.Count);
 		}
 
@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Polyline polyline = _strokeShapeTypeConverter.ConvertFromInvariantString(value) as Polyline;
 
-			Assert.IsNotNull(polyline);
+			Assert.NotNull(polyline);
 			Assert.NotZero(polyline.Points.Count);
 		}
 
@@ -84,7 +84,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Ellipse ellipse = _strokeShapeTypeConverter.ConvertFromInvariantString(value) as Ellipse;
 
-			Assert.IsNotNull(ellipse);
+			Assert.NotNull(ellipse);
 		}
 	}
 }

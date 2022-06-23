@@ -13,21 +13,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TextAndAttributedTextMutuallyExclusive()
 		{
 			var label = new Label();
-			Assert.IsNull(label.Text);
-			Assert.IsNull(label.FormattedText);
+			Assert.Null(label.Text);
+			Assert.Null(label.FormattedText);
 
 			label.Text = "Foo";
 			Assert.Equal("Foo", label.Text);
-			Assert.IsNull(label.FormattedText);
+			Assert.Null(label.FormattedText);
 
 			var fs = new FormattedString();
 			label.FormattedText = fs;
-			Assert.IsNull(label.Text);
+			Assert.Null(label.Text);
 			Assert.AreSame(fs, label.FormattedText);
 
 			label.Text = "Foo";
 			Assert.Equal("Foo", label.Text);
-			Assert.IsNull(label.FormattedText);
+			Assert.Null(label.FormattedText);
 		}
 
 		[Fact]
@@ -43,29 +43,29 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			fired = false;
 			label.Text = "Foo";
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 
 			fired = false;
 			label.TextTransform = TextTransform.Lowercase;
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 
 			fired = false;
 			label.TextTransform = TextTransform.Uppercase;
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 
 			fired = false;
 			label.TextTransform = TextTransform.None;
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 
 			var fs = new FormattedString();
 
 			fired = false;
 			label.FormattedText = fs;
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 
 			fired = false;
 			fs.Spans.Add(new Span { Text = "bar" });
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 		}
 
 		[Fact]

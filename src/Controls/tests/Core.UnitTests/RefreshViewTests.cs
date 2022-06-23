@@ -26,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void StartsEnabled()
 		{
 			RefreshView refreshView = new RefreshView();
-			Assert.IsTrue(refreshView.IsEnabled);
+			Assert.True(refreshView.IsEnabled);
 		}
 
 		[Fact]
@@ -34,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			RefreshView refreshView = new RefreshView();
 			refreshView.Command = new Command(() => { }, () => false);
-			Assert.IsFalse(refreshView.IsEnabled);
+			Assert.False(refreshView.IsEnabled);
 		}
 
 		[Fact]
@@ -42,7 +42,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			RefreshView refreshView = new RefreshView();
 			refreshView.Command = new Command(() => { }, () => true);
-			Assert.IsTrue(refreshView.IsEnabled);
+			Assert.True(refreshView.IsEnabled);
 		}
 
 		[Fact]
@@ -53,7 +53,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			command = new Command(() => command.ChangeCanExecute(), () => !refreshView.IsRefreshing);
 			refreshView.Command = command;
 			refreshView.IsRefreshing = true;
-			Assert.IsTrue(refreshView.IsRefreshing);
+			Assert.True(refreshView.IsRefreshing);
 		}
 
 		[Fact]
@@ -67,12 +67,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			canExecute = false;
 			command.ChangeCanExecute();
-			Assert.IsFalse(refreshView.IsEnabled);
+			Assert.False(refreshView.IsEnabled);
 
 
 			canExecute = true;
 			command.ChangeCanExecute();
-			Assert.IsTrue(refreshView.IsEnabled);
+			Assert.True(refreshView.IsEnabled);
 		}
 
 		[Fact]
@@ -85,11 +85,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			refreshView.CommandParameter = true;
 			refreshView.Command = command;
 
-			Assert.IsTrue(refreshView.IsEnabled);
+			Assert.True(refreshView.IsEnabled);
 			refreshView.CommandParameter = false;
-			Assert.IsFalse(refreshView.IsEnabled);
+			Assert.False(refreshView.IsEnabled);
 			refreshView.CommandParameter = true;
-			Assert.IsTrue(refreshView.IsEnabled);
+			Assert.True(refreshView.IsEnabled);
 		}
 
 		[Fact]
@@ -100,11 +100,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool canExecute = true;
 			var command = new Command(() => { }, () => false);
 			refreshView.Command = command;
-			Assert.IsFalse(refreshView.IsEnabled);
+			Assert.False(refreshView.IsEnabled);
 			refreshView.Command = null;
-			Assert.IsTrue(refreshView.IsEnabled);
+			Assert.True(refreshView.IsEnabled);
 			refreshView.Command = command;
-			Assert.IsFalse(refreshView.IsEnabled);
+			Assert.False(refreshView.IsEnabled);
 		}
 
 		[Fact]
@@ -115,17 +115,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool canExecute = true;
 			refreshView.Command = new Command(() => { }, () => false);
 			refreshView.IsRefreshing = true;
-			Assert.IsFalse(refreshView.IsRefreshing);
+			Assert.False(refreshView.IsRefreshing);
 		}
 
 		[Fact]
 		public void IsRefreshingSettableToTrue()
 		{
 			RefreshView refreshView = new RefreshView();
-			Assert.IsFalse(refreshView.IsRefreshing);
+			Assert.False(refreshView.IsRefreshing);
 
 			refreshView.IsRefreshing = true;
-			Assert.IsTrue(refreshView.IsRefreshing);
+			Assert.True(refreshView.IsRefreshing);
 		}
 
 		[Fact]
@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			RefreshView refreshView = new RefreshView();
 			refreshView.IsEnabled = false;
 			refreshView.IsRefreshing = true;
-			Assert.IsFalse(refreshView.IsRefreshing);
+			Assert.False(refreshView.IsRefreshing);
 		}
 
 		[Fact]
@@ -143,7 +143,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			RefreshView refreshView = new RefreshView();
 			refreshView.IsRefreshing = true;
 			refreshView.IsEnabled = false;
-			Assert.IsFalse(refreshView.IsRefreshing);
+			Assert.False(refreshView.IsRefreshing);
 		}
 
 		[Fact]
@@ -152,9 +152,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			RefreshView refreshView = new RefreshView();
 			bool eventFired = false;
 			refreshView.Refreshing += (_, __) => eventFired = true;
-			Assert.IsFalse(eventFired);
+			Assert.False(eventFired);
 			refreshView.IsRefreshing = true;
-			Assert.IsTrue(eventFired);
+			Assert.True(eventFired);
 		}
 	}
 }

@@ -326,7 +326,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			contentView.BindingContext = bc;
 
 			Assert.AreNotEqual(bc, ((IElementController)contentView).LogicalChildren[0].BindingContext);
-			Assert.IsNull(((IElementController)contentView).LogicalChildren[0].BindingContext);
+			Assert.Null(((IElementController)contentView).LogicalChildren[0].BindingContext);
 		}
 
 		[Fact]

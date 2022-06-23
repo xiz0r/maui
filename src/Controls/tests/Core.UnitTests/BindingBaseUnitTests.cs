@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -200,10 +201,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.KeepAlive(bindable);
 		}
 
-		[Test, Category("[Binding] Set Value")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Set Value")]
 		public void ValueSetOnOneWay(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new MockViewModel
@@ -242,10 +244,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(messages.Count, Is.EqualTo(0), "An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Set Value")]
+		[Theory, Category("[Binding] Set Value")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
 		public void ValueSetOnOneWayToSource(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new MockViewModel();
@@ -282,10 +285,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Set Value")]
+		[Theory, Category("[Binding] Set Value")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
 		public void ValueSetOnTwoWay(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new MockViewModel
@@ -325,9 +329,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Update Value")]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory, Category("[Binding] Update Value")]
 		public void ValueUpdatedWithSimplePathOnOneWayBinding(
-			[Values(true, false)] bool isDefault)
+			bool isDefault)
 		{
 			const string newvalue = "New Value";
 			var viewmodel = new MockViewModel
@@ -360,9 +366,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Update Value")]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory, Category("[Binding] Update Value")]
 		public void ValueUpdatedWithSimplePathOnOneWayToSourceBinding(
-			[Values(true, false)] bool isDefault)
+			bool isDefault)
 
 		{
 			const string newvalue = "New Value";
@@ -403,9 +411,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Update Value")]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory, Category("[Binding] Update Value")]
 		public void ValueUpdatedWithSimplePathOnTwoWayBinding(
-			[Values(true, false)] bool isDefault)
+			bool isDefault)
 		{
 			const string newvalue = "New Value";
 			var viewmodel = new MockViewModel
@@ -446,8 +456,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void ValueUpdatedWithOldContextDoesNotUpdateWithOneWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -482,8 +493,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void ValueUpdatedWithOldContextDoesNotUpdateWithTwoWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -524,8 +536,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + messages.FirstOrDefault());
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void ValueUpdatedWithOldContextDoesNotUpdateWithOneWayToSourceBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -601,10 +614,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => bindable.BindingContext = null, Throws.Nothing);
 		}
 
-		[Category("[Binding] Simple paths")]
-		[TestCase(BindingMode.OneWay)]
-		[TestCase(BindingMode.OneWayToSource)]
-		[TestCase(BindingMode.TwoWay)]
+		[Theory, Category("[Binding] Simple paths")]
+		[InlineData(BindingMode.OneWay)]
+		[InlineData(BindingMode.OneWayToSource)]
+		[InlineData(BindingMode.TwoWay)]
 		public void SourceAndTargetAreWeakWeakSimplePath(BindingMode mode)
 		{
 			var property = BindableProperty.Create("Text", typeof(string), typeof(MockBindable), "default value", BindingMode.OneWay);
@@ -640,10 +653,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.WaitForPendingFinalizers();
 
 			if (mode == BindingMode.TwoWay || mode == BindingMode.OneWay)
-				Assert.IsFalse(weakViewModel.IsAlive, "ViewModel wasn't collected");
+				Assert.False(weakViewModel.IsAlive, "ViewModel wasn't collected");
 
 			if (mode == BindingMode.TwoWay || mode == BindingMode.OneWayToSource)
-				Assert.IsFalse(weakBindable.IsAlive, "Bindable wasn't collected");
+				Assert.False(weakBindable.IsAlive, "Bindable wasn't collected");
 		}
 
 		[Fact]
@@ -701,7 +714,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindingBase.EnableCollectionSynchronization(stuff, context, callback);
 
 			CollectionSynchronizationContext syncContext;
-			Assert.IsTrue(BindingBase.TryGetSynchronizedCollection(stuff, out syncContext));
+			Assert.True(BindingBase.TryGetSynchronizedCollection(stuff, out syncContext));
 			Assert.That(syncContext, Is.Not.Null);
 			Assert.AreSame(syncContext.Callback, callback);
 			Assert.That(syncContext.ContextReference, Is.Not.Null);
@@ -720,8 +733,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindingBase.DisableCollectionSynchronization(stuff);
 
 			CollectionSynchronizationContext syncContext;
-			Assert.IsFalse(BindingBase.TryGetSynchronizedCollection(stuff, out syncContext));
-			Assert.IsNull(syncContext);
+			Assert.False(BindingBase.TryGetSynchronizedCollection(stuff, out syncContext));
+			Assert.Null(syncContext);
 		}
 
 		[Fact]
@@ -753,8 +766,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsFalse(weakCollection.IsAlive);
-			Assert.IsFalse(weakContext.IsAlive);
+			Assert.False(weakCollection.IsAlive);
+			Assert.False(weakContext.IsAlive);
 		}
 
 		[Fact]
@@ -789,8 +802,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsFalse(weakCollection.IsAlive);
-			Assert.IsFalse(weakContext.IsAlive);
+			Assert.False(weakCollection.IsAlive);
+			Assert.False(weakContext.IsAlive);
 		}
 
 		[Fact]
@@ -807,5 +820,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Throws.InstanceOf<ArgumentNullException>());
 		}
 
+
+		
 	}
 }

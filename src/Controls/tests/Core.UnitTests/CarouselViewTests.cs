@@ -21,10 +21,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestConstructorAndDefaults()
 		{
 			var carouselView = new CarouselView();
-			Assert.IsNull(carouselView.ItemsSource);
-			Assert.IsNull(carouselView.ItemTemplate);
-			Assert.IsNotNull(carouselView.ItemsLayout);
-			Assert.IsTrue(carouselView.Position == 0);
+			Assert.Null(carouselView.ItemsSource);
+			Assert.Null(carouselView.ItemTemplate);
+			Assert.NotNull(carouselView.ItemsLayout);
+			Assert.True(carouselView.Position == 0);
 		}
 
 		[Fact]
@@ -43,7 +43,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 			Assert.AreSame(source, carouselView.ItemsSource);
 			carouselView.Position = 1;
-			Assert.IsTrue(countFired == 1);
+			Assert.True(countFired == 1);
 		}
 
 		[Fact]
@@ -63,7 +63,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.AreSame(source, carouselView.ItemsSource);
 			carouselView.Position = gotoPosition;
-			Assert.IsTrue(countFired == 1);
+			Assert.True(countFired == 1);
 		}
 
 		[Fact]
@@ -83,7 +83,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 			Assert.AreSame(source, carouselView.ItemsSource);
 			carouselView.CurrentItem = source[gotoPosition];
-			Assert.IsTrue(countFired == 1);
+			Assert.True(countFired == 1);
 		}
 
 		[Fact]
@@ -103,7 +103,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.AreSame(source, carouselView.ItemsSource);
 			carouselView.CurrentItem = source[gotoPosition];
-			Assert.IsTrue(countFired == 1);
+			Assert.True(countFired == 1);
 		}
 
 		[Fact]

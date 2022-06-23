@@ -115,7 +115,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var contentView = new MyTestContentView();
 			contentView.LoadFromXaml(xaml);
-			Assert.IsTrue(contentView.WasOnApplyTemplateCalled);
+			Assert.True(contentView.WasOnApplyTemplateCalled);
 		}
 
 		[Fact]
@@ -136,7 +136,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var contentView = new MyTestTemplatedView();
 			contentView.LoadFromXaml(xaml);
 
-			Assert.IsTrue(contentView.WasOnApplyTemplateCalled);
+			Assert.True(contentView.WasOnApplyTemplateCalled);
 		}
 
 		[Fact]
@@ -155,7 +155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var contentPage = new MyTestContentPage();
 			contentPage.LoadFromXaml(xaml);
-			Assert.IsTrue(contentPage.WasOnApplyTemplateCalled);
+			Assert.True(contentPage.WasOnApplyTemplateCalled);
 		}
 
 		private class ExpectedView : View

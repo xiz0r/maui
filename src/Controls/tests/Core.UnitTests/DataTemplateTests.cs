@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var template = new DataTemplate(() => new MockBindable());
 			object obj = template.CreateContent();
 
-			Assert.IsNotNull(obj);
+			Assert.NotNull(obj);
 			Assert.That(obj, Is.InstanceOf<MockBindable>());
 		}
 
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var template = new DataTemplate(typeof(MockBindable));
 			object obj = template.CreateContent();
 
-			Assert.IsNotNull(obj);
+			Assert.NotNull(obj);
 			Assert.That(obj, Is.InstanceOf<MockBindable>());
 		}
 

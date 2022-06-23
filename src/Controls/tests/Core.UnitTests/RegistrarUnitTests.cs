@@ -117,15 +117,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IRegisterable renderWithTarget;
 
 			renderWithTarget = Internals.Registrar.Registered.GetHandler(typeof(RenderWithChild));
-			Assert.IsNotNull(renderWithTarget);
+			Assert.NotNull(renderWithTarget);
 			Assert.That(renderWithTarget, Is.InstanceOf<RenderWithChildTarget>());
 
 			renderWithTarget = Internals.Registrar.Registered.GetHandler(typeof(RenderWithChild), typeof(RegisteredWithNobodyMarker));
-			Assert.IsNotNull(renderWithTarget);
+			Assert.NotNull(renderWithTarget);
 			Assert.That(renderWithTarget, Is.InstanceOf<RenderWithChildTarget>());
 
 			renderWithTarget = Internals.Registrar.Registered.GetHandler(typeof(RenderWithChild), typeof(VisualMarkerUnitTests));
-			Assert.IsNotNull(renderWithTarget);
+			Assert.NotNull(renderWithTarget);
 			Assert.That(renderWithTarget, Is.InstanceOf<RenderWithChildTarget>());
 		}
 
@@ -133,11 +133,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void GetButtonChildHandler()
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(ButtonChild), typeof(RegisteredWithNobodyMarker));
-			Assert.IsNotNull(buttonTarget);
+			Assert.NotNull(buttonTarget);
 			Assert.That(buttonTarget, Is.InstanceOf<ButtonChildTarget>());
 
 			buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(ButtonChild), typeof(VisualMarkerUnitTests));
-			Assert.IsNotNull(buttonTarget);
+			Assert.NotNull(buttonTarget);
 			Assert.That(buttonTarget, Is.InstanceOf<ButtonChildTarget>());
 		}
 
@@ -145,18 +145,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void GetButtonHandler()
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(Button), typeof(VisualMarkerUnitTests));
-			Assert.IsNotNull(buttonTarget);
+			Assert.NotNull(buttonTarget);
 			Assert.That(buttonTarget, Is.InstanceOf<VisualButtonTarget>());
 
 			buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(Button));
-			Assert.IsNotNull(buttonTarget);
+			Assert.NotNull(buttonTarget);
 			Assert.That(buttonTarget, Is.InstanceOf<ButtonTarget>());
 
 
 			Button button = new Button();
 			object someObject = new object();
 			buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(Button), button, new VisualMarkerUnitTests(), someObject);
-			Assert.IsNotNull(buttonTarget);
+			Assert.NotNull(buttonTarget);
 			Assert.That(buttonTarget, Is.InstanceOf<VisualButtonTarget>());
 
 			var visualButtonTarget = (VisualButtonTarget)buttonTarget;
@@ -169,11 +169,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void GetSliderHandler()
 		{
 			var sliderTarget = Internals.Registrar.Registered.GetHandler(typeof(Slider), typeof(VisualMarkerUnitTests));
-			Assert.IsNotNull(sliderTarget);
+			Assert.NotNull(sliderTarget);
 			Assert.That(sliderTarget, Is.InstanceOf<VisualSliderTarget>());
 
 			sliderTarget = Internals.Registrar.Registered.GetHandler<SliderTarget>(typeof(Slider));
-			Assert.IsNotNull(sliderTarget);
+			Assert.NotNull(sliderTarget);
 			Assert.That(sliderTarget, Is.InstanceOf<SliderTarget>());
 		}
 	}
@@ -192,7 +192,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void GetButtonHandler()
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler<ButtonTarget>(typeof(Button));
-			Assert.IsNotNull(buttonTarget);
+			Assert.NotNull(buttonTarget);
 			Assert.That(buttonTarget, Is.InstanceOf<ButtonTarget>());
 		}
 
@@ -200,7 +200,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void GetSliderHandler()
 		{
 			var sliderTarget = Internals.Registrar.Registered.GetHandler<SliderTarget>(typeof(Slider));
-			Assert.IsNotNull(sliderTarget);
+			Assert.NotNull(sliderTarget);
 			Assert.That(sliderTarget, Is.InstanceOf<SliderTarget>());
 		}
 	}

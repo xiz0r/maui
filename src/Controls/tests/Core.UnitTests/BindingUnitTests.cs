@@ -170,7 +170,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayToSourceWithComplexPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -217,7 +217,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnTwoWayWithComplexPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -287,7 +287,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			public string GetSetProperty { get; set; }
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		public void BindingWithNoPublicSetterOnParent(
 			[Values(true, false)] bool setContextFirst,
 			[Values(BindingMode.OneWay, BindingMode.TwoWay)] BindingMode bindingmode,
@@ -324,7 +324,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -371,7 +371,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithSelfIndexedPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -412,7 +412,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedPathArrayBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -458,7 +458,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedSelfPathArrayBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -498,7 +498,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayToSourceWithIndexedPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -544,7 +544,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -591,7 +591,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedArrayPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -638,7 +638,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Indexed paths")]
+		[Fact, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedArraySelfPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -678,7 +678,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Self paths")]
+		[Fact, Category("[Binding] Self paths")]
 		public void ValueSetOnOneWayWithSelfPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -717,7 +717,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Self paths")]
+		[Fact, Category("[Binding] Self paths")]
 		public void ValueNotSetOnOneWayToSourceWithSelfPathBinding(
 			[Values(true, false)] bool isDefault)
 		{
@@ -735,19 +735,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var binding = new Binding(".", bindingMode);
 
 			var bindable = new MockBindable();
-			Assert.IsNull(bindable.BindingContext);
+			Assert.Null(bindable.BindingContext);
 
 			bindable.SetBinding(property, binding);
 
 			Assert.Equal(value, bindable.GetValue(property),
 				"Target property changed");
-			Assert.IsNull(bindable.BindingContext,
+			Assert.Null(bindable.BindingContext,
 				"BindingContext changed with self-path binding");
 			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0),
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Self paths")]
+		[Fact, Category("[Binding] Self paths")]
 		public void ValueSetOnTwoWayWithSelfPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -1213,10 +1213,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.WaitForPendingFinalizers();
 
 			if (mode == BindingMode.TwoWay || mode == BindingMode.OneWay)
-				Assert.IsFalse(weakViewModel.IsAlive, "ViewModel wasn't collected");
+				Assert.False(weakViewModel.IsAlive, "ViewModel wasn't collected");
 
 			if (mode == BindingMode.TwoWay || mode == BindingMode.OneWayToSource)
-				Assert.IsFalse(weakBindable.IsAlive, "Bindable wasn't collected");
+				Assert.False(weakBindable.IsAlive, "Bindable wasn't collected");
 		}
 
 		// Mono doesn't handle the GC properly until the stack frame where the object is created is popped.
@@ -1466,7 +1466,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		[Description("When part of a complex path can not be evaluated during an update, bindables should return to their default value.")]
 		public void NullInPathUsesDefaultValue()
 		{
@@ -1488,7 +1488,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		[Description("When part of a complex path can not be evaluated during an update, bindables should return to their default value.")]
 		public void NullContextUsesDefaultValue()
 		{
@@ -2037,7 +2037,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await Task.Delay(10);
 			GC.Collect();
 
-			Assert.IsFalse(bindingRef.IsAlive, "Binding should not be alive!");
+			Assert.False(bindingRef.IsAlive, "Binding should not be alive!");
 		}
 
 		[Fact]

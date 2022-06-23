@@ -106,7 +106,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayToSourceWithComplexPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -161,7 +161,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnTwoWayWithComplexPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -739,10 +739,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 
 			if (mode == BindingMode.TwoWay || mode == BindingMode.OneWay)
-				Assert.IsFalse(weakViewModel.IsAlive, "ViewModel wasn't collected");
+				Assert.False(weakViewModel.IsAlive, "ViewModel wasn't collected");
 
 			if (mode == BindingMode.TwoWay || mode == BindingMode.OneWayToSource)
-				Assert.IsFalse(weakBindable.IsAlive, "Bindable wasn't collected");
+				Assert.False(weakBindable.IsAlive, "Bindable wasn't collected");
 		}
 
 		class TestConverter<TSource, TTarget> : IValueConverter
@@ -998,7 +998,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		[Description("When part of a complex path can not be evaluated during an update, bindables should return to their default value.")]
 		public void NullInPathUsesDefaultValue()
 		{
@@ -1025,7 +1025,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		[Description("When part of a complex path can not be evaluated during an update, bindables should return to their default value.")]
 		public void NullContextUsesDefaultValue()
 		{
@@ -1056,7 +1056,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test, Category("[Binding] Complex paths")]
+		[Fact, Category("[Binding] Complex paths")]
 		[Description("When part of a complex path can not be evaluated during an update, bindables should return to their default value, or TargetNullValue")]
 		public void NullContextUsesFallbackValue()
 		{
@@ -1460,7 +1460,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.WaitForPendingFinalizers();
 			GC.Collect();
 
-			Assert.IsFalse(bindingRef.IsAlive, "Binding should not be alive!");
+			Assert.False(bindingRef.IsAlive, "Binding should not be alive!");
 		}
 
 		[Fact]
@@ -1583,8 +1583,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Pass(); //doesn't throw
 		}
 
-		[Fact]
-		[Ignore("SpeedTestApply")]
+		[Fact(Skip = "SpeedTestApply")]
 		public void SpeedTestApply()
 		{
 
@@ -1656,8 +1655,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Fail($"Applying {it} Typedbindings\t\t\t: {swtb.ElapsedMilliseconds}ms.\nApplying {it} Typedbindings (without INPC)\t: {swtbh.ElapsedMilliseconds}ms.\nApplying {it} Bindings\t\t\t: {swb.ElapsedMilliseconds}ms.\nSetting  {it} values\t\t\t\t: {swsv.ElapsedMilliseconds}ms.");
 		}
 
-		[Fact]
-		[Ignore("SpeedTestSetBC")]
+		[Fact(Skip = "SpeedTestSetBC")]
 		public void SpeedTestSetBC()
 		{
 			var property = BindableProperty.Create("Foo", typeof(string), typeof(MockBindable));

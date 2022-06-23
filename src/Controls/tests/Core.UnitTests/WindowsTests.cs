@@ -14,7 +14,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var window = app.CreateWindow();
 			window.Page.FlowDirection = FlowDirection.RightToLeft;
 
-			Assert.IsTrue((window as IWindow)
+			Assert.True((window as IWindow)
 				.FlowDirection == FlowDirection.RightToLeft);
 		}
 
@@ -25,13 +25,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var window = app.CreateWindow();
 			window.FlowDirection = FlowDirection.RightToLeft;
 
-			Assert.IsTrue((window.Page as IFlowDirectionController)
+			Assert.True((window.Page as IFlowDirectionController)
 				.EffectiveFlowDirection
 				.IsRightToLeft());
 
 			window.Page = new ContentPage();
 
-			Assert.IsTrue((window.Page as IFlowDirectionController)
+			Assert.True((window.Page as IFlowDirectionController)
 				.EffectiveFlowDirection
 				.IsRightToLeft());
 		}
@@ -63,7 +63,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var wind2 = app.LoadPage(secondPage);
 
 			ValidateSetup(app, secondPage);
-			Assert.IsNull(firstPage.Parent);
+			Assert.Null(firstPage.Parent);
 			Assert.Equal(wind1, wind2);
 		}
 

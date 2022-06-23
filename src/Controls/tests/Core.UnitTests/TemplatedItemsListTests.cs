@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void ListProxyNotNullWithNullItemsSource()
 		{
-			Assert.IsNotNull(bindable.TemplatedItems.ListProxy);
+			Assert.NotNull(bindable.TemplatedItems.ListProxy);
 		}
 
 		[Fact]
@@ -116,7 +116,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, Enumerable.Empty<string>());
 
-			Assert.IsTrue(raised, "CollectionChanged was not raised");
+			Assert.True(raised, "CollectionChanged was not raised");
 			Assert.Equal(NotifyCollectionChangedAction.Reset, action);
 		}
 		/*
@@ -152,7 +152,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bindable.SetValue(ItemsView<BindableObject>.ItemTemplateProperty, new DataTemplate());
 
-			Assert.IsTrue(raised, "CollectionChanged was not raised");
+			Assert.True(raised, "CollectionChanged was not raised");
 			Assert.Equal(NotifyCollectionChangedAction.Reset, action);
 		}
 
@@ -173,10 +173,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			string str = "foo bar";
 			collection.Add(str);
 
-			Assert.IsTrue(raised, "CollectionChanged was not raised");
+			Assert.True(raised, "CollectionChanged was not raised");
 			Assert.Equal(NotifyCollectionChangedAction.Add, args.Action);
 			Assert.Equal(0, args.NewStartingIndex);
-			Assert.IsNotNull(args.NewItems);
+			Assert.NotNull(args.NewItems);
 			Assert.Equal(1, args.NewItems.Count);
 			Assert.AreSame(str, ((Cell)args.NewItems[0]).BindingContext);
 		}
@@ -187,7 +187,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var collection = new List<string> { "foo bar" };
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, collection);
 
-			Assert.IsNotNull(bindable.TemplatedItems.ListProxy);
+			Assert.NotNull(bindable.TemplatedItems.ListProxy);
 			Assert.Equal(collection.Count, bindable.TemplatedItems.ListProxy.Count);
 		}
 
@@ -202,10 +202,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(ItemsView<BindableObject>.ItemTemplateProperty, template);
 
 			BindableObject content = bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
-			Assert.IsNotNull(content);
+			Assert.NotNull(content);
 
 			TextCell textCell = content as TextCell;
-			Assert.IsNotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
+			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
 			Assert.AreSame(collection[index], textCell.BindingContext);
 			Assert.AreSame(collection[index], textCell.Text);
@@ -217,17 +217,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void GetOrCreateContentDefault()
 		{
-			Assert.IsNull(bindable.GetValue(ItemsView<BindableObject>.ItemTemplateProperty));
+			Assert.Null(bindable.GetValue(ItemsView<BindableObject>.ItemTemplateProperty));
 
 			var collection = new List<string> { "foo", "bar", "baz" };
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, collection);
 
 			const int index = 0;
 			BindableObject content = bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
-			Assert.IsNotNull(content);
+			Assert.NotNull(content);
 
 			TextCell textCell = content as TextCell;
-			Assert.IsNotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
+			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
 			Assert.AreSame(collection[index], textCell.BindingContext);
 			Assert.AreSame(collection[index], textCell.Text);
@@ -257,7 +257,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(ItemsView<BindableObject>.ItemTemplateProperty, template);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
-			Assert.IsNotNull(content2);
+			Assert.NotNull(content2);
 			Assert.That(content2, Is.InstanceOf<SwitchCell>());
 
 			var switchCell = (SwitchCell)content2;
@@ -277,7 +277,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(ItemsView<BindableObject>.ItemTemplateProperty, template);
 
 			BindableObject content = bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
-			Assert.IsNotNull(content);
+			Assert.NotNull(content);
 
 			collection = new List<string> { "we", "wee", "weee" };
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, collection);
@@ -316,16 +316,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact("Make sure we're not duplicate cell instances for an equal item if it's a different index")]
 		public void GetOrCreateContentEqualItemDifferentItemDifferentIndex()
 		{
-			Assert.IsNull(bindable.GetValue(ItemsView<BindableObject>.ItemTemplateProperty));
+			Assert.Null(bindable.GetValue(ItemsView<BindableObject>.ItemTemplateProperty));
 
 			var collection = new List<string> { "foo", "foo" };
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, collection);
 
 			BindableObject content = bindable.TemplatedItems.GetOrCreateContent(0, collection[0]);
-			Assert.IsNotNull(content);
+			Assert.NotNull(content);
 
 			TextCell textCell = content as TextCell;
-			Assert.IsNotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
+			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
 			Assert.AreSame(collection[0], textCell.BindingContext);
 			Assert.AreSame(collection[0], textCell.Text);
@@ -340,7 +340,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact("Make sure we're not duplicate cell instances for the same item if it's a different index")]
 		public void GetOrCreateContentEqualItemSameItemDifferentIndex()
 		{
-			Assert.IsNull(bindable.GetValue(ItemsView<BindableObject>.ItemTemplateProperty));
+			Assert.Null(bindable.GetValue(ItemsView<BindableObject>.ItemTemplateProperty));
 
 			string item = "foo";
 
@@ -348,10 +348,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, collection);
 
 			BindableObject content = bindable.TemplatedItems.GetOrCreateContent(0, item);
-			Assert.IsNotNull(content);
+			Assert.NotNull(content);
 
 			TextCell textCell = content as TextCell;
-			Assert.IsNotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
+			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
 			Assert.AreSame(item, textCell.BindingContext);
 			Assert.AreSame(item, textCell.Text);
@@ -1059,7 +1059,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(ucount, Is.EqualTo(1));
 		}
 
-		[Test(Description = "If the cell exists and has an index, we still need to check if it's in the group asked for")]
+		[Fact( "If the cell exists and has an index, we still need to check if it's in the group asked for")]
 		public void IndexOfFailsForCellInAnotherGroup()
 		{
 			var items = new ObservableCollection<ObservableCollection<string>> {

@@ -222,8 +222,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.Equal(2, ((IElementController)group).LogicalChildren.Count);
-			Assert.IsTrue(((IElementController)group).LogicalChildren.Contains(view1));
-			Assert.IsTrue(((IElementController)group).LogicalChildren.Contains(view2));
+			Assert.True(((IElementController)group).LogicalChildren.Contains(view1));
+			Assert.True(((IElementController)group).LogicalChildren.Contains(view2));
 			Assert.Equal(view1, ((IElementController)group).LogicalChildren[0]);
 		}
 
@@ -240,8 +240,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.Equal(2, group.Children.Count);
-			Assert.IsTrue(group.Children.Contains(view1));
-			Assert.IsTrue(group.Children.Contains(view2));
+			Assert.True(group.Children.Contains(view1));
+			Assert.True(group.Children.Contains(view2));
 			Assert.Equal(view1, group.Children[0]);
 		}
 

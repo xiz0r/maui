@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			PathFigureCollection result = _pathFigureCollectionConverter.ConvertFromInvariantString("M 10,100 C 100,0 200,200 300,100") as PathFigureCollection;
 
-			Assert.IsNotNull(result);
+			Assert.NotNull(result);
 			Assert.Equal(1, result.Count);
 		}
 
@@ -35,7 +35,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			PathFigureCollection result = _pathFigureCollectionConverter.ConvertFromInvariantString(path) as PathFigureCollection;
 
-			Assert.IsNotNull(result);
+			Assert.NotNull(result);
 			Assert.AreNotEqual(0, result.Count);
 		}
 	}

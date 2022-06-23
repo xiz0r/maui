@@ -227,7 +227,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var pub = new TestPublisher();
 			pub.Test();
 
-			Assert.IsFalse(wr.IsAlive); // The Action target and subscriber were the same object, so both could be collected
+			Assert.False(wr.IsAlive); // The Action target and subscriber were the same object, so both could be collected
 		}
 
 		[Fact]
@@ -249,15 +249,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsTrue(wr.IsAlive); // The closure in Subscribe should be keeping the subscriber alive
-			Assert.IsNotNull(wr.Target as TestSubcriber);
+			Assert.True(wr.IsAlive); // The closure in Subscribe should be keeping the subscriber alive
+			Assert.NotNull(wr.Target as TestSubcriber);
 
-			Assert.IsFalse(((TestSubcriber)wr.Target).Successful);
+			Assert.False(((TestSubcriber)wr.Target).Successful);
 
 			var pub = new TestPublisher();
 			pub.Test();
 
-			Assert.IsTrue(((TestSubcriber)wr.Target).Successful);  // Since it's still alive, the subscriber should still have received the message and updated the property
+			Assert.True(((TestSubcriber)wr.Target).Successful);  // Since it's still alive, the subscriber should still have received the message and updated the property
 		}
 
 		[Test, Ignore("https://github.com/dotnet/maui/issues/1524")]
@@ -274,14 +274,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				MessagingCenter.Subscribe<TestPublisher>(subscriber, "test", p => subscriber.SetSuccess());
 			})();
 
-			Assert.IsNotNull(wr.Target as TestSubcriber);
+			Assert.NotNull(wr.Target as TestSubcriber);
 
 			MessagingCenter.Unsubscribe<TestPublisher>(wr.Target, "test");
 
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsFalse(wr.IsAlive); // The Action target and subscriber were the same object, so both could be collected
+			Assert.False(wr.IsAlive); // The Action target and subscriber were the same object, so both could be collected
 		}
 
 		[Fact]
@@ -299,7 +299,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var pub = new TestPublisher();
 			pub.Test();
 
-			Assert.IsTrue(i == 5, "The static method should have incremented 'i'");
+			Assert.True(i == 5, "The static method should have incremented 'i'");
 		}
 
 		[Fact]
@@ -375,7 +375,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Test(Description = "This is a demonstration of what a test with a fake/mock/substitute IMessagingCenter might look like")]
+		[Fact( "This is a demonstration of what a test with a fake/mock/substitute IMessagingCenter might look like")]
 		public void TestMessagingCenterSubstitute()
 		{
 			var mc = new FakeMessagingCenter();
@@ -384,8 +384,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var component = new ComponentWithMessagingDependency(mc);
 			component.DoAThing();
 
-			Assert.IsTrue(mc.WasSubscribeCalled, "ComponentWithMessagingDependency should have subscribed in its constructor");
-			Assert.IsTrue(mc.WasSendCalled, "The DoAThing method should send a message");
+			Assert.True(mc.WasSubscribeCalled, "ComponentWithMessagingDependency should have subscribed in its constructor");
+			Assert.True(mc.WasSendCalled, "The DoAThing method should send a message");
 		}
 
 		class ComponentWithMessagingDependency

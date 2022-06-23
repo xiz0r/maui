@@ -55,7 +55,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				new BindingExpression(binding, path);
 			});
 
-			Assert.IsFalse(String.IsNullOrWhiteSpace(fex.Message),
+			Assert.False(String.IsNullOrWhiteSpace(fex.Message),
 				"FormatException did not contain an explanation");
 		}
 

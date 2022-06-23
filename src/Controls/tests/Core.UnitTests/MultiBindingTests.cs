@@ -95,13 +95,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				IsExpanded = true
 			};
 			var cp = expander.Children[0].LogicalChildren[1] as ContentPresenter;
-			Assert.IsTrue(cp.IsVisible);
+			Assert.True(cp.IsVisible);
 			expander.IsEnabled = false;
-			Assert.IsFalse(cp.IsVisible);
+			Assert.False(cp.IsVisible);
 			expander.IsEnabled = true;
-			Assert.IsTrue(cp.IsVisible);
+			Assert.True(cp.IsVisible);
 			expander.IsExpanded = false;
-			Assert.IsFalse(cp.IsVisible);
+			Assert.False(cp.IsVisible);
 		}
 
 		[Fact]
@@ -149,31 +149,31 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			stack.Children.Add(checkBox);
 
 			// Monarch can do whatever she wants
-			Assert.IsTrue(checkBox.IsChecked);
+			Assert.True(checkBox.IsChecked);
 
 			// ... Until being deposed after a coup
 			group.Person5.IsMonarch = false;
-			Assert.IsFalse(checkBox.IsChecked);
+			Assert.False(checkBox.IsChecked);
 
 			// After passing test she can drive again
 			group.Person5.HasPassedTest = true;
-			Assert.IsTrue(checkBox.IsChecked);
+			Assert.True(checkBox.IsChecked);
 
 			// Martial law declared; no one can drive
 			group.SuspendAll = true;
-			Assert.IsFalse(checkBox.IsChecked);
+			Assert.False(checkBox.IsChecked);
 
 			// Martial law is over
 			group.SuspendAll = false;
-			Assert.IsTrue(checkBox.IsChecked);
+			Assert.True(checkBox.IsChecked);
 
 			// But she got in an accident and now can't drive again
 			group.Person5.IsSuspended = true;
-			Assert.IsFalse(checkBox.IsChecked);
+			Assert.False(checkBox.IsChecked);
 
 			// The new PM has pardoned everyone after the end of the rebellion
 			group.PardonAllSuspensions = true;
-			Assert.IsTrue(checkBox.IsChecked);
+			Assert.True(checkBox.IsChecked);
 		}
 
 		[Fact]

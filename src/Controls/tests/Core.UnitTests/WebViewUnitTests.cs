@@ -159,7 +159,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			defaultWebView.Cookies = CookieContainer;
 			defaultWebView.Source = "http://xamarin.com";
 
-			Assert.IsNotNull(defaultWebView.Cookies);
+			Assert.NotNull(defaultWebView.Cookies);
 		}
 	}
 }

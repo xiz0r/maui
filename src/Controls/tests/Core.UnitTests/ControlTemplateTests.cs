@@ -68,7 +68,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			testView.ControlTemplate = new ControlTemplate(typeof(PresenterWrapper));
 
-			Assert.IsNull(originalPresenter.Content);
+			Assert.Null(originalPresenter.Content);
 		}
 
 		[Fact]
@@ -81,7 +81,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var label = (Label)child2;
 
-			Assert.IsNull(label.Text);
+			Assert.Null(label.Text);
 
 			testView.Name = "Bar";
 			Assert.Equal("Bar", label.Text);
@@ -102,7 +102,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var childPresenter = (ContentPresenter)child2;
 
 			parentView.ControlTemplate = new ControlTemplate(typeof(ContentControl));
-			Assert.IsNotNull(childPresenter.Content);
+			Assert.NotNull(childPresenter.Content);
 		}
 
 		[Fact]

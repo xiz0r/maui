@@ -34,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			cell.Tapped += (sender, args) => tapped = true;
 
 			cell.OnTapped();
-			Assert.IsTrue(tapped);
+			Assert.True(tapped);
 		}
 
 		[Fact]

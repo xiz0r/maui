@@ -559,15 +559,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			relativeLayout.Layout(new Rect(0, 0, 100, 100));
 
-			Assert.IsTrue(relativeLayout.childAdded);
-			Assert.IsTrue(relativeLayout.added);
-			Assert.IsTrue(relativeLayout.layoutChildren);
+			Assert.True(relativeLayout.childAdded);
+			Assert.True(relativeLayout.added);
+			Assert.True(relativeLayout.layoutChildren);
 
 			relativeLayout.layoutChildren = relativeLayout.added = relativeLayout.childAdded = false;
 
-			Assert.IsFalse(relativeLayout.childAdded);
-			Assert.IsFalse(relativeLayout.added);
-			Assert.IsFalse(relativeLayout.layoutChildren);
+			Assert.False(relativeLayout.childAdded);
+			Assert.False(relativeLayout.added);
+			Assert.False(relativeLayout.layoutChildren);
 
 			relativeLayout.Children.Add(child1,
 				Constraint.Constant(30),
@@ -575,9 +575,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Constraint.RelativeToParent(parent => parent.Height / 2),
 				Constraint.RelativeToParent(parent => parent.Height / 4));
 
-			Assert.IsTrue(relativeLayout.childAdded);
-			Assert.IsTrue(relativeLayout.added);
-			Assert.IsTrue(relativeLayout.layoutChildren);
+			Assert.True(relativeLayout.childAdded);
+			Assert.True(relativeLayout.added);
+			Assert.True(relativeLayout.layoutChildren);
 
 		}
 	}

@@ -273,7 +273,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid.Layout(new Rect(0, 0, sizeRequest.Request.Width, sizeRequest.Request.Height));
 		}
 
-		[Test(Description = "Columns with a Star width less than one should not cause the Grid to contract below the target width; see https://github.com/xamarin/Microsoft.Maui.Controls/issues/11742")]
+		[Fact( "Columns with a Star width less than one should not cause the Grid to contract below the target width; see https://github.com/xamarin/Microsoft.Maui.Controls/issues/11742")]
 		public void StarWidthsLessThanOneShouldNotContractGrid()
 		{
 			var grid = new Grid

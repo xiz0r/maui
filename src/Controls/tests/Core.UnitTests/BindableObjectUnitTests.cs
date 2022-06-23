@@ -78,7 +78,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void BindingContext()
 		{
 			var mock = new MockBindable();
-			Assert.IsNull(mock.BindingContext);
+			Assert.Null(mock.BindingContext);
 
 			object obj = new object();
 			mock.BindingContext = obj;
@@ -259,7 +259,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			vm.Text = "test";
 
-			Assert.IsNull(mock.GetValue(Entry.TextProperty), "ViewModel was still being listened to after set to null");
+			Assert.Null(mock.GetValue(Entry.TextProperty), "ViewModel was still being listened to after set to null");
 		}
 
 		[Fact]
@@ -548,7 +548,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var mock = new MockBindable();
 			mock.SetValue(property, newv);
 
-			Assert.IsTrue(changed, "PropertyChanged was not called");
+			Assert.True(changed, "PropertyChanged was not called");
 		}
 
 		[Fact]
@@ -562,18 +562,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				if (!changedA1)
 				{
 					Assert.Equal("1", mock.GetValue(MockBindable.TextProperty));
-					Assert.IsFalse(changedA2);
-					Assert.IsFalse(changedB1);
-					Assert.IsFalse(changedB2);
+					Assert.False(changedA2);
+					Assert.False(changedB1);
+					Assert.False(changedB2);
 					mock.SetValue(MockBindable.TextProperty, "2");
 					changedA1 = true;
 				}
 				else
 				{
 					Assert.Equal("2", mock.GetValue(MockBindable.TextProperty));
-					Assert.IsFalse(changedA2);
-					Assert.IsTrue(changedB1);
-					Assert.IsFalse(changedB2);
+					Assert.False(changedA2);
+					Assert.True(changedB1);
+					Assert.False(changedB2);
 					changedA2 = true;
 				}
 			};
@@ -582,26 +582,26 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				if (!changedB1)
 				{
 					Assert.Equal("1", mock.GetValue(MockBindable.TextProperty));
-					Assert.IsTrue(changedA1);
-					Assert.IsFalse(changedA2);
-					Assert.IsFalse(changedB2);
+					Assert.True(changedA1);
+					Assert.False(changedA2);
+					Assert.False(changedB2);
 					changedB1 = true;
 				}
 				else
 				{
 					Assert.Equal("2", mock.GetValue(MockBindable.TextProperty));
-					Assert.IsTrue(changedA1);
-					Assert.IsTrue(changedA2);
-					Assert.IsFalse(changedB2);
+					Assert.True(changedA1);
+					Assert.True(changedA2);
+					Assert.False(changedB2);
 					changedB2 = true;
 				}
 			};
 			mock.SetValue(MockBindable.TextProperty, "1");
 			Assert.Equal("2", mock.GetValue(MockBindable.TextProperty));
-			Assert.IsTrue(changedA1);
-			Assert.IsTrue(changedA2);
-			Assert.IsTrue(changedB1);
-			Assert.IsTrue(changedB2);
+			Assert.True(changedA1);
+			Assert.True(changedA2);
+			Assert.True(changedB1);
+			Assert.True(changedB2);
 		}
 
 		[Fact]
@@ -855,7 +855,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(defaultValue, bindableProperty.DefaultValue);
 
 			var isSet = bindable.IsSet(bindableProperty);
-			Assert.IsFalse(isSet);
+			Assert.False(isSet);
 		}
 
 		[Fact]
@@ -872,7 +872,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(bindableProperty, newValue);
 
 			var isSet = bindable.IsSet(bindableProperty);
-			Assert.IsTrue(isSet);
+			Assert.True(isSet);
 		}
 
 		[Fact]
@@ -903,7 +903,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(bindableProperty, defaultValue);
 
 			var isSet = bindable.IsSet(bindableProperty);
-			Assert.IsTrue(isSet);
+			Assert.True(isSet);
 		}
 
 		[Fact]
@@ -924,7 +924,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(defaultValueC, created);
 
 			var isSet = bindable.IsSet(bindableProperty);
-			Assert.IsTrue(isSet);
+			Assert.True(isSet);
 		}
 
 		[Fact]
@@ -1487,9 +1487,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bindable = new MockBindable();
 			var locator = new VMLocator();
 			Assert.Equal(0, locator.Count);
-			locator.Invoked += (sender, e) => Assert.IsTrue(locator.Count <= 1);
+			locator.Invoked += (sender, e) => Assert.True(locator.Count <= 1);
 			bindable.SetBinding(BindableObject.BindingContextProperty, new Binding("VM", source: locator));
-			Assert.IsTrue(locator.Count == 1);
+			Assert.True(locator.Count == 1);
 		}
 
 		[Fact]

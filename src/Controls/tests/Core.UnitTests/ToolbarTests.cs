@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IToolbarElement toolbarElement = window;
 			var startingPage = new NavigationPage(new ContentPage());
 			window.Page = startingPage;
-			Assert.IsNotNull(toolbarElement.Toolbar);
+			Assert.NotNull(toolbarElement.Toolbar);
 		}
 
 		[Fact]
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IToolbarElement toolbarElement = window;
 			var startingPage = new ContentPage();
 			window.Page = startingPage;
-			Assert.IsNull(toolbarElement.Toolbar);
+			Assert.Null(toolbarElement.Toolbar);
 		}
 
 		[Fact]
@@ -34,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var startingPage = new NavigationPage(new ContentPage());
 			window.Page = startingPage;
 			window.Page = new ContentPage();
-			Assert.IsNull(toolbarElement.Toolbar);
+			Assert.Null(toolbarElement.Toolbar);
 		}
 
 		[Fact]

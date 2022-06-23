@@ -149,7 +149,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			picker.SelectedIndex = 42;
 			Assert.Equal("Lemon", picker.SelectedItem);
 			picker.SelectedIndex = -42;
-			Assert.IsNull(picker.SelectedItem);
+			Assert.Null(picker.SelectedItem);
 		}
 
 		[Fact]
@@ -219,7 +219,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					obj
 				}
 			};
-			Assert.IsTrue(converter.ConvertCalled);
+			Assert.True(converter.ConvertCalled);
 			Assert.Equal("John", picker.Items[0]);
 		}
 

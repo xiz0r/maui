@@ -14,7 +14,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var checkBox = new CheckBox();
 
-			Assert.IsFalse(checkBox.IsChecked);
+			Assert.False(checkBox.IsChecked);
 		}
 
 		[Fact]
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			checkBox.IsChecked = true;
 
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 		}
 
 		[Fact]
@@ -41,7 +41,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			checkBox.CheckedChanged += (sender, args) => fired = true;
 			checkBox.IsChecked = true;
 
-			Assert.IsFalse(fired);
+			Assert.False(fired);
 		}
 	}
 

@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			entry.SetValue(Entry.TextProperty, value);
 
-			Assert.IsTrue(signaled, "ValueChanged did not fire");
+			Assert.True(signaled, "ValueChanged did not fire");
 		}
 
 		[TestCase(null, "foo")]

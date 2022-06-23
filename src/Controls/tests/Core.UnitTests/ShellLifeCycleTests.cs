@@ -97,14 +97,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(tabAppearing, "Tab Appearing");
 
 			// Because the is a page template the content appearing events won't fire until the page is created
-			Assert.IsFalse(contentAppearing, "Content Appearing");
-			Assert.IsFalse(pageAppearing, "Page Appearing");
+			Assert.False(contentAppearing, "Content Appearing");
+			Assert.False(pageAppearing, "Page Appearing");
 
 			var createdContent = (content as IShellContentController).GetOrCreateContent();
 
 			Assert.Equal(createdContent, page);
-			Assert.IsTrue(contentAppearing, "Content Appearing");
-			Assert.IsTrue(pageAppearing, "Page Appearing");
+			Assert.True(contentAppearing, "Content Appearing");
+			Assert.True(pageAppearing, "Page Appearing");
 		}
 
 
@@ -131,7 +131,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var createdContent = (shell.Items[0].Items[0].Items[0] as IShellContentController).GetOrCreateContent();
 
-			Assert.IsTrue(pageAppearing);
+			Assert.True(pageAppearing);
 		}
 
 		[Fact]
@@ -143,8 +143,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var page = (LifeCyclePage)shell.GetVisiblePage();
 
-			Assert.IsTrue(page.Appearing);
-			Assert.IsTrue(page.ParentSet);
+			Assert.True(page.Appearing);
+			Assert.True(page.ParentSet);
 		}
 
 		[Fact]
@@ -158,8 +158,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var page = (LifeCyclePage)shell.GetVisiblePage();
 			var nonVisiblePage = (LifeCyclePage)shell.Navigation.NavigationStack[1];
 
-			Assert.IsFalse(nonVisiblePage.Appearing);
-			Assert.IsTrue(page.Appearing);
+			Assert.False(nonVisiblePage.Appearing);
+			Assert.True(page.Appearing);
 		}
 
 		[Fact]
@@ -174,9 +174,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var page = (LifeCyclePage)shell.GetVisiblePage();
 			var nonVisiblePage = (LifeCyclePage)shell.Navigation.NavigationStack[1];
 
-			Assert.IsFalse(shellContentPage.Appearing);
-			Assert.IsFalse(nonVisiblePage.Appearing);
-			Assert.IsTrue(page.Appearing);
+			Assert.False(shellContentPage.Appearing);
+			Assert.False(nonVisiblePage.Appearing);
+			Assert.True(page.Appearing);
 		}
 
 
@@ -187,8 +187,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(CreateShellItem());
 			shell.Navigation.PushAsync(new LifeCyclePage());
 			var page = (LifeCyclePage)shell.GetVisiblePage();
-			Assert.IsTrue(page.Appearing);
-			Assert.IsTrue(page.ParentSet);
+			Assert.True(page.Appearing);
+			Assert.True(page.ParentSet);
 		}
 
 		[Fact]
@@ -216,24 +216,24 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(flyoutItem);
 
 			Assert.AreNotEqual(shell.CurrentItem.CurrentItem.CurrentItem, content);
-			Assert.IsNull(page);
+			Assert.Null(page);
 
 			bool navigated = false;
 			shell.Navigated += (_, __) =>
 			{
-				Assert.IsNotNull(page);
-				Assert.IsNotNull((content as IShellContentController).Page);
+				Assert.NotNull(page);
+				Assert.NotNull((content as IShellContentController).Page);
 				navigated = true;
 			};
 
 			await shell.GoToAsync("///destination");
 
 			// content hasn't been created yet
-			Assert.IsFalse(navigated);
+			Assert.False(navigated);
 
 			var createPage = (content as IShellContentController).GetOrCreateContent();
 			Assert.Equal(createPage, page);
-			Assert.IsTrue(navigated);
+			Assert.True(navigated);
 		}
 
 		[Fact]
@@ -255,11 +255,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			section.CurrentItem = shell.SearchForRoute<ShellContent>(ContentRoute);
 
-			Assert.IsTrue(state.ContentAppearing);
+			Assert.True(state.ContentAppearing);
 
 			section.CurrentItem = content;
 
-			Assert.IsFalse(state.ContentAppearing);
+			Assert.False(state.ContentAppearing);
 		}
 
 
@@ -282,13 +282,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			item.CurrentItem = section;
 
-			Assert.IsTrue(state.SectionAppearing);
-			Assert.IsTrue(state.ContentAppearing);
+			Assert.True(state.SectionAppearing);
+			Assert.True(state.ContentAppearing);
 
 			item.CurrentItem = newSection;
 
-			Assert.IsFalse(state.SectionAppearing);
-			Assert.IsFalse(state.ContentAppearing);
+			Assert.False(state.SectionAppearing);
+			Assert.False(state.ContentAppearing);
 		}
 
 		[Fact]
@@ -307,15 +307,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.CurrentItem = item;
 
-			Assert.IsTrue(state.ItemAppearing);
-			Assert.IsTrue(state.SectionAppearing);
-			Assert.IsTrue(state.ContentAppearing);
+			Assert.True(state.ItemAppearing);
+			Assert.True(state.SectionAppearing);
+			Assert.True(state.ContentAppearing);
 
 			shell.CurrentItem = item2;
 
-			Assert.IsFalse(state.ItemAppearing);
-			Assert.IsFalse(state.SectionAppearing);
-			Assert.IsFalse(state.ContentAppearing);
+			Assert.False(state.ItemAppearing);
+			Assert.False(state.SectionAppearing);
+			Assert.False(state.ContentAppearing);
 		}
 
 
@@ -350,22 +350,22 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.Navigation.PushAsync(new ContentPage());
 
 			//if you're just pushing a page then the section and item are still visible but the content is not
-			Assert.IsFalse(lifeCycleState.ShellContentPageAppearing);
-			Assert.IsFalse(lifeCycleState.ContentAppearing);
-			Assert.IsTrue(lifeCycleState.SectionAppearing);
-			Assert.IsTrue(lifeCycleState.ItemAppearing);
+			Assert.False(lifeCycleState.ShellContentPageAppearing);
+			Assert.False(lifeCycleState.ContentAppearing);
+			Assert.True(lifeCycleState.SectionAppearing);
+			Assert.True(lifeCycleState.ItemAppearing);
 
 			await shell.Navigation.PushAsync(new ContentPage());
-			Assert.IsFalse(lifeCycleState.ShellContentPageAppearing);
-			Assert.IsFalse(lifeCycleState.ContentAppearing);
-			Assert.IsTrue(lifeCycleState.SectionAppearing);
-			Assert.IsTrue(lifeCycleState.ItemAppearing);
+			Assert.False(lifeCycleState.ShellContentPageAppearing);
+			Assert.False(lifeCycleState.ContentAppearing);
+			Assert.True(lifeCycleState.SectionAppearing);
+			Assert.True(lifeCycleState.ItemAppearing);
 
 			await shell.Navigation.PopAsync();
-			Assert.IsFalse(lifeCycleState.ShellContentPageAppearing);
-			Assert.IsFalse(lifeCycleState.ContentAppearing);
-			Assert.IsTrue(lifeCycleState.SectionAppearing);
-			Assert.IsTrue(lifeCycleState.ItemAppearing);
+			Assert.False(lifeCycleState.ShellContentPageAppearing);
+			Assert.False(lifeCycleState.ContentAppearing);
+			Assert.True(lifeCycleState.SectionAppearing);
+			Assert.True(lifeCycleState.ItemAppearing);
 			await shell.Navigation.PopAsync();
 			lifeCycleState.AllTrue();
 		}
@@ -384,10 +384,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.Navigation.PushAsync(new ContentPage());
 			await shell.Navigation.PushAsync(new ContentPage());
 			await shell.Navigation.PushAsync(new ContentPage());
-			Assert.IsFalse(lifeCycleState.ShellContentPageAppearing);
-			Assert.IsFalse(lifeCycleState.ContentAppearing);
-			Assert.IsTrue(lifeCycleState.SectionAppearing);
-			Assert.IsTrue(lifeCycleState.ItemAppearing);
+			Assert.False(lifeCycleState.ShellContentPageAppearing);
+			Assert.False(lifeCycleState.ContentAppearing);
+			Assert.True(lifeCycleState.SectionAppearing);
+			Assert.True(lifeCycleState.ItemAppearing);
 
 			await shell.Navigation.PopToRootAsync();
 			lifeCycleState.AllTrue();
@@ -410,11 +410,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.Disappearing += (_, __) => appearing = false;
 
 			await shell.Navigation.PushModalAsync(page);
-			Assert.IsTrue(appearing);
+			Assert.True(appearing);
 			lifeCycleState.AllFalse();
 
 			await shell.Navigation.PopModalAsync();
-			Assert.IsFalse(appearing);
+			Assert.False(appearing);
 			lifeCycleState.AllTrue();
 		}
 
@@ -432,9 +432,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.Disappearing += (_, __) => appearing = false;
 
 			await shell.Navigation.PushAsync(page);
-			Assert.IsTrue(appearing);
+			Assert.True(appearing);
 			await shell.Navigation.PopAsync();
-			Assert.IsFalse(appearing);
+			Assert.False(appearing);
 		}
 
 
@@ -624,18 +624,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			public void AllFalse()
 			{
-				Assert.IsFalse(ItemAppearing);
-				Assert.IsFalse(SectionAppearing);
-				Assert.IsFalse(ContentAppearing);
-				Assert.IsFalse(ShellContentPageAppearing);
+				Assert.False(ItemAppearing);
+				Assert.False(SectionAppearing);
+				Assert.False(ContentAppearing);
+				Assert.False(ShellContentPageAppearing);
 			}
 
 			public void AllTrue()
 			{
-				Assert.IsTrue(ItemAppearing);
-				Assert.IsTrue(SectionAppearing);
-				Assert.IsTrue(ContentAppearing);
-				Assert.IsTrue(ShellContentPageAppearing);
+				Assert.True(ItemAppearing);
+				Assert.True(SectionAppearing);
+				Assert.True(ContentAppearing);
+				Assert.True(ShellContentPageAppearing);
 			}
 		}
 	}

@@ -111,7 +111,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var image = new Image();
 
-			Assert.IsNull(image.Source);
+			Assert.Null(image.Source);
 
 			bool signaled = false;
 			image.PropertyChanged += (sender, e) =>
@@ -197,12 +197,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var loader = new StreamImageSource { Stream = GetStreamAsync };
 
 			image.Source = loader;
-			Assert.IsTrue(image.IsLoading);
+			Assert.True(image.IsLoading);
 
 			image.Source = null;
 			mockImageRenderer.CompletionSource.Task.Wait();
-			Assert.IsFalse(image.IsLoading);
-			Assert.IsTrue(cancelled);
+			Assert.False(image.IsLoading);
+			Assert.True(cancelled);
 
 			async Task<Stream> GetStreamAsync(CancellationToken cancellationToken)
 			{

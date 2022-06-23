@@ -30,13 +30,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(0, button.changing);
 			Assert.Equal(0, button.changed);
-			Assert.IsFalse(changing);
-			Assert.IsFalse(changed);
+			Assert.False(changing);
+			Assert.False(changed);
 
 			button.Handler = new HandlerStub();
 
-			Assert.IsTrue(changing);
-			Assert.IsTrue(changed);
+			Assert.True(changing);
+			Assert.True(changed);
 			Assert.Equal(1, button.changing);
 			Assert.Equal(1, button.changed);
 		}
@@ -46,12 +46,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			LifeCycleButton button = new LifeCycleButton();
 
-			Assert.IsNull(button.Handler);
+			Assert.Null(button.Handler);
 			var firstHandler = new HandlerStub();
 			button.Handler = firstHandler;
 
 			Assert.Equal(button.LastHandlerChangingEventArgs.NewHandler, firstHandler);
-			Assert.IsNull(button.LastHandlerChangingEventArgs.OldHandler);
+			Assert.Null(button.LastHandlerChangingEventArgs.OldHandler);
 
 			var secondHandler = new HandlerStub();
 			button.Handler = secondHandler;

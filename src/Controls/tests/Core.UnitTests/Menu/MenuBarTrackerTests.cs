@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.MenuBarTests
 			Assert.True(tracker.ToolbarItems.Count() == 2);
 			Assert.True(tracker.ToolbarItems.First() == subPage2.MenuBarItems[0]);
 			Assert.True(tracker.ToolbarItems.Last() == subPage2.MenuBarItems[1]);
-			Assert.IsTrue(changed);
+			Assert.True(changed);
 		}
 
 		[Fact]
@@ -223,7 +223,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.MenuBarTests
 			tracker.CollectionChanged += (sender, args) => changed = true;
 
 			subPage1.MenuBarItems.Add(menubarItem2);
-			Assert.IsTrue(changed);
+			Assert.True(changed);
 		}
 	}
 }

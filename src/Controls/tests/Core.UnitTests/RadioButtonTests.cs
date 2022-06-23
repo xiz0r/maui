@@ -104,17 +104,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			radioButton1.IsChecked = true;
 
-			Assert.IsTrue(radioButton1.IsChecked);
-			Assert.IsFalse(radioButton2.IsChecked);
-			Assert.IsFalse(radioButton3.IsChecked);
-			Assert.IsFalse(radioButton4.IsChecked);
+			Assert.True(radioButton1.IsChecked);
+			Assert.False(radioButton2.IsChecked);
+			Assert.False(radioButton3.IsChecked);
+			Assert.False(radioButton4.IsChecked);
 
 			radioButton3.IsChecked = true;
 
-			Assert.IsFalse(radioButton1.IsChecked);
-			Assert.IsFalse(radioButton2.IsChecked);
-			Assert.IsTrue(radioButton3.IsChecked);
-			Assert.IsFalse(radioButton4.IsChecked);
+			Assert.False(radioButton1.IsChecked);
+			Assert.False(radioButton2.IsChecked);
+			Assert.True(radioButton3.IsChecked);
+			Assert.False(radioButton4.IsChecked);
 		}
 
 		[Fact]
@@ -132,15 +132,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			radioButton1.IsChecked = true;
 
-			Assert.IsTrue(radioButton1.IsChecked);
-			Assert.IsFalse(radioButton2.IsChecked);
-			Assert.IsFalse(radioButton3.IsChecked);
+			Assert.True(radioButton1.IsChecked);
+			Assert.False(radioButton2.IsChecked);
+			Assert.False(radioButton3.IsChecked);
 
 			radioButton3.IsChecked = true;
 
-			Assert.IsFalse(radioButton1.IsChecked);
-			Assert.IsFalse(radioButton2.IsChecked);
-			Assert.IsTrue(radioButton3.IsChecked);
+			Assert.False(radioButton1.IsChecked);
+			Assert.False(radioButton2.IsChecked);
+			Assert.True(radioButton3.IsChecked);
 		}
 
 		[Fact]
@@ -159,9 +159,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			radioButton1.IsChecked = true;
 			radioButton3.IsChecked = true;
 
-			Assert.IsTrue(radioButton1.IsChecked);
-			Assert.IsFalse(radioButton2.IsChecked);
-			Assert.IsTrue(radioButton3.IsChecked);
+			Assert.True(radioButton1.IsChecked);
+			Assert.False(radioButton2.IsChecked);
+			Assert.True(radioButton3.IsChecked);
 		}
 
 		[Fact]
@@ -174,15 +174,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			radioButton1.IsChecked = true;
 			radioButton2.IsChecked = true;
 
-			Assert.IsFalse(radioButton1.IsChecked);
-			Assert.IsTrue(radioButton2.IsChecked);
-			Assert.IsFalse(radioButton3.IsChecked);
+			Assert.False(radioButton1.IsChecked);
+			Assert.True(radioButton2.IsChecked);
+			Assert.False(radioButton3.IsChecked);
 
 			radioButton2.GroupName = "bar";
 
-			Assert.IsFalse(radioButton1.IsChecked);
-			Assert.IsTrue(radioButton2.IsChecked);
-			Assert.IsFalse(radioButton3.IsChecked);
+			Assert.False(radioButton1.IsChecked);
+			Assert.True(radioButton2.IsChecked);
+			Assert.False(radioButton3.IsChecked);
 		}
 
 		[Fact]

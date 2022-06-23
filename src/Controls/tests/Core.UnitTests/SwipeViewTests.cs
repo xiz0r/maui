@@ -184,7 +184,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			swipeView.Open(OpenSwipeItem.LeftItems);
 
-			Assert.IsTrue(isOpen);
+			Assert.True(isOpen);
 		}
 
 		[Fact]
@@ -212,7 +212,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			swipeView.Close();
 
-			Assert.IsFalse(isOpen);
+			Assert.False(isOpen);
 		}
 
 		[Fact]

@@ -33,19 +33,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void DefaultSectionTitle()
 		{
-			Assert.IsNull(new TestModel().ProtectedSectionTitle());
+			Assert.Null(new TestModel().ProtectedSectionTitle());
 		}
 
 		[Fact]
 		public void DefualtSectionIndexTitles()
 		{
-			Assert.IsNull(new TestModel().GetSectionIndexTitles());
+			Assert.Null(new TestModel().GetSectionIndexTitles());
 		}
 
 		[Fact]
 		public void DefaultHeaderCell()
 		{
-			Assert.IsNull(new TestModel().GetHeaderCell(0));
+			Assert.Null(new TestModel().GetHeaderCell(0));
 		}
 
 		[Fact]

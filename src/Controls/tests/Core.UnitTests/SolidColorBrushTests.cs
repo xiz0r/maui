@@ -52,11 +52,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestDefaultBrushes()
 		{
 			SolidColorBrush black = Brush.Black;
-			Assert.IsNotNull(black.Color);
+			Assert.NotNull(black.Color);
 			Assert.That(black.Color, Is.EqualTo(Colors.Black));
 
 			SolidColorBrush white = Brush.White;
-			Assert.IsNotNull(white.Color);
+			Assert.NotNull(white.Color);
 			Assert.That(white.Color, Is.EqualTo(Colors.White));
 		}
 	}

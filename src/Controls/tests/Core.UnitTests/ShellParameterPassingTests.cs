@@ -435,7 +435,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var content = CreateShellContent();
 			_ = new TestShell(content);
-			Assert.IsFalse(content.IsSet(ShellContent.QueryAttributesProperty));
+			Assert.False(content.IsSet(ShellContent.QueryAttributesProperty));
 		}
 	}
 }

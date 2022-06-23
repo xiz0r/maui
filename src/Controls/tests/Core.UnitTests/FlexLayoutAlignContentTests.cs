@@ -586,8 +586,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(100f, view4.Height);
 		}
 
-		[Fact]
-		[Ignore("")]
+		[Fact(Skip = "")]
 		public void TestAlignContentStretchRowWithMargin()
 		{
 			var layout = new FlexLayout

@@ -128,7 +128,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var windowParent = ((IVisualTreeElement)window).GetVisualParent();
 			var pageParent = ((IVisualTreeElement)page).GetVisualParent();
 
-			Assert.IsNull(appParent);
+			Assert.Null(appParent);
 			Assert.Equal(app, windowParent);
 			Assert.Equal(window, pageParent);
 		}

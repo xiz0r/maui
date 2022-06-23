@@ -10,8 +10,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class NavigationUnitTest : BaseTestFixtureXUnit
 	{
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task HandlerUpdatesDontFireForLegacy(bool withPage)
 		{
 			TestNavigationPage nav =
@@ -21,12 +22,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			(nav as IView).Handler = handler;
 
 
-			Assert.IsNull(nav.CurrentNavigationTask);
-			Assert.IsNull(handler.CurrentNavigationRequest);
+			Assert.Null(nav.CurrentNavigationTask);
+			Assert.Null(handler.CurrentNavigationRequest);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task HandlerUpdatesFireWithStartingPage(bool withPage)
 		{
 			TestNavigationPage nav =
@@ -37,22 +39,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			if (!withPage)
 			{
-				Assert.IsNull(nav.CurrentNavigationTask);
+				Assert.Null(nav.CurrentNavigationTask);
 			}
 			else
 			{
-				Assert.IsNotNull(nav.CurrentNavigationTask);
+				Assert.NotNull(nav.CurrentNavigationTask);
 			}
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestNavigationImplPush(bool useMaui)
 		{
 			NavigationPage nav = new TestNavigationPage(useMaui);
 
-			Assert.IsNull(nav.RootPage);
-			Assert.IsNull(nav.CurrentPage);
+			Assert.Null(nav.RootPage);
+			Assert.Null(nav.CurrentPage);
 
 			Label child = new Label { Text = "Label" };
 			Page childRoot = new ContentPage { Content = child };
@@ -64,8 +67,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestNavigationImplPop(bool useMaui)
 		{
 			NavigationPage nav = new TestNavigationPage(useMaui);
@@ -97,20 +101,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PopAsync();
 			var last = await nav.Navigation.PopAsync();
 
-			Assert.IsNull(last);
-			Assert.IsNotNull(nav.RootPage);
-			Assert.IsNotNull(nav.CurrentPage);
+			Assert.Null(last);
+			Assert.NotNull(nav.RootPage);
+			Assert.NotNull(nav.CurrentPage);
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestPushRoot(bool useMaui)
 		{
 			NavigationPage nav = new TestNavigationPage(useMaui);
 
-			Assert.IsNull(nav.RootPage);
-			Assert.IsNull(nav.CurrentPage);
+			Assert.Null(nav.RootPage);
+			Assert.Null(nav.CurrentPage);
 
 			Label child = new Label { Text = "Label" };
 			Page childRoot = new ContentPage { Content = child };
@@ -122,8 +127,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestPushEvent(bool useMaui)
 		{
 			NavigationPage nav = new TestNavigationPage(useMaui);
@@ -139,8 +145,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestDoublePush(bool useMaui)
 		{
 			NavigationPage nav = new TestNavigationPage(useMaui);
@@ -164,8 +171,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestPop(bool useMaui)
 		{
 			NavigationPage nav = new TestNavigationPage(useMaui);
@@ -190,11 +198,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PopAsync();
 			var last = await nav.PopAsync();
 
-			Assert.IsNull(last);
+			Assert.Null(last);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestPopToRoot(bool useMaui)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -218,8 +227,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestPopToRootEventArgs(bool useMaui)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -237,7 +247,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await nav.PopToRootAsync();
 
-			Assert.IsNotNull(poppedChildren);
+			Assert.NotNull(poppedChildren);
 			Assert.Equal(2, poppedChildren.Count);
 			Assert.Contains(child1, poppedChildren);
 			Assert.Contains(child2, poppedChildren);
@@ -246,8 +256,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task PeekOne(bool useMaui)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -266,8 +277,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(((INavigationPageController)nav).Peek(1), child1);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task PeekZero(bool useMaui)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -287,8 +299,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(((INavigationPageController)nav).Peek(), child2);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task PeekPastStackDepth(bool useMaui)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -307,8 +320,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(((INavigationPageController)nav).Peek(3), null);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task PeekShallow(bool useMaui)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -339,8 +353,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void ConstructWithRoot(bool useMaui)
 		{
 			var root = new ContentPage();
@@ -351,8 +366,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void TitleViewSetProperty(bool useMaui)
 		{
 			var root = new ContentPage();
@@ -367,8 +383,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(result, target);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void TitleViewSetsParentWhenAdded(bool useMaui)
 		{
 			var root = new ContentPage();
@@ -381,8 +398,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(root, target.Parent);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void TitleViewClearsParentWhenRemoved(bool useMaui)
 		{
 			var root = new ContentPage();
@@ -394,11 +412,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			NavigationPage.SetTitleView(root, null);
 
-			Assert.IsNull(target.Parent);
+			Assert.Null(target.Parent);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task NavigationChangedEventArgs(bool useMaui)
 		{
 			var rootPage = new ContentPage { Title = "Root" };
@@ -430,8 +449,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(rootArg, secondPushPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task CurrentPageChanged(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
@@ -465,8 +485,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(changed, Is.True, "PropertyChanged was not raised for 'CurrentPage'");
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task HandlesPopToRoot(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
@@ -486,8 +507,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(popped);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task SendsBackButtonEventToCurrentPage(bool useMaui)
 		{
 			var current = new BackButtonPage();
@@ -501,8 +523,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(emitted);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task DoesNotSendBackEventToNonCurrentPage(bool useMaui)
 		{
 			var current = new BackButtonPage();
@@ -517,8 +540,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(emitted);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task NavigatesBackWhenBackButtonPressed(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
@@ -532,8 +556,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(result);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task DoesNotNavigatesBackWhenBackButtonPressedIfHandled(bool useMaui)
 		{
 			var root = new BackButtonPage { Title = "Root" };
@@ -547,8 +572,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(second, navPage.CurrentPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task DoesNotHandleBackButtonWhenNoNavStack(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
@@ -558,8 +584,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(result);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public void TestInsertPage(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
@@ -594,8 +621,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		public async Task TestRemovePage(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
@@ -650,8 +678,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(navPage.CurrentPage, Is.SameAs(root));
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory]
 		[Property("Bugzilla", 31171)]
 		public async Task ReleasesPoppedPage(bool useMaui)
 		{
@@ -668,7 +697,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsTrue(isFinalized);
+			Assert.True(isFinalized);
 		}
 
 		[Fact]
@@ -696,9 +725,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var navigationPage = new TestNavigationPage(true, contentPage1);
 			var window = new Window(navigationPage);
 
-			Assert.IsNotNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNull(navigationPage.Toolbar);
+			Assert.NotNull(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.Null(navigationPage.Toolbar);
 
 		}
 
@@ -715,10 +744,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var window = new Window(flyoutPage);
 
-			Assert.IsNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNull(navigationPage.Toolbar);
-			Assert.IsNotNull(flyoutPage.Toolbar);
+			Assert.Null(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.Null(navigationPage.Toolbar);
+			Assert.NotNull(flyoutPage.Toolbar);
 		}
 
 		[Fact]
@@ -742,11 +771,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var window = new Window(tabbedPage);
 
-			Assert.IsNotNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNull(navigationPage.Toolbar);
-			Assert.IsNull(flyoutPage.Toolbar);
-			Assert.IsNull(tabbedPage.Toolbar);
+			Assert.NotNull(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.Null(navigationPage.Toolbar);
+			Assert.Null(flyoutPage.Toolbar);
+			Assert.Null(tabbedPage.Toolbar);
 		}
 
 		[Fact]
@@ -757,9 +786,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var navigationPage = new TestNavigationPage(true, contentPage1);
 			await window.Navigation.PushModalAsync(navigationPage);
 
-			Assert.IsNotNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNotNull(navigationPage.Toolbar);
+			Assert.NotNull(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.NotNull(navigationPage.Toolbar);
 		}
 
 		[Fact]
@@ -770,9 +799,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var navigationPage = new TestNavigationPage(true, contentPage1);
 			await window.Navigation.PushModalAsync(navigationPage);
 
-			Assert.IsNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNotNull(navigationPage.Toolbar);
+			Assert.Null(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.NotNull(navigationPage.Toolbar);
 		}
 
 		[Fact]
@@ -789,10 +818,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await window.Navigation.PushModalAsync(flyoutPage);
 
-			Assert.IsNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNull(navigationPage.Toolbar);
-			Assert.IsNotNull(flyoutPage.Toolbar);
+			Assert.Null(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.Null(navigationPage.Toolbar);
+			Assert.NotNull(flyoutPage.Toolbar);
 		}
 
 		[Fact]
@@ -817,11 +846,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await window.Navigation.PushModalAsync(tabbedPage);
 
-			Assert.IsNull(window.Toolbar);
-			Assert.IsNull(contentPage1.Toolbar);
-			Assert.IsNull(navigationPage.Toolbar);
-			Assert.IsNull(flyoutPage.Toolbar);
-			Assert.IsNotNull(tabbedPage.Toolbar);
+			Assert.Null(window.Toolbar);
+			Assert.Null(contentPage1.Toolbar);
+			Assert.Null(navigationPage.Toolbar);
+			Assert.Null(flyoutPage.Toolbar);
+			Assert.NotNull(tabbedPage.Toolbar);
 		}
 
 		[Fact]
@@ -834,7 +863,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			(navigationPage as IView).Handler = new TestNavigationHandler();
 
 			var navTask = navigationPage.CurrentNavigationTask;
-			Assert.IsNotNull(navTask);
+			Assert.NotNull(navTask);
 			await navTask;
 			navigationPage.ValidateNavigationCompleted();
 		}

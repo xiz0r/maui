@@ -24,5 +24,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				yield return set.Cast<object>().ToArray();
 			}
 		}
+
+		public static IEnumerable<object[]> Combinations<T>(IEnumerable<T> inputs) 
+		{
+			var all = new List<IEnumerable<T>>(inputs.Count());
+			foreach (var i in inputs)
+			{
+				all.Add(new List<T>(inputs));
+			}
+
+			return Combinations(all);
+		}
+
+		public static IEnumerable<object[]> TrueFalseData()
+		{
+			return TestDataHelpers.Combinations(new List<bool>() { true, false });
+		}
 	}
 }

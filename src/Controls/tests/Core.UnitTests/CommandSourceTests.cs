@@ -87,7 +87,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				return true;
 			};
 
-			Assert.IsFalse(fired);
+			Assert.False(fired);
 			var source = CreateSource();
 			source.SetValue(CommandProperty, new Command(() => { }, canExecute));
 
@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			source.SetValue(CommandProperty, new Command(() => { }, canExecute));
 
 			fired = false;
-			Assert.IsFalse(fired);
+			Assert.False(fired);
 			source.SetValue(CommandParameterProperty, new object());
 			Assert.True(fired);
 		}

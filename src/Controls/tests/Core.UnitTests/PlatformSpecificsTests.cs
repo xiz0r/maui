@@ -14,11 +14,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var x = new FlyoutPage();
 
-			Assert.IsTrue(x.On<iOS>().GetVendorFoo());
+			Assert.True(x.On<iOS>().GetVendorFoo());
 
 			x.On<iOS>().SetVendorFoo(false);
 
-			Assert.IsFalse(x.On<iOS>().GetVendorFoo());
+			Assert.False(x.On<iOS>().GetVendorFoo());
 		}
 
 		[Fact]
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var x = new FlyoutPage();
 			x.On<iOS>().SetVendorFoo(false);
 
-			Assert.IsFalse(x.On<iOS>().GetVendorFoo());
+			Assert.False(x.On<iOS>().GetVendorFoo());
 		}
 
 		[Fact]
@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var x = new FlyoutPage();
 			x.On<Android>().SetSomeAndroidThing(42);
 
-			Assert.IsTrue(x.On<Android>().GetSomeAndroidThing() == 42);
+			Assert.True(x.On<Android>().GetSomeAndroidThing() == 42);
 		}
 
 		[Fact]
@@ -46,13 +46,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			x.On<Android>().UseTabletDefaults();
 
-			Assert.IsTrue(x.On<Android>().GetSomeAndroidThing() == 10);
-			Assert.IsTrue(x.On<Android>().GetSomeOtherAndroidThing() == 45);
+			Assert.True(x.On<Android>().GetSomeAndroidThing() == 10);
+			Assert.True(x.On<Android>().GetSomeOtherAndroidThing() == 45);
 
 			x.On<Android>().UsePhabletDefaults();
 
-			Assert.IsTrue(x.On<Android>().GetSomeAndroidThing() == 8);
-			Assert.IsTrue(x.On<Android>().GetSomeOtherAndroidThing() == 40);
+			Assert.True(x.On<Android>().GetSomeAndroidThing() == 8);
+			Assert.True(x.On<Android>().GetSomeOtherAndroidThing() == 40);
 		}
 
 		[Fact]
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			x.On<iOS>().SetIsNavigationBarTranslucent(true);
 
-			Assert.IsTrue(x.On<iOS>().IsNavigationBarTranslucent());
+			Assert.True(x.On<iOS>().IsNavigationBarTranslucent());
 		}
 	}
 }

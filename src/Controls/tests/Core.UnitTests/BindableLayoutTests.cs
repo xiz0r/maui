@@ -25,7 +25,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var itemsSource = new ObservableCollection<int>();
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -40,7 +40,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
 			itemsSource.Add(1);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -55,7 +55,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
 			itemsSource.Insert(2, 5);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -70,10 +70,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
 			itemsSource.RemoveAt(0);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 
 			itemsSource.Remove(1);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
 			itemsSource.RemoveAll();
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -105,7 +105,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			itemsSource[0] = 3;
 			itemsSource[1] = 4;
 			itemsSource[2] = 5;
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -120,10 +120,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
 			itemsSource.Move(0, 1);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 
 			itemsSource.Move(1, 0);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
 			itemsSource.Clear();
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -151,11 +151,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var itemsSource = new ObservableCollection<int>(Enumerable.Range(0, 10));
 			BindableLayout.SetItemsSource(layout, itemsSource);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 
 			itemsSource = null;
 			BindableLayout.SetItemsSource(layout, itemsSource);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -171,7 +171,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			BindableLayout.SetItemTemplate(layout, new DataTemplateBoxView());
 
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 			Assert.Equal(itemsSource.Count, layout.Children.Cast<BoxView>().Count());
 		}
 
@@ -187,7 +187,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemsSource(layout, itemsSource);
 			BindableLayout.SetItemTemplateSelector(layout, new DataTemplateSelectorFrame());
 
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 			Assert.Equal(itemsSource.Count, layout.Children.Cast<Frame>().Count());
 		}
 
@@ -226,7 +226,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindableLayout.SetItemTemplate(layout, new DataTemplateBoxView());
 			BindableLayout.SetItemTemplateSelector(layout, new DataTemplateSelectorFrame());
 
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 			Assert.Equal(itemsSource.Count, layout.Children.Cast<BoxView>().Count());
 		}
 
@@ -244,7 +244,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var itemsSource = new ObservableCollection<int>(Enumerable.Range(0, 10));
 			BindableLayout.SetItemsSource(layout, itemsSource);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Test, Ignore("https://github.com/dotnet/maui/issues/1524")]
@@ -269,7 +269,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsFalse(weakReference.IsAlive);
+			Assert.False(weakReference.IsAlive);
 		}
 
 		[Fact]
@@ -301,7 +301,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool wasCalled = false;
 			layout.ChildAdded += (_, __) => wasCalled = true;
 			itemsSource.Add(11);
-			Assert.IsFalse(wasCalled);
+			Assert.False(wasCalled);
 		}
 
 		[Fact]
@@ -315,7 +315,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var itemsSource = new ObservableCollection<int?>(Enumerable.Range(0, 10).Cast<int?>());
 			itemsSource.Add(null);
 			BindableLayout.SetItemsSource(layout, itemsSource);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 		[Fact]
@@ -333,10 +333,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 
 			BindableLayout.SetItemsSource(layout, itemsSource);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 
 			itemsSource.Remove(0);
-			Assert.IsTrue(IsLayoutWithItemsSource(itemsSource, layout));
+			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
 

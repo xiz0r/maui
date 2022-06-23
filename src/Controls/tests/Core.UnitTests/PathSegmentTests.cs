@@ -20,10 +20,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestArcSegmentConstructor()
 		{
 			var arcSegment1 = new ArcSegment();
-			Assert.IsNotNull(arcSegment1);
+			Assert.NotNull(arcSegment1);
 
 			var arcSegment2 = new ArcSegment(new Point(0, 0), new Size(100, 100), 90, SweepDirection.Clockwise, false);
-			Assert.IsNotNull(arcSegment2);
+			Assert.NotNull(arcSegment2);
 			Assert.Equal(90, arcSegment2.RotationAngle);
 			Assert.Equal(100, arcSegment2.Size.Height);
 			Assert.Equal(100, arcSegment2.Size.Width);
@@ -33,10 +33,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestBezierSegmentConstructor()
 		{
 			var bezierSegment1 = new BezierSegment();
-			Assert.IsNotNull(bezierSegment1);
+			Assert.NotNull(bezierSegment1);
 
 			var bezierSegment2 = new BezierSegment(new Point(0, 0), new Point(50, 50), new Point(100, 100));
-			Assert.IsNotNull(bezierSegment2);
+			Assert.NotNull(bezierSegment2);
 			Assert.Equal(0, bezierSegment2.Point1.X);
 			Assert.Equal(0, bezierSegment2.Point1.Y);
 			Assert.Equal(50, bezierSegment2.Point2.X);
@@ -49,10 +49,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestLineSegmentConstructor()
 		{
 			var lineSegment1 = new LineSegment();
-			Assert.IsNotNull(lineSegment1);
+			Assert.NotNull(lineSegment1);
 
 			var lineSegment2 = new LineSegment(new Point(25, 50));
-			Assert.IsNotNull(lineSegment2);
+			Assert.NotNull(lineSegment2);
 			Assert.Equal(25, lineSegment2.Point.X);
 			Assert.Equal(50, lineSegment2.Point.Y);
 		}
@@ -73,7 +73,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
 
 			var polyBezierSegment = new PolyBezierSegment(pointCollection);
-			Assert.IsNotNull(polyBezierSegment);
+			Assert.NotNull(polyBezierSegment);
 			Assert.Equal(count, polyBezierSegment.Points.Count);
 		}
 
@@ -92,7 +92,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
 			var polyLineSegment = new PolyLineSegment(pointCollection);
-			Assert.IsNotNull(polyLineSegment);
+			Assert.NotNull(polyLineSegment);
 			Assert.Equal(count, polyLineSegment.Points.Count);
 		}
 
@@ -111,7 +111,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
 			var polyQuadraticBezierSegment = new PolyQuadraticBezierSegment(pointCollection);
-			Assert.IsNotNull(polyQuadraticBezierSegment);
+			Assert.NotNull(polyQuadraticBezierSegment);
 			Assert.Equal(count, polyQuadraticBezierSegment.Points.Count);
 		}
 
@@ -119,10 +119,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestQuadraticBezierSegmentConstructor()
 		{
 			var quadraticBezierSegment1 = new QuadraticBezierSegment();
-			Assert.IsNotNull(quadraticBezierSegment1);
+			Assert.NotNull(quadraticBezierSegment1);
 
 			var quadraticBezierSegment2 = new QuadraticBezierSegment(new Point(0, 0), new Point(100, 100));
-			Assert.IsNotNull(quadraticBezierSegment2);
+			Assert.NotNull(quadraticBezierSegment2);
 			Assert.Equal(0, quadraticBezierSegment2.Point1.X);
 			Assert.Equal(0, quadraticBezierSegment2.Point1.Y);
 			Assert.Equal(100, quadraticBezierSegment2.Point2.X);

@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Source = new RelativeBindingSource(
 					RelativeBindingSourceMode.FindAncestor, typeof(StackLayout), 1)
 			});
-			Assert.IsNull(label0.Text);
+			Assert.Null(label0.Text);
 			Assert.Equal(Label.TextColorProperty.DefaultValue, label0.TextColor);
 
 			label1.SetBinding(Label.TextProperty, new Binding
@@ -87,7 +87,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Path = nameof(StackLayout.BackgroundColor),
 				Source = new RelativeBindingSource(RelativeBindingSourceMode.FindAncestor, typeof(StackLayout), 2)
 			});
-			Assert.IsNull(label1.Text);
+			Assert.Null(label1.Text);
 			Assert.Equal(Label.TextColorProperty.DefaultValue, label1.TextColor);
 
 			label2.SetBinding(Label.TextProperty, new Binding
@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Path = nameof(StackLayout.BackgroundColor),
 				Source = new RelativeBindingSource(RelativeBindingSourceMode.FindAncestor, typeof(StackLayout), 3)
 			});
-			Assert.IsNull(label2.Text);
+			Assert.Null(label2.Text);
 			Assert.Equal(Label.TextColorProperty.DefaultValue, label2.TextColor);
 
 			grid.Children.Add(label0);
@@ -119,9 +119,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label0.TextColor, stack0.BackgroundColor);
 			Assert.Equal(label1.TextColor, stack1.BackgroundColor);
 			Assert.Equal(label2.TextColor, stack2.BackgroundColor);
-			Assert.IsNull(label0.Text);
-			Assert.IsNull(label1.Text);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label0.Text);
+			Assert.Null(label1.Text);
+			Assert.Null(label2.Text);
 
 			// stack2	(person2)
 			//		stack1 (person2*)
@@ -135,8 +135,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label1.TextColor, stack1.BackgroundColor);
 			Assert.Equal(label2.TextColor, stack2.BackgroundColor);
 			Assert.Equal(label0.Text, person2.Name);
-			Assert.IsNull(label1.Text);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label1.Text);
+			Assert.Null(label2.Text);
 
 			// stack2	(person2)
 			//		stack1 (person1)
@@ -181,7 +181,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label2.TextColor, stack2.BackgroundColor);
 			Assert.Equal(label0.Text, person0.Name);
 			Assert.Equal(label1.Text, person1.Name);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label2.Text);
 
 			// stack2
 			//		stack1
@@ -195,8 +195,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label1.TextColor, stack1.BackgroundColor);
 			Assert.Equal(label2.TextColor, stack2.BackgroundColor);
 			Assert.Equal(label0.Text, person0.Name);
-			Assert.IsNull(label1.Text);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label1.Text);
+			Assert.Null(label2.Text);
 
 			// stack2
 			//		stack1
@@ -208,9 +208,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label0.TextColor, stack0.BackgroundColor);
 			Assert.Equal(label1.TextColor, stack1.BackgroundColor);
 			Assert.Equal(label2.TextColor, stack2.BackgroundColor);
-			Assert.IsNull(label0.Text);
-			Assert.IsNull(label1.Text);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label0.Text);
+			Assert.Null(label1.Text);
+			Assert.Null(label2.Text);
 
 			stack0.BindingContext = person0;
 			stack1.BindingContext = person1;
@@ -230,7 +230,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label2.TextColor, StackLayout.BackgroundColorProperty.DefaultValue);
 			Assert.Equal(label0.Text, person0.Name);
 			Assert.Equal(label1.Text, person1.Name);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label2.Text);
 
 			// stack2 (person2) 
 			// stack1 (person1) 
@@ -243,8 +243,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label1.TextColor, StackLayout.BackgroundColorProperty.DefaultValue);
 			Assert.Equal(label2.TextColor, StackLayout.BackgroundColorProperty.DefaultValue);
 			Assert.Equal(label0.Text, person0.Name);
-			Assert.IsNull(label1.Text);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label1.Text);
+			Assert.Null(label2.Text);
 
 			// stack2 (person2) 
 			// stack1 (person1) 
@@ -257,9 +257,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label0.TextColor, StackLayout.BackgroundColorProperty.DefaultValue);
 			Assert.Equal(label1.TextColor, StackLayout.BackgroundColorProperty.DefaultValue);
 			Assert.Equal(label2.TextColor, StackLayout.BackgroundColorProperty.DefaultValue);
-			Assert.IsNull(label0.Text);
-			Assert.IsNull(label1.Text);
-			Assert.IsNull(label2.Text);
+			Assert.Null(label0.Text);
+			Assert.Null(label1.Text);
+			Assert.Null(label2.Text);
 		}
 
 		class PersonViewModel

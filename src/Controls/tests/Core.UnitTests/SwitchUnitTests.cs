@@ -72,7 +72,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Switch sw = new Switch();
 
-			Assert.IsFalse(sw.IsToggled);
+			Assert.False(sw.IsToggled);
 		}
 
 		[Fact]
@@ -85,7 +85,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			sw.IsToggled = true;
 
-			Assert.IsTrue(fired);
+			Assert.True(fired);
 		}
 
 		[Fact]
@@ -99,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			sw.Toggled += (sender, args) => fired = true;
 			sw.IsToggled = true;
 
-			Assert.IsFalse(fired);
+			Assert.False(fired);
 		}
 
 		[Fact]

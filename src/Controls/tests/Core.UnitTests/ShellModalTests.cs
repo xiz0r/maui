@@ -85,7 +85,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool appearing = false;
 			shell.Items[0].Items[0].Navigation.ModalStack[0].Appearing += (_, __) => appearing = true;
 			await shell.GoToAsync($"///MainContent");
-			Assert.IsFalse(appearing);
+			Assert.False(appearing);
 		}
 
 		[Fact]
@@ -99,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items[0].Items[0].Navigation.ModalStack[0].Appearing += (_, __) => appearing = true;
 
 			await shell.Navigation.PopModalAsync();
-			Assert.IsTrue(true);
+			Assert.True(true);
 		}
 
 
@@ -269,7 +269,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.IsTrue(invalidOperationThrown);
+			Assert.True(invalidOperationThrown);
 		});
 
 
@@ -301,8 +301,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var page1 = (ShellLifeCycleTests.LifeCyclePage)shell.Navigation.ModalStack[0];
 			var page2 = (ShellLifeCycleTests.LifeCyclePage)shell.Navigation.ModalStack[1];
 
-			Assert.IsFalse(page1.Appearing);
-			Assert.IsTrue(page2.Appearing);
+			Assert.False(page1.Appearing);
+			Assert.True(page2.Appearing);
 		}
 
 		[Fact]
@@ -356,8 +356,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("ModalTestPage");
 
-			Assert.IsNotNull(shellNavigatingEventArgs, "Shell.Navigating never fired");
-			Assert.IsNotNull(shellNavigatedEventArgs, "Shell.Navigated never fired");
+			Assert.NotNull(shellNavigatingEventArgs, "Shell.Navigating never fired");
+			Assert.NotNull(shellNavigatedEventArgs, "Shell.Navigated never fired");
 
 			Assert.Equal("//NewRoute/Section/Content", shellNavigatingEventArgs.Current.FullLocation.ToString());
 			Assert.Equal("//NewRoute/Section/Content/ModalTestPage", shellNavigatedEventArgs.Current.FullLocation.ToString());
@@ -378,7 +378,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			await shell.GoToAsync("ModalTestPage");
-			Assert.IsNotNull(page);
+			Assert.NotNull(page);
 			Assert.Equal(page.GetType(), typeof(ModalTestPage));
 		}
 

@@ -42,7 +42,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var root = (radioButton as IControlTemplated)?.TemplateRoot as Frame;
 
-			Assert.IsNotNull(root);
+			Assert.NotNull(root);
 			Assert.That(root.GetValue(property), Is.Not.EqualTo(value), $"{property.PropertyName} should be ignored.");
 		}
 
@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var root = (radioButton as IControlTemplated)?.TemplateRoot as Frame;
 
-			Assert.IsNotNull(root);
+			Assert.NotNull(root);
 			Assert.That(root.GetValue(property), Is.EqualTo(value), $"{property.PropertyName} should match.");
 		}
 	}

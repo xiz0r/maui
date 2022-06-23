@@ -84,8 +84,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool result = shell.Controller.ProposeNavigation(
 				ShellNavigationSource.ShellContentChanged, flyoutItem, flyoutItem.Items[0], navigatingToShellContent, flyoutItem.Items[0].Stack, true);
 
-			Assert.IsTrue(executed);
-			Assert.IsFalse(result);
+			Assert.True(executed);
+			Assert.False(result);
 		}
 
 		[Fact]
@@ -125,7 +125,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await taskCompletionSource.Task;
 
-			Assert.IsTrue(executed);
+			Assert.True(executed);
 			Assert.AreNotEqual(contentActiveBeforeCompletingDeferral, navigatingToShellContent);
 			Assert.Equal(flyoutItem.Items[0].Items[0], contentActiveBeforeCompletingDeferral, "Navigation to new Content was not deferred");
 			Assert.Equal(flyoutItem.Items[0].CurrentItem, navigatingToShellContent, "Navigation after completing the deferral failed");
@@ -148,7 +148,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			await shell.Navigation.PushAsync(new ContentPage());
-			Assert.IsTrue(executed);
+			Assert.True(executed);
 			Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 		}
 
@@ -229,7 +229,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					break;
 			}
 
-			Assert.IsTrue(_token.IsCompleted);
+			Assert.True(_token.IsCompleted);
 		}
 
 		[Fact]
@@ -650,8 +650,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Routing.RegisterRoute(routeName, pageType);
 			await shell.GoToAsync(routeName);
 
-			Assert.IsNotNull(shell.Navigation);
-			Assert.IsNotNull(shell.Navigation.NavigationStack);
+			Assert.NotNull(shell.Navigation);
+			Assert.NotNull(shell.Navigation.NavigationStack);
 			var page = shell.Navigation.NavigationStack[1];
 			Assert.That(page, Is.Not.Null);
 			if (pageType == typeof(PageWithDependency) || pageType == typeof(Dependency))
@@ -876,8 +876,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("1", ((ShellTestPage)shell.CurrentPage).SomeQueryParameter);
 			await shell.GoToAsync($"page1/page2/page3");
 
-			Assert.IsTrue(shell.CurrentPage is TestPage1);
-			Assert.IsTrue(shell.Navigation.NavigationStack[1] is ShellTestPage);
+			Assert.True(shell.CurrentPage is TestPage1);
+			Assert.True(shell.Navigation.NavigationStack[1] is ShellTestPage);
 		}
 
 		[Fact]
@@ -891,8 +891,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync($"page1/page2/page3");
 
-			Assert.IsTrue(shell.CurrentPage is TestPage1);
-			Assert.IsTrue(shell.Navigation.NavigationStack[1] is ShellTestPage);
+			Assert.True(shell.CurrentPage is TestPage1);
+			Assert.True(shell.Navigation.NavigationStack[1] is ShellTestPage);
 		}
 
 		[Fact]
@@ -906,11 +906,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync($"page1/page2");
 			await shell.GoToAsync($"page1/page2/page3");
-			Assert.IsTrue(shell.CurrentPage is TestPage1);
+			Assert.True(shell.CurrentPage is TestPage1);
 			await shell.GoToAsync($"..");
-			Assert.IsTrue(shell.CurrentPage is ShellTestPage);
+			Assert.True(shell.CurrentPage is ShellTestPage);
 			await shell.GoToAsync($"..");
-			Assert.IsTrue(shell.CurrentPage is ContentPage);
+			Assert.True(shell.CurrentPage is ContentPage);
 		}
 
 		[Fact]

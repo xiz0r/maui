@@ -208,7 +208,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var p = new ListProxy(c);
 
 			IEnumerator<object> e = p.GetEnumerator();
-			Assert.IsTrue(e.MoveNext(), "Initial MoveNext() failed, test can't continue");
+			Assert.True(e.MoveNext(), "Initial MoveNext() failed, test can't continue");
 
 			c.Add("baz");
 
@@ -230,8 +230,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				executed = true;
 				Assert.AreSame(collection, enumerable);
 				Assert.AreSame(context, o);
-				Assert.IsNotNull(method);
-				Assert.IsFalse(access);
+				Assert.NotNull(method);
+				Assert.False(access);
 
 				lock (enumerable)
 					method();
@@ -239,7 +239,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object value = list[0];
 
-			Assert.IsTrue(executed, "Callback was not executed");
+			Assert.True(executed, "Callback was not executed");
 		}
 
 		[Fact]
@@ -259,7 +259,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var list = new ListProxy(collection);
 
-			Assert.IsFalse(invoked, "An invoke shouldn't be executed just setting up ListProxy");
+			Assert.False(invoked, "An invoke shouldn't be executed just setting up ListProxy");
 
 			bool executed = false;
 			BindingBase.EnableCollectionSynchronization(collection, context, (enumerable, o, method, access) =>
@@ -267,8 +267,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				executed = true;
 				Assert.AreSame(collection, enumerable);
 				Assert.AreSame(context, o);
-				Assert.IsNotNull(method);
-				Assert.IsFalse(access);
+				Assert.NotNull(method);
+				Assert.False(access);
 
 				lock (enumerable)
 					method();
@@ -293,8 +293,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			mre.WaitOne(5000);
 
-			Assert.IsTrue(executed, "Callback was not executed");
-			Assert.IsTrue(invoked, "Callback was not executed on the UI thread");
+			Assert.True(executed, "Callback was not executed");
+			Assert.True(invoked, "Callback was not executed on the UI thread");
 		});
 
 		[Fact]
@@ -443,14 +443,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsTrue(list.AddObject(), "GC run, but proxy should still hold a reference");
+			Assert.True(list.AddObject(), "GC run, but proxy should still hold a reference");
 
 			_proxyForWeakToWeakTest = null;
 
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
 
-			Assert.IsFalse(list.AddObject(), "Proxy is gone and GC has run");
+			Assert.False(list.AddObject(), "Proxy is gone and GC has run");
 		}
 
 		public class WeakCollectionChangedList : List<object>, INotifyCollectionChanged

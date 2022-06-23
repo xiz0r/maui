@@ -11,11 +11,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var target = FlowDirection.LeftToRight.ToEffectiveFlowDirection();
 
-			Assert.IsTrue(target.IsLeftToRight());
-			Assert.IsTrue(target.IsImplicit());
+			Assert.True(target.IsLeftToRight());
+			Assert.True(target.IsImplicit());
 
-			Assert.IsFalse(target.IsRightToLeft());
-			Assert.IsFalse(target.IsExplicit());
+			Assert.False(target.IsRightToLeft());
+			Assert.False(target.IsExplicit());
 		}
 
 		[Fact]
@@ -23,11 +23,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var target = FlowDirection.LeftToRight.ToEffectiveFlowDirection(isExplicit: true);
 
-			Assert.IsTrue(target.IsLeftToRight());
-			Assert.IsTrue(target.IsExplicit());
+			Assert.True(target.IsLeftToRight());
+			Assert.True(target.IsExplicit());
 
-			Assert.IsFalse(target.IsRightToLeft());
-			Assert.IsFalse(target.IsImplicit());
+			Assert.False(target.IsRightToLeft());
+			Assert.False(target.IsImplicit());
 		}
 
 		[Fact]
@@ -35,11 +35,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var target = FlowDirection.RightToLeft.ToEffectiveFlowDirection();
 
-			Assert.IsTrue(target.IsRightToLeft());
-			Assert.IsTrue(target.IsImplicit());
+			Assert.True(target.IsRightToLeft());
+			Assert.True(target.IsImplicit());
 
-			Assert.IsFalse(target.IsLeftToRight());
-			Assert.IsFalse(target.IsExplicit());
+			Assert.False(target.IsLeftToRight());
+			Assert.False(target.IsExplicit());
 		}
 
 		[Fact]
@@ -47,11 +47,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var target = FlowDirection.RightToLeft.ToEffectiveFlowDirection(isExplicit: true);
 
-			Assert.IsTrue(target.IsRightToLeft());
-			Assert.IsTrue(target.IsExplicit());
+			Assert.True(target.IsRightToLeft());
+			Assert.True(target.IsExplicit());
 
-			Assert.IsFalse(target.IsLeftToRight());
-			Assert.IsFalse(target.IsImplicit());
+			Assert.False(target.IsLeftToRight());
+			Assert.False(target.IsImplicit());
 		}
 	}
 }

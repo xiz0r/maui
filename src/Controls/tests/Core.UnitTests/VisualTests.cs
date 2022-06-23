@@ -164,7 +164,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target == Maui.Controls.VisualMarker.Material, "EffectiveVisual should be Material");
+			Assert.True(target == Maui.Controls.VisualMarker.Material, "EffectiveVisual should be Material");
 
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 			Assert.Equal(Maui.Controls.VisualMarker.Material, layout2.Visual);
@@ -184,8 +184,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
-			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
+			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
+			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 			Assert.Equal(Maui.Controls.VisualMarker.Default, layout2.Visual);
@@ -209,8 +209,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
-			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
+			Assert.True(target.IsMaterial(), "EffectiveVisual should be Material");
+			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, layout2.Visual);
@@ -278,8 +278,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
-			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
+			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
+			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 		}
@@ -321,8 +321,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
-			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
+			Assert.True(target.IsMaterial(), "EffectiveVisual should be Material");
+			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
 		[Fact]
@@ -341,8 +341,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
-			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
-			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
+			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
+			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
 		[Fact]
@@ -368,8 +368,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
-			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
-			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
+			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
+			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
 		[Fact]
@@ -385,8 +385,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
-			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
-			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
+			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
+			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
 		[Fact]
@@ -402,8 +402,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
-			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
+			Assert.True(target.IsMaterial(), "EffectiveVisual should be Material");
+			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
 		[Fact]
@@ -419,8 +419,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
-			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
+			Assert.True(target.IsMaterial(), "EffectiveVisual should be Material");
+			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
 
@@ -434,8 +434,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
-			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
+			Assert.True(target.IsMaterial(), "EffectiveVisual should be Material");
+			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
 		[Fact]
@@ -448,8 +448,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
-			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
+			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
+			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 			Assert.Equal(Maui.Controls.VisualMarker.Default, ((View)view).Visual);
 		}
 
@@ -465,8 +465,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
-			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
+			Assert.True(target.IsMaterial(), "EffectiveVisual should be Material");
+			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 		}
 

@@ -25,8 +25,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Points = points
 			};
 
-			Assert.IsNotNull(points);
-			Assert.IsNotNull(polyline);
+			Assert.NotNull(points);
+			Assert.NotNull(polyline);
 			Assert.Equal(10, points.Count);
 		}
 	}

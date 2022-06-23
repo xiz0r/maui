@@ -14,7 +14,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(new Position(0, 0), span.Center);
 			Assert.Equal(1, span.LatitudeDegrees);
 			Assert.Equal(1, span.LongitudeDegrees);
-			Assert.IsTrue(span.Radius.Kilometers > 54 && span.Radius.Kilometers < 56);
+			Assert.True(span.Radius.Kilometers > 54 && span.Radius.Kilometers < 56);
 		}
 
 		[Fact]
@@ -37,8 +37,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void RangeClamping()
 		{
 			var span = new MapSpan(new Position(0, 0), -1, -2);
-			Assert.IsTrue(span.LatitudeDegrees > 0);
-			Assert.IsTrue(span.LongitudeDegrees > 0);
+			Assert.True(span.LatitudeDegrees > 0);
+			Assert.True(span.LongitudeDegrees > 0);
 		}
 	}
 }

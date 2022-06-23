@@ -21,7 +21,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			NavigationPage nav = new TestNavigationPage(useMaui, contentPage);
 
-			Assert.IsNull(resultPage);
+			Assert.Null(resultPage);
 			_ = new Window(nav);
 			Assert.Equal(resultPage, contentPage);
 		}
@@ -74,8 +74,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				=> pageDisappeared = (ContentPage)sender;
 
 			await nav.PushAsync(pushedPage);
-			Assert.IsNull(rootPageFiresAppearingAfterPop);
-			Assert.IsNull(pageDisappeared);
+			Assert.Null(rootPageFiresAppearingAfterPop);
+			Assert.Null(pageDisappeared);
 
 			await nav.PopAsync();
 
@@ -104,8 +104,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				=> pageDisappeared = (ContentPage)sender;
 
 			await nav.PushAsync(pushedPage);
-			Assert.IsNull(initialPageAppearing);
-			Assert.IsNull(pageDisappeared);
+			Assert.Null(initialPageAppearing);
+			Assert.Null(pageDisappeared);
 
 			nav.Navigation.RemovePage(pushedPage);
 

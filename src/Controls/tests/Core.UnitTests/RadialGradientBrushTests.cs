@@ -102,7 +102,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Radius = 20
 			};
 
-			Assert.IsNotNull(radialGradientBrush);
+			Assert.NotNull(radialGradientBrush);
 		}
 
 		[Fact]

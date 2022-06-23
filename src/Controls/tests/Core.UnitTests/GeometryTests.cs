@@ -66,7 +66,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var lineGeometry = new LineGeometry(new Point(0, 0), new Point(100, 100));
 
-			Assert.IsNotNull(lineGeometry);
+			Assert.NotNull(lineGeometry);
 			Assert.Equal(0, lineGeometry.StartPoint.X);
 			Assert.Equal(0, lineGeometry.StartPoint.Y);
 			Assert.Equal(100, lineGeometry.EndPoint.X);
@@ -78,7 +78,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var ellipseGeometry = new EllipseGeometry(new Point(50, 50), 10, 20);
 
-			Assert.IsNotNull(ellipseGeometry);
+			Assert.NotNull(ellipseGeometry);
 			Assert.Equal(50, ellipseGeometry.Center.X);
 			Assert.Equal(50, ellipseGeometry.Center.Y);
 			Assert.Equal(10, ellipseGeometry.RadiusX);
@@ -90,7 +90,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var rectangleGeometry = new RectangleGeometry(new Rect(0, 0, 150, 150));
 
-			Assert.IsNotNull(rectangleGeometry);
+			Assert.NotNull(rectangleGeometry);
 			Assert.Equal(150, rectangleGeometry.Rect.Height);
 			Assert.Equal(150, rectangleGeometry.Rect.Width);
 		}
@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var roundRectangleGeometry = new RoundRectangleGeometry(new CornerRadius(12, 0, 0, 12), new Rect(0, 0, 150, 150));
 
-			Assert.IsNotNull(roundRectangleGeometry);
+			Assert.NotNull(roundRectangleGeometry);
 			Assert.Equal(12, roundRectangleGeometry.CornerRadius.TopLeft);
 			Assert.Equal(0, roundRectangleGeometry.CornerRadius.TopRight);
 			Assert.Equal(0, roundRectangleGeometry.CornerRadius.BottomLeft);

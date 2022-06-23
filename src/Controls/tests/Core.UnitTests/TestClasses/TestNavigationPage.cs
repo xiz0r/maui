@@ -24,9 +24,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		public void ValidateNavigationCompleted()
 		{
-			Assert.IsNull(CurrentNavigationTask);
+			Assert.Null(CurrentNavigationTask);
 			if (Handler is TestNavigationHandler nh)
-				Assert.IsNull(nh.CurrentNavigationRequest);
+				Assert.Null(nh.CurrentNavigationRequest);
 		}
 
 		public async Task<bool> SendBackButtonPressedAsync()

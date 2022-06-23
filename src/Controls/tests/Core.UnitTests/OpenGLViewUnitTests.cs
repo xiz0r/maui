@@ -1,11 +1,11 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class OpenGLViewUnitTests : BaseTestFixture
+	
+	public class OpenGLViewUnitTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void Display()
 		{
 			var view = new OpenGLView();

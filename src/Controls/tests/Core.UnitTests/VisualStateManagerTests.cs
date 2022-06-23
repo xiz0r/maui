@@ -5,11 +5,11 @@ using System.Linq;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class VisualStateManagerTests
 	{
 		const string NormalStateName = "Normal";
@@ -50,7 +50,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return stateGroups;
 		}
 
-		[Test]
+		[Fact]
 		public void InitialStateIsNormalIfAvailable()
 		{
 			var label1 = new Label();
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void InitialStateIsNullIfNormalNotAvailable()
 		{
 			var label1 = new Label();
@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(groups1[0].CurrentState);
 		}
 
-		[Test]
+		[Fact]
 		public void VisualElementsStateGroupsAreDistinct()
 		{
 			var label1 = new Label();
@@ -97,7 +97,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void VisualStateGroupsFromSettersAreDistinct()
 		{
 			var x = new Setter();
@@ -127,7 +127,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void ElementsDoNotHaveVisualStateGroupsCollectionByDefault()
 		{
 			var label1 = new Label();
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(label1.HasVisualStateGroups());
 		}
 
-		[Test]
+		[Fact]
 		public void StateNamesMustBeUniqueWithinGroup()
 		{
 			IList<VisualStateGroup> vsgs = CreateTestStateGroups();
@@ -148,7 +148,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => vsgs[0].States.Add(duplicate));
 		}
 
-		[Test]
+		[Fact]
 		public void StateNamesMustBeUniqueWithinGroupList()
 		{
 			IList<VisualStateGroup> vsgs = CreateTestStateGroups();
@@ -163,7 +163,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => secondGroup.States.Add(duplicate));
 		}
 
-		[Test]
+		[Fact]
 		public void StateNamesMustBeUniqueWithinGroupListWhenAddingGroup()
 		{
 			IList<VisualStateGroup> vsgs = CreateTestStateGroups();
@@ -178,7 +178,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => vsgs.Add(secondGroup));
 		}
 
-		[Test]
+		[Fact]
 		public void GroupNamesMustBeUniqueWithinGroupList()
 		{
 			IList<VisualStateGroup> vsgs = CreateTestStateGroups();
@@ -187,7 +187,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => vsgs.Add(secondGroup));
 		}
 
-		[Test]
+		[Fact]
 		public void StateNamesInGroupMayNotBeNull()
 		{
 			IList<VisualStateGroup> vsgs = CreateTestStateGroups();
@@ -197,7 +197,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => vsgs[0].States.Add(nullStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void StateNamesInGroupMayNotBeEmpty()
 		{
 			IList<VisualStateGroup> vsgs = CreateTestStateGroups();
@@ -207,7 +207,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => vsgs[0].States.Add(emptyStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void VerifyVisualStateChanges()
 		{
 			var label1 = new Label();
@@ -237,7 +237,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[Test]
+		[Fact]
 		public void VisualElementGoesToCorrectStateWhenAvailable()
 		{
 			var label = new Label();
@@ -257,7 +257,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label.Margin.Bottom, Is.EqualTo(targetBottomMargin));
 		}
 
-		[Test]
+		[Fact]
 		public void VisualElementGoesToCorrectStateWhenAvailableFromSetter()
 		{
 			double targetBottomMargin = 1.5;
@@ -287,7 +287,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label2.Margin.Bottom, Is.EqualTo(targetBottomMargin));
 		}
 
-		[Test]
+		[Fact]
 		public void VisualElementGoesToCorrectStateWhenSetterHasTarget()
 		{
 			double defaultMargin = default(double);
@@ -330,7 +330,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label2.Margin.Bottom, Is.EqualTo(defaultMargin));
 		}
 
-		[Test]
+		[Fact]
 		public void CanRemoveAStateAndAddANewStateWithTheSameName()
 		{
 			var stateGroups = new VisualStateGroupList();
@@ -349,7 +349,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			visualStateGroup.States.Add(new VisualState { Name = name });
 		}
 
-		[Test]
+		[Fact]
 		public void CanRemoveAGroupAndAddANewGroupWithTheSameName()
 		{
 			var stateGroups = new VisualStateGroupList();
@@ -371,20 +371,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			stateGroups.Add(new VisualStateGroup { Name = name });
 		}
 
-		[SetUp]
+		
 		public void Setup()
 		{
 			AppInfo.SetCurrent(new MockAppInfo() { RequestedTheme = AppTheme.Light });
 			Application.Current = new Application();
 		}
 
-		[TearDown]
+		
 		public void TearDown()
 		{
 			Application.Current = null;
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/dotnet/maui/issues/6251
 		public void AppThemeBindingInVSM()
 		{
@@ -418,7 +418,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label.BackgroundColor, Is.EqualTo(Colors.Red));
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/dotnet/maui/issues/4139
 		public void ChangingStyleContainingVSMShouldResetStateValue()
 		{
@@ -475,7 +475,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label.TextColor, Is.EqualTo(Colors.Black));
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/dotnet/maui/issues/6857
 		public void VSMFromStyleAreUnApplied()
 		{
@@ -504,7 +504,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(VisualStateManager.GetVisualStateGroups(label).Count, Is.EqualTo(0)); //default style (created by defaultValueCreator) has no groups
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/dotnet/maui/issues/6885
 		public void UnapplyingVSMShouldUnapplySetters()
 		{
@@ -529,7 +529,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label.TextColor, Is.Not.EqualTo(Colors.HotPink)); //setter should be unapplied
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/dotnet/maui/issues/6856
 		public void VSMInStyleShouldHaveStylePriority()
 		{
@@ -563,7 +563,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label.TextColor, Is.EqualTo(Colors.HotPink)); //textcolor Style's VSM isn't applied
 		}
 
-		[Test]
+		[Fact]
 		[Explicit("This test was created to check performance characteristics; leaving it in because it may be useful again.")]
 		[TestCase(1, 10)]
 		[TestCase(1, 10000)]

@@ -1,16 +1,16 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class StrokeShapeTests : BaseTestFixture
+	public class StrokeShapeTests : BaseTestFixtureXUnit
 	{
 		StrokeShapeTypeConverter _strokeShapeTypeConverter;
 
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 
 			_strokeShapeTypeConverter = new StrokeShapeTypeConverter();
 		}

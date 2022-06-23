@@ -1,5 +1,5 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -28,10 +28,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public BindableObject AssociatedObject { get; set; }
 	}
 
-	[TestFixture]
-	public class BehaviorTest : BaseTestFixture
+	
+	public class BehaviorTest : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void AttachAndDetach()
 		{
 			var behavior = new MockBehavior<MockBindable>();
@@ -54,7 +54,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(behavior.AssociatedObject);
 		}
 
-		[Test]
+		[Fact]
 		public void AttachToTypeCompatibleWithTargetType()
 		{
 			var behavior = new MockBehavior<MockBindable>();
@@ -63,7 +63,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => ((IAttachedObject)behavior).AttachTo(bindable));
 		}
 
-		[Test]
+		[Fact]
 		public void BehaviorsInCollectionAreAttachedWhenCollectionIsAttached()
 		{
 			var behavior = new MockBehavior<MockBindable>();
@@ -79,7 +79,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(behavior.AssociatedObject);
 		}
 
-		[Test]
+		[Fact]
 		public void BehaviorsAddedToAttachedCollectionAreAttached()
 		{
 			var behavior = new MockBehavior<MockBindable>();
@@ -95,7 +95,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(behavior.AssociatedObject);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBehaviorsAttachedDP()
 		{
 			var behavior = new MockBehavior<MockBindable>();

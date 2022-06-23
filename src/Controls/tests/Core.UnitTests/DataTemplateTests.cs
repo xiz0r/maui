@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DataTemplateTests : BaseTestFixture
+	
+	public class DataTemplateTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void CtorInvalid()
 		{
 			Assert.Throws<ArgumentNullException>(() => new DataTemplate((Func<object>)null),
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"Allowed null type");
 		}
 
-		[Test]
+		[Fact]
 		public void CreateContent()
 		{
 			var template = new DataTemplate(() => new MockBindable());
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(obj, Is.InstanceOf<MockBindable>());
 		}
 
-		[Test]
+		[Fact]
 		public void CreateContentType()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(obj, Is.InstanceOf<MockBindable>());
 		}
 
-		[Test]
+		[Fact]
 		public void CreateContentValues()
 		{
 			var template = new DataTemplate(typeof(MockBindable))
@@ -49,7 +49,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("value"));
 		}
 
-		[Test]
+		[Fact]
 		public void CreateContentBindings()
 		{
 			var template = new DataTemplate(() => new MockBindable())
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("text"));
 		}
 
-		[Test]
+		[Fact]
 		public void SetBindingInvalid()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
@@ -70,7 +70,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => template.SetBinding(MockBindable.TextProperty, null), Throws.InstanceOf<ArgumentNullException>());
 		}
 
-		[Test]
+		[Fact]
 		public void SetBindingOverridesValue()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
@@ -84,7 +84,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("binding"));
 		}
 
-		[Test]
+		[Fact]
 		public void SetValueOverridesBinding()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
@@ -97,14 +97,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("value"));
 		}
 
-		[Test]
+		[Fact]
 		public void SetValueInvalid()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
 			Assert.That(() => template.SetValue(null, "string"), Throws.InstanceOf<ArgumentNullException>());
 		}
 
-		[Test]
+		[Fact]
 		public void SetValueAndBinding()
 		{
 			var template = new DataTemplate(typeof(TextCell))
@@ -119,7 +119,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => template.CreateContent(), Throws.InstanceOf<InvalidOperationException>());
 		}
 
-		[Test]
+		[Fact]
 		public void HotReloadTransitionDoesNotCrash()
 		{
 			// Hot Reload may need to create a template while the content portion isn't ready yet

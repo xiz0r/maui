@@ -1,9 +1,9 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class TextDecorationUnitTests : BaseTestFixture
+	
+	public class TextDecorationUnitTests : BaseTestFixtureXUnit
 	{
 		[TestCase("strikethrough", TextDecorations.Strikethrough)]
 		[TestCase("underline", TextDecorations.Underline)]
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestTextDecorationConverter(string input, TextDecorations expected)
 		{
 			var converter = new TextDecorationConverter();
-			Assert.AreEqual(converter.ConvertFromInvariantString(input), expected);
+			Assert.Equal(converter.ConvertFromInvariantString(input), expected);
 		}
 	}
 }

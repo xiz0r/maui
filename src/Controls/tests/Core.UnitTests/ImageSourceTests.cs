@@ -4,30 +4,30 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ImageSourceTests : BaseTestFixture
+	
+	public class ImageSourceTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestConstructors()
 		{
 			var filesource = new FileImageSource { File = "File.png" };
-			Assert.AreEqual("File.png", filesource.File);
+			Assert.Equal("File.png", filesource.File);
 
 			Func<CancellationToken, Task<Stream>> stream = token => new Task<Stream>(() => new FileStream("Foo", System.IO.FileMode.Open), token);
 			var streamsource = new StreamImageSource { Stream = stream };
-			Assert.AreEqual(stream, streamsource.Stream);
+			Assert.Equal(stream, streamsource.Stream);
 		}
 
-		[Test]
+		[Fact]
 		public void TestHelpers()
 		{
 			var imagesource = ImageSource.FromFile("File.png");
 			Assert.That(imagesource, Is.TypeOf<FileImageSource>());
-			Assert.AreEqual("File.png", ((FileImageSource)imagesource).File);
+			Assert.Equal("File.png", ((FileImageSource)imagesource).File);
 
 			Func<Stream> stream = () => new System.IO.FileStream("Foo", System.IO.FileMode.Open);
 			var streamsource = ImageSource.FromStream(stream);
@@ -35,19 +35,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var urisource = ImageSource.FromUri(new Uri("http://xamarin.com/img.png"));
 			Assert.That(urisource, Is.TypeOf<UriImageSource>());
-			Assert.AreEqual("http://xamarin.com/img.png", ((UriImageSource)(urisource)).Uri.AbsoluteUri);
+			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(urisource)).Uri.AbsoluteUri);
 		}
 
-		[Test]
+		[Fact]
 		public void TestImplicitFileConversion()
 		{
 			var image = new Image { Source = "File.png" };
 			Assert.IsTrue(image.Source != null);
 			Assert.That(image.Source, Is.InstanceOf<FileImageSource>());
-			Assert.AreEqual("File.png", ((FileImageSource)(image.Source)).File);
+			Assert.Equal("File.png", ((FileImageSource)(image.Source)).File);
 		}
 
-		[Test]
+		[Fact]
 		public void TestImplicitStringConversionWhenNull()
 		{
 			string s = null;
@@ -56,25 +56,25 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(((FileImageSource)sut).File);
 		}
 
-		[Test]
+		[Fact]
 		public void TestImplicitUriConversion()
 		{
 			var image = new Image { Source = new Uri("http://xamarin.com/img.png") };
 			Assert.IsTrue(image.Source != null);
 			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
-			Assert.AreEqual("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
+			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
-		[Test]
+		[Fact]
 		public void TestImplicitStringUriConversion()
 		{
 			var image = new Image { Source = "http://xamarin.com/img.png" };
 			Assert.IsTrue(image.Source != null);
 			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
-			Assert.AreEqual("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
+			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
-		[Test]
+		[Fact]
 		public void TestImplicitUriConversionWhenNull()
 		{
 			Uri u = null;
@@ -82,17 +82,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(sut);
 		}
 
-		[Test]
+		[Fact]
 		public void TestSetStringValue()
 		{
 			var image = new Image();
 			image.SetValue(Image.SourceProperty, "foo.png");
 			Assert.IsNotNull(image.Source);
 			Assert.That(image.Source, Is.InstanceOf<FileImageSource>());
-			Assert.AreEqual("foo.png", ((FileImageSource)(image.Source)).File);
+			Assert.Equal("foo.png", ((FileImageSource)(image.Source)).File);
 		}
 
-		[Test]
+		[Fact]
 		public void TextBindToStringValue()
 		{
 			var image = new Image();
@@ -101,10 +101,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			image.BindingContext = "foo.png";
 			Assert.IsNotNull(image.Source);
 			Assert.That(image.Source, Is.InstanceOf<FileImageSource>());
-			Assert.AreEqual("foo.png", ((FileImageSource)(image.Source)).File);
+			Assert.Equal("foo.png", ((FileImageSource)(image.Source)).File);
 		}
 
-		[Test]
+		[Fact]
 		public void TextBindToStringUriValue()
 		{
 			var image = new Image();
@@ -113,10 +113,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			image.BindingContext = "http://xamarin.com/img.png";
 			Assert.IsNotNull(image.Source);
 			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
-			Assert.AreEqual("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
+			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
-		[Test]
+		[Fact]
 		public void TextBindToUriValue()
 		{
 			var image = new Image();
@@ -125,14 +125,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			image.BindingContext = new Uri("http://xamarin.com/img.png");
 			Assert.IsNotNull(image.Source);
 			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
-			Assert.AreEqual("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
+			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
 		class MockImageSource : ImageSource
 		{
 		}
 
-		[Test]
+		[Fact]
 		public void TestBindingContextPropagation()
 		{
 			var context = new object();
@@ -149,7 +149,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(context, source.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitCastOnAbsolutePathsShouldCreateAFileImageSource()
 		{
 			var path = "/private/var/mobile/Containers/Data/Application/B1E5AB19-F815-4B4A-AB97-BD4571D53743/Documents/temp/IMG_20140603_150614_preview.jpg";

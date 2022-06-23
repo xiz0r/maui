@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DragGestureRecognizerTests : BaseTestFixture
+	
+	public class DragGestureRecognizerTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void PropertySetters()
 		{
 			var dragRec = new DragGestureRecognizer();
@@ -23,14 +23,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dragRec.DropCompletedCommand = cmd;
 			dragRec.DropCompletedCommandParameter = parameter;
 
-			Assert.AreEqual(true, dragRec.CanDrag);
-			Assert.AreEqual(cmd, dragRec.DragStartingCommand);
-			Assert.AreEqual(parameter, dragRec.DragStartingCommandParameter);
-			Assert.AreEqual(cmd, dragRec.DropCompletedCommand);
-			Assert.AreEqual(parameter, dragRec.DropCompletedCommandParameter);
+			Assert.Equal(true, dragRec.CanDrag);
+			Assert.Equal(cmd, dragRec.DragStartingCommand);
+			Assert.Equal(parameter, dragRec.DragStartingCommandParameter);
+			Assert.Equal(cmd, dragRec.DropCompletedCommand);
+			Assert.Equal(parameter, dragRec.DropCompletedCommandParameter);
 		}
 
-		[Test]
+		[Fact]
 		public void DragStartingCommandFires()
 		{
 			var dragRec = new DragGestureRecognizer();
@@ -42,10 +42,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dragRec.DragStartingCommandParameter = parameter;
 			dragRec.SendDragStarting(new Label());
 
-			Assert.AreEqual(commandExecuted, parameter);
+			Assert.Equal(commandExecuted, parameter);
 		}
 
-		[Test]
+		[Fact]
 		public void UserSpecifiedTextIsntOverwritten()
 		{
 			var dragRec = new DragGestureRecognizer();
@@ -56,10 +56,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var returnedArgs = dragRec.SendDragStarting(element);
-			Assert.AreEqual("Right Text", returnedArgs.Data.Text);
+			Assert.Equal("Right Text", returnedArgs.Data.Text);
 		}
 
-		[Test]
+		[Fact]
 		public void UserSpecifiedImageIsntOverwritten()
 		{
 			var dragRec = new DragGestureRecognizer();
@@ -72,10 +72,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var returnedArgs = dragRec.SendDragStarting(element);
-			Assert.AreEqual(fileImageSource, returnedArgs.Data.Image);
+			Assert.Equal(fileImageSource, returnedArgs.Data.Image);
 		}
 
-		[Test]
+		[Fact]
 		public void DropCompletedCommandFires()
 		{
 			var dragRec = new DragGestureRecognizer();
@@ -88,10 +88,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dragRec.DropCompletedCommandParameter = parameter;
 			dragRec.SendDropCompleted(new DropCompletedEventArgs());
 
-			Assert.AreEqual(commandExecuted, parameter);
+			Assert.Equal(commandExecuted, parameter);
 		}
 
-		[Test]
+		[Fact]
 		public void DropCompletedCommandFiresOnce()
 		{
 			int counter = 0;
@@ -104,7 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dragRec.SendDropCompleted(new DropCompletedEventArgs());
 			dragRec.SendDropCompleted(new DropCompletedEventArgs());
 
-			Assert.AreEqual(1, counter);
+			Assert.Equal(1, counter);
 		}
 
 		[TestCase(typeof(Entry), "EntryTest")]
@@ -120,7 +120,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var element = (VisualElement)Activator.CreateInstance(fieldType);
 			Assert.IsTrue(element.TrySetValue(result));
 			var args = dragRec.SendDragStarting((IView)element);
-			Assert.AreEqual(result, args.Data.Text);
+			Assert.Equal(result, args.Data.Text);
 		}
 
 		[TestCase(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
@@ -131,7 +131,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			TextPackageCorrectlyExtractedFromCompatibleElement(fieldType, result);
 		}
 
-		[Test]
+		[Fact]
 		public void HandledTest()
 		{
 			string testString = "test String";

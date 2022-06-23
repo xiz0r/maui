@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ShellTestBase : BaseTestFixture
+	
+	public class ShellTestBase : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			AppInfo.SetCurrent(new MockAppInfo());
 		}
 
-		[TearDown]
+		
 		public override void TearDown()
 		{
 			base.TearDown();
@@ -353,7 +353,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			public void AssertCurrentStateEquals(string expectedState)
 			{
-				Assert.AreEqual(expectedState, CurrentState.Location.ToString());
+				Assert.Equal(expectedState, CurrentState.Location.ToString());
 			}
 
 			public class ConcretePageFactory : RouteFactory
@@ -394,27 +394,27 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			public void TestNavigatedArgs(ShellNavigationSource source, string from, string to)
 			{
-				Assert.AreEqual(source, this.LastShellNavigatedEventArgs.Source);
+				Assert.Equal(source, this.LastShellNavigatedEventArgs.Source);
 
 				if (from == null)
-					Assert.AreEqual(LastShellNavigatedEventArgs.Previous, null);
+					Assert.Equal(LastShellNavigatedEventArgs.Previous, null);
 				else
-					Assert.AreEqual(from, this.LastShellNavigatedEventArgs.Previous.Location.ToString());
+					Assert.Equal(from, this.LastShellNavigatedEventArgs.Previous.Location.ToString());
 
-				Assert.AreEqual(to, this.LastShellNavigatedEventArgs.Current.Location.ToString());
-				Assert.AreEqual(to, this.CurrentState.Location.ToString());
+				Assert.Equal(to, this.LastShellNavigatedEventArgs.Current.Location.ToString());
+				Assert.Equal(to, this.CurrentState.Location.ToString());
 			}
 
 			public void TestNavigatingArgs(ShellNavigationSource source, string from, string to)
 			{
-				Assert.AreEqual(source, this.LastShellNavigatingEventArgs.Source);
+				Assert.Equal(source, this.LastShellNavigatingEventArgs.Source);
 
 				if (from == null)
-					Assert.AreEqual(LastShellNavigatingEventArgs.Current, null);
+					Assert.Equal(LastShellNavigatingEventArgs.Current, null);
 				else
-					Assert.AreEqual(from, this.LastShellNavigatingEventArgs.Current.Location.ToString());
+					Assert.Equal(from, this.LastShellNavigatingEventArgs.Current.Location.ToString());
 
-				Assert.AreEqual(to, this.LastShellNavigatingEventArgs.Target.Location.ToString());
+				Assert.Equal(to, this.LastShellNavigatingEventArgs.Target.Location.ToString());
 			}
 
 			public Func<bool> OnBackButtonPressedFunc;
@@ -441,10 +441,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			public void TestCount(int count, string message = null)
 			{
-				Assert.AreEqual(count, OnNavigatedCount, $"OnNavigatedCount: {message}");
-				Assert.AreEqual(count, NavigatingCount, $"NavigatingCount: {message}");
-				Assert.AreEqual(count, OnNavigatingCount, $"OnNavigatingCount: {message}");
-				Assert.AreEqual(count, NavigatedCount, $"NavigatedCount: {message}");
+				Assert.Equal(count, OnNavigatedCount, $"OnNavigatedCount: {message}");
+				Assert.Equal(count, NavigatingCount, $"NavigatingCount: {message}");
+				Assert.Equal(count, OnNavigatingCount, $"OnNavigatingCount: {message}");
+				Assert.Equal(count, NavigatedCount, $"NavigatedCount: {message}");
 			}
 
 

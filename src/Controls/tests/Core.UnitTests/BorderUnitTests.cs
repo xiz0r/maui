@@ -1,12 +1,12 @@
 #nullable enable
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class BorderUnitTests : BaseTestFixture
+	
+	public class BorderUnitTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void HasNoVisualChildrenWhenNoContentIsSet()
 		{
 			var border = new Border();
@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsEmpty(((IVisualTreeElement)border).GetVisualChildren());
 		}
 
-		[Test]
+		[Fact]
 		public void HasVisualChildrenWhenContentIsSet()
 		{
 			var border = new Border();
@@ -31,7 +31,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(visualTreeChildren[0], label);
 		}
 
-		[Test]
+		[Fact]
 		public void ChildrenHaveParentsWhenContentIsSet()
 		{
 			var border = new Border();

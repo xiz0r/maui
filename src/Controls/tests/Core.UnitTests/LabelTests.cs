@@ -2,14 +2,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class LabelTests : BaseTestFixture
+	
+	public class LabelTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TextAndAttributedTextMutuallyExclusive()
 		{
 			var label = new Label();
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(label.FormattedText);
 
 			label.Text = "Foo";
-			Assert.AreEqual("Foo", label.Text);
+			Assert.Equal("Foo", label.Text);
 			Assert.IsNull(label.FormattedText);
 
 			var fs = new FormattedString();
@@ -26,11 +26,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(fs, label.FormattedText);
 
 			label.Text = "Foo";
-			Assert.AreEqual("Foo", label.Text);
+			Assert.Equal("Foo", label.Text);
 			Assert.IsNull(label.FormattedText);
 		}
 
-		[Test]
+		[Fact]
 		public void InvalidateMeasureWhenTextChanges()
 		{
 			var label = new Label();
@@ -68,16 +68,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void AssignedToFontSizeDouble()
 		{
 			var label = new Label();
 
 			label.FontSize = 10.7;
-			Assert.AreEqual(label.FontSize, 10.7);
+			Assert.Equal(label.FontSize, 10.7);
 		}
 
-		[Test]
+		[Fact]
 		public void LabelResizesWhenFontChanges()
 		{
 			MockPlatformSizeService.Current.GetPlatformSizeFunc = (ve, w, h) =>
@@ -88,13 +88,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var label = new Label { IsPlatformEnabled = true };
 
-			Assert.AreEqual(label.FontSize, label.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width);
+			Assert.Equal(label.FontSize, label.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width);
 
 			bool fired = false;
 
 			label.MeasureInvalidated += (sender, args) =>
 			{
-				Assert.AreEqual(25, label.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width);
+				Assert.Equal(25, label.Measure(double.PositiveInfinity, double.PositiveInfinity).Request.Width);
 				fired = true;
 			};
 
@@ -104,49 +104,49 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void FontSizeConverterTests()
 		{
 			var converter = new FontSizeConverter();
-			Assert.AreEqual(12, converter.ConvertFromInvariantString("12"));
-			Assert.AreEqual(10.7, converter.ConvertFromInvariantString("10.7"));
+			Assert.Equal(12, converter.ConvertFromInvariantString("12"));
+			Assert.Equal(10.7, converter.ConvertFromInvariantString("10.7"));
 		}
 
-		[Test]
+		[Fact]
 		public void FontSizeCanBeSetFromStyle()
 		{
 			var label = new Label();
 
-			Assert.AreEqual(label.GetDefaultFontSize(), label.FontSize);
+			Assert.Equal(label.GetDefaultFontSize(), label.FontSize);
 
 			label.SetValue(Label.FontSizeProperty, 1.0, true);
-			Assert.AreEqual(1.0, label.FontSize);
+			Assert.Equal(1.0, label.FontSize);
 		}
 
-		[Test]
+		[Fact]
 		public void ManuallySetFontSizeNotOverridenByStyle()
 		{
 			var label = new Label();
 			Assume.That(label.FontSize, Is.EqualTo(label.GetDefaultFontSize()));
 
 			label.SetValue(Label.FontSizeProperty, 2.0, false);
-			Assert.AreEqual(2.0, label.FontSize);
+			Assert.Equal(2.0, label.FontSize);
 
 			label.SetValue(Label.FontSizeProperty, 1.0, true);
-			Assert.AreEqual(2.0, label.FontSize);
+			Assert.Equal(2.0, label.FontSize);
 		}
 
-		[Test]
+		[Fact]
 		public void ManuallySetFontSizeNotOverridenByFontSetInStyle()
 		{
 			var label = new Label();
 			Assume.That(label.FontSize, Is.EqualTo(label.GetDefaultFontSize()));
 
 			label.SetValue(Label.FontSizeProperty, 2.0);
-			Assert.AreEqual(2.0, label.FontSize);
+			Assert.Equal(2.0, label.FontSize);
 		}
 
-		[Test]
+		[Fact]
 		public void EntryCellXAlignBindingMatchesHorizontalTextAlignmentBinding()
 		{
 			var vm = new ViewModel();
@@ -155,14 +155,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var labelHorizontalTextAlignment = new Label() { BindingContext = vm };
 			labelHorizontalTextAlignment.SetBinding(Label.HorizontalTextAlignmentProperty, new Binding("HorizontalAlignment"));
 
-			Assert.AreEqual(TextAlignment.Center, labelHorizontalTextAlignment.HorizontalTextAlignment);
+			Assert.Equal(TextAlignment.Center, labelHorizontalTextAlignment.HorizontalTextAlignment);
 
 			vm.HorizontalAlignment = TextAlignment.End;
 
-			Assert.AreEqual(TextAlignment.End, labelHorizontalTextAlignment.HorizontalTextAlignment);
+			Assert.Equal(TextAlignment.End, labelHorizontalTextAlignment.HorizontalTextAlignment);
 		}
 
-		[Test]
+		[Fact]
 		public void EntryCellYAlignBindingMatchesVerticalTextAlignmentBinding()
 		{
 			var vm = new ViewModel();
@@ -171,11 +171,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var labelVerticalTextAlignment = new Label() { BindingContext = vm };
 			labelVerticalTextAlignment.SetBinding(Label.VerticalTextAlignmentProperty, new Binding("VerticalAlignment"));
 
-			Assert.AreEqual(TextAlignment.Center, labelVerticalTextAlignment.VerticalTextAlignment);
+			Assert.Equal(TextAlignment.Center, labelVerticalTextAlignment.VerticalTextAlignment);
 
 			vm.VerticalAlignment = TextAlignment.End;
 
-			Assert.AreEqual(TextAlignment.End, labelVerticalTextAlignment.VerticalTextAlignment);
+			Assert.Equal(TextAlignment.End, labelVerticalTextAlignment.VerticalTextAlignment);
 		}
 
 		sealed class ViewModel : INotifyPropertyChanged

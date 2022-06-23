@@ -8,28 +8,28 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class RefreshViewTests : BaseTestFixture
+	
+	public class RefreshViewTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
 		}
 
-		[Test]
+		[Fact]
 		public void StartsEnabled()
 		{
 			RefreshView refreshView = new RefreshView();
 			Assert.IsTrue(refreshView.IsEnabled);
 		}
 
-		[Test]
+		[Fact]
 		public void CanExecuteDisablesRefreshView()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(refreshView.IsEnabled);
 		}
 
-		[Test]
+		[Fact]
 		public void CanExecuteEnablesRefreshView()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -45,7 +45,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(refreshView.IsEnabled);
 		}
 
-		[Test]
+		[Fact]
 		public void IsRefreshingStillTogglesTrueWhenCanExecuteToggledDuringExecute()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -56,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(refreshView.IsRefreshing);
 		}
 
-		[Test]
+		[Fact]
 		public void CanExecuteChangesEnabled()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(refreshView.IsEnabled);
 		}
 
-		[Test]
+		[Fact]
 		public void CommandPropertyChangesEnabled()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -92,7 +92,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(refreshView.IsEnabled);
 		}
 
-		[Test]
+		[Fact]
 		public void RemovedCommandEnablesRefreshView()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -107,7 +107,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(refreshView.IsEnabled);
 		}
 
-		[Test]
+		[Fact]
 		public void IsRefreshingStaysFalseWithDisabledCommand()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -118,7 +118,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(refreshView.IsRefreshing);
 		}
 
-		[Test]
+		[Fact]
 		public void IsRefreshingSettableToTrue()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -128,7 +128,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(refreshView.IsRefreshing);
 		}
 
-		[Test]
+		[Fact]
 		public void IsRefreshingStaysFalseWithDisabledRefreshView()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -137,7 +137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(refreshView.IsRefreshing);
 		}
 
-		[Test]
+		[Fact]
 		public void IsRefreshingTogglesFalseWhenIsEnabledSetToFalse()
 		{
 			RefreshView refreshView = new RefreshView();
@@ -146,7 +146,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(refreshView.IsRefreshing);
 		}
 
-		[Test]
+		[Fact]
 		public void IsRefreshingEventFires()
 		{
 			RefreshView refreshView = new RefreshView();

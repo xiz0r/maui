@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Maui.Controls.Internals;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DependencyResolutionTests : BaseTestFixture
+	
+	public class DependencyResolutionTests : BaseTestFixtureXUnit
 	{
 		class MockElement { }
 
@@ -90,7 +90,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		MockContainer _container;
 
-		[SetUp]
+		
 		public void SetUp()
 		{
 			_container = new MockContainer();
@@ -99,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			DependencyResolver.ResolveUsing(Resolver);
 		}
 
-		[Test]
+		[Fact]
 		public void ThrowsIfResolverReturnsWrongType()
 		{
 			_container = new MockContainer();
@@ -109,7 +109,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidCastException>(() => DependencyService.Resolve<TypeWhichWillNotResolveCorrectly>());
 		}
 
-		[Test]
+		[Fact]
 		public void GetHandlerFromContainer()
 		{
 			Internals.Registrar.Registered.Register(typeof(MockElement), typeof(MockElementRenderer));
@@ -121,7 +121,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(typedRenderer, Is.SameAs(renderer));
 		}
 
-		[Test]
+		[Fact]
 		public void GetEffectFromContainer()
 		{
 			string effectName = "anEffect";
@@ -133,7 +133,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.SameAs(effect));
 		}
 
-		[Test]
+		[Fact]
 		public void GetServiceFromContainer()
 		{
 			MockServiceImpl impl = new MockServiceImpl();
@@ -144,7 +144,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.SameAs(impl));
 		}
 
-		[Test]
+		[Fact]
 		public void PreferServiceTypeFromContainer()
 		{
 			MockServiceImpl impl = new MockServiceImpl();
@@ -155,7 +155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.SameAs(impl));
 		}
 
-		[Test]
+		[Fact]
 		public void FallbackOnDependencyServiceIfNotInContainer()
 		{
 			DependencyService.Register<MockServiceImpl>();
@@ -164,7 +164,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.Not.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void HandlerWithParameter()
 		{
 			Internals.Registrar.Registered.Register(typeof(MockElement), typeof(MockRendererWithParam));

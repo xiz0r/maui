@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class SwitchUnitTests : BaseTestFixture
+	
+	public class SwitchUnitTests : BaseTestFixtureXUnit
 	{
 		const string CommonStatesName = "CommonStates";
 		const string DisabledStateName = "Disabled";
@@ -67,7 +67,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return stateGroups;
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			Switch sw = new Switch();
@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(sw.IsToggled);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOnEvent()
 		{
 			Switch sw = new Switch();
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOnEventNotDoubleFired()
 		{
 			var sw = new Switch();
@@ -102,7 +102,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void VisualStateIsDisabledIfSwitchIsDisabled()
 		{
 			var switch1 = new Switch();
@@ -112,7 +112,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(DisabledStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void VisualStateIsOnIfAvailableAndSwitchIsEnabledAndOn()
 		{
 			var switch1 = new Switch();
@@ -123,7 +123,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(OnStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void VisualStateIsOffIfAvailableAndSwitchIsEnabledAndOff()
 		{
 			var switch1 = new Switch();
@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(OffStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void InitialStateIsNormalIfAvailableButOnOffNotAvailable()
 		{
 			var switch1 = new Switch();
@@ -143,7 +143,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
 		}
 
-		[Test]
+		[Fact]
 		public void InitialStateIsNullIfNormalOnOffNotAvailable()
 		{
 			var switch1 = new Switch();

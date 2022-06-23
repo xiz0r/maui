@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -12,12 +12,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	{
 	}
 
-	[TestFixture]
+	
 	public abstract class MenuItemTests<T>
 		: CommandSourceTests<T>
 		where T : MenuItem, new()
 	{
-		[Test]
+		[Fact]
 		public void Activated()
 		{
 			var item = new MenuItem();
@@ -30,7 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(activated, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void Command()
 		{
 			bool executed = false;
@@ -48,17 +48,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(executed, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void Accelerator()
 		{
 			var item = new MenuItem();
 			string shourtCutKeyBinding = "ctrl+A";
 			MenuItem.SetAccelerator(item, Microsoft.Maui.Controls.Accelerator.FromString(shourtCutKeyBinding));
 
-			Assert.AreEqual(MenuItem.GetAccelerator(item).ToString(), shourtCutKeyBinding);
+			Assert.Equal(MenuItem.GetAccelerator(item).ToString(), shourtCutKeyBinding);
 		}
 
-		[Test]
+		[Fact]
 		public void AcceleratorPlus()
 		{
 			var item = new MenuItem();
@@ -66,8 +66,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MenuItem.SetAccelerator(item, Microsoft.Maui.Controls.Accelerator.FromString(shourtCutKeyLikeSeparator));
 
 			var accelerator = MenuItem.GetAccelerator(item);
-			Assert.AreEqual(accelerator.ToString(), shourtCutKeyLikeSeparator);
-			Assert.AreEqual(accelerator.Keys.FirstOrDefault(), shourtCutKeyLikeSeparator);
+			Assert.Equal(accelerator.ToString(), shourtCutKeyLikeSeparator);
+			Assert.Equal(accelerator.Keys.FirstOrDefault(), shourtCutKeyLikeSeparator);
 		}
 
 		protected override T CreateSource()

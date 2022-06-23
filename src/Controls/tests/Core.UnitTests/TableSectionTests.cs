@@ -1,29 +1,29 @@
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 
 using NContains = NUnit.Framework.Contains;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class TableSectionTests : BaseTestFixture
+	
+	public class TableSectionTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void Constructor()
 		{
 			var section = new TableSection("Title");
-			Assert.AreEqual("Title", section.Title);
+			Assert.Equal("Title", section.Title);
 			Assert.That(section, Is.Empty);
 		}
 
-		[Test]
+		[Fact]
 		public void IsReadOnly()
 		{
 			var section = new TableSection() as ICollection<Cell>;
 			Assert.False(section.IsReadOnly);
 		}
 
-		[Test]
+		[Fact]
 		public void Add()
 		{
 			var section = new TableSection();
@@ -35,7 +35,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(section, NContains.Item(second));
 		}
 
-		[Test]
+		[Fact]
 		public void Remove()
 		{
 			var section = new TableSection();
@@ -48,7 +48,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(section, Has.No.Contains(first));
 		}
 
-		[Test]
+		[Fact]
 		public void Clear()
 		{
 			var section = new TableSection { new TextCell { Text = "Text" }, new TextCell { Text = "Text" } };
@@ -56,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(section, Is.Empty);
 		}
 
-		[Test]
+		[Fact]
 		public void Contains()
 		{
 			var section = new TableSection();
@@ -68,7 +68,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(section.Contains(second));
 		}
 
-		[Test]
+		[Fact]
 		public void IndexOf()
 		{
 			var section = new TableSection();
@@ -76,11 +76,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.Add(first = new TextCell { Text = "Text" });
 			section.Add(second = new TextCell { Text = "Text" });
 
-			Assert.AreEqual(0, section.IndexOf(first));
-			Assert.AreEqual(1, section.IndexOf(second));
+			Assert.Equal(0, section.IndexOf(first));
+			Assert.Equal(1, section.IndexOf(second));
 		}
 
-		[Test]
+		[Fact]
 		public void Insert()
 		{
 			var section = new TableSection();
@@ -89,10 +89,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var third = new TextCell { Text = "Text" };
 			section.Insert(1, third);
-			Assert.AreEqual(third, section[1]);
+			Assert.Equal(third, section[1]);
 		}
 
-		[Test]
+		[Fact]
 		public void RemoveAt()
 		{
 			var section = new TableSection();
@@ -104,7 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(section, Has.No.Contains(first));
 		}
 
-		[Test]
+		[Fact]
 		public void Overwrite()
 		{
 			var section = new TableSection();
@@ -115,11 +115,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var third = new TextCell { Text = "Text" };
 			section[1] = third;
 
-			Assert.AreEqual(third, section[1]);
+			Assert.Equal(third, section[1]);
 			Assert.That(section, Has.No.Contains(second));
 		}
 
-		[Test]
+		[Fact]
 		public void CopyTo()
 		{
 			var section = new TableSection();
@@ -130,11 +130,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Cell[] cells = new Cell[2];
 			section.CopyTo(cells, 0);
 
-			Assert.AreEqual(first, cells[0]);
-			Assert.AreEqual(second, cells[1]);
+			Assert.Equal(first, cells[0]);
+			Assert.Equal(second, cells[1]);
 		}
 
-		[Test]
+		[Fact]
 		public void ChainsBindingContextOnSet()
 		{
 			var section = new TableSection();
@@ -146,11 +146,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			section.BindingContext = bindingContext;
 
-			Assert.AreEqual(bindingContext, first.BindingContext);
-			Assert.AreEqual(bindingContext, second.BindingContext);
+			Assert.Equal(bindingContext, first.BindingContext);
+			Assert.Equal(bindingContext, second.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void ChainsBindingContextWithExistingContext()
 		{
 			var section = new TableSection();
@@ -164,11 +164,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindingContext = "newContext";
 			section.BindingContext = bindingContext;
 
-			Assert.AreEqual(bindingContext, first.BindingContext);
-			Assert.AreEqual(bindingContext, second.BindingContext);
+			Assert.Equal(bindingContext, first.BindingContext);
+			Assert.Equal(bindingContext, second.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void ChainsBindingContextToNewlyAdded()
 		{
 			var section = new TableSection();
@@ -179,11 +179,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.Add(first = new TextCell { Text = "Text" });
 			section.Add(second = new TextCell { Text = "Text" });
 
-			Assert.AreEqual(bindingContext, first.BindingContext);
-			Assert.AreEqual(bindingContext, second.BindingContext);
+			Assert.Equal(bindingContext, first.BindingContext);
+			Assert.Equal(bindingContext, second.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBindingTitleSectionChange()
 		{
 			var vm = new MockViewModel { Text = "FooBar" };
@@ -192,14 +192,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.BindingContext = vm;
 			section.SetBinding(TableSectionBase.TitleProperty, "Text");
 
-			Assert.AreEqual("FooBar", section.Title);
+			Assert.Equal("FooBar", section.Title);
 
 			vm.Text = "Baz";
 
-			Assert.AreEqual("Baz", section.Title);
+			Assert.Equal("Baz", section.Title);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBindingTitle()
 		{
 			var section = new TableSection();
@@ -207,7 +207,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.BindingContext = mock;
 			section.SetBinding(TableSection.TitleProperty, new Binding("Text"));
 
-			Assert.AreEqual(mock.Text, section.Title);
+			Assert.Equal(mock.Text, section.Title);
 		}
 	}
 }

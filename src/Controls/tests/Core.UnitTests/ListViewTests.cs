@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ListViewTests : BaseTestFixture
+	
+	public class ListViewTests : BaseTestFixtureXUnit
 	{
 		MockDeviceInfo mockDeviceInfo;
 
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
 			DeviceInfo.SetCurrent(mockDeviceInfo = new MockDeviceInfo());
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			var listView = new ListView();
 
 			Assert.Null(listView.ItemsSource);
 			Assert.Null(listView.ItemTemplate);
-			Assert.AreEqual(LayoutOptions.FillAndExpand, listView.HorizontalOptions);
-			Assert.AreEqual(LayoutOptions.FillAndExpand, listView.VerticalOptions);
+			Assert.Equal(LayoutOptions.FillAndExpand, listView.HorizontalOptions);
+			Assert.Equal(LayoutOptions.FillAndExpand, listView.VerticalOptions);
 		}
 
 		internal class ListItem
@@ -53,7 +53,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 		}
 
-		[Test]
+		[Fact]
 		public void TestTemplating()
 		{
 			var cellTemplate = new DataTemplate(typeof(TextCell));
@@ -71,11 +71,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var textCell = (TextCell)cell;
 			cell.BindingContext = listView.ItemsSource.OfType<ListItem>().First();
 
-			Assert.AreEqual("Foo", textCell.Text);
-			Assert.AreEqual("Bar", textCell.Detail);
+			Assert.Equal("Foo", textCell.Text);
+			Assert.Equal("Bar", textCell.Detail);
 		}
 
-		[Test]
+		[Fact]
 		public void TemplateNullObject()
 		{
 			var listView = new ListView
@@ -92,7 +92,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((TextCell)cell).Text, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void ItemTemplateIsNullObjectExecutesToString()
 		{
 			var listView = new ListView
@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				ItemsSource = CreateListItemCollection()
 			};
 
-			Assert.AreEqual(2, listView.TemplatedItems.Count);
+			Assert.Equal(2, listView.TemplatedItems.Count);
 
 			Cell cell = listView.TemplatedItems[0];
 			Assert.That(cell, Is.Not.Null);
@@ -113,8 +113,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((TextCell)cell).Text, Is.EqualTo("Baz"));
 		}
 
-		[Test]
-		[Description("Setting BindingContext should trickle down to Header and Footer.")]
+		[Fact("Setting BindingContext should trickle down to Header and Footer.")]
 		public void SettingBindingContextPassesToHeaderAndFooter()
 		{
 			var bc = new object();
@@ -131,8 +130,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(footer.BindingContext, Is.SameAs(bc));
 		}
 
-		[Test]
-		[Description("Setting Header and Footer should pass BindingContext.")]
+		[Fact("Setting Header and Footer should pass BindingContext.")]
 		public void SettingHeaderFooterPassesBindingContext()
 		{
 			var bc = new object();
@@ -150,8 +148,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(footer.BindingContext, Is.SameAs(bc));
 		}
 
-		[Test]
-		[Description("Setting GroupDisplayBinding or GroupHeaderTemplate when the other is set should set the other one to null.")]
+		[Fact("Setting GroupDisplayBinding or GroupHeaderTemplate when the other is set should set the other one to null.")]
 		public void SettingGroupHeaderTemplateSetsDisplayBindingToNull()
 		{
 			var listView = new ListView
@@ -164,8 +161,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(listView.GroupDisplayBinding, Is.Null);
 		}
 
-		[Test]
-		[Description("Setting GroupDisplayBinding or GroupHeaderTemplate when the other is set should set the other one to null.")]
+		[Fact("Setting GroupDisplayBinding or GroupHeaderTemplate when the other is set should set the other one to null.")]
 		public void SettingGroupDisplayBindingSetsHeaderTemplateToNull()
 		{
 			var listView = new ListView
@@ -178,8 +174,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(listView.GroupHeaderTemplate, Is.Null);
 		}
 
-		[Test]
-		[Description("You should be able to set ItemsSource without having set the other properties first without issue")]
+		[Fact("You should be able to set ItemsSource without having set the other properties first without issue")]
 		public void SettingItemsSourceWithoutBindingsOrItemsSource()
 		{
 			var listView = new ListView
@@ -190,7 +185,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => listView.ItemsSource = new[] { new[] { new object() } }, Throws.Nothing);
 		}
 
-		[Test]
+		[Fact]
 		public void DefaultGroupHeaderTemplates()
 		{
 			var items = new[] { new[] { new object() } };
@@ -209,8 +204,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((TextCell)cell).Text, Is.EqualTo(items[0].ToString()));
 		}
 
-		[Test]
-		[Description("Tapping a different item (row) that is equal to the current item selection should still raise ItemSelected")]
+		[Fact("Tapping a different item (row) that is equal to the current item selection should still raise ItemSelected")]
 		public void NotifyRowTappedDifferentIndex()
 		{
 			string item = "item";
@@ -232,7 +226,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(raised, Is.True, "ItemSelected was not raised");
 		}
 
-		[Test]
+		[Fact]
 		public void DoesNotCrashWhenAddingToSource()
 		{
 			var items = new ObservableCollection<string> {
@@ -250,7 +244,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.DoesNotThrow(() => items.Add("Blah"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoesNotThrowWhenMovingInSource()
 		{
 			var items = new ObservableCollection<string> {
@@ -268,8 +262,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.DoesNotThrow(() => items.Move(0, 1));
 		}
 
-		[Test]
-		[Description("A cell being tapped from the UI should raise both tapped events, but not change ItemSelected")]
+		[Fact("A cell being tapped from the UI should raise both tapped events, but not change ItemSelected")]
 		public void NotifyTappedSameItem()
 		{
 			int cellTapped = 0;
@@ -306,7 +299,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(itemSelected, Is.EqualTo(1), "ListView.ItemSelected was raised a second time");
 		}
 
-		[Test]
+		[Fact]
 		public void ScrollTo()
 		{
 			var listView = new ListView
@@ -331,7 +324,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void ScrollToDelayed()
 		{
 			var listView = new ListView();
@@ -357,7 +350,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void ScrollToGroup()
 		{
 			// Fake a renderer so we pass along messages right away
@@ -385,7 +378,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void ScrollToInvalid()
 		{
 			var listView = new ListView
@@ -400,7 +393,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => listView.ScrollTo(new object(), new object(), (ScrollToPosition)500, true), Throws.ArgumentException);
 		}
 
-		[Test]
+		[Fact]
 		public void GetSizeRequest()
 		{
 			var listView = new ListView
@@ -413,13 +406,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 			var sizeRequest = listView.Measure(double.PositiveInfinity, double.PositiveInfinity);
-			Assert.AreEqual(40, sizeRequest.Minimum.Width);
-			Assert.AreEqual(40, sizeRequest.Minimum.Height);
-			Assert.AreEqual(50, sizeRequest.Request.Width);
-			Assert.AreEqual(50 * 20, sizeRequest.Request.Height);
+			Assert.Equal(40, sizeRequest.Minimum.Width);
+			Assert.Equal(40, sizeRequest.Minimum.Height);
+			Assert.Equal(50, sizeRequest.Request.Width);
+			Assert.Equal(50 * 20, sizeRequest.Request.Height);
 		}
 
-		[Test]
+		[Fact]
 		public void GetSizeRequestUneven()
 		{
 			var listView = new ListView
@@ -432,10 +425,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 			var sizeRequest = listView.Measure(double.PositiveInfinity, double.PositiveInfinity);
-			Assert.AreEqual(40, sizeRequest.Minimum.Width);
-			Assert.AreEqual(40, sizeRequest.Minimum.Height);
-			Assert.AreEqual(50, sizeRequest.Request.Width);
-			Assert.AreEqual(100, sizeRequest.Request.Height);
+			Assert.Equal(40, sizeRequest.Minimum.Width);
+			Assert.Equal(40, sizeRequest.Minimum.Height);
+			Assert.Equal(50, sizeRequest.Request.Width);
+			Assert.Equal(100, sizeRequest.Request.Height);
 		}
 
 		public class ListItemValue : IComparable<ListItemValue>
@@ -529,7 +522,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return allListItemGroups;
 		}
 
-		[Test]
+		[Fact]
 		public void UncollectableHeaderReferences()
 		{
 			var list = new ListView
@@ -551,7 +544,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				ItemsSource = SetupList(),
 			};
 
-			Assert.AreEqual(5, TestCell.NumberOfCells);
+			Assert.Equal(5, TestCell.NumberOfCells);
 
 			var newList1 = SetupList();
 			var newList2 = SetupList();
@@ -573,7 +566,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var keepAlive = list.ToString();
 		}
 
-		[Test]
+		[Fact]
 		public void CollectionChangedMultipleFires()
 		{
 			var source = new ObservableCollection<string> {
@@ -596,10 +589,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			source.Add("Baz");
 
-			Assert.AreEqual(1, fireCount);
+			Assert.Equal(1, fireCount);
 		}
 
-		[Test]
+		[Fact]
 		public void GroupedCollectionChangedMultipleFires()
 		{
 			var source = new ObservableCollection<ObservableCollection<string>> {
@@ -628,10 +621,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			source[0].Add("Baz");
 
-			Assert.AreEqual(1, fireCount);
+			Assert.Equal(1, fireCount);
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderAsView()
 		{
 			var label = new Label { Text = "header" };
@@ -644,7 +637,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(controller.HeaderElement, Is.SameAs(label));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderTemplated()
 		{
 			var lv = new ListView
@@ -664,7 +657,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.HeaderElement).Text, Is.EqualTo(lv.Header));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderTemplateThrowsIfCell()
 		{
 			var lv = new ListView();
@@ -672,7 +665,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentException>(() => lv.HeaderTemplate = new DataTemplate(typeof(TextCell)));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterTemplateThrowsIfCell()
 		{
 			var lv = new ListView();
@@ -680,7 +673,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentException>(() => lv.FooterTemplate = new DataTemplate(typeof(TextCell)));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderObjectTemplatedChanged()
 		{
 			var lv = new ListView
@@ -717,7 +710,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.HeaderElement).Text, Is.EqualTo(lv.Header));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderViewChanged()
 		{
 			var lv = new ListView
@@ -748,7 +741,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void HeaderTemplateChanged()
 		{
 			var lv = new ListView
@@ -790,7 +783,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Entry)controller.HeaderElement).Text, Is.EqualTo(lv.Header));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderTemplateChangedNoObject()
 		{
 			var lv = new ListView
@@ -829,7 +822,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(controller.HeaderElement, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderNoTemplate()
 		{
 			var lv = new ListView
@@ -843,7 +836,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.HeaderElement).Text, Is.EqualTo(lv.Header));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderChangedNoTemplate()
 		{
 			var lv = new ListView
@@ -874,7 +867,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.HeaderElement).Text, Is.EqualTo(lv.Header));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderViewButTemplated()
 		{
 			var lv = new ListView
@@ -894,7 +887,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.HeaderElement).Text, Is.EqualTo(((Entry)lv.Header).Text));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderTemplatedChangedToView()
 		{
 			var lv = new ListView
@@ -931,7 +924,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Entry)controller.HeaderElement).Text, Is.EqualTo(((Entry)lv.Header).Text));
 		}
 
-		[Test]
+		[Fact]
 		public void HeaderTemplatedSetToNull()
 		{
 			var lv = new ListView
@@ -966,7 +959,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(controller.HeaderElement, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void FooterAsView()
 		{
 			var label = new Label { Text = "footer" };
@@ -979,7 +972,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(controller.FooterElement, Is.SameAs(label));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterTemplated()
 		{
 			var lv = new ListView
@@ -999,7 +992,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.FooterElement).Text, Is.EqualTo(lv.Footer));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterObjectTemplatedChanged()
 		{
 			var lv = new ListView
@@ -1036,7 +1029,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.FooterElement).Text, Is.EqualTo(lv.Footer));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterViewChanged()
 		{
 			var lv = new ListView
@@ -1067,7 +1060,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void FooterTemplateChanged()
 		{
 			var lv = new ListView
@@ -1109,7 +1102,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Entry)controller.FooterElement).Text, Is.EqualTo(lv.Footer));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterTemplateChangedNoObject()
 		{
 			var lv = new ListView
@@ -1148,7 +1141,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(controller.FooterElement, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void FooterNoTemplate()
 		{
 			var lv = new ListView
@@ -1162,7 +1155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.FooterElement).Text, Is.EqualTo(lv.Footer));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterChangedNoTemplate()
 		{
 			var lv = new ListView
@@ -1193,7 +1186,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.FooterElement).Text, Is.EqualTo(lv.Footer));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterViewButTemplated()
 		{
 			var lv = new ListView
@@ -1213,7 +1206,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Label)controller.FooterElement).Text, Is.EqualTo(((Entry)lv.Footer).Text));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterTemplatedChangedToView()
 		{
 			var lv = new ListView
@@ -1250,7 +1243,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Entry)controller.FooterElement).Text, Is.EqualTo(((Entry)lv.Footer).Text));
 		}
 
-		[Test]
+		[Fact]
 		public void FooterTemplatedSetToNull()
 		{
 			var lv = new ListView
@@ -1285,7 +1278,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(controller.FooterElement, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void BeginRefresh()
 		{
 			var lv = new ListView();
@@ -1302,7 +1295,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(lv.IsRefreshing, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void SendRefreshing()
 		{
 			var lv = new ListView();
@@ -1320,7 +1313,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(lv.IsRefreshing, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void RefreshCommand()
 		{
 			var lv = new ListView();
@@ -1374,7 +1367,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That((lv as IListViewController).RefreshAllowed, Is.EqualTo(initial));
 		}
 
-		[Test]
+		[Fact]
 		public void BeginRefreshDoesNothingWhenCannotExecute()
 		{
 			var lv = new ListView();
@@ -1394,7 +1387,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(commandExecuted, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void SendRefreshingDoesNothingWhenCannotExecute()
 		{
 			var lv = new ListView();
@@ -1415,7 +1408,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(commandExecuted, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void SettingIsRefreshingDoesntFireEvent()
 		{
 			var lv = new ListView();
@@ -1431,7 +1424,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(refreshing, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void EndRefresh()
 		{
 			var lv = new ListView { IsRefreshing = true };
@@ -1443,7 +1436,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(lv.IsRefreshing, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void CanRefreshAfterCantExecuteCommand()
 		{
 			var lv = new ListView();
@@ -1465,7 +1458,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(commandExecuted, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void StopsListeningToCommandAfterCleared()
 		{
 			var lv = new ListView();
@@ -1488,8 +1481,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(commandExecuted, Is.False);
 		}
 
-		[Test]
-		[Description("We should be able to set selected item when using ReadOnlyList")]
+		[Fact("We should be able to set selected item when using ReadOnlyList")]
 		public void SetItemSelectedOnReadOnlyList()
 		{
 			var source = new ReadOnlySource();
@@ -1551,7 +1543,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[Test]
+		[Fact]
 		public void ChildElementsParentIsNulledWhenReset()
 		{
 			var list = new ListView();
@@ -1564,7 +1556,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.Parent, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void ChildElementsParentIsNulledWhenRemoved()
 		{
 			var collection = new ObservableCollection<string> {
@@ -1581,7 +1573,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.Parent, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void ChildElementsParentIsNulledWhenCleared()
 		{
 			var collection = new ObservableCollection<string> {
@@ -1608,18 +1600,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			mockDeviceInfo.Platform = DevicePlatform.Create(platform);
 			var listView = new ListView(ListViewCachingStrategy.RecycleElement);
 
-			Assert.AreEqual(expected, listView.CachingStrategy);
+			Assert.Equal(expected, listView.CachingStrategy);
 		}
 
-		[Test]
+		[Fact]
 		public void DefaultCacheStrategy()
 		{
 			var listView = new ListView();
 
-			Assert.AreEqual(ListViewCachingStrategy.RetainElement, listView.CachingStrategy);
+			Assert.Equal(ListViewCachingStrategy.RetainElement, listView.CachingStrategy);
 		}
 
-		[Test]
+		[Fact]
 		public void DoesNotRetainInRecycleMode()
 		{
 			var items = new ObservableCollection<string> {

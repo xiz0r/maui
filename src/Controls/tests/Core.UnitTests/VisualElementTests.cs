@@ -1,5 +1,5 @@
 ﻿using Microsoft.Maui.Primitives;
-using NUnit.Framework;
+using Xunit;
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	public class VisualElementTests

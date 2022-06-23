@@ -8,21 +8,21 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls.Internals;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class ShellNavigatingTests : ShellTestBase
 	{
-		[TearDown]
+		
 		public override void TearDown()
 		{
 			base.TearDown();
 			Routing.Clear();
 		}
 
-		[Test]
+		[Fact]
 		public void CancelNavigation()
 		{
 			var shell = new Shell();
@@ -56,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
 		}
 
-		[Test]
+		[Fact]
 		public void CancelNavigationOccurringOutsideGotoAsyncWithoutDelay()
 		{
 			var flyoutItem = CreateShellItem<FlyoutItem>();
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(result);
 		}
 
-		[Test]
+		[Fact]
 		public async Task CancelNavigationOccurringOutsideGotoAsync()
 		{
 			var flyoutItem = CreateShellItem<FlyoutItem>();
@@ -127,11 +127,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsTrue(executed);
 			Assert.AreNotEqual(contentActiveBeforeCompletingDeferral, navigatingToShellContent);
-			Assert.AreEqual(flyoutItem.Items[0].Items[0], contentActiveBeforeCompletingDeferral, "Navigation to new Content was not deferred");
-			Assert.AreEqual(flyoutItem.Items[0].CurrentItem, navigatingToShellContent, "Navigation after completing the deferral failed");
+			Assert.Equal(flyoutItem.Items[0].Items[0], contentActiveBeforeCompletingDeferral, "Navigation to new Content was not deferred");
+			Assert.Equal(flyoutItem.Items[0].CurrentItem, navigatingToShellContent, "Navigation after completing the deferral failed");
 		}
 
-		[Test]
+		[Fact]
 		public async Task ImmediatelyCompleteDeferral()
 		{
 			TestShell shell = new TestShell()
@@ -149,7 +149,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.Navigation.PushAsync(new ContentPage());
 			Assert.IsTrue(executed);
-			Assert.AreEqual(2, shell.Navigation.NavigationStack.Count);
+			Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 		}
 
 		[TestCase("PopToRoot")]
@@ -169,7 +169,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				_token = args.GetDeferral();
 				await Task.Delay(500);
-				Assert.AreEqual(3, shell.Navigation.NavigationStack.Count);
+				Assert.Equal(3, shell.Navigation.NavigationStack.Count);
 				_token.Complete();
 			};
 
@@ -183,13 +183,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				await shell.Navigation.PopAsync();
 				await source.Task;
-				Assert.AreEqual(2, shell.Navigation.NavigationStack.Count);
+				Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 			}
 			else
 			{
 				await shell.Navigation.PopToRootAsync();
 				await source.Task;
-				Assert.AreEqual(1, shell.Navigation.NavigationStack.Count);
+				Assert.Equal(1, shell.Navigation.NavigationStack.Count);
 			}
 		}
 
@@ -232,21 +232,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(_token.IsCompleted);
 		}
 
-		[Test]
+		[Fact]
 		public void CompletingTheSameDeferralTokenTwiceDoesntDoAnything()
 		{
 			var args = CreateShellNavigatedEventArgs();
 			var token = args.GetDeferral();
 			args.GetDeferral();
 
-			Assert.AreEqual(2, args.DeferralCount);
+			Assert.Equal(2, args.DeferralCount);
 			token.Complete();
-			Assert.AreEqual(1, args.DeferralCount);
+			Assert.Equal(1, args.DeferralCount);
 			token.Complete();
-			Assert.AreEqual(1, args.DeferralCount);
+			Assert.Equal(1, args.DeferralCount);
 		}
 
-		[Test]
+		[Fact]
 		public async Task DotDotNavigateBackFromPagesWithDefaultRoute()
 		{
 			var flyoutItem = CreateShellItem<FlyoutItem>();
@@ -277,7 +277,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Is.EqualTo($"//{itemRoute}/{Routing.GetRoute(page1)}"));
 		}
 
-		[Test]
+		[Fact]
 		public async Task InsertTwoPagesAtSeparatePoints()
 		{
 			Routing.RegisterRoute("pagefirstmiddle", typeof(ContentPage));
@@ -296,7 +296,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Is.EqualTo("//item/pagefirstmiddle/middle/pagesecondmiddle/last"));
 		}
 
-		[Test]
+		[Fact]
 		public async Task NavigationPushAndPopBasic()
 		{
 			var flyoutItem =
@@ -330,7 +330,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Is.EqualTo($"//{itemRoute}/{Routing.GetRoute(page1)}"));
 		}
 
-		[Test]
+		[Fact]
 		public async Task NavigateToDefaultShellContent()
 		{
 			TestShell testShell = new TestShell(CreateShellItem<FlyoutItem>());
@@ -349,7 +349,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Is.EqualTo($"//{contentRoute}/{pageRoute}"));
 		}
 
-		[Test]
+		[Fact]
 		public async Task PopToRootWithMultipleFlyoutItems()
 		{
 			TestShell testShell = new TestShell(
@@ -362,7 +362,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await testShell.Navigation.PopToRootAsync();
 		}
 
-		[Test]
+		[Fact]
 		public async Task MultiplePopsRemoveMiddlePagesBeforeFinalPop()
 		{
 			TestShell testShell = new TestShell(
@@ -379,12 +379,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(testShell.CurrentState.Location.ToString(),
 				Is.EqualTo($"//rootpage/{Routing.GetRoute(pageLeftOnStack)}"));
 
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[0]);
-			Assert.AreEqual("OnPopAsync", tab.NavigationsFired[1]);
-			Assert.AreEqual(2, tab.NavigationsFired.Count);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[0]);
+			Assert.Equal("OnPopAsync", tab.NavigationsFired[1]);
+			Assert.Equal(2, tab.NavigationsFired.Count);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PopToRootRemovesMiddlePagesBeforePoppingVisibleModalPages()
 		{
 			Routing.RegisterRoute("ModalTestPage", typeof(ShellModalTests.ModalTestPage));
@@ -402,14 +402,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(testShell.CurrentState.Location.ToString(),
 				Is.EqualTo($"//rootpage"));
 
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[0]);
-			Assert.AreEqual("OnPopModal", tab.NavigationsFired[1]);
-			Assert.AreEqual(2, tab.NavigationsFired.Count);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[0]);
+			Assert.Equal("OnPopModal", tab.NavigationsFired[1]);
+			Assert.Equal(2, tab.NavigationsFired.Count);
 		}
 
 
 
-		[Test]
+		[Fact]
 		public async Task MultiplePopsRemoveMiddlePagesBeforeFinalPopWhenUsingModal()
 		{
 			Routing.RegisterRoute("ModalTestPage", typeof(ShellModalTests.ModalTestPage));
@@ -430,13 +430,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(testShell.CurrentState.Location.ToString(),
 				Is.EqualTo($"//rootpage/{Routing.GetRoute(pageLeftOnStack)}"));
 
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[0]);
-			Assert.AreEqual("OnPopModal", tab.NavigationsFired[1]);
-			Assert.AreEqual(2, tab.NavigationsFired.Count);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[0]);
+			Assert.Equal("OnPopModal", tab.NavigationsFired[1]);
+			Assert.Equal(2, tab.NavigationsFired.Count);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task SwappingOutVisiblePageDoesntRevealPreviousPage()
 		{
 			TestShell testShell = new TestShell(
@@ -455,13 +455,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(testShell.CurrentState.Location.ToString(),
 				Is.EqualTo($"//rootpage/pageToSwapIn"));
 
-			Assert.AreEqual("OnPushAsync", tab.NavigationsFired[0]);
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[1]);
-			Assert.AreEqual(2, tab.NavigationsFired.Count);
+			Assert.Equal("OnPushAsync", tab.NavigationsFired[0]);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[1]);
+			Assert.Equal(2, tab.NavigationsFired.Count);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task MiddleRoutesAreRemovedWithoutPoppingStack()
 		{
 			TestShell testShell = new TestShell(
@@ -485,13 +485,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(testShell.CurrentState.Location.ToString(),
 				Is.EqualTo($"//rootpage/thirdPage/fifthPage"));
 
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[0]);
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[1]);
-			Assert.AreEqual("OnRemovePage", tab.NavigationsFired[2]);
-			Assert.AreEqual(3, tab.NavigationsFired.Count);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[0]);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[1]);
+			Assert.Equal("OnRemovePage", tab.NavigationsFired[2]);
+			Assert.Equal(3, tab.NavigationsFired.Count);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PoppingSetsCorrectNavigationSource()
 		{
 			var shell = new TestShell(CreateShellItem(shellContentRoute: "item1"));
@@ -556,7 +556,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//animals/monkeys/details/details"));
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellSectionWithGlobalRouteAbsolute()
 		{
 			var shell = new Shell();
@@ -568,11 +568,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var request = ShellUriHandler.GetNavigationRequest(shell, CreateUri("//rootlevelcontent1/edit"));
 
-			Assert.AreEqual(1, request.Request.GlobalRoutes.Count);
-			Assert.AreEqual("edit", request.Request.GlobalRoutes.First());
+			Assert.Equal(1, request.Request.GlobalRoutes.Count);
+			Assert.Equal("edit", request.Request.GlobalRoutes.First());
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellSectionWithRelativeEdit()
 		{
 			var shell = new Shell();
@@ -587,11 +587,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var location = shell.CurrentState.FullLocation;
 			await shell.NavigationManager.GoToAsync("edit", false, true);
 
-			Assert.AreEqual(editShellContent, shell.CurrentItem.CurrentItem.CurrentItem);
+			Assert.Equal(editShellContent, shell.CurrentItem.CurrentItem.CurrentItem);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task ShellContentOnlyWithGlobalEdit()
 		{
 			var shell = new Shell();
@@ -606,7 +606,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task RouteWithGlobalPageRoute()
 		{
 
@@ -620,7 +620,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Routing.RegisterRoute("catdetails", typeof(ContentPage));
 			await shell.GoToAsync("//cats/catdetails?name=3");
 
-			Assert.AreEqual("//animals/domestic/cats/catdetails", shell.CurrentState.Location.ToString());
+			Assert.Equal("//animals/domestic/cats/catdetails", shell.CurrentState.Location.ToString());
 		}
 
 		[TestCase(typeof(PageWithDependency))]
@@ -674,7 +674,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Test]
+		[Fact]
 		public async Task AbsoluteRoutingToPage()
 		{
 
@@ -687,7 +687,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(async () => await shell.GoToAsync($"//catdetails"), Throws.Exception);
 		}
 
-		[Test]
+		[Fact]
 		public async Task LocationRemovesImplicit()
 		{
 
@@ -696,10 +696,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.Items.Add(item1);
 
-			Assert.AreEqual("//rootlevelcontent1", shell.CurrentState.Location.ToString());
+			Assert.Equal("//rootlevelcontent1", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public async Task GlobalNavigateTwice()
 		{
 
@@ -713,12 +713,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("cat");
 			await shell.GoToAsync("details");
 
-			Assert.AreEqual("//rootlevelcontent1/cat/details", shell.CurrentState.Location.ToString());
+			Assert.Equal("//rootlevelcontent1/cat/details", shell.CurrentState.Location.ToString());
 			await shell.GoToAsync("//rootlevelcontent1/details");
-			Assert.AreEqual("//rootlevelcontent1/details", shell.CurrentState.Location.ToString());
+			Assert.Equal("//rootlevelcontent1/details", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public async Task GlobalRoutesRegisteredHierarchicallyNavigateCorrectly()
 		{
 			Routing.RegisterRoute("first", typeof(TestPage1));
@@ -730,17 +730,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("//MainPage/first/second");
 
-			Assert.AreEqual(typeof(TestPage1), shell.Navigation.NavigationStack[1].GetType());
-			Assert.AreEqual(typeof(TestPage2), shell.Navigation.NavigationStack[2].GetType());
+			Assert.Equal(typeof(TestPage1), shell.Navigation.NavigationStack[1].GetType());
+			Assert.Equal(typeof(TestPage2), shell.Navigation.NavigationStack[2].GetType());
 
 			await shell.GoToAsync("//MainPage/first/second/third");
 
-			Assert.AreEqual(typeof(TestPage1), shell.Navigation.NavigationStack[1].GetType());
-			Assert.AreEqual(typeof(TestPage2), shell.Navigation.NavigationStack[2].GetType());
-			Assert.AreEqual(typeof(TestPage3), shell.Navigation.NavigationStack[3].GetType());
+			Assert.Equal(typeof(TestPage1), shell.Navigation.NavigationStack[1].GetType());
+			Assert.Equal(typeof(TestPage2), shell.Navigation.NavigationStack[2].GetType());
+			Assert.Equal(typeof(TestPage3), shell.Navigation.NavigationStack[3].GetType());
 		}
 
-		[Test]
+		[Fact]
 		public async Task GlobalRoutesRegisteredHierarchicallyNavigateCorrectlyVariation()
 		{
 			Routing.RegisterRoute("monkeys/monkeyDetails", typeof(TestPage1));
@@ -752,10 +752,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("//animals/monkeys/monkeyDetails?id=123");
 			await shell.GoToAsync("monkeygenome");
-			Assert.AreEqual("//animals/monkeys/monkeyDetails/monkeygenome", shell.CurrentState.Location.ToString());
+			Assert.Equal("//animals/monkeys/monkeyDetails/monkeygenome", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public async Task GlobalRoutesRegisteredHierarchicallyWithDoublePop()
 		{
 			Routing.RegisterRoute("monkeys/monkeyDetails", typeof(TestPage1));
@@ -768,10 +768,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("//animals/monkeys/monkeyDetails?id=123");
 			await shell.GoToAsync("monkeygenome");
 			await shell.GoToAsync("../..");
-			Assert.AreEqual("//animals/monkeys", shell.CurrentState.Location.ToString());
+			Assert.Equal("//animals/monkeys", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public async Task GlobalRoutesRegisteredHierarchicallyWithDoubleSplash()
 		{
 			Routing.RegisterRoute("//animals/monkeys/monkeyDetails", typeof(TestPage1));
@@ -780,11 +780,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			);
 
 			await shell.GoToAsync("//animals/monkeys/monkeyDetails?id=123");
-			Assert.AreEqual("//animals/monkeys/monkeyDetails", shell.CurrentState.Location.ToString());
+			Assert.Equal("//animals/monkeys/monkeyDetails", shell.CurrentState.Location.ToString());
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task RemovePageWithNestedRoutes()
 		{
 			Routing.RegisterRoute("monkeys/monkeyDetails", typeof(TestPage1));
@@ -799,7 +799,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.Navigation.PopAsync();
 		}
 
-		[Test]
+		[Fact]
 		public async Task GlobalRoutesRegisteredHierarchicallyNavigateCorrectlyWithAdditionalItems()
 		{
 			Routing.RegisterRoute("monkeys/monkeyDetails", typeof(TestPage1));
@@ -815,10 +815,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(CreateShellContent(shellContentRoute: "about"));
 			await shell.GoToAsync("//animals/monkeys/monkeyDetails?id=123");
 			await shell.GoToAsync("monkeygenome");
-			Assert.AreEqual("//animals/monkeys/monkeyDetails/monkeygenome", shell.CurrentState.Location.ToString());
+			Assert.Equal("//animals/monkeys/monkeyDetails/monkeygenome", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public async Task GoBackFromRouteWithMultiplePaths()
 		{
 			Routing.RegisterRoute("monkeys/monkeyDetails", typeof(TestPage1));
@@ -833,7 +833,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.Navigation.PopAsync();
 		}
 
-		[Test]
+		[Fact]
 		public async Task GoBackFromRouteWithMultiplePathsHierarchical()
 		{
 			Routing.RegisterRoute("monkeys/monkeyDetails", typeof(TestPage1));
@@ -849,7 +849,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.Navigation.PopAsync();
 		}
 
-		[Test]
+		[Fact]
 		public async Task HierarchicalNavigation()
 		{
 			Routing.RegisterRoute("page1/page2", typeof(ShellTestPage));
@@ -859,10 +859,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync($"page1/page2?{nameof(ShellTestPage.SomeQueryParameter)}=1");
 
-			Assert.AreEqual("1", ((ShellTestPage)shell.CurrentPage).SomeQueryParameter);
+			Assert.Equal("1", ((ShellTestPage)shell.CurrentPage).SomeQueryParameter);
 		}
 
-		[Test]
+		[Fact]
 		public async Task HierarchicalNavigationMultipleRoutes()
 		{
 			Routing.RegisterRoute("page1/page2", typeof(ShellTestPage));
@@ -873,14 +873,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync($"page1/page2?{nameof(ShellTestPage.SomeQueryParameter)}=1");
 
-			Assert.AreEqual("1", ((ShellTestPage)shell.CurrentPage).SomeQueryParameter);
+			Assert.Equal("1", ((ShellTestPage)shell.CurrentPage).SomeQueryParameter);
 			await shell.GoToAsync($"page1/page2/page3");
 
 			Assert.IsTrue(shell.CurrentPage is TestPage1);
 			Assert.IsTrue(shell.Navigation.NavigationStack[1] is ShellTestPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task HierarchicalNavigationMultipleRoutesVariation1()
 		{
 			Routing.RegisterRoute("page1/page2", typeof(ShellTestPage));
@@ -895,7 +895,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(shell.Navigation.NavigationStack[1] is ShellTestPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task HierarchicalNavigationWithBackNavigation()
 		{
 			Routing.RegisterRoute("page1/page2", typeof(ShellTestPage));
@@ -913,7 +913,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(shell.CurrentPage is ContentPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task NavigatedFiresAfterSwitchingFlyoutItemsBothWithPushedPages()
 		{
 			var shellContent1 = new ShellContent() { Content = new ContentPage() };
@@ -926,8 +926,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.Navigation.PushAsync(new ContentPage());
 			await shellController.OnFlyoutItemSelectedAsync(shellContent1);
 
-			Assert.AreEqual(2, shell.Items[0].Items[0].Navigation.NavigationStack.Count);
-			Assert.AreEqual(2, shell.Items[1].Items[0].Navigation.NavigationStack.Count);
+			Assert.Equal(2, shell.Items[0].Items[0].Navigation.NavigationStack.Count);
+			Assert.Equal(2, shell.Items[1].Items[0].Navigation.NavigationStack.Count);
 		}
 
 		public class NavigationMonitoringTab : Tab

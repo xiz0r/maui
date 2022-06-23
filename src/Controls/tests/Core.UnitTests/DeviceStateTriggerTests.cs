@@ -1,13 +1,13 @@
 using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DeviceStateTriggerTests : BaseTestFixture
+	
+	public class DeviceStateTriggerTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ConstructionCanHappen()
 		{
 			var trigger = new DeviceStateTrigger();
@@ -15,7 +15,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(trigger);
 		}
 
-		[Test]
+		[Fact]
 		[TestCase("Android", true)]
 		[TestCase("iOS", false)]
 		public void CorrectStateIsAppliedWhenAttached(string triggerDevice, bool isApplied)

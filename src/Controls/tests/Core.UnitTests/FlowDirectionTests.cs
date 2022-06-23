@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls.Internals;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class FlowDirectionTests : BaseTestFixture
+	
+	public class FlowDirectionTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ListViewFlowDirectionIsInheritedByViewCells()
 		{
 			var lv = new ListView { FlowDirection = FlowDirection.RightToLeft, ItemTemplate = new DataTemplate(() => new ViewCell { View = new View() }) };
@@ -21,7 +21,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.EffectiveFlowDirection.IsRightToLeft(), "ViewCell View is not RightToLeft");
 		}
 
-		[Test]
+		[Fact]
 		public void ListViewFlowDirectionIsInheritedByImageInViewCells()
 		{
 			var lv = new ListView { FlowDirection = FlowDirection.RightToLeft, ItemTemplate = new DataTemplate(() => new ViewCell { View = new Label() }) };
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.EffectiveFlowDirection.IsRightToLeft(), "ViewCell View is not RightToLeft");
 		}
 
-		[Test]
+		[Fact]
 		public void ScrollViewSetsFlowDirectionAndGrandchildMaintainsParentExplicitValue()
 		{
 			var layout = ImplicitLeftToRightScrollView();
@@ -52,11 +52,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsRightToLeft(), "EffectiveFlowDirection should be RightToLeft");
 			Assert.IsTrue(!target.IsLeftToRight(), "EffectiveFlowDirection should be RightToLeft");
 
-			Assert.AreEqual(FlowDirection.MatchParent, ((View)view).FlowDirection);
-			Assert.AreEqual(FlowDirection.RightToLeft, layout2.FlowDirection);
+			Assert.Equal(FlowDirection.MatchParent, ((View)view).FlowDirection);
+			Assert.Equal(FlowDirection.RightToLeft, layout2.FlowDirection);
 		}
 
-		[Test]
+		[Fact]
 		public void GrandparentSetsFlowDirectionAndGrandchildMaintainsParentExplicitValue()
 		{
 			var layout = ImplicitLeftToRightLayout();
@@ -75,11 +75,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsRightToLeft(), "EffectiveFlowDirection should be LeftToRight");
 			Assert.IsTrue(target.IsLeftToRight(), "EffectiveFlowDirection should be LeftToRight");
 
-			Assert.AreEqual(FlowDirection.MatchParent, ((View)view).FlowDirection);
-			Assert.AreEqual(FlowDirection.LeftToRight, layout2.FlowDirection);
+			Assert.Equal(FlowDirection.MatchParent, ((View)view).FlowDirection);
+			Assert.Equal(FlowDirection.LeftToRight, layout2.FlowDirection);
 		}
 
-		[Test]
+		[Fact]
 		public void GrandparentSetsFlowDirectionAndImplicitDescendentsInheritValue()
 		{
 			var layout = ImplicitLeftToRightLayout();
@@ -105,11 +105,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsRightToLeft(), "EffectiveFlowDirection should be RightToLeft");
 			Assert.IsTrue(!target.IsLeftToRight(), "EffectiveFlowDirection should be RightToLeft");
 
-			Assert.AreEqual(FlowDirection.MatchParent, ((View)view).FlowDirection);
-			Assert.AreEqual(FlowDirection.MatchParent, layout2.FlowDirection);
+			Assert.Equal(FlowDirection.MatchParent, ((View)view).FlowDirection);
+			Assert.Equal(FlowDirection.MatchParent, layout2.FlowDirection);
 		}
 
-		[Test]
+		[Fact]
 		public void GrandparentSetsOppositeFlowDirectionAndGrandchildInheritsParentExplicitValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -133,10 +133,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = ((View)view).FlowDirection;
 
-			Assert.AreEqual(FlowDirection.MatchParent, target);
+			Assert.Equal(FlowDirection.MatchParent, target);
 		}
 
-		[Test]
+		[Fact]
 		public void NotifyFlowDirectionChangedDoesNotTriggerFlowDirectionPropertyChangedUnnecessarily()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -157,10 +157,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = ((PropertyWatchingView)view).FlowDirectionPropertyChangedCount;
 
-			Assert.AreEqual(1, target);
+			Assert.Equal(1, target);
 		}
 
-		[Test]
+		[Fact]
 		public void ReParentAndInheritNewParentValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -181,10 +181,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsRightToLeft(), "EffectiveFlowDirection should be LeftToRight");
 			Assert.IsTrue(target.IsLeftToRight(), "EffectiveFlowDirection should be LeftToRight");
 
-			Assert.AreEqual(FlowDirection.MatchParent, ((View)view).FlowDirection);
+			Assert.Equal(FlowDirection.MatchParent, ((View)view).FlowDirection);
 		}
 
-		[Test]
+		[Fact]
 		public void ReParentParentAndInheritNewGrandParentValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -205,10 +205,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = ((View)view).FlowDirection;
 
-			Assert.AreEqual(FlowDirection.MatchParent, target);
+			Assert.Equal(FlowDirection.MatchParent, target);
 		}
 
-		[Test]
+		[Fact]
 		public void SetFlowDirectionToMatchParentAndInheritParentValue()
 		{
 			var layout = ImplicitLeftToRightLayout();
@@ -229,7 +229,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsLeftToRight(), "EffectiveFlowDirection should be RightToLeft");
 		}
 
-		[Test]
+		[Fact]
 		public void SetGrandparentAndInheritExplicitParentValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -253,7 +253,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsLeftToRight(), "EffectiveFlowDirection should be LeftToRight");
 		}
 
-		[Test]
+		[Fact]
 		public void SetGrandparentUsingAnonCtorAndMaintainExplicitParentValue()
 		{
 			var layout = new StackLayout
@@ -284,7 +284,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsLeftToRight(), "EffectiveFlowDirection should be LeftToRight");
 		}
 
-		[Test]
+		[Fact]
 		public void SetGrandparentUsingCtorAndMaintainExplicitParentValue()
 		{
 			IViewController view = ImplicitLeftToRightView();
@@ -305,7 +305,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsLeftToRight(), "EffectiveFlowDirection should be LeftToRight");
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentAndGrandchildrenInheritValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -324,7 +324,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsLeftToRight(), "EffectiveFlowDirection should be RightToLeft");
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentAndContentAndGrandchildrenInheritValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -344,7 +344,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void SetParentAndInheritExplicitParentValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -360,7 +360,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsLeftToRight(), "EffectiveFlowDirection should be RightToLeft");
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentAndMaintainExplicitValue()
 		{
 			var layout = ExplicitRightToLeftLayout();
@@ -374,10 +374,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsExplicit(), "EffectiveFlowDirection should be Explicit");
 			Assert.IsTrue(!target.IsRightToLeft(), "EffectiveFlowDirection should be LeftToRight");
 			Assert.IsTrue(target.IsLeftToRight(), "EffectiveFlowDirection should be LeftToRight");
-			Assert.AreEqual(FlowDirection.LeftToRight, ((View)view).FlowDirection);
+			Assert.Equal(FlowDirection.LeftToRight, ((View)view).FlowDirection);
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentUsingCtorAndInheritParentValue()
 		{
 			IViewController view = ImplicitLeftToRightView();
@@ -394,10 +394,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsExplicit(), "EffectiveFlowDirection should be Implicit");
 			Assert.IsTrue(target.IsRightToLeft(), "EffectiveFlowDirection should be RightToLeft");
 			Assert.IsTrue(!target.IsLeftToRight(), "EffectiveFlowDirection should be RightToLeft");
-			Assert.AreEqual(FlowDirection.MatchParent, ((View)view).FlowDirection);
+			Assert.Equal(FlowDirection.MatchParent, ((View)view).FlowDirection);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellPropagatesDownRightToLeftChange()
 		{
 			Button button = new Button();
@@ -458,7 +458,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void ShellPropagatesRightToLeftChangetoNewElements()
 		{
 			Button button = new Button();

@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class PageLifeCycleTests : BaseTestFixture
+	
+	public class PageLifeCycleTests : BaseTestFixtureXUnit
 	{
 		[TestCase(false)]
 		[TestCase(true)]
@@ -29,8 +29,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await navigationPage.PushAsync(lcPage);
 
 			Assert.IsNotNull(previousPage.NavigatingFromArgs);
-			Assert.AreEqual(previousPage, lcPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(lcPage, previousPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(previousPage, lcPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(lcPage, previousPage.NavigatedFromArgs.DestinationPage);
 		}
 
 		[TestCase(false)]
@@ -45,8 +45,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await navigationPage.PopAsync();
 
 			Assert.IsNotNull(poppedPage.NavigatingFromArgs);
-			Assert.AreEqual(poppedPage, firstPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(poppedPage, firstPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
 		}
 
 		[TestCase(false)]
@@ -63,11 +63,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await navigationPage.PopToRootAsync();
 
 			Assert.IsNotNull(poppedPage.NavigatingFromArgs);
-			Assert.AreEqual(poppedPage, firstPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(poppedPage, firstPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TabbedPageBasicSelectionChanged()
 		{
 			var firstPage = new LCPage() { Title = "First Page" };
@@ -76,11 +76,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			tabbedPage.CurrentPage = secondPage;
 			Assert.IsNotNull(firstPage.NavigatingFromArgs);
-			Assert.AreEqual(firstPage, secondPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(secondPage, firstPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(firstPage, secondPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(secondPage, firstPage.NavigatedFromArgs.DestinationPage);
 		}
 
-		[Test]
+		[Fact]
 		public void TabbedPageInitialPage()
 		{
 			var firstPage = new LCPage() { Title = "First Page" };
@@ -92,7 +92,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(firstPage.NavigatedToArgs.PreviousPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task FlyoutPageFlyoutChanged()
 		{
 			var firstPage = new LCPage() { Title = "First Page" };
@@ -101,11 +101,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			flyoutPage.Flyout = secondPage;
 
 			Assert.IsNotNull(firstPage.NavigatingFromArgs);
-			Assert.AreEqual(firstPage, secondPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(secondPage, firstPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(firstPage, secondPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(secondPage, firstPage.NavigatedFromArgs.DestinationPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task FlyoutPageDetailChanged()
 		{
 			var firstPage = new LCPage() { Title = "First Page" };
@@ -114,11 +114,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			flyoutPage.Detail = secondPage;
 
 			Assert.IsNotNull(firstPage.NavigatingFromArgs);
-			Assert.AreEqual(firstPage, secondPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(secondPage, firstPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(firstPage, secondPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(secondPage, firstPage.NavigatedFromArgs.DestinationPage);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PushModalPage()
 		{
 			var previousPage = new LCPage();
@@ -128,14 +128,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await window.Navigation.PushModalAsync(lcPage);
 
 			Assert.IsNotNull(previousPage.NavigatingFromArgs);
-			Assert.AreEqual(previousPage, lcPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(lcPage, previousPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(previousPage, lcPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(lcPage, previousPage.NavigatedFromArgs.DestinationPage);
 
-			Assert.AreEqual(1, previousPage.DisappearingCount);
-			Assert.AreEqual(1, lcPage.AppearingCount);
+			Assert.Equal(1, previousPage.DisappearingCount);
+			Assert.Equal(1, lcPage.AppearingCount);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PopModalPage()
 		{
 			var firstPage = new LCPage();
@@ -146,15 +146,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await window.Navigation.PopModalAsync();
 
 			Assert.IsNotNull(poppedPage.NavigatingFromArgs);
-			Assert.AreEqual(poppedPage, firstPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(poppedPage, firstPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
 
-			Assert.AreEqual(1, poppedPage.AppearingCount);
-			Assert.AreEqual(1, poppedPage.DisappearingCount);
-			Assert.AreEqual(2, firstPage.AppearingCount);
+			Assert.Equal(1, poppedPage.AppearingCount);
+			Assert.Equal(1, poppedPage.DisappearingCount);
+			Assert.Equal(2, firstPage.AppearingCount);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PopToAModalPage()
 		{
 			var firstPage = new LCPage();
@@ -171,17 +171,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await window.Navigation.PopModalAsync();
 
 			Assert.IsNotNull(secondModalPage.NavigatingFromArgs);
-			Assert.AreEqual(secondModalPage, firstModalPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(firstModalPage, secondModalPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(secondModalPage, firstModalPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(firstModalPage, secondModalPage.NavigatedFromArgs.DestinationPage);
 
-			Assert.AreEqual(1, secondModalPage.DisappearingCount);
-			Assert.AreEqual(1, secondModalPage.AppearingCount);
+			Assert.Equal(1, secondModalPage.DisappearingCount);
+			Assert.Equal(1, secondModalPage.AppearingCount);
 
-			Assert.AreEqual(1, firstModalPage.DisappearingCount);
-			Assert.AreEqual(2, firstModalPage.AppearingCount);
+			Assert.Equal(1, firstModalPage.DisappearingCount);
+			Assert.Equal(2, firstModalPage.AppearingCount);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PushSecondModalPage()
 		{
 			var firstPage = new LCPage();
@@ -197,14 +197,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await window.Navigation.PushModalAsync(secondModalPage);
 
 			Assert.IsNotNull(firstModalPage.NavigatingFromArgs);
-			Assert.AreEqual(firstModalPage, secondModalPage.NavigatedToArgs.PreviousPage);
-			Assert.AreEqual(secondModalPage, firstModalPage.NavigatedFromArgs.DestinationPage);
+			Assert.Equal(firstModalPage, secondModalPage.NavigatedToArgs.PreviousPage);
+			Assert.Equal(secondModalPage, firstModalPage.NavigatedFromArgs.DestinationPage);
 
-			Assert.AreEqual(0, secondModalPage.DisappearingCount);
-			Assert.AreEqual(1, secondModalPage.AppearingCount);
+			Assert.Equal(0, secondModalPage.DisappearingCount);
+			Assert.Equal(1, secondModalPage.AppearingCount);
 
-			Assert.AreEqual(1, firstModalPage.DisappearingCount);
-			Assert.AreEqual(1, firstModalPage.AppearingCount);
+			Assert.Equal(1, firstModalPage.DisappearingCount);
+			Assert.Equal(1, firstModalPage.AppearingCount);
 		}
 
 		class LCPage : ContentPage

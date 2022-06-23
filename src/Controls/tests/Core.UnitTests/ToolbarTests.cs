@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ToolbarTests : BaseTestFixture
+	
+	public class ToolbarTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ToolbarExistsForNavigationPage()
 		{
 			var window = new Window();
@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(toolbarElement.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public void ToolbarEmptyForContentPage()
 		{
 			Window window = new Window();
@@ -26,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(toolbarElement.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public void ToolbarClearsWhenNavigationPageRemoved()
 		{
 			var window = new Window();
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(toolbarElement.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TitleAndTitleViewAreMutuallyExclusive()
 		{
 			var window = new Window();
@@ -48,15 +48,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var titleView = new VerticalStackLayout();
 			var toolbar = (Toolbar)toolbarElement.Toolbar;
-			Assert.AreEqual("Test Title", toolbar.Title);
+			Assert.Equal("Test Title", toolbar.Title);
 			NavigationPage.SetTitleView(contentPage, titleView);
 			Assert.IsEmpty(toolbar.Title);
-			Assert.AreEqual(titleView, toolbar.TitleView);
+			Assert.Equal(titleView, toolbar.TitleView);
 			NavigationPage.SetTitleView(contentPage, null);
-			Assert.AreEqual("Test Title", toolbar.Title);
+			Assert.Equal("Test Title", toolbar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public async Task InsertPageBeforeRootPageShowsBackButton()
 		{
 			var window = new Window();
@@ -68,7 +68,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(toolbarElement.Toolbar.BackButtonVisible);
 		}
 
-		[Test]
+		[Fact]
 		public async Task RemoveRootPageHidesBackButton()
 		{
 			var window = new Window();
@@ -81,7 +81,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(toolbarElement.Toolbar.BackButtonVisible);
 		}
 
-		[Test]
+		[Fact]
 		public void BackButtonNotVisibleForInitialPage()
 		{
 			var window = new Window();
@@ -92,7 +92,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void NestedNavigation_AppliesFromMostInnerNavigationPage()
 		{
 			var window = new Window();
@@ -127,7 +127,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(toolbar.IsVisible);
 		}
 
-		[Test]
+		[Fact]
 		public void NestedNavigation_ChangingToTabWithNoNavigationPage()
 		{
 			var window = new Window();
@@ -163,7 +163,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(toolbar.IsVisible);
 		}
 
-		[Test]
+		[Fact]
 		public void NestedNavigation_NestedNavigationPage()
 		{
 			var window = new Window();
@@ -199,7 +199,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(toolbar.IsVisible);
 		}
 
-		[Test]
+		[Fact]
 		public async Task NestedNavigation_BackButtonVisibleIfAnyoneHasPages()
 		{
 			var window = new Window();

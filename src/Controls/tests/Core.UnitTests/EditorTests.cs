@@ -1,9 +1,9 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class EditorTests : BaseTestFixture
+	
+	public class EditorTests : BaseTestFixtureXUnit
 	{
 		[TestCase("Hi", "My text has changed")]
 		[TestCase(null, "My text has changed")]
@@ -28,9 +28,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			editor.Text = finalText;
 
-			Assert.AreEqual(editor, editorFromSender);
-			Assert.AreEqual(initialText, oldText);
-			Assert.AreEqual(finalText, newText);
+			Assert.Equal(editor, editorFromSender);
+			Assert.Equal(initialText, oldText);
+			Assert.Equal(finalText, newText);
 		}
 
 		[TestCase(true)]
@@ -38,13 +38,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Editor editor = new Editor();
 			editor.SetValue(InputView.IsReadOnlyProperty, isReadOnly);
-			Assert.AreEqual(isReadOnly, editor.IsReadOnly);
+			Assert.Equal(isReadOnly, editor.IsReadOnly);
 		}
-		[Test]
+		[Fact]
 		public void IsReadOnlyDefaultValueTest()
 		{
 			Editor editor = new Editor();
-			Assert.AreEqual(editor.IsReadOnly, false);
+			Assert.Equal(editor.IsReadOnly, false);
 		}
 	}
 }

@@ -3,15 +3,15 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using Grid = Microsoft.Maui.Controls.Compatibility.Grid;
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
-	[TestFixture]
-	public class NotifiedPropertiesTests : BaseTestFixture
+	
+	public class NotifiedPropertiesTests : BaseTestFixtureXUnit
 	{
 		public abstract class PropertyTestCase
 		{
@@ -165,7 +165,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var expected = property.ExpectedDefaultValue;
 			var actual = property.PropertyGetter(view);
 
-			Assert.AreEqual(property.ExpectedDefaultValue, property.PropertyGetter(view), property.DebugName);
+			Assert.Equal(property.ExpectedDefaultValue, property.PropertyGetter(view), property.DebugName);
 		}
 
 		[Test, TestCaseSource("Properties")]
@@ -184,7 +184,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			property.PropertySetter(view, testvalue);
 
 			Assert.True(changed, property.DebugName);
-			Assert.AreEqual(testvalue, property.PropertyGetter(view), property.DebugName);
+			Assert.Equal(testvalue, property.PropertyGetter(view), property.DebugName);
 		}
 
 		[Test, TestCaseSource("Properties")]
@@ -205,7 +205,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			property.PropertySetter(view, testvalue);
 
 			Assert.False(changed, property.DebugName);
-			Assert.AreEqual(testvalue, property.PropertyGetter(view), property.DebugName);
+			Assert.Equal(testvalue, property.PropertyGetter(view), property.DebugName);
 		}
 	}
 }

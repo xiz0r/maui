@@ -1,44 +1,44 @@
 using System;
 
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DatePickerUnitTest : BaseTestFixture
+	
+	public class DatePickerUnitTest : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestMinimumDateException()
 		{
 			DatePicker picker = new DatePicker();
 
 			picker.MinimumDate = new DateTime(1950, 1, 1);
 
-			Assert.AreEqual(new DateTime(1950, 1, 1), picker.MinimumDate);
+			Assert.Equal(new DateTime(1950, 1, 1), picker.MinimumDate);
 
 			Assert.That(() => picker.MinimumDate = new DateTime(2200, 1, 1), Throws.ArgumentException);
 		}
 
-		[Test]
+		[Fact]
 		public void TestMaximumDateException()
 		{
 			DatePicker picker = new DatePicker();
 
 			picker.MaximumDate = new DateTime(2050, 1, 1);
 
-			Assert.AreEqual(new DateTime(2050, 1, 1), picker.MaximumDate);
+			Assert.Equal(new DateTime(2050, 1, 1), picker.MaximumDate);
 
 			Assert.That(() => picker.MaximumDate = new DateTime(1800, 1, 1), Throws.ArgumentException);
 		}
 
-		[Test]
+		[Fact]
 		public void TestMaximumDateClamping()
 		{
 			DatePicker picker = new DatePicker();
 
 			picker.Date = new DateTime(2050, 1, 1);
 
-			Assert.AreEqual(new DateTime(2050, 1, 1), picker.Date);
+			Assert.Equal(new DateTime(2050, 1, 1), picker.Date);
 
 			bool dateChanged = false;
 			bool maximumDateChanged = false;
@@ -62,19 +62,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(maximumDateChanged);
 			Assert.IsTrue(dateChanged);
 
-			Assert.AreEqual(newDate, picker.MaximumDate);
-			Assert.AreEqual(newDate, picker.Date);
-			Assert.AreEqual(picker.MaximumDate, picker.Date);
+			Assert.Equal(newDate, picker.MaximumDate);
+			Assert.Equal(newDate, picker.Date);
+			Assert.Equal(picker.MaximumDate, picker.Date);
 		}
 
-		[Test]
+		[Fact]
 		public void TestMinimumDateClamping()
 		{
 			DatePicker picker = new DatePicker();
 
 			picker.Date = new DateTime(1950, 1, 1);
 
-			Assert.AreEqual(new DateTime(1950, 1, 1), picker.Date);
+			Assert.Equal(new DateTime(1950, 1, 1), picker.Date);
 
 			bool dateChanged = false;
 			bool minimumDateChanged = false;
@@ -98,26 +98,26 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(minimumDateChanged);
 			Assert.IsTrue(dateChanged);
 
-			Assert.AreEqual(newDate, picker.MinimumDate);
-			Assert.AreEqual(newDate, picker.Date);
-			Assert.AreEqual(picker.MinimumDate, picker.Date);
+			Assert.Equal(newDate, picker.MinimumDate);
+			Assert.Equal(newDate, picker.Date);
+			Assert.Equal(picker.MinimumDate, picker.Date);
 		}
 
-		[Test]
+		[Fact]
 		public void TestDateClamping()
 		{
 			DatePicker picker = new DatePicker();
 
 			picker.Date = new DateTime(1500, 1, 1);
 
-			Assert.AreEqual(picker.MinimumDate, picker.Date);
+			Assert.Equal(picker.MinimumDate, picker.Date);
 
 			picker.Date = new DateTime(2500, 1, 1);
 
-			Assert.AreEqual(picker.MaximumDate, picker.Date);
+			Assert.Equal(picker.MaximumDate, picker.Date);
 		}
 
-		[Test]
+		[Fact]
 		public void TestDateSelected()
 		{
 			var picker = new DatePicker();
@@ -156,31 +156,31 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			datePicker.Date = finalDate;
 
-			Assert.AreEqual(datePicker, pickerFromSender);
-			Assert.AreEqual(initialDate, oldDate);
-			Assert.AreEqual(finalDate, newDate);
+			Assert.Equal(datePicker, pickerFromSender);
+			Assert.Equal(initialDate, oldDate);
+			Assert.Equal(finalDate, newDate);
 		}
 
-		[Test]
+		[Fact]
 		//https://bugzilla.xamarin.com/show_bug.cgi?id=32144
 		public void SetNullValueDoesNotThrow()
 		{
 			var datePicker = new DatePicker();
 			Assert.DoesNotThrow(() => datePicker.SetValue(DatePicker.DateProperty, null));
-			Assert.AreEqual(DateTime.Today, datePicker.Date);
+			Assert.Equal(DateTime.Today, datePicker.Date);
 		}
 
-		[Test]
+		[Fact]
 		public void SetNullableDateTime()
 		{
 			var datePicker = new DatePicker();
 			var dateTime = new DateTime(2015, 7, 21);
 			DateTime? nullableDateTime = dateTime;
 			datePicker.SetValue(DatePicker.DateProperty, nullableDateTime);
-			Assert.AreEqual(dateTime, datePicker.Date);
+			Assert.Equal(dateTime, datePicker.Date);
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/xamarin/Microsoft.Maui.Controls/issues/5784
 		public void SetMaxAndMinDateTimeToNow()
 		{

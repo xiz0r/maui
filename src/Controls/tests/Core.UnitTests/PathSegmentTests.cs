@@ -1,22 +1,22 @@
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class PathSegmentTests : BaseTestFixture
+	public class PathSegmentTests : BaseTestFixtureXUnit
 	{
 		PointCollectionConverter _pointCollectionConverter;
 
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 
 			_pointCollectionConverter = new PointCollectionConverter();
 		}
 
-		[Test]
+		[Fact]
 		public void TestArcSegmentConstructor()
 		{
 			var arcSegment1 = new ArcSegment();
@@ -24,12 +24,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var arcSegment2 = new ArcSegment(new Point(0, 0), new Size(100, 100), 90, SweepDirection.Clockwise, false);
 			Assert.IsNotNull(arcSegment2);
-			Assert.AreEqual(90, arcSegment2.RotationAngle);
-			Assert.AreEqual(100, arcSegment2.Size.Height);
-			Assert.AreEqual(100, arcSegment2.Size.Width);
+			Assert.Equal(90, arcSegment2.RotationAngle);
+			Assert.Equal(100, arcSegment2.Size.Height);
+			Assert.Equal(100, arcSegment2.Size.Width);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBezierSegmentConstructor()
 		{
 			var bezierSegment1 = new BezierSegment();
@@ -37,15 +37,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var bezierSegment2 = new BezierSegment(new Point(0, 0), new Point(50, 50), new Point(100, 100));
 			Assert.IsNotNull(bezierSegment2);
-			Assert.AreEqual(0, bezierSegment2.Point1.X);
-			Assert.AreEqual(0, bezierSegment2.Point1.Y);
-			Assert.AreEqual(50, bezierSegment2.Point2.X);
-			Assert.AreEqual(50, bezierSegment2.Point2.Y);
-			Assert.AreEqual(100, bezierSegment2.Point3.X);
-			Assert.AreEqual(100, bezierSegment2.Point3.Y);
+			Assert.Equal(0, bezierSegment2.Point1.X);
+			Assert.Equal(0, bezierSegment2.Point1.Y);
+			Assert.Equal(50, bezierSegment2.Point2.X);
+			Assert.Equal(50, bezierSegment2.Point2.Y);
+			Assert.Equal(100, bezierSegment2.Point3.X);
+			Assert.Equal(100, bezierSegment2.Point3.Y);
 		}
 
-		[Test]
+		[Fact]
 		public void TestLineSegmentConstructor()
 		{
 			var lineSegment1 = new LineSegment();
@@ -53,8 +53,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var lineSegment2 = new LineSegment(new Point(25, 50));
 			Assert.IsNotNull(lineSegment2);
-			Assert.AreEqual(25, lineSegment2.Point.X);
-			Assert.AreEqual(50, lineSegment2.Point.Y);
+			Assert.Equal(25, lineSegment2.Point.X);
+			Assert.Equal(50, lineSegment2.Point.Y);
 		}
 
 		[TestCase("", 0)]
@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var polyBezierSegment = new PolyBezierSegment(pointCollection);
 			Assert.IsNotNull(polyBezierSegment);
-			Assert.AreEqual(count, polyBezierSegment.Points.Count);
+			Assert.Equal(count, polyBezierSegment.Points.Count);
 		}
 
 		[TestCase("", 0)]
@@ -93,7 +93,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
 			var polyLineSegment = new PolyLineSegment(pointCollection);
 			Assert.IsNotNull(polyLineSegment);
-			Assert.AreEqual(count, polyLineSegment.Points.Count);
+			Assert.Equal(count, polyLineSegment.Points.Count);
 		}
 
 		[TestCase("", 0)]
@@ -112,10 +112,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
 			var polyQuadraticBezierSegment = new PolyQuadraticBezierSegment(pointCollection);
 			Assert.IsNotNull(polyQuadraticBezierSegment);
-			Assert.AreEqual(count, polyQuadraticBezierSegment.Points.Count);
+			Assert.Equal(count, polyQuadraticBezierSegment.Points.Count);
 		}
 
-		[Test]
+		[Fact]
 		public void TestQuadraticBezierSegmentConstructor()
 		{
 			var quadraticBezierSegment1 = new QuadraticBezierSegment();
@@ -123,10 +123,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var quadraticBezierSegment2 = new QuadraticBezierSegment(new Point(0, 0), new Point(100, 100));
 			Assert.IsNotNull(quadraticBezierSegment2);
-			Assert.AreEqual(0, quadraticBezierSegment2.Point1.X);
-			Assert.AreEqual(0, quadraticBezierSegment2.Point1.Y);
-			Assert.AreEqual(100, quadraticBezierSegment2.Point2.X);
-			Assert.AreEqual(100, quadraticBezierSegment2.Point2.Y);
+			Assert.Equal(0, quadraticBezierSegment2.Point1.X);
+			Assert.Equal(0, quadraticBezierSegment2.Point1.Y);
+			Assert.Equal(100, quadraticBezierSegment2.Point2.X);
+			Assert.Equal(100, quadraticBezierSegment2.Point2.Y);
 		}
 	}
 }

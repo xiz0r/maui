@@ -8,7 +8,7 @@ using AbsoluteLayoutFlags = Microsoft.Maui.Layouts.AbsoluteLayoutFlags;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class AbsoluteLayoutTests : BaseTestFixtureXUnit
+	public class AbsoluteLayoutTests : BaseTestFixtureXUnitXUnit
 	{
 		public AbsoluteLayoutTests()
 		{

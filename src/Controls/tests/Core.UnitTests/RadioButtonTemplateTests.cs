@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	[TestFixture(Category = "RadioButton")]
-	public class RadioButtonTemplateTests : BaseTestFixture
+	public class RadioButtonTemplateTests : BaseTestFixtureXUnit
 	{
 		class FrameStyleCases : IEnumerable
 		{

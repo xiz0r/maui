@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 {
-	public class ElementTests : BaseTestFixture
+	public class ElementTests : BaseTestFixtureXUnit
 	{
 		class CustomLayout : StackLayout
 		{
@@ -22,27 +22,27 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void OnChildAddedCalled()
 		{
 			var layout = new CustomLayout();
 			var button = new Button();
 
-			Assert.AreEqual(0, layout.AddedCount);
+			Assert.Equal(0, layout.AddedCount);
 			layout.Add(button);
-			Assert.AreEqual(1, layout.AddedCount);
+			Assert.Equal(1, layout.AddedCount);
 		}
 
-		[Test]
+		[Fact]
 		public void OnChildRemovedCalled()
 		{
 			var layout = new CustomLayout();
 			var button = new Button();
 			layout.Add(button);
 
-			Assert.AreEqual(0, layout.RemovedCount);
+			Assert.Equal(0, layout.RemovedCount);
 			layout.Remove(button);
-			Assert.AreEqual(1, layout.RemovedCount);
+			Assert.Equal(1, layout.RemovedCount);
 		}
 	}
 }

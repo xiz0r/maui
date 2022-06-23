@@ -5,23 +5,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.UnitTests;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class MarshalingObservableCollectionTests
 	{
 		MarshalingTestDispatcherProvider _dispatcherProvider;
 
-		[SetUp]
+		
 		public void Setup()
 		{
 			_dispatcherProvider = new MarshalingTestDispatcherProvider();
 			DispatcherProvider.SetCurrent(_dispatcherProvider);
 		}
 
-		[TearDown]
+		
 		public void TearDown()
 		{
 			DispatcherProvider.SetCurrent(null);
@@ -29,8 +29,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			_dispatcherProvider = null;
 		}
 
-		[Test]
-		[Description("Added items don't show up until they've been processed on the UI thread")]
+		[Fact("Added items don't show up until they've been processed on the UI thread")]
 		public Task AddOffUIThread() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -67,8 +66,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(insertCount, Is.EqualTo(1), "The CollectionChanged event should have fired with an Add exactly 1 time");
 		});
 
-		[Test]
-		[Description("Intial item count should match wrapped collection.")]
+		[Fact("Intial item count should match wrapped collection.")]
 		public Task InitialItemCountsMatch() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -80,8 +78,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(source.Count, Is.EqualTo(moc.Count));
 		});
 
-		[Test]
-		[Description("Clears don't show up until they've been processed on the UI thread")]
+		[Fact("Clears don't show up until they've been processed on the UI thread")]
 		public Task ClearOnUIThread() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -110,8 +107,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(onMainThreadCount, Is.EqualTo(0), "Count should be zero because the Clear has been processed");
 		});
 
-		[Test]
-		[Description("A Reset should reflect the state at the time of the Reset")]
+		[Fact("A Reset should reflect the state at the time of the Reset")]
 		public Task ClearAndAddOffUIThread() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -141,8 +137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(onMainThreadCount, Is.EqualTo(1), "Should have processed a Clear and an Add");
 		});
 
-		[Test]
-		[Description("Removed items are still there until they're removed on the UI thread")]
+		[Fact("Removed items are still there until they're removed on the UI thread")]
 		public Task RemoveOffUIThread() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -167,8 +162,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(onMainThreadCount, Is.EqualTo(1), "Remove has now processed");
 		});
 
-		[Test]
-		[Description("Until the UI thread processes a change, the indexer should remain consistent")]
+		[Fact("Until the UI thread processes a change, the indexer should remain consistent")]
 		public Task IndexerConsistent() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -189,8 +183,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(itemFromThreadPool, Is.EqualTo(2), "Should have indexer value from before remove");
 		});
 
-		[Test]
-		[Description("Don't show replacements until the UI thread has processed them")]
+		[Fact("Don't show replacements until the UI thread has processed them")]
 		public Task ReplaceOffUIThread() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();
@@ -215,8 +208,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(onMainThreadValue, Is.EqualTo(42), "Should have value from after replace");
 		});
 
-		[Test]
-		[Description("Don't show moves until the UI thread has processed them")]
+		[Fact("Don't show moves until the UI thread has processed them")]
 		public Task MoveOffUIThread() => DispatcherTest.Run(async () =>
 		{
 			var _dispatcher = Dispatcher.GetForCurrentThread();

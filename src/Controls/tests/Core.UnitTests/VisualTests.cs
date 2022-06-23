@@ -3,23 +3,23 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class VisualTests : BaseTestFixture
+	
+	public class VisualTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			var mockDeviceInfo = new MockDeviceDisplay();
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
 		}
 
 
-		[Test]
+		[Fact]
 		public void ShellPropagatesChangeToNewElements()
 		{
 			Button button = new Button();
@@ -76,12 +76,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var buttonVisualController = (button as IVisualController);
 			var stacklayoutVisualController = (flyout as IVisualController);
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, buttonVisualController.EffectiveVisual);
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, stacklayoutVisualController.EffectiveVisual);
+			Assert.Equal(Maui.Controls.VisualMarker.Material, buttonVisualController.EffectiveVisual);
+			Assert.Equal(Maui.Controls.VisualMarker.Material, stacklayoutVisualController.EffectiveVisual);
 		}
 
 
-		[Test]
+		[Fact]
 		public void ShellPropagatesDownVisualChange()
 		{
 			Button button = new Button();
@@ -118,15 +118,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var buttonVisualController = (button as IVisualController);
 			var stacklayoutVisualController = (flyout as IVisualController);
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.Default, buttonVisualController.EffectiveVisual);
-			Assert.AreEqual(Maui.Controls.VisualMarker.Default, stacklayoutVisualController.EffectiveVisual);
+			Assert.Equal(Maui.Controls.VisualMarker.Default, buttonVisualController.EffectiveVisual);
+			Assert.Equal(Maui.Controls.VisualMarker.Default, stacklayoutVisualController.EffectiveVisual);
 			shell.Visual = VisualMarker.Material;
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, buttonVisualController.EffectiveVisual);
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, stacklayoutVisualController.EffectiveVisual);
+			Assert.Equal(Maui.Controls.VisualMarker.Material, buttonVisualController.EffectiveVisual);
+			Assert.Equal(Maui.Controls.VisualMarker.Material, stacklayoutVisualController.EffectiveVisual);
 		}
 
 
-		[Test]
+		[Fact]
 		public void ListViewVisualIsInheritedByViewCells()
 		{
 			var lv = new ListView { Visual = Maui.Controls.VisualMarker.Material, ItemTemplate = new DataTemplate(() => new ViewCell { View = new View() }) };
@@ -135,10 +135,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			ViewCell cell = lv.TemplatedItems[0] as ViewCell;
 			IVisualController target = cell.View;
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, target.EffectiveVisual, "ViewCell View is not Material");
+			Assert.Equal(Maui.Controls.VisualMarker.Material, target.EffectiveVisual, "ViewCell View is not Material");
 		}
 
-		[Test]
+		[Fact]
 		public void ListViewVisualIsInheritedByImageInViewCells()
 		{
 			var lv = new ListView { Visual = Maui.Controls.VisualMarker.Material, ItemTemplate = new DataTemplate(() => new ViewCell { View = new Label() }) };
@@ -147,10 +147,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			ViewCell cell = lv.TemplatedItems[0] as ViewCell;
 			IVisualController target = cell.View;
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, target.EffectiveVisual, "ViewCell View is not Material");
+			Assert.Equal(Maui.Controls.VisualMarker.Material, target.EffectiveVisual, "ViewCell View is not Material");
 		}
 
-		[Test]
+		[Fact]
 		public void ScrollViewSetsVisualAndGrandchildMaintainsParentExplicitValue()
 		{
 			var layout = ImplicitDefaultScrollView();
@@ -166,11 +166,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsTrue(target == Maui.Controls.VisualMarker.Material, "EffectiveVisual should be Material");
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
-			Assert.AreEqual(Maui.Controls.VisualMarker.Material, layout2.Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.Material, layout2.Visual);
 		}
 
-		[Test]
+		[Fact]
 		public void GrandparentSetsVisualAndGrandchildMaintainsParentExplicitValue()
 		{
 			var layout = ImplicitDefaultLayout();
@@ -187,11 +187,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
 			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
-			Assert.AreEqual(Maui.Controls.VisualMarker.Default, layout2.Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.Default, layout2.Visual);
 		}
 
-		[Test]
+		[Fact]
 		public void GrandparentSetsVisualAndImplicitDescendentsInheritValue()
 		{
 			var layout = ImplicitDefaultLayout();
@@ -212,11 +212,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
 			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, layout2.Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, layout2.Visual);
 		}
 
-		[Test]
+		[Fact]
 		public void GrandparentSetsOppositeVisualAndGrandchildInheritsParentExplicitValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -237,10 +237,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = ((View)view).Visual;
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, target);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, target);
 		}
 
-		[Test]
+		[Fact]
 		public void NotifyVisualChangedDoesNotTriggerVisualPropertyChangedUnnecessarily()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -260,10 +260,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = ((PropertyWatchingView)view).VisualPropertyChangedCount;
 
-			Assert.AreEqual(1, target);
+			Assert.Equal(1, target);
 		}
 
-		[Test]
+		[Fact]
 		public void ReParentAndInheritNewParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -281,10 +281,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
 			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 		}
 
-		[Test]
+		[Fact]
 		public void ReParentParentAndInheritNewGrandParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -303,10 +303,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = ((View)view).Visual;
 
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, target);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, target);
 		}
 
-		[Test]
+		[Fact]
 		public void SetVisualToMatchParentAndInheritParentValue()
 		{
 			var layout = ImplicitDefaultLayout();
@@ -325,7 +325,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
-		[Test]
+		[Fact]
 		public void SetGrandparentAndInheritExplicitParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -345,7 +345,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
-		[Test]
+		[Fact]
 		public void SetGrandparentUsingAnonCtorAndMaintainExplicitParentValue()
 		{
 			var layout = new StackLayout
@@ -372,7 +372,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
-		[Test]
+		[Fact]
 		public void SetGrandparentUsingCtorAndMaintainExplicitParentValue()
 		{
 			IVisualController view = ImplicitDefaultView();
@@ -389,7 +389,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentAndGrandchildrenInheritValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -406,7 +406,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentAndContentAndGrandchildrenInheritValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -424,7 +424,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void SetParentAndInheritExplicitParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -438,7 +438,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentAndMaintainExplicitValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -450,10 +450,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsTrue(!target.IsMaterial(), "EffectiveVisual should be Default");
 			Assert.IsTrue(target.IsDefault(), "EffectiveVisual should be Default");
-			Assert.AreEqual(Maui.Controls.VisualMarker.Default, ((View)view).Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.Default, ((View)view).Visual);
 		}
 
-		[Test]
+		[Fact]
 		public void SetParentUsingCtorAndInheritParentValue()
 		{
 			IVisualController view = ImplicitDefaultView();
@@ -467,7 +467,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsTrue(target.IsMaterial(), "EffectiveVisual should be Material");
 			Assert.IsTrue(!target.IsDefault(), "EffectiveVisual should be Material");
-			Assert.AreEqual(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
+			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 		}
 
 		static void AddExplicitLTRToScrollView(ScrollView parent, View child)

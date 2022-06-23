@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class CellTests : BaseTestFixture
+	
+	public class CellTests : BaseTestFixtureXUnit
 	{
 		internal class TestCell : Cell
 		{
@@ -25,7 +25,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Selected()
 		{
 			var cell = new TestCell();
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(tapped);
 		}
 
-		[Test]
+		[Fact]
 		public void AppearingEvent()
 		{
 			var cell = new TestCell();
@@ -51,7 +51,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(cell.OnDisappearingSent);
 		}
 
-		[Test]
+		[Fact]
 		public void DisappearingEvent()
 		{
 			var cell = new TestCell();
@@ -65,7 +65,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(cell.OnDisappearingSent);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBindingContextPropagationOnImageCell()
 		{
 			var context = new object();
@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(context, source.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void HasContextActions()
 		{
 			bool changed = false;
@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(changed, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void MenuItemsGetBindingContext()
 		{
 			var cell = new TextCell
@@ -129,7 +129,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.ContextActions[0].BindingContext, Is.SameAs(cell.BindingContext));
 		}
 
-		[Test]
+		[Fact]
 		public void RenderHeightINPCFromParent()
 		{
 			var lv = new ListView();
@@ -157,7 +157,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(changed, Is.EqualTo(1));
 		}
 
-		[Test]
+		[Fact]
 		public async Task ForceUpdateSizeCallsAreRateLimited()
 		{
 			var lv = new ListView { HasUnevenRows = true };
@@ -173,10 +173,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(150));
 
-			Assert.AreEqual(1, numberOfCalls);
+			Assert.Equal(1, numberOfCalls);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ForceUpdateSizeWillNotBeCalledIfParentIsNotAListViewWithUnevenRows()
 		{
 			var lv = new ListView { HasUnevenRows = false };
@@ -189,7 +189,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await System.Threading.Tasks.Task.Delay(TimeSpan.FromMilliseconds(16));
 
-			Assert.AreEqual(0, numberOfCalls);
+			Assert.Equal(0, numberOfCalls);
 		}
 	}
 }

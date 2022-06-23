@@ -1,10 +1,10 @@
 using System;
 using Microsoft.Maui.Controls.Core.UnitTests;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 {
-	[TestFixture]
+	
 	public class IStylableTest
 	{
 		[TestCase]

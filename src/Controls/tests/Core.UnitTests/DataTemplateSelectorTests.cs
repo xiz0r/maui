@@ -1,12 +1,12 @@
 using System;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DataTemplateSelectorTests : BaseTestFixture
+	
+	public class DataTemplateSelectorTests : BaseTestFixtureXUnit
 	{
 		class TemplateOne : DataTemplate
 		{
@@ -45,13 +45,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			readonly DataTemplate templateTwo;
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor()
 		{
 			var dts = new TestDTS();
 		}
 
-		[Test]
+		[Fact]
 		public void ReturnsCorrectType()
 		{
 			var dts = new TestDTS();
@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsInstanceOf<TemplateTwo>(dts.SelectTemplate("test", null));
 		}
 
-		[Test]
+		[Fact]
 		public void ListViewSupport()
 		{
 			var listView = new ListView(ListViewCachingStrategy.RecycleElement);
@@ -70,7 +70,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsInstanceOf<EntryCell>(listView.TemplatedItems[1]);
 		}
 
-		[Test]
+		[Fact]
 		public void NestingThrowsException()
 		{
 			var dts = new TestDTS();
@@ -78,13 +78,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 	}
 
-	[TestFixture]
-	public class DataTemplateRecycleTests : BaseTestFixture
+	
+	public class DataTemplateRecycleTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			DeviceInfo.SetCurrent(new MockDeviceInfo(platform: DevicePlatform.iOS));
 		}
 
@@ -112,13 +112,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			public int Counter = 0;
 		}
 
-		[Test]
+		[Fact]
 		public void ListViewSupport()
 		{
 			var listView = new ListView(ListViewCachingStrategy.RecycleElementAndDataTemplate);
 			listView.ItemsSource = new object[] { "foo", "bar", 0 };
 
-			Assert.AreEqual(ListViewCachingStrategy.RecycleElementAndDataTemplate, listView.CachingStrategy);
+			Assert.Equal(ListViewCachingStrategy.RecycleElementAndDataTemplate, listView.CachingStrategy);
 
 			var selector = new TestDataTemplateSelector();
 			listView.ItemTemplate = selector;

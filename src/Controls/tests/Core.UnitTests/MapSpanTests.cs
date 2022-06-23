@@ -1,23 +1,23 @@
 using Microsoft.Maui.Controls.Maps;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class MapSpanTests : BaseTestFixture
+	
+	public class MapSpanTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void Constructor()
 		{
 			var span = new MapSpan(new Position(0, 0), 1, 1);
 
-			Assert.AreEqual(new Position(0, 0), span.Center);
-			Assert.AreEqual(1, span.LatitudeDegrees);
-			Assert.AreEqual(1, span.LongitudeDegrees);
+			Assert.Equal(new Position(0, 0), span.Center);
+			Assert.Equal(1, span.LatitudeDegrees);
+			Assert.Equal(1, span.LongitudeDegrees);
 			Assert.IsTrue(span.Radius.Kilometers > 54 && span.Radius.Kilometers < 56);
 		}
 
-		[Test]
+		[Fact]
 		public void Equals()
 		{
 			Assert.True(new MapSpan(new Position(1, 2), 3, 4) == new MapSpan(new Position(1, 2), 3, 4));
@@ -27,13 +27,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(new MapSpan(new Position(1, 2), 3, 4).Equals(null));
 		}
 
-		[Test]
+		[Fact]
 		public void HashCode()
 		{
-			Assert.AreEqual(new MapSpan(new Position(1, 2), 3, 4).GetHashCode(), new MapSpan(new Position(1, 2), 3, 4).GetHashCode());
+			Assert.Equal(new MapSpan(new Position(1, 2), 3, 4).GetHashCode(), new MapSpan(new Position(1, 2), 3, 4).GetHashCode());
 		}
 
-		[Test]
+		[Fact]
 		public void RangeClamping()
 		{
 			var span = new MapSpan(new Position(0, 0), -1, -2);

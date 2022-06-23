@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class AnimationTests : BaseTestFixture
+	
+	public class AnimationTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		//https://bugzilla.xamarin.com/show_bug.cgi?id=51424
 		public async Task AnimationRepeats()
 		{

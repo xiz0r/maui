@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Core.UnitTests;
-using NUnit.Framework;
+using Xunit;
 
 [assembly: TestHandler(typeof(Button), typeof(ButtonTarget))]
 [assembly: TestHandler(typeof(Slider), typeof(SliderTarget))]
@@ -63,13 +63,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	internal class ButtonLowerPriorityTarget : IRegisterable { }
 	internal class ButtonHigherPriorityTarget : IRegisterable { }
 
-	[TestFixture]
-	public class PriorityRegistrarTests : BaseTestFixture
+	
+	public class PriorityRegistrarTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			Internals.Registrar.RegisterAll(new[] {
 				typeof (TestHandlerAttribute),
 				typeof (TestHandlerLowerPriority)
@@ -77,21 +77,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[Test]
+		[Fact]
 		public void BasicTest()
 		{
 			IRegisterable renderWithTarget = Internals.Registrar.Registered.GetHandler(typeof(ButtonPriority));
-			Assert.AreEqual(typeof(ButtonHigherPriorityTarget), renderWithTarget.GetType());
+			Assert.Equal(typeof(ButtonHigherPriorityTarget), renderWithTarget.GetType());
 		}
 	}
 
-	[TestFixture]
-	public class VisualRegistrarTests : BaseTestFixture
+	
+	public class VisualRegistrarTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			Internals.Registrar.RegisterAll(new[] {
 				typeof (TestHandlerAttribute)
 			});
@@ -99,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void RegisteringANewDefaultShouldReplaceRenderWithAttributeForFallbackVisual()
 		{
 			Internals.Registrar.Registered.Register(typeof(RenderWith), typeof(RenderWithSetAsNewDefault));
@@ -109,7 +109,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void EnsureDefaultChildRendererTrumpsParentRenderWith()
 		{
 			Microsoft.Maui.Controls.Internals.Registrar.Registered.Register(typeof(RenderWithChild), typeof(RenderWithChildTarget));
@@ -129,7 +129,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(renderWithTarget, Is.InstanceOf<RenderWithChildTarget>());
 		}
 
-		[Test]
+		[Fact]
 		public void GetButtonChildHandler()
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(ButtonChild), typeof(RegisteredWithNobodyMarker));
@@ -141,7 +141,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(buttonTarget, Is.InstanceOf<ButtonChildTarget>());
 		}
 
-		[Test]
+		[Fact]
 		public void GetButtonHandler()
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler(typeof(Button), typeof(VisualMarkerUnitTests));
@@ -160,12 +160,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(buttonTarget, Is.InstanceOf<VisualButtonTarget>());
 
 			var visualButtonTarget = (VisualButtonTarget)buttonTarget;
-			Assert.AreEqual(visualButtonTarget.Param1, someObject);
-			Assert.AreEqual(visualButtonTarget.Param2, button);
+			Assert.Equal(visualButtonTarget.Param1, someObject);
+			Assert.Equal(visualButtonTarget.Param2, button);
 
 		}
 
-		[Test]
+		[Fact]
 		public void GetSliderHandler()
 		{
 			var sliderTarget = Internals.Registrar.Registered.GetHandler(typeof(Slider), typeof(VisualMarkerUnitTests));
@@ -178,17 +178,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 	}
 
-	[TestFixture]
-	public class RegistrarTests : BaseTestFixture
+	
+	public class RegistrarTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			Internals.Registrar.RegisterAll(new[] { typeof(TestHandlerAttribute) });
 		}
 
-		[Test]
+		[Fact]
 		public void GetButtonHandler()
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler<ButtonTarget>(typeof(Button));
@@ -196,7 +196,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(buttonTarget, Is.InstanceOf<ButtonTarget>());
 		}
 
-		[Test]
+		[Fact]
 		public void GetSliderHandler()
 		{
 			var sliderTarget = Internals.Registrar.Registered.GetHandler<SliderTarget>(typeof(Slider));
@@ -205,7 +205,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 	}
 
-	[TestFixture]
+	
 	public class SimpleRegistrarUnitTests
 	{
 		class MockRenderer { }
@@ -220,13 +220,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[SetUp]
+		
 		public void Setup()
 		{
 			VisualElement.SetDefaultVisual(VisualMarker.Default);
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
@@ -236,7 +236,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(renderer);
 		}
 
-		[Test]
+		[Fact]
 		public void TestGetRendererForKnownClass()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
@@ -248,7 +248,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(renderer, Is.InstanceOf<MockRenderer>());
 		}
 
-		[Test]
+		[Fact]
 		public void TestGetRendererForUnknownSubclass()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
@@ -260,7 +260,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(renderer, Is.InstanceOf<MockRenderer>());
 		}
 
-		[Test]
+		[Fact]
 		public void TestGetRendererWithRegisteredSubclass()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
@@ -276,7 +276,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(viewRenderer, Is.InstanceOf<MockRenderer>());
 		}
 
-		[Test]
+		[Fact]
 		public void TestReplaceRenderer()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
@@ -290,26 +290,26 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(buttonRenderer, Is.InstanceOf<ShinyButtonMockRenderer>());
 		}
 
-		[Test]
+		[Fact]
 		public void GetHandlerType()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
 			registrar.Register(typeof(View), typeof(MockRenderer));
 
-			Assert.AreEqual(typeof(MockRenderer), registrar.GetHandlerType(typeof(View)));
+			Assert.Equal(typeof(MockRenderer), registrar.GetHandlerType(typeof(View)));
 		}
 
-		[Test]
+		[Fact]
 		public void GetHandlerTypeForObject()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
 			registrar.Register(typeof(View), typeof(MockRenderer));
 			registrar.Register(typeof(Button), typeof(ButtonMockRenderer));
 
-			Assert.AreEqual(typeof(ButtonMockRenderer), registrar.GetHandlerTypeForObject(new Button()));
+			Assert.Equal(typeof(ButtonMockRenderer), registrar.GetHandlerTypeForObject(new Button()));
 		}
 
-		[Test]
+		[Fact]
 		public void GetHandlerForObject()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();
@@ -320,7 +320,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(buttonRenderer, Is.InstanceOf<ButtonMockRenderer>());
 		}
 
-		[Test]
+		[Fact]
 		public void TestGetRendererNullViewRenderer()
 		{
 			var registrar = new Internals.Registrar<MockRenderer>();

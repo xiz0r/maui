@@ -3,16 +3,16 @@ using System.Globalization;
 using System.Threading;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using FlexLayout = Microsoft.Maui.Controls.Compatibility.FlexLayout;
 
-	[TestFixture]
-	public class FlexOrderTests : BaseTestFixture
+	
+	public class FlexOrderTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestOrderingElements()
 		{
 			var label0 = new Label { IsPlatformEnabled = true };

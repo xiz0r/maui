@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.Graphics;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 {
 	using Grid = Microsoft.Maui.Controls.Compatibility.Grid;
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
-	public class LayoutCompatTests : BaseTestFixture
+	public class LayoutCompatTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void BasicContentPage()
 		{
 			var page = new ContentPage() { IsPlatformEnabled = true };
@@ -31,10 +31,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			(page as IContentView).CrossPlatformArrange(expectedRect);
 
 			buttonHandler.Received().PlatformArrange(expectedRect);
-			Assert.AreEqual(expectedSize, button.Bounds.Size);
+			Assert.Equal(expectedSize, button.Bounds.Size);
 		}
 
-		[Test]
+		[Fact]
 		public void GridInsideStackLayout()
 		{
 			ContentPage contentPage = new ContentPage();
@@ -56,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			(contentPage as Microsoft.Maui.IContentView).CrossPlatformMeasure(expectedSize.Width, expectedSize.Height);
 			(contentPage as Microsoft.Maui.IContentView).CrossPlatformArrange(rect);
 
-			Assert.AreEqual(expectedSize, grid.Bounds.Size);
+			Assert.Equal(expectedSize, grid.Bounds.Size);
 		}
 	}
 }

@@ -1,12 +1,12 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class BindableObjectExtensionTests : BaseTestFixture
+	
+	public class BindableObjectExtensionTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void SetBindingNull()
 		{
 			Assert.That(() => BindableObjectExtensions.SetBinding(null, MockBindable.TextProperty, "Name"),
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Throws.InstanceOf<ArgumentNullException>());
 		}
 
-		[Test]
+		[Fact]
 		public void Issue2643()
 		{
 			Label labelTempoDiStampa = new Label();
@@ -46,13 +46,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			public TResult Result { get; set; }
 		}
 
-		[Test]
+		[Fact]
 		public void Bz27229()
 		{
 			var totalCheckTime = new TextCell { Text = "Total Check Time" };
 			totalCheckTime.BindingContext = new Bz27229ViewModel();
 			totalCheckTime.SetBinding(TextCell.DetailProperty, "Member.Result.Text");
-			Assert.AreEqual("foo", totalCheckTime.Detail);
+			Assert.Equal("foo", totalCheckTime.Detail);
 		}
 	}
 }

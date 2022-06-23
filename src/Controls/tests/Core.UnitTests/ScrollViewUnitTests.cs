@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Maui.Graphics;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
-	[TestFixture]
-	public class ScrollViewUnitTests : BaseTestFixture
+	
+	public class ScrollViewUnitTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			ScrollView scrollView = new ScrollView();
@@ -22,10 +22,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			View view = new View();
 			scrollView = new ScrollView { Content = view };
 
-			Assert.AreEqual(view, scrollView.Content);
+			Assert.Equal(view, scrollView.Content);
 		}
 
-		[Test]
+		[Fact]
 		[TestCase(ScrollOrientation.Horizontal)]
 		[TestCase(ScrollOrientation.Both)]
 		public void GetsCorrectSizeRequestWithWrappingContent(ScrollOrientation orientation)
@@ -55,10 +55,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var r = scrollView.Measure(100, 100);
 
-			Assert.AreEqual(10, r.Request.Height);
+			Assert.Equal(10, r.Request.Height);
 		}
 
-		[Test]
+		[Fact]
 		public void TestChildChanged()
 		{
 			ScrollView scrollView = new ScrollView();
@@ -79,7 +79,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(changed);
 		}
 
-		[Test]
+		[Fact]
 		public void TestChildDoubleSet()
 		{
 			var scrollView = new ScrollView();
@@ -95,8 +95,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			scrollView.Content = child;
 
 			Assert.True(changed);
-			Assert.AreEqual(child, scrollView.Content);
-			Assert.AreEqual(child.Parent, scrollView);
+			Assert.Equal(child, scrollView.Content);
+			Assert.Equal(child.Parent, scrollView);
 
 			changed = false;
 
@@ -111,12 +111,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(child.Parent);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOrientation()
 		{
 			var scrollView = new ScrollView();
 
-			Assert.AreEqual(ScrollOrientation.Vertical, scrollView.Orientation);
+			Assert.Equal(ScrollOrientation.Vertical, scrollView.Orientation);
 
 			bool signaled = false;
 			scrollView.PropertyChanged += (sender, args) =>
@@ -127,19 +127,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			scrollView.Orientation = ScrollOrientation.Horizontal;
 
-			Assert.AreEqual(ScrollOrientation.Horizontal, scrollView.Orientation);
+			Assert.Equal(ScrollOrientation.Horizontal, scrollView.Orientation);
 			Assert.True(signaled);
 
 			scrollView.Orientation = ScrollOrientation.Both;
-			Assert.AreEqual(ScrollOrientation.Both, scrollView.Orientation);
+			Assert.Equal(ScrollOrientation.Both, scrollView.Orientation);
 			Assert.True(signaled);
 
 			scrollView.Orientation = ScrollOrientation.Neither;
-			Assert.AreEqual(ScrollOrientation.Neither, scrollView.Orientation);
+			Assert.Equal(ScrollOrientation.Neither, scrollView.Orientation);
 			Assert.True(signaled);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOrientationDoubleSet()
 		{
 			var scrollView = new ScrollView();
@@ -157,7 +157,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void TestScrollTo()
 		{
 			var scrollView = new ScrollView();
@@ -169,8 +169,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			((IScrollViewController)scrollView).ScrollToRequested += (sender, args) =>
 			{
 				requested = true;
-				Assert.AreEqual(args.ScrollY, 100);
-				Assert.AreEqual(args.ScrollX, 0);
+				Assert.Equal(args.ScrollY, 100);
+				Assert.Equal(args.ScrollX, 0);
 				Assert.Null(args.Item);
 				Assert.That(args.ShouldAnimate, Is.EqualTo(true));
 			};
@@ -179,7 +179,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void TestScrollWasNotFiredOnNeither()
 		{
 			var scrollView = new ScrollView
@@ -200,7 +200,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void TestScrollToNotAnimated()
 		{
 			var scrollView = new ScrollView();
@@ -212,8 +212,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			((IScrollViewController)scrollView).ScrollToRequested += (sender, args) =>
 			{
 				requested = true;
-				Assert.AreEqual(args.ScrollY, 100);
-				Assert.AreEqual(args.ScrollX, 0);
+				Assert.Equal(args.ScrollY, 100);
+				Assert.Equal(args.ScrollX, 0);
 				Assert.Null(args.Item);
 				Assert.That(args.ShouldAnimate, Is.EqualTo(false));
 			};
@@ -222,7 +222,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void TestScrollToElement()
 		{
 			var scrollView = new ScrollView();
@@ -244,7 +244,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void TestScrollToElementNotAnimated()
 		{
 			var scrollView = new ScrollView();
@@ -266,7 +266,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(requested, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void TestScrollToInvalid()
 		{
 			var scrollView = new ScrollView();
@@ -275,7 +275,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => scrollView.ScrollToAsync(null, (ScrollToPosition)500, true), Throws.ArgumentException);
 		}
 
-		[Test]
+		[Fact]
 		public void SetScrollPosition()
 		{
 			var scroll = new ScrollView();
@@ -286,7 +286,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(scroll.ScrollY, Is.EqualTo(100));
 		}
 
-		[Test]
+		[Fact]
 		public void TestBackToBackBiDirectionalScroll()
 		{
 			var scrollView = new ScrollView
@@ -310,10 +310,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			scrollView.ScrollToAsync(100, 100, true);
-			Assert.AreEqual(y100Count, 1);
+			Assert.Equal(y100Count, 1);
 
 			scrollView.ScrollToAsync(0, 100, true);
-			Assert.AreEqual(y100Count, 2);
+			Assert.Equal(y100Count, 2);
 		}
 
 		void AssertInvalidated(IViewHandler handler)

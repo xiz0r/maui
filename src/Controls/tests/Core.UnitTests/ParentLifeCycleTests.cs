@@ -4,15 +4,15 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 using NUnit.Framework.Constraints;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ParentLifeCycleTests : BaseTestFixture
+	
+	public class ParentLifeCycleTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ChangingAndChangedBothFireForParentOverride()
 		{
 			LifeCycleButton button = new LifeCycleButton();
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(changed);
 		}
 
-		[Test]
+		[Fact]
 		public void ChangingAndChangedBothFireInitially()
 		{
 			LifeCycleButton button = new LifeCycleButton();
@@ -55,8 +55,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				changed = true;
 			};
 
-			Assert.AreEqual(0, button.changing);
-			Assert.AreEqual(0, button.changed);
+			Assert.Equal(0, button.changing);
+			Assert.Equal(0, button.changed);
 			Assert.IsFalse(changing);
 			Assert.IsFalse(changed);
 
@@ -64,11 +64,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsTrue(changing);
 			Assert.IsTrue(changed);
-			Assert.AreEqual(1, button.changing);
-			Assert.AreEqual(1, button.changed);
+			Assert.Equal(1, button.changing);
+			Assert.Equal(1, button.changed);
 		}
 
-		[Test]
+		[Fact]
 		public void ParentOverrideChangingArgsSendCorrectly()
 		{
 			LifeCycleButton button = new LifeCycleButton();
@@ -77,20 +77,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var firstParent = new Button();
 			button.Parent = firstParent;
 
-			Assert.AreEqual(button.LastParentChangingEventArgs.NewParent, firstParent);
+			Assert.Equal(button.LastParentChangingEventArgs.NewParent, firstParent);
 			Assert.IsNull(button.LastParentChangingEventArgs.OldParent);
 
 			var secondParent = new Button();
 			button.ParentOverride = secondParent;
-			Assert.AreEqual(button.LastParentChangingEventArgs.OldParent, firstParent);
-			Assert.AreEqual(button.LastParentChangingEventArgs.NewParent, secondParent);
+			Assert.Equal(button.LastParentChangingEventArgs.OldParent, firstParent);
+			Assert.Equal(button.LastParentChangingEventArgs.NewParent, secondParent);
 
 			button.ParentOverride = null;
-			Assert.AreEqual(button.LastParentChangingEventArgs.OldParent, secondParent);
-			Assert.AreEqual(button.LastParentChangingEventArgs.NewParent, firstParent);
+			Assert.Equal(button.LastParentChangingEventArgs.OldParent, secondParent);
+			Assert.Equal(button.LastParentChangingEventArgs.NewParent, firstParent);
 		}
 
-		[Test]
+		[Fact]
 		public void ChangingArgsAreSetCorrectly()
 		{
 			LifeCycleButton button = new LifeCycleButton();
@@ -99,20 +99,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var firstParent = new Button();
 			button.Parent = firstParent;
 
-			Assert.AreEqual(button.LastParentChangingEventArgs.NewParent, firstParent);
+			Assert.Equal(button.LastParentChangingEventArgs.NewParent, firstParent);
 			Assert.IsNull(button.LastParentChangingEventArgs.OldParent);
 
 			var secondParent = new Button();
 			button.Parent = secondParent;
-			Assert.AreEqual(button.LastParentChangingEventArgs.OldParent, firstParent);
-			Assert.AreEqual(button.LastParentChangingEventArgs.NewParent, secondParent);
+			Assert.Equal(button.LastParentChangingEventArgs.OldParent, firstParent);
+			Assert.Equal(button.LastParentChangingEventArgs.NewParent, secondParent);
 
 			button.Parent = null;
-			Assert.AreEqual(button.LastParentChangingEventArgs.OldParent, secondParent);
-			Assert.AreEqual(button.LastParentChangingEventArgs.NewParent, null);
+			Assert.Equal(button.LastParentChangingEventArgs.OldParent, secondParent);
+			Assert.Equal(button.LastParentChangingEventArgs.NewParent, null);
 
-			Assert.AreEqual(3, button.changing);
-			Assert.AreEqual(3, button.changed);
+			Assert.Equal(3, button.changing);
+			Assert.Equal(3, button.changed);
 		}
 
 		public class LifeCycleButton : Button

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 {
-	[TestFixture]
+	
 	public class SelectorTests
 	{
 		IStyleSelectable Page;
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		IStyleSelectable Label4 => StackLayout.Children.Skip(4).First();
 		IStyleSelectable ContentView0 => StackLayout.Children.Skip(2).First();
 
-		[SetUp]
+		
 		public void SetUp()
 		{
 			Page = new MockStylable
@@ -108,12 +108,12 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		public void TestCase(string selectorString, bool label0match, bool label1match, bool label2match, bool label3match, bool label4match, bool content0match)
 		{
 			var selector = Selector.Parse(new CssReader(new StringReader(selectorString)));
-			Assert.AreEqual(label0match, selector.Matches(Label0));
-			Assert.AreEqual(label1match, selector.Matches(Label1));
-			Assert.AreEqual(label2match, selector.Matches(Label2));
-			Assert.AreEqual(label3match, selector.Matches(Label3));
-			Assert.AreEqual(label4match, selector.Matches(Label4));
-			Assert.AreEqual(content0match, selector.Matches(ContentView0));
+			Assert.Equal(label0match, selector.Matches(Label0));
+			Assert.Equal(label1match, selector.Matches(Label1));
+			Assert.Equal(label2match, selector.Matches(Label2));
+			Assert.Equal(label3match, selector.Matches(Label3));
+			Assert.Equal(label4match, selector.Matches(Label4));
+			Assert.Equal(content0match, selector.Matches(ContentView0));
 		}
 	}
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -41,11 +41,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		readonly ObservableCollection<Element> internalChildren = new ObservableCollection<Element>();
 	}
 
-	[TestFixture]
+	
 	public class ElementTests
-		: BaseTestFixture
+		: BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void DescendantAddedLevel1()
 		{
 			var root = new TestElement();
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			root.Children.Add(child);
 		}
 
-		[Test]
+		[Fact]
 		public void DescendantAddedLevel2()
 		{
 			var root = new TestElement();
@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			child.Children.Add(child2);
 		}
 
-		[Test]
+		[Fact]
 		public void DescendantAddedExistingChildren()
 		{
 			var root = new TestElement();
@@ -112,7 +112,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(tier2added, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void DescendantRemovedLevel1()
 		{
 			var root = new TestElement();
@@ -130,7 +130,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			root.Children.Remove(child);
 		}
 
-		[Test]
+		[Fact]
 		public void DescendantRemovedLevel2()
 		{
 			var root = new TestElement();
@@ -151,7 +151,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			child.Children.Remove(child2);
 		}
 
-		[Test]
+		[Fact]
 		public void DescendantRemovedWithChildren()
 		{
 			var root = new TestElement();

@@ -1,23 +1,23 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ProgressBarTests : BaseTestFixture
+	
+	public class ProgressBarTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestClamp()
 		{
 			ProgressBar bar = new ProgressBar();
 
 			bar.Progress = 2;
-			Assert.AreEqual(1, bar.Progress);
+			Assert.Equal(1, bar.Progress);
 
 			bar.Progress = -1;
-			Assert.AreEqual(0, bar.Progress);
+			Assert.Equal(0, bar.Progress);
 		}
 
-		[Test]
+		[Fact]
 		public void TestProgressTo()
 		{
 			var bar = AnimationReadyHandler.Prepare(new ProgressBar());

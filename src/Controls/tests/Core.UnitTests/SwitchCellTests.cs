@@ -1,13 +1,13 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 using NUnit.Framework.Constraints;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class SwitchCellTemplateTests : BaseTestFixture
+	
+	public class SwitchCellTemplateTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void Create()
 		{
 			var template = new DataTemplate(typeof(SwitchCell));
@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(content, Is.InstanceOf<SwitchCell>());
 		}
 
-		[Test]
+		[Fact]
 		public void Text()
 		{
 			var template = new DataTemplate(typeof(SwitchCell));
@@ -26,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.Text, Is.EqualTo("text"));
 		}
 
-		[Test]
+		[Fact]
 		public void On()
 		{
 			var template = new DataTemplate(typeof(SwitchCell));
@@ -56,8 +56,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			cell.On = finalValue;
 
-			Assert.AreEqual(cell, switchCellFromSender);
-			Assert.AreEqual(finalValue, newSwitchValue);
+			Assert.Equal(cell, switchCellFromSender);
+			Assert.Equal(finalValue, newSwitchValue);
 		}
 	}
 }

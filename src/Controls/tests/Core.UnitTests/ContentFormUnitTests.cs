@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ContentPageUnitTests : BaseTestFixture
+	
+	public class ContentPageUnitTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void PropagateBindingContextBefore()
 		{
 			var stack = new StackLayout();
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(context, stack.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void PropagateBindingContextAfter()
 		{
 			var stack = new StackLayout();
@@ -38,7 +38,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(context, stack.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void PropagateToolbarItemBindingContextPreAdd()
 		{
 			var page = new ContentPage();
@@ -49,10 +49,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.BindingContext = context;
 
-			Assert.AreEqual(context, toolbarItem.BindingContext);
+			Assert.Equal(context, toolbarItem.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void PropagateToolbarItemBindingContextPostAdd()
 		{
 			var page = new ContentPage();
@@ -63,10 +63,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.ToolbarItems.Add(toolbarItem);
 
-			Assert.AreEqual(context, toolbarItem.BindingContext);
+			Assert.Equal(context, toolbarItem.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void ContentPage_should_have_the_InternalChildren_correctly_when_Content_changed()
 		{
 			var sut = new ContentPage();
@@ -78,7 +78,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var expected = new View();
 			sut.Content = expected;
 
-			Assert.AreEqual(1, internalChildren.Count);
+			Assert.Equal(1, internalChildren.Count);
 			Assert.AreSame(expected, internalChildren[0]);
 		}
 	}

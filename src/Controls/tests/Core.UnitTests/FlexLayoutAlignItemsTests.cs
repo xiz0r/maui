@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Core.UnitTests;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using FlexLayout = Microsoft.Maui.Controls.Compatibility.FlexLayout;
 
-	[TestFixture]
-	public class FlexLayoutAlignItemsTests : BaseTestFixture
+	
+	public class FlexLayoutAlignItemsTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestAlignItemsStretch()
 		{
 			var layout = new FlexLayout
@@ -32,7 +32,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 0, 100, 10)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestAlignItemsCenter()
 		{
 			var layout = new FlexLayout
@@ -50,7 +50,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view0.Bounds, Is.EqualTo(new Rect(45, 0, 10, 10)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestAlignItemsFlexStart()
 		{
 			var layout = new FlexLayout
@@ -68,7 +68,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 0, 10, 10)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestAlignItemsFlexEnd()
 		{
 			var layout = new FlexLayout

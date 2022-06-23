@@ -3,14 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Hosting;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class HostBuilderHandlerTests
 	{
-		[Test]
+		[Fact]
 		public void DefaultHandlersAreRegistered()
 		{
 			var mauiApp = MauiApp.CreateBuilder()
@@ -23,10 +23,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var handler = handlers.GetHandler(typeof(Button));
 
 			Assert.NotNull(handler);
-			Assert.AreEqual(typeof(ButtonHandler), handler.GetType());
+			Assert.Equal(typeof(ButtonHandler), handler.GetType());
 		}
 
-		[Test]
+		[Fact]
 		public void CanSpecifyHandler()
 		{
 			var mauiApp = MauiApp.CreateBuilder()
@@ -41,10 +41,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var specificHandler = handlers.GetHandler(typeof(Button));
 
 			Assert.NotNull(specificHandler);
-			Assert.AreEqual(typeof(ButtonHandlerStub), specificHandler.GetType());
+			Assert.Equal(typeof(ButtonHandlerStub), specificHandler.GetType());
 		}
 
-		[Test]
+		[Fact]
 		[TestCase(typeof(Label), typeof(LabelHandler))]
 		[TestCase(typeof(Button), typeof(ButtonHandler))]
 		[TestCase(typeof(ContentPage), typeof(PageHandler))]
@@ -63,7 +63,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var specificHandler = handlers.GetHandler(viewType);
 
 			Assert.NotNull(specificHandler);
-			Assert.AreEqual(handlerType, specificHandler.GetType());
+			Assert.Equal(handlerType, specificHandler.GetType());
 		}
 
 		class MyTestCustomTemplatedView : TemplatedView

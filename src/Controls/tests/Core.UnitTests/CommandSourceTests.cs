@@ -1,12 +1,12 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public abstract class CommandSourceTests<T> : BaseTestFixture
+	public abstract class CommandSourceTests<T> : BaseTestFixtureXUnit
 		where T : BindableObject
 	{
-		[Test]
+		[Fact]
 		public void TestCommand()
 		{
 			var source = CreateSource();
@@ -15,7 +15,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			source.SetValue(CommandProperty, new Command(o =>
 			{
 				executed = true;
-				Assert.AreEqual(source, o);
+				Assert.Equal(source, o);
 			}));
 
 			source.SetValue(CommandParameterProperty, source);
@@ -25,7 +25,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(executed);
 		}
 
-		[Test]
+		[Fact]
 		public void CommandCanExecuteModifiesEnabled([Values(true, false)] bool initial)
 		{
 			bool canExecute = initial;
@@ -33,15 +33,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var source = CreateSource();
 			source.SetValue(CommandProperty, command = new Command(() => { }, () => canExecute));
 
-			Assert.AreEqual(canExecute, source.GetValue(IsEnabledProperty));
+			Assert.Equal(canExecute, source.GetValue(IsEnabledProperty));
 
 			canExecute = !initial;
 			command.ChangeCanExecute();
 
-			Assert.AreEqual(canExecute, source.GetValue(IsEnabledProperty));
+			Assert.Equal(canExecute, source.GetValue(IsEnabledProperty));
 		}
 
-		[Test]
+		[Fact]
 		public void ReenabledAfterCommandRemoved()
 		{
 			var source = CreateSource();
@@ -54,7 +54,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(source.GetValue(IsEnabledProperty), Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void CommandUnhooksOnNull()
 		{
 			bool canExecute = false;
@@ -77,7 +77,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(raised);
 		}
 
-		[Test]
+		[Fact]
 		public void CommandCanExecuteInvokedOnCommandSet()
 		{
 			bool fired = false;
@@ -94,7 +94,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void CommandCanExecuteInvokedOnCommandParameterSet()
 		{
 			bool fired;
@@ -113,7 +113,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void CommandCanExecuteInvokedOnChange()
 		{
 			bool fired;
@@ -157,7 +157,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void EnabledUpdatesDoNotRemoveBindings()
 		{
 			var vm = new BoolViewModel { Toggle = true };

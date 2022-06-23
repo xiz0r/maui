@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Internals;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class ShellLifeCycleTests : ShellTestBase
 	{
 		const string ContentRoute = "content";
 		const string SectionRoute = "section";
 		const string ItemRoute = "item";
 
-		[Test]
+		[Fact]
 		public void AppearingOnCreate()
 		{
 			Shell shell = new TestShell();
@@ -40,7 +40,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(contentAppearing, "Content Appearing");
 		}
 
-		[Test]
+		[Fact]
 		public void MisfiringOfAppearingWithMultipleTabs()
 		{
 			Shell shell = new TestShell();
@@ -65,11 +65,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			shell.GoToAsync("//RequestType2Dates");
-			Assert.AreEqual(0, appearingCounter);
+			Assert.Equal(0, appearingCounter);
 		}
 
 
-		[Test]
+		[Fact]
 		public void AppearingOnCreateFromTemplate()
 		{
 			Shell shell = new TestShell();
@@ -102,7 +102,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var createdContent = (content as IShellContentController).GetOrCreateContent();
 
-			Assert.AreEqual(createdContent, page);
+			Assert.Equal(createdContent, page);
 			Assert.IsTrue(contentAppearing, "Content Appearing");
 			Assert.IsTrue(pageAppearing, "Page Appearing");
 		}
@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(pageAppearing);
 		}
 
-		[Test]
+		[Fact]
 		public async Task EnsureOnAppearingFiresForNavigatedToPage()
 		{
 			Shell shell = new TestShell();
@@ -147,7 +147,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(page.ParentSet);
 		}
 
-		[Test]
+		[Fact]
 		public async Task EnsureOnAppearingFiresForLastPageOnly()
 		{
 			Shell shell = new TestShell();
@@ -162,7 +162,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(page.Appearing);
 		}
 
-		[Test]
+		[Fact]
 		public async Task EnsureOnAppearingFiresForLastPageOnlyAbsoluteRoute()
 		{
 			Shell shell = new TestShell();
@@ -180,7 +180,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task EnsureOnAppearingFiresForPushedPage()
 		{
 			Shell shell = new TestShell();
@@ -191,7 +191,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(page.ParentSet);
 		}
 
-		[Test]
+		[Fact]
 		public async Task NavigatedFiresAfterContentIsCreatedWhenUsingTemplate()
 		{
 			Shell shell = new TestShell();
@@ -232,11 +232,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(navigated);
 
 			var createPage = (content as IShellContentController).GetOrCreateContent();
-			Assert.AreEqual(createPage, page);
+			Assert.Equal(createPage, page);
 			Assert.IsTrue(navigated);
 		}
 
-		[Test]
+		[Fact]
 		public void AppearingOnShellContentChanged()
 		{
 			Shell shell = new TestShell();
@@ -251,7 +251,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			state.AllFalse();
 
-			Assert.AreEqual(content, section.CurrentItem);
+			Assert.Equal(content, section.CurrentItem);
 
 			section.CurrentItem = shell.SearchForRoute<ShellContent>(ContentRoute);
 
@@ -263,7 +263,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void AppearingOnShellSectionChanged()
 		{
 			Shell shell = new TestShell();
@@ -277,7 +277,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			state.AllFalse();
 
 
-			Assert.AreEqual(newSection, item.CurrentItem);
+			Assert.Equal(newSection, item.CurrentItem);
 			Assert.AreNotEqual(section, item.CurrentItem);
 
 			item.CurrentItem = section;
@@ -291,7 +291,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(state.ContentAppearing);
 		}
 
-		[Test]
+		[Fact]
 		public void AppearingOnShellItemChanged()
 		{
 			Shell shell = new TestShell();
@@ -302,7 +302,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			ShellLifeCycleState state = new ShellLifeCycleState(shell);
 			state.AllFalse();
 
-			Assert.AreEqual(shell.CurrentItem, item2);
+			Assert.Equal(shell.CurrentItem, item2);
 			Assert.AreNotEqual(shell.CurrentItem, item);
 
 			shell.CurrentItem = item;
@@ -319,7 +319,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task ShellPartWithModalPush()
 		{
 			Shell shell = new TestShell();
@@ -337,7 +337,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task ShellPartWithPagePush()
 		{
 			Shell shell = new TestShell();
@@ -370,7 +370,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			lifeCycleState.AllTrue();
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellPartWithPopToRoot()
 		{
 			Shell shell = new TestShell();
@@ -394,7 +394,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task PagePushModal()
 		{
 			Shell shell = new TestShell();
@@ -418,7 +418,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			lifeCycleState.AllTrue();
 		}
 
-		[Test]
+		[Fact]
 		public async Task PagePush()
 		{
 			Shell shell = new TestShell();
@@ -438,7 +438,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void OnNavigatedOnlyFiresOnce()
 		{
 			int navigated = 0;
@@ -450,11 +450,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var item = CreateShellItem(shellContentRoute: ContentRoute, shellSectionRoute: SectionRoute, shellItemRoute: ItemRoute);
 			shell.Items.Add(item);
-			Assert.AreEqual(1, navigated);
+			Assert.Equal(1, navigated);
 		}
 
 
-		[Test]
+		[Fact]
 		public void AppearingOnlyForVisiblePage()
 		{
 			Shell shell = new TestShell();
@@ -486,7 +486,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(pageNotAppearingFired, "Incorrect Page Appearing Fired");
 		}
 
-		[Test]
+		[Fact]
 		public void OnNavigatedCalledOnce()
 		{
 			List<ShellNavigatedEventArgs> args = new List<ShellNavigatedEventArgs>();
@@ -502,11 +502,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			testShell.Items.Add(base.CreateShellItem());
 
-			Assert.AreEqual(1, args.Count);
+			Assert.Equal(1, args.Count);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task OnNavigatedFiresWhenPopping()
 		{
 			Routing.RegisterRoute("AlarmPage", typeof(LifeCyclePage));
@@ -559,7 +559,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		public override void Setup()
 		{
-			base.Setup();
+			
 			Routing.RegisterRoute("LifeCyclePage", typeof(LifeCyclePage));
 		}
 

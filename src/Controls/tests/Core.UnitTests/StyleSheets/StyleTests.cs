@@ -2,28 +2,28 @@
 using System.IO;
 using Microsoft.Maui.Controls.Core.UnitTests;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 {
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
-	[TestFixture]
+	
 	public class StyleTests
 	{
-		[SetUp]
+		
 		public void SetUp()
 		{
 			ApplicationExtensions.CreateAndSetMockApplication();
 		}
 
-		[TearDown]
+		
 		public void TearDown()
 		{
 			Application.ClearCurrent();
 		}
 
-		[Test]
+		[Fact]
 		public void PropertiesAreApplied()
 		{
 			var styleString = @"background-color: #ff0000;";
@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That(ve.BackgroundColor, Is.EqualTo(Colors.Red));
 		}
 
-		[Test]
+		[Fact]
 		public void PropertiesSetByStyleDoesNotOverrideManualOne()
 		{
 			var styleString = @"background-color: #ff0000;";
@@ -50,7 +50,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That(ve.BackgroundColor, Is.EqualTo(Colors.Pink));
 		}
 
-		[Test]
+		[Fact]
 		public void StylesAreCascading()
 		{
 			//color should cascade, background-color should not
@@ -76,7 +76,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That(label.TextColor, Is.EqualTo(Colors.Lime));
 		}
 
-		[Test]
+		[Fact]
 		public void PropertiesAreOnlySetOnMatchingElements()
 		{
 			var styleString = @"background-color: #ff0000; color: #00ff00;";
@@ -87,7 +87,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That(layout.GetValue(TextElement.TextColorProperty), Is.EqualTo(null));
 		}
 
-		[Test]
+		[Fact]
 		public void StyleSheetsOnAppAreApplied()
 		{
 			var app = new MockApplication();
@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That((page.Content as Label).TextColor, Is.EqualTo(Colors.Red));
 		}
 
-		[Test]
+		[Fact]
 		public void StyleSheetsOnAppAreAppliedBeforePageStyleSheet()
 		{
 			var app = new MockApplication();
@@ -115,7 +115,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That((page.Content as Label).BackgroundColor, Is.EqualTo(Colors.Blue));
 		}
 
-		[Test]
+		[Fact]
 		public void StyleSheetsOnChildAreReAppliedWhenParentStyleSheetAdded()
 		{
 			var app = new MockApplication();
@@ -132,7 +132,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That((page.Content as Label).TextColor, Is.EqualTo(Colors.Red));
 		}
 
-		[Test]
+		[Fact]
 		public void StyleSheetsOnSubviewAreAppliedBeforePageStyleSheet()
 		{
 			var app = new MockApplication();

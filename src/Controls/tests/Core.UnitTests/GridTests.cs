@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.UnitTests;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using Grid = Microsoft.Maui.Controls.Compatibility.Grid;
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
-	[TestFixture]
-	public class GridTests : BaseTestFixture
+	
+	public class GridTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ThrowsOnNullAdd()
 		{
 			var layout = new Grid();
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentNullException>(() => layout.Children.Add(null));
 		}
 
-		[Test]
+		[Fact]
 		public void ChildrenHaveParentsWhenAdded()
 		{
 			var layout = new Grid();
@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(label.Parent);
 		}
 
-		[Test]
+		[Fact]
 		public void ThrowsOnNullRemove()
 		{
 			var layout = new Grid();
@@ -44,7 +44,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentNullException>(() => layout.Children.Remove(null));
 		}
 
-		[Test]
+		[Fact]
 		public void StarColumnsHaveEqualWidths()
 		{
 			var grid = new Grid
@@ -77,7 +77,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(column0Width, Is.LessThan(gridWidth));
 		}
 
-		[Test]
+		[Fact]
 		public void StarRowsHaveEqualHeights()
 		{
 			var grid = new Grid
@@ -111,7 +111,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(column0Height, Is.LessThan(gridHeight));
 		}
 
-		[Test]
+		[Fact]
 		public void StarRowsDoNotOverlapWithStackLayoutOnTop()
 		{
 			SetupStarRowOverlapTest(rowAIsOnTop: false, out VisualElement rowAControl,
@@ -127,7 +127,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"B is on top of A, so the top of A should be the bottom of B");
 		}
 
-		[Test]
+		[Fact]
 		public void StarRowsDoNotOverlapWithStackLayoutOnBottom()
 		{
 			SetupStarRowOverlapTest(rowAIsOnTop: true, out VisualElement rowAControl,
@@ -144,7 +144,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"A is on top of B, so the top of B should be the bottom of A");
 		}
 
-		[Test]
+		[Fact]
 		public void StarColumnsDoNotOverlapWithStackLayoutAtStart()
 		{
 			SetupStarColumnOverlapTest(colAIsAtStart: false, out VisualElement colAControl,
@@ -160,7 +160,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"B is before A, so the start of A should be the end of B");
 		}
 
-		[Test]
+		[Fact]
 		public void StarColumnsDoNotOverlapWithStackLayoutAtEnd()
 		{
 			SetupStarColumnOverlapTest(colAIsAtStart: true, out VisualElement colAControl,
@@ -318,7 +318,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(column0Width + column1Width + totalColumnSpacing, Is.GreaterThanOrEqualTo(gridWidth));
 		}
 
-		[Test]
+		[Fact]
 		public void ColumnsLessThanOneStarShouldBeTallerThanOneStarColumns()
 		{
 			var gridWidth = 400;
@@ -362,7 +362,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void ContentHeightSumShouldMatchGridHeightWithAutoRows()
 		{
 			var widthConstraint = 400;
@@ -388,7 +388,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(grid1Height, Is.EqualTo(expectedHeight));
 		}
 
-		[Test]
+		[Fact]
 		public void UnconstrainedStarRowWithMultipleStarColumnsAllowsTextToGrow()
 		{
 			var outerGrid = new Grid() { ColumnSpacing = 0, Padding = 0, RowSpacing = 0, IsPlatformEnabled = true };
@@ -441,7 +441,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label1.Height, Is.GreaterThan(label1OriginalHeight));
 		}
 
-		[Test]
+		[Fact]
 		[TestCase(0.1), TestCase(0.2), TestCase(0.3), TestCase(0.4), TestCase(0.5)]
 		[TestCase(0.6), TestCase(0.7), TestCase(0.8), TestCase(0.9)]
 		public void AbsoluteColumnShouldNotBloatStarredColumns(double firstColumnWidth)
@@ -490,7 +490,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(layoutSize.Request.Width, Is.EqualTo(411).Within(2));
 		}
 
-		[Test]
+		[Fact]
 		public void ContractionAppliedEquallyOnMultiStarColumns()
 		{
 			var grid = new Grid { ColumnSpacing = 0 };
@@ -525,7 +525,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(column0Width, Is.EqualTo(column1Width / 2));
 		}
 
-		[Test]
+		[Fact]
 		public void AllStarColumnsCanOnlyContractToTheLargestMinimum()
 		{
 			var grid = new Grid { ColumnSpacing = 0 };
@@ -561,7 +561,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(column0Width, Is.EqualTo(column1Width));
 		}
 
-		[Test]
+		[Fact]
 		public void ContractionAppliedEquallyOnMultiStarRows()
 		{
 			var grid = new Grid { ColumnSpacing = 0, RowSpacing = 0 };
@@ -594,7 +594,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(column0Height, Is.EqualTo(column1Height / 2));
 		}
 
-		[Test]
+		[Fact]
 		public void Issue13127()
 		{
 			var outerGrid = new Grid() { RowSpacing = 0, IsPlatformEnabled = true };
@@ -753,7 +753,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[TestFixture]
+		
 		public class AddDimension : GridTests
 		{
 			[Datapoints]
@@ -859,7 +859,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				_grid.ColumnDefinitions.Add(new ColumnDefinition());
 			}
 
-			[TearDown]
+			
 			public override void TearDown()
 			{
 				_grid = null;
@@ -908,7 +908,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void TestBasicVerticalLayout()
 		{
 			var layout = new Grid();
@@ -925,15 +925,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 912, 912));
 
-			Assert.AreEqual(912, layout.Width);
-			Assert.AreEqual(912, layout.Height);
+			Assert.Equal(912, layout.Width);
+			Assert.Equal(912, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 912, 300), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 306, 912, 300), label2.Bounds);
-			Assert.AreEqual(new Rect(0, 612, 912, 300), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 912, 300), label1.Bounds);
+			Assert.Equal(new Rect(0, 306, 912, 300), label2.Bounds);
+			Assert.Equal(new Rect(0, 612, 912, 300), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBasicHorizontalLayout()
 		{
 			var layout = new Grid();
@@ -950,15 +950,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 912, 912));
 
-			Assert.AreEqual(912, layout.Width);
-			Assert.AreEqual(912, layout.Height);
+			Assert.Equal(912, layout.Width);
+			Assert.Equal(912, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 300, 912), label1.Bounds);
-			Assert.AreEqual(new Rect(306, 0, 300, 912), label2.Bounds);
-			Assert.AreEqual(new Rect(612, 0, 300, 912), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 300, 912), label1.Bounds);
+			Assert.Equal(new Rect(306, 0, 300, 912), label2.Bounds);
+			Assert.Equal(new Rect(612, 0, 300, 912), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestVerticalExpandStart()
 		{
 			var layout = new Grid();
@@ -975,14 +975,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 1000, 1000 - 20 - layout.RowSpacing), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 1000 - 20, 1000, 20), label2.Bounds);
+			Assert.Equal(new Rect(0, 0, 1000, 1000 - 20 - layout.RowSpacing), label1.Bounds);
+			Assert.Equal(new Rect(0, 1000 - 20, 1000, 20), label2.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestHorizontalExpandStart()
 		{
 			var layout = new Grid();
@@ -999,14 +999,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 1000 - 106, 1000), label1.Bounds);
-			Assert.AreEqual(new Rect(1000 - 100, 0, 100, 1000), label2.Bounds);
+			Assert.Equal(new Rect(0, 0, 1000 - 106, 1000), label1.Bounds);
+			Assert.Equal(new Rect(1000 - 100, 0, 100, 1000), label2.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestVerticalExpandEnd()
 		{
 			var layout = new Grid();
@@ -1023,14 +1023,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 1000, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 26, 1000, 1000 - 26), label2.Bounds);
+			Assert.Equal(new Rect(0, 0, 1000, 20), label1.Bounds);
+			Assert.Equal(new Rect(0, 26, 1000, 1000 - 26), label2.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestHorizontalExpandEnd()
 		{
 			var layout = new Grid();
@@ -1048,14 +1048,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 100, 1000), label1.Bounds);
-			Assert.AreEqual(new Rect(106, 0, 1000 - 106, 1000), label2.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 1000), label1.Bounds);
+			Assert.Equal(new Rect(106, 0, 1000 - 106, 1000), label2.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestVerticalExpandMiddle()
 		{
 			var layout = new Grid();
@@ -1075,15 +1075,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 1000, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 26, 1000, 1000 - 52), label2.Bounds);
-			Assert.AreEqual(new Rect(0, 980, 1000, 20), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 1000, 20), label1.Bounds);
+			Assert.Equal(new Rect(0, 26, 1000, 1000 - 52), label2.Bounds);
+			Assert.Equal(new Rect(0, 980, 1000, 20), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestHorizontalExpandMiddle()
 		{
 			var layout = new Grid();
@@ -1104,15 +1104,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 100, 1000), label1.Bounds);
-			Assert.AreEqual(new Rect(106, 0, 1000 - 212, 1000), label2.Bounds);
-			Assert.AreEqual(new Rect(900, 0, 100, 1000), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 1000), label1.Bounds);
+			Assert.Equal(new Rect(106, 0, 1000 - 212, 1000), label2.Bounds);
+			Assert.Equal(new Rect(900, 0, 100, 1000), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestTableNoExpand()
 		{
 			var layout = new Grid();
@@ -1138,16 +1138,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 100, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(106, 0, 100, 20), label2.Bounds);
-			Assert.AreEqual(new Rect(0, 26, 100, 20), label3.Bounds);
-			Assert.AreEqual(new Rect(106, 26, 100, 20), label4.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 20), label1.Bounds);
+			Assert.Equal(new Rect(106, 0, 100, 20), label2.Bounds);
+			Assert.Equal(new Rect(0, 26, 100, 20), label3.Bounds);
+			Assert.Equal(new Rect(106, 26, 100, 20), label4.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestTableExpand()
 		{
 			var layout = new Grid();
@@ -1169,16 +1169,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 100, 497), label1.Bounds);
-			Assert.AreEqual(new Rect(106, 0, 894, 497), label2.Bounds);
-			Assert.AreEqual(new Rect(0, 503, 100, 497), label3.Bounds);
-			Assert.AreEqual(new Rect(106, 503, 894, 497), label4.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 497), label1.Bounds);
+			Assert.Equal(new Rect(106, 0, 894, 497), label2.Bounds);
+			Assert.Equal(new Rect(0, 503, 100, 497), label3.Bounds);
+			Assert.Equal(new Rect(106, 503, 894, 497), label4.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestTableSpan()
 		{
 			var layout = new Grid();
@@ -1202,15 +1202,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 206, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 26, 100, 20), label2.Bounds);
-			Assert.AreEqual(new Rect(106, 26, 100, 20), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 206, 20), label1.Bounds);
+			Assert.Equal(new Rect(0, 26, 100, 20), label2.Bounds);
+			Assert.Equal(new Rect(106, 26, 100, 20), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestTableExpandedSpan()
 		{
 			var layout = new Grid();
@@ -1234,15 +1234,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 1000, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 26, 497, 20), label2.Bounds);
-			Assert.AreEqual(new Rect(503, 26, 497, 20), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 1000, 20), label1.Bounds);
+			Assert.Equal(new Rect(0, 26, 497, 20), label2.Bounds);
+			Assert.Equal(new Rect(503, 26, 497, 20), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestInvalidSet()
 		{
 			var layout = new Grid();
@@ -1263,7 +1263,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(thrown);
 		}
 
-		[Test]
+		[Fact]
 		public void TestCentering()
 		{
 			var layout = new Grid();
@@ -1280,10 +1280,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(new Rect(450, 490, 100, 20), label1.Bounds);
+			Assert.Equal(new Rect(450, 490, 100, 20), label1.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestStart()
 		{
 			var layout = new Grid();
@@ -1300,10 +1300,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(new Rect(0, 0, 100, 20), label1.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 20), label1.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestEnd()
 		{
 			var layout = new Grid();
@@ -1320,10 +1320,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(new Rect(900, 980, 100, 20), label1.Bounds);
+			Assert.Equal(new Rect(900, 980, 100, 20), label1.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestDefaultRowSpacing()
 		{
 			var layout = new Grid();
@@ -1343,7 +1343,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(preferredSizeChanged);
 		}
 
-		[Test]
+		[Fact]
 		public void TestDefaultColumnSpacing()
 		{
 			var layout = new Grid();
@@ -1363,7 +1363,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(preferredSizeChanged);
 		}
 
-		[Test]
+		[Fact]
 		public void TestAddCell()
 		{
 			var layout = new Grid();
@@ -1377,7 +1377,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(preferredSizeChanged);
 		}
 
-		[Test]
+		[Fact]
 		public void TestMoveCell()
 		{
 			var layout = new Grid();
@@ -1410,7 +1410,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(preferredSizeChanged);
 		}
 
-		[Test]
+		[Fact]
 		public void TestInvalidBottomAdd()
 		{
 			var layout = new Grid();
@@ -1418,17 +1418,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentOutOfRangeException>(() => layout.Children.Add(new View(), 0, 1, 1, 0));
 		}
 
-		[Test]
+		[Fact]
 		public void TestZeroSizeConstraints()
 		{
 			var layout = new Grid();
 
-			Assert.AreEqual(new Size(0, 0), layout.Measure(0, 0).Request);
-			Assert.AreEqual(new Size(0, 0), layout.Measure(0, 10).Request);
-			Assert.AreEqual(new Size(0, 0), layout.Measure(10, 0).Request);
+			Assert.Equal(new Size(0, 0), layout.Measure(0, 0).Request);
+			Assert.Equal(new Size(0, 0), layout.Measure(0, 10).Request);
+			Assert.Equal(new Size(0, 0), layout.Measure(10, 0).Request);
 		}
 
-		[Test]
+		[Fact]
 		public void TestSizeRequest()
 		{
 			var layout = new Grid { IsPlatformEnabled = true };
@@ -1439,10 +1439,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var result = layout.Measure(double.PositiveInfinity, double.PositiveInfinity).Request;
-			Assert.AreEqual(new Size(100, 72), result);
+			Assert.Equal(new Size(100, 72), result);
 		}
 
-		[Test]
+		[Fact]
 		public void TestLimitedSizeRequest()
 		{
 			var layout = new Grid { IsPlatformEnabled = true };
@@ -1453,10 +1453,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var result = layout.Measure(10, 10).Request;
-			Assert.AreEqual(new Size(100, 72), result);
+			Assert.Equal(new Size(100, 72), result);
 		}
 
-		[Test]
+		[Fact]
 		public void TestLimitedWidthSizeRequest()
 		{
 			var layout = new Grid { IsPlatformEnabled = true };
@@ -1467,10 +1467,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var result = layout.Measure(10, double.PositiveInfinity).Request;
-			Assert.AreEqual(new Size(100, 72), result);
+			Assert.Equal(new Size(100, 72), result);
 		}
 
-		[Test]
+		[Fact]
 		public void TestLimitedHeightSizeRequest()
 		{
 
@@ -1482,10 +1482,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var result = layout.Measure(double.PositiveInfinity, 10).Request;
-			Assert.AreEqual(new Size(100, 72), result);
+			Assert.Equal(new Size(100, 72), result);
 		}
 
-		[Test]
+		[Fact]
 		public void IgnoresInvisibleChildren()
 		{
 			var layout = new Grid();
@@ -1506,14 +1506,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, -1, -1), label1.Bounds);
-			Assert.AreEqual(new Rect(0, 6, 100, 20), label2.Bounds);
+			Assert.Equal(new Rect(0, 0, -1, -1), label1.Bounds);
+			Assert.Equal(new Rect(0, 6, 100, 20), label2.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestSizeRequestWithPadding()
 		{
 			var layout = new Grid { IsPlatformEnabled = true, Padding = new Thickness(20, 10, 15, 5) };
@@ -1524,10 +1524,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var result = layout.Measure(double.PositiveInfinity, double.PositiveInfinity).Request;
-			Assert.AreEqual(new Size(135, 87), result);
+			Assert.Equal(new Size(135, 87), result);
 		}
 
-		[Test]
+		[Fact]
 		public void InvalidCallsToStaticMethods()
 		{
 			Assert.Throws<ArgumentException>(() => Grid.SetRow(new Label(), -1));
@@ -1536,7 +1536,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentException>(() => Grid.SetColumnSpan(new Label(), 0));
 		}
 
-		[Test]
+		[Fact]
 		public void TestAddedBP()
 		{
 			var labela0 = new Label { IsPlatformEnabled = true };
@@ -1571,16 +1571,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 100, 20), labela0.Bounds);
-			Assert.AreEqual(new Rect(106, 0, 100, 20), labela1.Bounds);
-			Assert.AreEqual(new Rect(106, 26, 100, 20), labelb1.Bounds);
-			Assert.AreEqual(new Rect(0, 52, 206, 20), labelc.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 20), labela0.Bounds);
+			Assert.Equal(new Rect(106, 0, 100, 20), labela1.Bounds);
+			Assert.Equal(new Rect(106, 26, 100, 20), labelb1.Bounds);
+			Assert.Equal(new Rect(0, 52, 206, 20), labelc.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void Remove()
 		{
 			var labela0 = new Label { IsPlatformEnabled = true };
@@ -1607,7 +1607,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(((IElementController)layout).LogicalChildren.Contains(labela0));
 		}
 
-		[Test]
+		[Fact]
 		public void TestAbsoluteLayout()
 		{
 			var layout = new Grid();
@@ -1633,15 +1633,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 150, 30), label1.Bounds);
-			Assert.AreEqual(new Rect(156, 36, 150, 30), label2.Bounds);
-			Assert.AreEqual(new Rect(312, 72, 150, 30), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 150, 30), label1.Bounds);
+			Assert.Equal(new Rect(156, 36, 150, 30), label2.Bounds);
+			Assert.Equal(new Rect(312, 72, 150, 30), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestAbsoluteLayoutWithSpans()
 		{
 			var layout = new Grid();
@@ -1667,15 +1667,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 306, 30), label1.Bounds);
-			Assert.AreEqual(new Rect(312, 0, 150, 66), label2.Bounds);
-			Assert.AreEqual(new Rect(156, 72, 150, 30), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 306, 30), label1.Bounds);
+			Assert.Equal(new Rect(312, 0, 150, 66), label2.Bounds);
+			Assert.Equal(new Rect(156, 72, 150, 30), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestStarLayout()
 		{
 			var layout = new Grid();
@@ -1699,19 +1699,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(label3, 2, 2);
 
 			var request = layout.Measure(1002, 462);
-			Assert.AreEqual(312, request.Request.Width);
-			Assert.AreEqual(72, request.Request.Height);
+			Assert.Equal(312, request.Request.Width);
+			Assert.Equal(72, request.Request.Height);
 
 			layout.Layout(new Rect(0, 0, 1002, 462));
-			Assert.AreEqual(1002, layout.Width);
-			Assert.AreEqual(462, layout.Height);
+			Assert.Equal(1002, layout.Width);
+			Assert.Equal(462, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 330, 150), label1.Bounds);
-			Assert.AreEqual(new Rect(336, 156, 330, 150), label2.Bounds);
-			Assert.AreEqual(new Rect(672, 312, 330, 150), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 330, 150), label1.Bounds);
+			Assert.Equal(new Rect(336, 156, 330, 150), label2.Bounds);
+			Assert.Equal(new Rect(672, 312, 330, 150), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestStarLayoutWithSpans()
 		{
 			var layout = new Grid();
@@ -1736,15 +1736,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1002, 462));
 
-			Assert.AreEqual(1002, layout.Width);
-			Assert.AreEqual(462, layout.Height);
+			Assert.Equal(1002, layout.Width);
+			Assert.Equal(462, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 666, 150), label1.Bounds);
-			Assert.AreEqual(new Rect(672, 0, 330, 306), label2.Bounds);
-			Assert.AreEqual(new Rect(336, 312, 330, 150), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 666, 150), label1.Bounds);
+			Assert.Equal(new Rect(672, 0, 330, 306), label2.Bounds);
+			Assert.Equal(new Rect(336, 312, 330, 150), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestAutoLayout()
 		{
 			var layout = new Grid();
@@ -1770,15 +1770,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 1000));
 
-			Assert.AreEqual(1000, layout.Width);
-			Assert.AreEqual(1000, layout.Height);
+			Assert.Equal(1000, layout.Width);
+			Assert.Equal(1000, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 100, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(106, 26, 100, 20), label2.Bounds);
-			Assert.AreEqual(new Rect(212, 52, 100, 20), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 100, 20), label1.Bounds);
+			Assert.Equal(new Rect(106, 26, 100, 20), label2.Bounds);
+			Assert.Equal(new Rect(212, 52, 100, 20), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void TestAutoLayoutWithSpans()
 		{
 			var layout = new Grid();
@@ -1803,15 +1803,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1002, 462));
 
-			Assert.AreEqual(1002, layout.Width);
-			Assert.AreEqual(462, layout.Height);
+			Assert.Equal(1002, layout.Width);
+			Assert.Equal(462, layout.Height);
 
-			Assert.AreEqual(new Rect(0, 0, 150, 20), label1.Bounds);
-			Assert.AreEqual(new Rect(156, 0, 100, 50), label2.Bounds);
-			Assert.AreEqual(new Rect(50, 56, 100, 20), label3.Bounds);
+			Assert.Equal(new Rect(0, 0, 150, 20), label1.Bounds);
+			Assert.Equal(new Rect(156, 0, 100, 50), label2.Bounds);
+			Assert.Equal(new Rect(50, 56, 100, 20), label3.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void AutoLayoutWithComplexSpans()
 		{
 			var layout = new Grid();
@@ -1840,14 +1840,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 500));
 
-			Assert.AreEqual(100, layout.ColumnDefinitions[0].ActualWidth);
-			Assert.AreEqual(100, layout.ColumnDefinitions[1].ActualWidth);
-			Assert.AreEqual(100, layout.ColumnDefinitions[2].ActualWidth);
-			Assert.AreEqual(100, layout.ColumnDefinitions[3].ActualWidth);
-			Assert.AreEqual(100, layout.ColumnDefinitions[4].ActualWidth);
+			Assert.Equal(100, layout.ColumnDefinitions[0].ActualWidth);
+			Assert.Equal(100, layout.ColumnDefinitions[1].ActualWidth);
+			Assert.Equal(100, layout.ColumnDefinitions[2].ActualWidth);
+			Assert.Equal(100, layout.ColumnDefinitions[3].ActualWidth);
+			Assert.Equal(100, layout.ColumnDefinitions[4].ActualWidth);
 		}
 
-		[Test]
+		[Fact]
 		public void AutoLayoutExpandColumns()
 		{
 			var layout = new Grid();
@@ -1867,11 +1867,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 1000, 500));
 
-			Assert.AreEqual(100, layout.ColumnDefinitions[0].ActualWidth);
-			Assert.AreEqual(194, layout.ColumnDefinitions[1].ActualWidth);
+			Assert.Equal(100, layout.ColumnDefinitions[0].ActualWidth);
+			Assert.Equal(194, layout.ColumnDefinitions[1].ActualWidth);
 		}
 
-		[Test]
+		[Fact]
 		public void GridHasDefaultDefinitions()
 		{
 			var grid = new Grid();
@@ -1879,7 +1879,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(grid.RowDefinitions);
 		}
 
-		[Test]
+		[Fact]
 		public void DefaultDefinitionsArentSharedAccrossInstances()
 		{
 			var grid0 = new Grid();
@@ -1892,7 +1892,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreNotSame(rowdefs, grid1.RowDefinitions);
 		}
 
-		[Test]
+		[Fact]
 		public void ChildrenLayoutRespectAlignment()
 		{
 			var grid = new Grid
@@ -1910,23 +1910,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid.Children.Add(label);
 			grid.Layout(new Rect(0, 0, 500, 500));
 
-			Assert.AreEqual(new Rect(200, 40, 100, 20), label.Bounds);
+			Assert.Equal(new Rect(200, 40, 100, 20), label.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void BothChildrenPropertiesUseTheSameBackendStore()
 		{
 			var view = new View();
 			var grid = new Grid();
-			Assert.AreEqual(0, grid.Children.Count);
+			Assert.Equal(0, grid.Children.Count);
 			(grid as Compatibility.Layout<View>).Children.Add(view);
-			Assert.AreEqual(1, grid.Children.Count);
-			Assert.AreEqual(1, (grid as Compatibility.Layout<View>).Children.Count);
+			Assert.Equal(1, grid.Children.Count);
+			Assert.Equal(1, (grid as Compatibility.Layout<View>).Children.Count);
 			Assert.AreSame(view, (grid as Compatibility.Layout<View>).Children.First());
 			Assert.AreSame(view, grid.Children.First());
 		}
 
-		[Test]
+		[Fact]
 		//Issue 1384
 		public void ImageInAutoCellIsProperlyConstrained()
 		{
@@ -1952,15 +1952,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Content = grid,
 			};
 			view.Layout(new Rect(0, 0, 100, 100));
-			Assert.AreEqual(100, grid.Width);
-			Assert.AreEqual(20, grid.Height);
+			Assert.Equal(100, grid.Width);
+			Assert.Equal(20, grid.Height);
 
 			view.Layout(new Rect(0, 0, 50, 50));
-			Assert.AreEqual(50, grid.Width);
-			Assert.AreEqual(10, grid.Height);
+			Assert.Equal(50, grid.Width);
+			Assert.Equal(10, grid.Height);
 		}
 
-		[Test]
+		[Fact]
 		//Issue 1384
 		public void ImageInStarCellIsProperlyConstrained()
 		{
@@ -1986,15 +1986,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Content = grid,
 			};
 			view.Layout(new Rect(0, 0, 100, 100));
-			Assert.AreEqual(100, grid.Width);
-			Assert.AreEqual(20, grid.Height);
+			Assert.Equal(100, grid.Width);
+			Assert.Equal(20, grid.Height);
 
 			view.Layout(new Rect(0, 0, 50, 50));
-			Assert.AreEqual(50, grid.Width);
-			Assert.AreEqual(10, grid.Height);
+			Assert.Equal(50, grid.Width);
+			Assert.Equal(10, grid.Height);
 		}
 
-		[Test]
+		[Fact]
 		public void SizeRequestForStar()
 		{
 			var grid = new Grid
@@ -2014,15 +2014,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid.Children.Add(new Label { Text = "Qux", HorizontalTextAlignment = TextAlignment.End, IsPlatformEnabled = true }, 1, 1);
 
 			var request = grid.Measure(double.PositiveInfinity, double.PositiveInfinity);
-			Assert.AreEqual(206, request.Request.Width);
-			Assert.AreEqual(46, request.Request.Height);
+			Assert.Equal(206, request.Request.Width);
+			Assert.Equal(46, request.Request.Height);
 
-			Assert.AreEqual(106, request.Minimum.Width);
-			Assert.AreEqual(26, request.Minimum.Height);
+			Assert.Equal(106, request.Minimum.Width);
+			Assert.Equal(26, request.Minimum.Height);
 			//
 		}
 
-		[Test]
+		[Fact]
 		//Issue 1497
 		public void StarRowsShouldOccupyTheSpace()
 		{
@@ -2052,10 +2052,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid.Children.Add(Button, 0, 1);
 
 			grid.Layout(new Rect(0, 0, 300, 300));
-			Assert.AreEqual(new Rect(0, 280, 300, 20), Button.Bounds);
+			Assert.Equal(new Rect(0, 280, 300, 20), Button.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void StarColumnsWithSpansDoNotExpandAutos()
 		{
 			var grid = new Grid
@@ -2084,10 +2084,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			grid.Layout(new Rect(0, 0, 300, 46));
 
-			Assert.AreEqual(new Rect(0, 0, 300, 20), spanBox.Bounds);
-			Assert.AreEqual(new Rect(0, 26, 20, 20), box1.Bounds);
-			Assert.AreEqual(new Rect(26, 26, 20, 20), box2.Bounds);
-			Assert.AreEqual(new Rect(52, 26, 248, 20), box3.Bounds);
+			Assert.Equal(new Rect(0, 0, 300, 20), spanBox.Bounds);
+			Assert.Equal(new Rect(0, 26, 20, 20), box1.Bounds);
+			Assert.Equal(new Rect(26, 26, 20, 20), box2.Bounds);
+			Assert.Equal(new Rect(52, 26, 248, 20), box3.Bounds);
 		}
 
 		static SizeRequest GetResizableSize(VisualElement view, double widthconstraint, double heightconstraint)
@@ -2101,7 +2101,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return new SizeRequest(new Size(100, 20));
 		}
 
-		[Test]
+		[Fact]
 		//Issue 1893
 		public void EditorSpanningOnMultipleAutoRows()
 		{
@@ -2126,7 +2126,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid0.Children.Add(editor0, 1, 2, 0, 2);
 
 			grid0.Layout(new Rect(0, 0, 156, 200));
-			Assert.AreEqual(new Rect(106, 0, 50, 40), editor0.Bounds);
+			Assert.Equal(new Rect(106, 0, 50, 40), editor0.Bounds);
 
 			var grid1 = new Grid
 			{
@@ -2146,10 +2146,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid1.Children.Add(editor1, 1, 0);
 
 			grid1.Layout(new Rect(0, 0, 156, 200));
-			Assert.AreEqual(new Rect(106, 0, 50, 40), editor1.Bounds);
+			Assert.Equal(new Rect(106, 0, 50, 40), editor1.Bounds);
 		}
 
-		[Test]
+		[Fact]
 		public void WidthBoundRequestRespected()
 		{
 			MockPlatformSizeService.Current.GetPlatformSizeFunc = GetResizableSize;
@@ -2180,11 +2180,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var unboundRequest = grid.Measure(double.PositiveInfinity, double.PositiveInfinity);
 			var widthBoundRequest = grid.Measure(50, double.PositiveInfinity);
 
-			Assert.AreEqual(new SizeRequest(new Size(20, 120), new Size(0, 120)), unboundRequest);
-			Assert.AreEqual(new SizeRequest(new Size(50, 60), new Size(0, 60)), widthBoundRequest);
+			Assert.Equal(new SizeRequest(new Size(20, 120), new Size(0, 120)), unboundRequest);
+			Assert.Equal(new SizeRequest(new Size(50, 60), new Size(0, 60)), widthBoundRequest);
 		}
 
-		[Test]
+		[Fact]
 		//https://bugzilla.xamarin.com/show_bug.cgi?id=31608
 		public void ColAndRowDefinitionsAreActuallyBindable()
 		{
@@ -2194,12 +2194,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				RowDefinitions = new RowDefinitionCollection { rowdef },
 			};
-			Assert.AreEqual(RowDefinition.HeightProperty.DefaultValue, rowdef.Height);
+			Assert.Equal(RowDefinition.HeightProperty.DefaultValue, rowdef.Height);
 			grid.BindingContext = new { Height = 32 };
-			Assert.AreEqual(new GridLength(32), rowdef.Height);
+			Assert.Equal(new GridLength(32), rowdef.Height);
 		}
 
-		[Test]
+		[Fact]
 		//https://bugzilla.xamarin.com/show_bug.cgi?id=31967
 		public void ChangingRowHeightViaBindingTriggersRedraw()
 		{
@@ -2226,12 +2226,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid.Children.Add(label0);
 			grid.Children.Add(label1);
 
-			Assert.AreEqual(new SizeRequest(new Size(100, 20), new Size(0, 20)), grid.Measure(double.PositiveInfinity, double.PositiveInfinity));
+			Assert.Equal(new SizeRequest(new Size(100, 20), new Size(0, 20)), grid.Measure(double.PositiveInfinity, double.PositiveInfinity));
 			grid.BindingContext = new { Height = 42 };
-			Assert.AreEqual(new SizeRequest(new Size(100, 62), new Size(0, 62)), grid.Measure(double.PositiveInfinity, double.PositiveInfinity));
+			Assert.Equal(new SizeRequest(new Size(100, 62), new Size(0, 62)), grid.Measure(double.PositiveInfinity, double.PositiveInfinity));
 		}
 
-		[Test]
+		[Fact]
 		public void InvalidationBlockedForAbsoluteCell()
 		{
 			var grid = new Grid()
@@ -2259,7 +2259,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(invalidated);
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/xamarin/Microsoft.Maui.Controls/issues/4933
 		public void GridHeightCorrectWhenAspectFitImageGetsShrinked()
 		{
@@ -2275,11 +2275,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			//image will have "EVERYTHING IS 100 x 20" size so grid should shrink it and itself to 50x10
 			contentGrid.Children.Add(new Image() { IsPlatformEnabled = true }, 0, 0);
 			var measurement = contentGrid.Measure(50, 100);
-			Assert.AreEqual(50, measurement.Request.Width);
-			Assert.AreEqual(10, measurement.Request.Height);
+			Assert.Equal(50, measurement.Request.Width);
+			Assert.Equal(10, measurement.Request.Height);
 		}
 
-		[Test]
+		[Fact]
 		public void MinimumWidthRequestInAutoCells()
 		{
 			var boxRow0Column0 = new BoxView
@@ -2328,12 +2328,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			view.Layout(new Rect(0, 0, 800, 800));
 
 
-			Assert.AreEqual(boxRow0Column0.MinimumWidthRequest, boxRow0Column0.Width);
-			Assert.AreEqual(boxRow1Column0.MinimumWidthRequest, boxRow1Column0.Width);
+			Assert.Equal(boxRow0Column0.MinimumWidthRequest, boxRow0Column0.Width);
+			Assert.Equal(boxRow1Column0.MinimumWidthRequest, boxRow1Column0.Width);
 		}
 
 
-		[Test]
+		[Fact]
 		public void MinimumHeightRequestInAutoCells()
 		{
 			var boxRow0Column0 = new BoxView
@@ -2381,8 +2381,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			view.Layout(new Rect(0, 0, 800, 800));
 
-			Assert.AreEqual(boxRow0Column0.MinimumHeightRequest, boxRow0Column0.Height);
-			Assert.AreEqual(boxRow0Column1.MinimumHeightRequest, boxRow0Column1.Height);
+			Assert.Equal(boxRow0Column0.MinimumHeightRequest, boxRow0Column0.Height);
+			Assert.Equal(boxRow0Column1.MinimumHeightRequest, boxRow0Column1.Height);
 		}
 
 		// because the constraint is internal, we need this
@@ -2458,7 +2458,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return !invalidated;
 		}
 
-		[Test]
+		[Fact]
 		public Task NestedInvalidateMeasureDoesNotCrash()
 		{
 			var delayActions = new List<Action>();

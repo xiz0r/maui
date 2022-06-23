@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Maui.Handlers;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class NavigationUnitTest : BaseTestFixture
+	
+	public class NavigationUnitTest : BaseTestFixtureXUnit
 	{
 		[TestCase(false)]
 		[TestCase(true)]
@@ -92,7 +92,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(childRoot, nav.RootPage);
 			Assert.AreSame(childRoot, nav.CurrentPage);
 			Assert.AreSame(nav.RootPage, nav.CurrentPage);
-			Assert.AreEqual(childRoot2, popped);
+			Assert.Equal(childRoot2, popped);
 
 			await nav.PopAsync();
 			var last = await nav.Navigation.PopAsync();
@@ -185,7 +185,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.True(fired);
 			Assert.AreSame(childRoot, nav.CurrentPage);
-			Assert.AreEqual(childRoot2, popped);
+			Assert.Equal(childRoot2, popped);
 
 			await nav.PopAsync();
 			var last = await nav.PopAsync();
@@ -238,7 +238,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PopToRootAsync();
 
 			Assert.IsNotNull(poppedChildren);
-			Assert.AreEqual(2, poppedChildren.Count);
+			Assert.Equal(2, poppedChildren.Count);
 			Assert.Contains(child1, poppedChildren);
 			Assert.Contains(child2, poppedChildren);
 			Assert.AreSame(root, nav.RootPage);
@@ -263,7 +263,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PushAsync(child1);
 			await nav.PushAsync(child2);
 
-			Assert.AreEqual(((INavigationPageController)nav).Peek(1), child1);
+			Assert.Equal(((INavigationPageController)nav).Peek(1), child1);
 		}
 
 		[TestCase(false)]
@@ -283,8 +283,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PushAsync(child1);
 			await nav.PushAsync(child2);
 
-			Assert.AreEqual(((INavigationPageController)nav).Peek(0), child2);
-			Assert.AreEqual(((INavigationPageController)nav).Peek(), child2);
+			Assert.Equal(((INavigationPageController)nav).Peek(0), child2);
+			Assert.Equal(((INavigationPageController)nav).Peek(), child2);
 		}
 
 		[TestCase(false)]
@@ -304,7 +304,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PushAsync(child1);
 			await nav.PushAsync(child2);
 
-			Assert.AreEqual(((INavigationPageController)nav).Peek(3), null);
+			Assert.Equal(((INavigationPageController)nav).Peek(3), null);
 		}
 
 		[TestCase(false)]
@@ -324,10 +324,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PushAsync(child1);
 			await nav.PushAsync(child2);
 
-			Assert.AreEqual(((INavigationPageController)nav).Peek(-1), null);
+			Assert.Equal(((INavigationPageController)nav).Peek(-1), null);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PeekEmpty([Values(true, false)] bool useMaui, [Range(0, 3)] int depth)
 		{
 			var nav = new TestNavigationPage(useMaui);
@@ -335,7 +335,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool signaled = false;
 			nav.PoppedToRoot += (sender, args) => signaled = true;
 
-			Assert.AreEqual(((INavigationPageController)nav).Peek(depth), null);
+			Assert.Equal(((INavigationPageController)nav).Peek(depth), null);
 		}
 
 
@@ -346,8 +346,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var root = new ContentPage();
 			var nav = new TestNavigationPage(useMaui, root);
 
-			Assert.AreEqual(1, ((INavigationPageController)nav).StackDepth);
-			Assert.AreEqual(root, ((IElementController)nav).LogicalChildren[0]);
+			Assert.Equal(1, ((INavigationPageController)nav).StackDepth);
+			Assert.Equal(root, ((IElementController)nav).LogicalChildren[0]);
 
 		}
 
@@ -418,7 +418,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await navPage.PushAsync(pushPage);
 
-			Assert.AreEqual(rootArg, pushPage);
+			Assert.Equal(rootArg, pushPage);
 
 			var secondPushPage = new ContentPage
 			{
@@ -427,7 +427,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await navPage.PushAsync(secondPushPage);
 
-			Assert.AreEqual(rootArg, secondPushPage);
+			Assert.Equal(rootArg, secondPushPage);
 		}
 
 		[TestCase(false)]
@@ -528,7 +528,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var result = await navPage.SendBackButtonPressedAsync();
 
-			Assert.AreEqual(root, navPage.CurrentPage);
+			Assert.Equal(root, navPage.CurrentPage);
 			Assert.True(result);
 		}
 
@@ -544,7 +544,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await navPage.SendBackButtonPressedAsync();
 
-			Assert.AreEqual(second, navPage.CurrentPage);
+			Assert.Equal(second, navPage.CurrentPage);
 		}
 
 		[TestCase(false)]
@@ -626,16 +626,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
-		[Test]
+		[Fact]
 		public async Task CurrentPageUpdatesOnPopBeforeAsyncCompletes()
 		{
 			var root = new ContentPage { Title = "Root" };
 			var navPage = new TestNavigationPage(true, root);
 			await navPage.PushAsync(new ContentPage());
 			var popped = navPage.PopAsync();
-			Assert.AreEqual(navPage.CurrentPage, root);
+			Assert.Equal(navPage.CurrentPage, root);
 			await popped;
-			Assert.AreEqual(navPage.CurrentPage, root);
+			Assert.Equal(navPage.CurrentPage, root);
 		}
 
 		[TestCase(false, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
@@ -671,7 +671,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(isFinalized);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PushingPagesWhileNavigating()
 		{
 			ContentPage contentPage1 = new ContentPage();
@@ -682,14 +682,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await navigationPage.PushAsync(contentPage2);
 			await navigationPage.PushAsync(contentPage3);
 
-			Assert.AreEqual(3, navigationPage.Navigation.NavigationStack.Count);
-			Assert.AreEqual(contentPage1, navigationPage.Navigation.NavigationStack[0]);
-			Assert.AreEqual(contentPage2, navigationPage.Navigation.NavigationStack[1]);
-			Assert.AreEqual(contentPage3, navigationPage.Navigation.NavigationStack[2]);
+			Assert.Equal(3, navigationPage.Navigation.NavigationStack.Count);
+			Assert.Equal(contentPage1, navigationPage.Navigation.NavigationStack[0]);
+			Assert.Equal(contentPage2, navigationPage.Navigation.NavigationStack[1]);
+			Assert.Equal(contentPage3, navigationPage.Navigation.NavigationStack[2]);
 			navigationPage.ValidateNavigationCompleted();
 		}
 
-		[Test]
+		[Fact]
 		public void TabBarSetsOnWindowForSingleNavigationPage()
 		{
 			var contentPage1 = new ContentPage();
@@ -702,7 +702,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[Test]
+		[Fact]
 		public void TabBarSetsOnFlyoutPage()
 		{
 			var contentPage1 = new ContentPage();
@@ -721,7 +721,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(flyoutPage.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public void TabBarSetsOnWindowWithFlyoutPageNestedInTabbedPage()
 		{
 			// TabbedPage => FlyoutPage => NavigationPage
@@ -749,7 +749,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNull(tabbedPage.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TabBarSetsOnModalPageWhenWindowAlsoHasNavigationPage()
 		{
 			var window = new Window(new TestNavigationPage(true, new ContentPage()));
@@ -762,7 +762,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(navigationPage.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TabBarSetsOnModalPageForSingleNavigationPage()
 		{
 			var window = new Window(new ContentPage());
@@ -775,7 +775,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(navigationPage.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TabBarSetsOnFlyoutPageInsideModalPage()
 		{
 			var window = new Window(new ContentPage());
@@ -795,7 +795,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(flyoutPage.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TabBarSetsOnModalPageWithFlyoutPageNestedInTabbedPage()
 		{
 			// ModalPage => TabbedPage => FlyoutPage => NavigationPage
@@ -824,7 +824,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(tabbedPage.Toolbar);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PushingPageBeforeSettingHandlerPropagatesAfterSettingHandler()
 		{
 			ContentPage contentPage1 = new ContentPage();

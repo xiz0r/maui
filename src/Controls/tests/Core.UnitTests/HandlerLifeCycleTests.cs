@@ -4,15 +4,15 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 using NUnit.Framework.Constraints;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class HandlerLifeCycleTests : BaseTestFixture
+	
+	public class HandlerLifeCycleTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ChangingAndChangedBothFireInitially()
 		{
 			LifeCycleButton button = new LifeCycleButton();
@@ -28,8 +28,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				changed = true;
 			};
 
-			Assert.AreEqual(0, button.changing);
-			Assert.AreEqual(0, button.changed);
+			Assert.Equal(0, button.changing);
+			Assert.Equal(0, button.changed);
 			Assert.IsFalse(changing);
 			Assert.IsFalse(changed);
 
@@ -37,11 +37,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsTrue(changing);
 			Assert.IsTrue(changed);
-			Assert.AreEqual(1, button.changing);
-			Assert.AreEqual(1, button.changed);
+			Assert.Equal(1, button.changing);
+			Assert.Equal(1, button.changed);
 		}
 
-		[Test]
+		[Fact]
 		public void ChangingArgsAreSetCorrectly()
 		{
 			LifeCycleButton button = new LifeCycleButton();
@@ -50,20 +50,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var firstHandler = new HandlerStub();
 			button.Handler = firstHandler;
 
-			Assert.AreEqual(button.LastHandlerChangingEventArgs.NewHandler, firstHandler);
+			Assert.Equal(button.LastHandlerChangingEventArgs.NewHandler, firstHandler);
 			Assert.IsNull(button.LastHandlerChangingEventArgs.OldHandler);
 
 			var secondHandler = new HandlerStub();
 			button.Handler = secondHandler;
-			Assert.AreEqual(button.LastHandlerChangingEventArgs.OldHandler, firstHandler);
-			Assert.AreEqual(button.LastHandlerChangingEventArgs.NewHandler, secondHandler);
+			Assert.Equal(button.LastHandlerChangingEventArgs.OldHandler, firstHandler);
+			Assert.Equal(button.LastHandlerChangingEventArgs.NewHandler, secondHandler);
 
 			button.Handler = null;
-			Assert.AreEqual(button.LastHandlerChangingEventArgs.OldHandler, secondHandler);
-			Assert.AreEqual(button.LastHandlerChangingEventArgs.NewHandler, null);
+			Assert.Equal(button.LastHandlerChangingEventArgs.OldHandler, secondHandler);
+			Assert.Equal(button.LastHandlerChangingEventArgs.NewHandler, null);
 
-			Assert.AreEqual(3, button.changing);
-			Assert.AreEqual(3, button.changed);
+			Assert.Equal(3, button.changing);
+			Assert.Equal(3, button.changed);
 		}
 
 		public class LifeCycleButton : Button

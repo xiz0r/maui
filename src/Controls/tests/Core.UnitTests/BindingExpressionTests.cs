@@ -1,13 +1,13 @@
 using System;
 using System.Globalization;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class BindingExpressionTests : BaseTestFixture
+	
+	public class BindingExpressionTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void Ctor()
 		{
 			string path = "Foo.Bar";
@@ -16,10 +16,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var be = new BindingExpression(binding, path);
 
 			Assert.AreSame(binding, be.Binding);
-			Assert.AreEqual(path, be.Path);
+			Assert.Equal(path, be.Path);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorInvalid()
 		{
 			string path = "Foo.Bar";
@@ -32,7 +32,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"Allowed the binding to be null");
 		}
 
-		[Test]
+		[Fact]
 		public void ApplyNull()
 		{
 			const string path = "Foo.Bar";
@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"FormatException did not contain an explanation");
 		}
 
-		[Test]
+		[Fact]
 		public void ValidPaths(
 			[Values (
 				".", "[1]", "[1 ]", ".[1]", ". [1]",
@@ -122,7 +122,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			CultureInfo.CurrentCulture = culture;
 			BindingExpression.TryConvert(ref inputString, Entry.TextProperty, expected.GetType(), false);
 
-			Assert.AreEqual(expected, inputString);
+			Assert.Equal(expected, inputString);
 		}
 	}
 }

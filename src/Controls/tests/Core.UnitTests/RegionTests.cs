@@ -1,13 +1,13 @@
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class RegionTests : BaseTestFixture
+	
+	public class RegionTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void RegionOneLineConstruction()
 		{
 			double[] lineHeights = { 20 };
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[Test]
+		[Fact]
 		public void RegionTwoLineConstruction()
 		{
 			double[] lineHeights = { 20, 20 };
@@ -83,7 +83,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(region.Contains(new Point(40, 119)));
 		}
 
-		[Test]
+		[Fact]
 		public void RegionThreeLineConstruction()
 		{
 			double[] lineHeights = { 20, 20, 20 };
@@ -136,7 +136,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(region.Contains(new Point(40, 139)));
 		}
 
-		[Test]
+		[Fact]
 		public void RegionInflate()
 		{
 			double[] lineHeights = { 20 };
@@ -174,7 +174,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(region.Contains(new Point(190, 99)));
 		}
 
-		[Test]
+		[Fact]
 		public void RegionDeflate()
 		{
 			double[] lineHeights = { 20 };

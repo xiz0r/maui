@@ -2,14 +2,14 @@ using System;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class AdaptiveTriggerTests : BaseTestFixture
+	
+	public class AdaptiveTriggerTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void ResizingWindowPageActivatesTrigger()
 		{
 			var redBrush = new SolidColorBrush(Colors.Red);

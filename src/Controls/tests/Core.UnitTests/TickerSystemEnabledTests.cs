@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.UnitTests;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class TickerSystemEnabledTests
 	{
 		[OneTimeSetUp]
@@ -73,7 +73,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view.Opacity, Is.EqualTo(1));
 		}
 
-		[Test]
+		[Fact]
 		public async Task NewAnimationsFinishImmediatelyWhenTickerDisabled()
 		{
 			var view = AnimationReadyHandlerAsync.Prepare(new View(), out var handler);
@@ -85,7 +85,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view.RotationY, Is.EqualTo(200));
 		}
 
-		[Test]
+		[Fact]
 		public async Task AnimationExtensionsReturnTrueIfAnimationsDisabled()
 		{
 			var label = AnimationReadyHandlerAsync.Prepare(new Label { Text = "Foo" }, out var handler);

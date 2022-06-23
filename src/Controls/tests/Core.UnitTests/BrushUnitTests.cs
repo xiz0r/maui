@@ -1,20 +1,20 @@
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class BrushUnitTests : BaseTestFixture
+	
+	public class BrushUnitTests : BaseTestFixtureXUnit
 	{
 		BrushTypeConverter _converter;
 
-		[SetUp]
+		
 		public void SetUp()
 		{
 			_converter = new BrushTypeConverter();
 		}
 
-		[Test]
+		[Fact]
 		[TestCase("rgb(6, 201, 198)")]
 		[TestCase("rgba(6, 201, 188, 0.2)")]
 		[TestCase("hsl(6, 20%, 45%)")]
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(_converter.ConvertFromInvariantString(colorDefinition));
 		}
 
-		[Test]
+		[Fact]
 		[TestCase("#ff00ff")]
 		[TestCase("#00FF33")]
 		[TestCase("#00FFff 40%")]
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(_converter.ConvertFromInvariantString(colorHex));
 		}
 
-		[Test]
+		[Fact]
 		[TestCase("linear-gradient(90deg, rgb(255, 0, 0),rgb(255, 153, 51))")]
 		[TestCase("radial-gradient(circle, rgb(255, 0, 0) 25%, rgb(0, 255, 0) 50%, rgb(0, 0, 255) 75%)")]
 		public void TestBrushTypeConverterWithBrush(string brush)
@@ -46,7 +46,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(_converter.ConvertFromInvariantString(brush));
 		}
 
-		[Test]
+		[Fact]
 		public void TestBindingContextPropagation()
 		{
 			var context = new object();
@@ -64,7 +64,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(context, secondStop.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBrushParent()
 		{
 			var context = new object();

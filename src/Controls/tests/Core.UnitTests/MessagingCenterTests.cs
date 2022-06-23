@@ -1,14 +1,14 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class MessagingCenterTests : BaseTestFixture
+	
+	public class MessagingCenterTests : BaseTestFixtureXUnit
 	{
 		TestSubcriber _subscriber;
 
-		[Test]
+		[Fact]
 		public void SingleSubscriber()
 		{
 			string sentMessage = null;
@@ -21,7 +21,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, "SimpleTest");
 		}
 
-		[Test]
+		[Fact]
 		public void Filter()
 		{
 			string sentMessage = null;
@@ -38,7 +38,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, "SimpleTest");
 		}
 
-		[Test]
+		[Fact]
 		public void MultiSubscriber()
 		{
 			var sub1 = new object();
@@ -57,7 +57,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(sub2, "SimpleTest");
 		}
 
-		[Test]
+		[Fact]
 		public void Unsubscribe()
 		{
 			string sentMessage = null;
@@ -69,13 +69,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(sentMessage, Is.EqualTo(null));
 		}
 
-		[Test]
+		[Fact]
 		public void SendWithoutSubscribers()
 		{
 			Assert.DoesNotThrow(() => MessagingCenter.Send(this, "SimpleTest", "My Message"));
 		}
 
-		[Test]
+		[Fact]
 		public void NoArgSingleSubscriber()
 		{
 			bool sentMessage = false;
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(this, "SimpleTest");
 		}
 
-		[Test]
+		[Fact]
 		public void NoArgFilter()
 		{
 			bool sentMessage = false;
@@ -105,7 +105,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(this, "SimpleTest");
 		}
 
-		[Test]
+		[Fact]
 		public void NoArgMultiSubscriber()
 		{
 			var sub1 = new object();
@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(sub2, "SimpleTest");
 		}
 
-		[Test]
+		[Fact]
 		public void NoArgUnsubscribe()
 		{
 			bool sentMessage = false;
@@ -136,13 +136,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(sentMessage, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void NoArgSendWithoutSubscribers()
 		{
 			Assert.DoesNotThrow(() => MessagingCenter.Send(this, "SimpleTest"));
 		}
 
-		[Test]
+		[Fact]
 		public void ThrowOnNullArgs()
 		{
 			Assert.Throws<ArgumentNullException>(() => MessagingCenter.Subscribe<MessagingCenterTests, string>(null, "Foo", (sender, args) => { }));
@@ -166,7 +166,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentNullException>(() => MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, null));
 		}
 
-		[Test]
+		[Fact]
 		public void UnsubscribeInCallback()
 		{
 			int messageCount = 0;
@@ -188,10 +188,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest");
 
-			Assert.AreEqual(1, messageCount);
+			Assert.Equal(1, messageCount);
 		}
 
-		[Test]
+		[Fact]
 		public void SubscriberShouldBeCollected()
 		{
 			new Action(() =>
@@ -207,7 +207,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			pub.Test(); // Assert.Fail() shouldn't be called, because the TestSubcriber object should have ben GCed
 		}
 
-		[Test]
+		[Fact]
 		public void ShouldBeCollectedIfCallbackTargetIsSubscriber()
 		{
 			WeakReference wr = null;
@@ -230,7 +230,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(wr.IsAlive); // The Action target and subscriber were the same object, so both could be collected
 		}
 
-		[Test]
+		[Fact]
 		public void NotCollectedIfSubscriberIsNotTheCallbackTarget()
 		{
 			WeakReference wr = null;
@@ -284,7 +284,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(wr.IsAlive); // The Action target and subscriber were the same object, so both could be collected
 		}
 
-		[Test]
+		[Fact]
 		public void StaticCallback()
 		{
 			int i = 4;
@@ -302,7 +302,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(i == 5, "The static method should have incremented 'i'");
 		}
 
-		[Test]
+		[Fact]
 		public void NothingShouldBeCollected()
 		{
 			var success = false;
@@ -321,7 +321,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(success); // TestCallbackSource.SuccessCallback() should be invoked to make success == true
 		}
 
-		[Test]
+		[Fact]
 		public void MultipleSubscribersOfTheSameClass()
 		{
 			var sub1 = new object();

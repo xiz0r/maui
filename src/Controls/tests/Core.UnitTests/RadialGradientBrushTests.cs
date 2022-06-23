@@ -1,27 +1,27 @@
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class RadialGradientBrushTests : BaseTestFixture
+	public class RadialGradientBrushTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush();
 
 			int gradientStops = radialGradientBrush.GradientStops.Count;
 
-			Assert.AreEqual(0, gradientStops);
+			Assert.Equal(0, gradientStops);
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructorUsingGradientStopCollection()
 		{
 			var gradientStops = new GradientStopCollection
@@ -33,16 +33,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush(gradientStops, new Point(0, 0), 10);
 
 			Assert.AreNotEqual(0, radialGradientBrush.GradientStops.Count, "GradientStops");
-			Assert.AreEqual(0, radialGradientBrush.Center.X, "Center.X");
-			Assert.AreEqual(0, radialGradientBrush.Center.Y, "Center.Y");
-			Assert.AreEqual(10, radialGradientBrush.Radius, "Radius");
+			Assert.Equal(0, radialGradientBrush.Center.X, "Center.X");
+			Assert.Equal(0, radialGradientBrush.Center.Y, "Center.Y");
+			Assert.Equal(10, radialGradientBrush.Radius, "Radius");
 		}
 
-		[Test]
+		[Fact]
 		public void TestEmptyRadialGradientBrush()
 		{
 			RadialGradientBrush nullRadialGradientBrush = new RadialGradientBrush();
-			Assert.AreEqual(true, nullRadialGradientBrush.IsEmpty, "IsEmpty");
+			Assert.Equal(true, nullRadialGradientBrush.IsEmpty, "IsEmpty");
 
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush
 			{
@@ -55,17 +55,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.AreEqual(false, radialGradientBrush.IsEmpty, "IsEmpty");
+			Assert.Equal(false, radialGradientBrush.IsEmpty, "IsEmpty");
 		}
 
-		[Test]
+		[Fact]
 		public void TestNullOrEmptyRadialGradientBrush()
 		{
 			RadialGradientBrush nullRadialGradientBrush = null;
-			Assert.AreEqual(true, Brush.IsNullOrEmpty(nullRadialGradientBrush), "IsNullOrEmpty");
+			Assert.Equal(true, Brush.IsNullOrEmpty(nullRadialGradientBrush), "IsNullOrEmpty");
 
 			RadialGradientBrush emptyRadialGradientBrush = new RadialGradientBrush();
-			Assert.AreEqual(true, Brush.IsNullOrEmpty(emptyRadialGradientBrush), "IsNullOrEmpty");
+			Assert.Equal(true, Brush.IsNullOrEmpty(emptyRadialGradientBrush), "IsNullOrEmpty");
 
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush
 			{
@@ -78,19 +78,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.AreEqual(false, Brush.IsNullOrEmpty(radialGradientBrush), "IsNullOrEmpty");
+			Assert.Equal(false, Brush.IsNullOrEmpty(radialGradientBrush), "IsNullOrEmpty");
 		}
 
-		[Test]
+		[Fact]
 		public void TestRadialGradientBrushRadius()
 		{
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush();
 			radialGradientBrush.Radius = 20;
 
-			Assert.AreEqual(20, radialGradientBrush.Radius);
+			Assert.Equal(20, radialGradientBrush.Radius);
 		}
 
-		[Test]
+		[Fact]
 		public void TestRadialGradientBrushOnlyOneGradientStop()
 		{
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush
@@ -105,7 +105,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(radialGradientBrush);
 		}
 
-		[Test]
+		[Fact]
 		public void TestRadialGradientBrushGradientStops()
 		{
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush
@@ -118,7 +118,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Radius = 20
 			};
 
-			Assert.AreEqual(2, radialGradientBrush.GradientStops.Count);
+			Assert.Equal(2, radialGradientBrush.GradientStops.Count);
 		}
 	}
 }

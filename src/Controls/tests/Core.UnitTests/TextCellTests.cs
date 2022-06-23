@@ -1,13 +1,13 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class TextCellTests : BaseTestFixture
+	
+	public class TextCellTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestTapped()
 		{
 			var cell = new TextCell();
@@ -31,7 +31,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(executed, Is.EqualTo(canExecute));
 		}
 
-		[Test]
+		[Fact]
 		public void TestCommand()
 		{
 			bool executed = false;
@@ -44,7 +44,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(executed, "Command was not executed");
 		}
 
-		[Test]
+		[Fact]
 		public void TestCommandParameter()
 		{
 			bool executed = false;
@@ -67,7 +67,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(executed, "Command was not executed");
 		}
 
-		[Test]
+		[Fact]
 		public void TestCommandCanExecute()
 		{
 			bool tested = false;
@@ -83,7 +83,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(tested, "Command.CanExecute was not called");
 		}
 
-		[Test]
+		[Fact]
 		public void TestCommandCanExecuteDisables()
 		{
 			var cmd = new Command(() => { }, () => false);
@@ -91,7 +91,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(cell.IsEnabled, "Cell was not disabled");
 		}
 
-		[Test]
+		[Fact]
 		public void TestCommandCanExecuteChanged()
 		{
 			bool first = true;
@@ -116,7 +116,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(cell.IsEnabled, "Cell was not reenabled");
 		}
 
-		[Test]
+		[Fact]
 		public void Create()
 		{
 			var template = new DataTemplate(typeof(TextCell));
@@ -126,7 +126,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(content, Is.InstanceOf<TextCell>());
 		}
 
-		[Test]
+		[Fact]
 		public void Detail()
 		{
 			var template = new DataTemplate(typeof(TextCell));
@@ -136,7 +136,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.Detail, Is.EqualTo("detail"));
 		}
 
-		[Test]
+		[Fact]
 		public void Text()
 		{
 			var template = new DataTemplate(typeof(TextCell));

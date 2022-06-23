@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class TemplatedPageUnitTests : BaseTestFixture
+	
+	public class TemplatedPageUnitTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TemplatedPage_should_have_the_InternalChildren_correctly_when_ControlTemplate_changed()
 		{
 			var sut = new TemplatedPage();
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			sut.ControlTemplate = new ControlTemplate(typeof(ExpectedView));
 
-			Assert.AreEqual(1, internalChildren.Count);
+			Assert.Equal(1, internalChildren.Count);
 			Assert.IsInstanceOf<ExpectedView>(internalChildren[0]);
 		}
 

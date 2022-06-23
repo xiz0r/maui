@@ -2,14 +2,14 @@ using ImAVendor.Forms.PlatformConfiguration.iOS;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
+	
 	public class PlatformSpecificsTests
 	{
-		[Test]
+		[Fact]
 		public void VendorPlatformProperty()
 		{
 			var x = new FlyoutPage();
@@ -21,7 +21,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(x.On<iOS>().GetVendorFoo());
 		}
 
-		[Test]
+		[Fact]
 		public void ConsumeVendorSetting()
 		{
 			var x = new FlyoutPage();
@@ -30,7 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(x.On<iOS>().GetVendorFoo());
 		}
 
-		[Test]
+		[Fact]
 		public void Properties()
 		{
 			var x = new FlyoutPage();
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(x.On<Android>().GetSomeAndroidThing() == 42);
 		}
 
-		[Test]
+		[Fact]
 		public void ConvenienceConfiguration()
 		{
 			var x = new FlyoutPage();
@@ -55,7 +55,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(x.On<Android>().GetSomeOtherAndroidThing() == 40);
 		}
 
-		[Test]
+		[Fact]
 		public void NavigationPageiOSConfiguration()
 		{
 			var x = new NavigationPage();

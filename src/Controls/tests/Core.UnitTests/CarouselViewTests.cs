@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class CarouselViewTests : BaseTestFixture
+	public class CarouselViewTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructorAndDefaults()
 		{
 			var carouselView = new CarouselView();
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(carouselView.Position == 0);
 		}
 
-		[Test]
+		[Fact]
 		public void TestPositionChangedCommand()
 		{
 			var source = new List<string> { "1", "2", "3" };
@@ -46,7 +46,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(countFired == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void TestPositionChangedEvent()
 		{
 			var gotoPosition = 1;
@@ -66,7 +66,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(countFired == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void TestCurrentItemChangedCommand()
 		{
 			var gotoPosition = 1;
@@ -86,7 +86,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(countFired == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void TestCurrentItemChangedEvent()
 		{
 			var gotoPosition = 1;
@@ -106,7 +106,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(countFired == 1);
 		}
 
-		[Test]
+		[Fact]
 		public void TestAddRemoveItems()
 		{
 			var source = new List<string>();
@@ -122,7 +122,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			carouselView.ScrollTo(1, position: ScrollToPosition.Center, animate: false);
 			source.Remove("2");
 
-			Assert.AreEqual(0, carouselView.Position);
+			Assert.Equal(0, carouselView.Position);
 		}
 	}
 }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class DropGestureRecognizerTests : BaseTestFixture
+	
+	public class DropGestureRecognizerTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void PropertySetters()
 		{
 			var dropRec = new DropGestureRecognizer() { AllowDrop = true };
@@ -23,14 +23,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dropRec.DropCommand = cmd;
 			dropRec.DropCommandParameter = parameter;
 
-			Assert.AreEqual(true, dropRec.AllowDrop);
-			Assert.AreEqual(cmd, dropRec.DragOverCommand);
-			Assert.AreEqual(parameter, dropRec.DragOverCommandParameter);
-			Assert.AreEqual(cmd, dropRec.DropCommand);
-			Assert.AreEqual(parameter, dropRec.DropCommandParameter);
+			Assert.Equal(true, dropRec.AllowDrop);
+			Assert.Equal(cmd, dropRec.DragOverCommand);
+			Assert.Equal(parameter, dropRec.DragOverCommandParameter);
+			Assert.Equal(cmd, dropRec.DropCommand);
+			Assert.Equal(parameter, dropRec.DropCommandParameter);
 		}
 
-		[Test]
+		[Fact]
 		public void DragOverCommandFires()
 		{
 			var dropRec = new DropGestureRecognizer() { AllowDrop = true };
@@ -42,10 +42,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dropRec.DragOverCommandParameter = parameter;
 			dropRec.SendDragOver(new DragEventArgs(new DataPackage()));
 
-			Assert.AreEqual(parameter, commandExecuted);
+			Assert.Equal(parameter, commandExecuted);
 		}
 
-		[Test]
+		[Fact]
 		public async Task DropCommandFires()
 		{
 			var dropRec = new DropGestureRecognizer() { AllowDrop = true };
@@ -57,7 +57,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dropRec.DropCommandParameter = parameter;
 			await dropRec.SendDrop(new DropEventArgs(new DataPackageView(new DataPackage())));
 
-			Assert.AreEqual(commandExecuted, parameter);
+			Assert.Equal(commandExecuted, parameter);
 		}
 
 		[TestCase(typeof(Entry), "EntryTest")]
@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			element.GestureRecognizers.Add(dropRec);
 			var args = new DropEventArgs(new DataPackageView(new DataPackage() { Text = result }));
 			await dropRec.SendDrop(args);
-			Assert.AreEqual(element.GetStringValue(), result);
+			Assert.Equal(element.GetStringValue(), result);
 		}
 
 		[TestCase(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
@@ -85,7 +85,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			TextPackageCorrectlySetsOnCompatibleTarget(fieldType, result);
 		}
 
-		[Test]
+		[Fact]
 		public async Task HandledTest()
 		{
 			string testString = "test String";

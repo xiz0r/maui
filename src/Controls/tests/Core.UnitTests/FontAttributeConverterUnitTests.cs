@@ -1,9 +1,9 @@
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class FontAttributeConverterUnitTests : BaseTestFixture
+	
+	public class FontAttributeConverterUnitTests : BaseTestFixtureXUnit
 	{
 		[TestCase("None", FontAttributes.None)]
 		[TestCase("Bold", FontAttributes.Bold)]

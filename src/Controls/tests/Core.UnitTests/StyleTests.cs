@@ -4,28 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class StyleTests : BaseTestFixture
+	
+	public class StyleTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			ApplicationExtensions.CreateAndSetMockApplication();
 		}
 
-		[TearDown]
+		
 		public override void TearDown()
 		{
 			base.TearDown();
 			Application.ClearCurrent();
 		}
 
-		[Test]
+		[Fact]
 		public void ApplyUnapplyStyle()
 		{
 			var style = new Style(typeof(VisualElement))
@@ -40,15 +40,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Style = style
 			};
-			Assert.AreEqual("foo", label.Text);
-			Assert.AreEqual(Colors.Pink, label.BackgroundColor);
+			Assert.Equal("foo", label.Text);
+			Assert.Equal(Colors.Pink, label.BackgroundColor);
 
 			label.Style = null;
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label.Text);
-			Assert.AreEqual(VisualElement.BackgroundColorProperty.DefaultValue, label.BackgroundColor);
+			Assert.Equal(Label.TextProperty.DefaultValue, label.Text);
+			Assert.Equal(VisualElement.BackgroundColorProperty.DefaultValue, label.BackgroundColor);
 		}
 
-		[Test]
+		[Fact]
 		public void BindingAndDynamicResourcesInStyle()
 		{
 			var style = new Style(typeof(VisualElement))
@@ -66,19 +66,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			label.BindingContext = new { foo = "FOO" };
-			Assert.AreEqual("FOO", label.Text);
+			Assert.Equal("FOO", label.Text);
 
 			label.Resources = new ResourceDictionary {
 				{"qux", Colors.Pink}
 			};
-			Assert.AreEqual(Colors.Pink, label.BackgroundColor);
+			Assert.Equal(Colors.Pink, label.BackgroundColor);
 
 			label.Style = null;
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label.Text);
-			Assert.AreEqual(VisualElement.BackgroundColorProperty.DefaultValue, label.BackgroundColor);
+			Assert.Equal(Label.TextProperty.DefaultValue, label.Text);
+			Assert.Equal(VisualElement.BackgroundColorProperty.DefaultValue, label.BackgroundColor);
 		}
 
-		[Test]
+		[Fact]
 		public void StyleCanBeAppliedMultipleTimes()
 		{
 			var style = new Style(typeof(VisualElement))
@@ -104,21 +104,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				{"qux", Colors.Pink}
 			};
 
-			Assert.AreEqual("FOO", label0.Text);
-			Assert.AreEqual("FOO", label1.Text);
+			Assert.Equal("FOO", label0.Text);
+			Assert.Equal("FOO", label1.Text);
 
-			Assert.AreEqual(Colors.Pink, label0.BackgroundColor);
-			Assert.AreEqual(Colors.Pink, label1.BackgroundColor);
+			Assert.Equal(Colors.Pink, label0.BackgroundColor);
+			Assert.Equal(Colors.Pink, label1.BackgroundColor);
 
 			label0.Style = label1.Style = null;
 
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label0.Text);
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label1.Text);
-			Assert.AreEqual(VisualElement.BackgroundColorProperty.DefaultValue, label0.BackgroundColor);
-			Assert.AreEqual(VisualElement.BackgroundColorProperty.DefaultValue, label1.BackgroundColor);
+			Assert.Equal(Label.TextProperty.DefaultValue, label0.Text);
+			Assert.Equal(Label.TextProperty.DefaultValue, label1.Text);
+			Assert.Equal(VisualElement.BackgroundColorProperty.DefaultValue, label0.BackgroundColor);
+			Assert.Equal(VisualElement.BackgroundColorProperty.DefaultValue, label1.BackgroundColor);
 		}
 
-		[Test]
+		[Fact]
 		public void BaseStyleIsAppliedUnapplied()
 		{
 			var baseStyle = new Style(typeof(VisualElement))
@@ -136,13 +136,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Style = style
 			};
-			Assert.AreEqual("baseStyle", label.Text);
+			Assert.Equal("baseStyle", label.Text);
 
 			label.Style = null;
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label.Text);
+			Assert.Equal(Label.TextProperty.DefaultValue, label.Text);
 		}
 
-		[Test]
+		[Fact]
 		public void StyleOverrideBaseStyle()
 		{
 			var baseStyle = new Style(typeof(VisualElement))
@@ -163,13 +163,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Style = style
 			};
-			Assert.AreEqual("style", label.Text);
+			Assert.Equal("style", label.Text);
 
 			label.Style = null;
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label.Text);
+			Assert.Equal(Label.TextProperty.DefaultValue, label.Text);
 		}
 
-		[Test]
+		[Fact]
 		public void AddImplicitStyleToResourceDictionary()
 		{
 			var rd = new ResourceDictionary {
@@ -185,11 +185,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.AreEqual(3, rd.Count);
+			Assert.Equal(3, rd.Count);
 			Assert.Contains("Microsoft.Maui.Controls.Label", (System.Collections.ICollection)rd.Keys);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesAreAppliedOnSettingRD()
 		{
 			var rd = new ResourceDictionary {
@@ -208,12 +208,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label = new Label();
 			var layout = new StackLayout { Children = { label } };
 
-			Assert.AreEqual(label.TextColor, Label.TextColorProperty.DefaultValue);
+			Assert.Equal(label.TextColor, Label.TextColorProperty.DefaultValue);
 			layout.Resources = rd;
-			Assert.AreEqual(label.TextColor, Colors.Pink);
+			Assert.Equal(label.TextColor, Colors.Pink);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesAreAppliedOnSettingParrent()
 		{
 			var rd = new ResourceDictionary {
@@ -233,12 +233,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var layout = new StackLayout();
 			layout.Resources = rd;
 
-			Assert.AreEqual(label.TextColor, Label.TextColorProperty.DefaultValue);
+			Assert.Equal(label.TextColor, Label.TextColorProperty.DefaultValue);
 			layout.Children.Add(label);
-			Assert.AreEqual(label.TextColor, Colors.Pink);
+			Assert.Equal(label.TextColor, Colors.Pink);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesOverridenByStyle()
 		{
 			var rd = new ResourceDictionary {
@@ -258,10 +258,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
 			var layout = new StackLayout { Children = { label }, Resources = rd };
 
-			Assert.AreEqual(label.TextColor, Colors.Purple);
+			Assert.Equal(label.TextColor, Colors.Purple);
 		}
 
-		[Test]
+		[Fact]
 		public void UnsettingStyleReApplyImplicit()
 		{
 			var rd = new ResourceDictionary {
@@ -281,12 +281,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
 			var layout = new StackLayout { Children = { label }, Resources = rd };
 
-			Assert.AreEqual(label.TextColor, Colors.Purple);
+			Assert.Equal(label.TextColor, Colors.Purple);
 			label.Style = null;
-			Assert.AreEqual(label.TextColor, Colors.Pink);
+			Assert.Equal(label.TextColor, Colors.Pink);
 		}
 
-		[Test]
+		[Fact]
 		public void DynamicStyle()
 		{
 			var baseStyle0 = new Style(typeof(Label))
@@ -317,9 +317,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Style = style
 			};
 
-			Assert.AreEqual(Colors.Red, label0.BackgroundColor);
-			Assert.AreEqual(Colors.Red, label0.TextColor);
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label0.Text);
+			Assert.Equal(Colors.Red, label0.BackgroundColor);
+			Assert.Equal(Colors.Red, label0.TextColor);
+			Assert.Equal(Label.TextProperty.DefaultValue, label0.Text);
 
 			var layout0 = new StackLayout
 			{
@@ -331,18 +331,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.AreEqual(Colors.Red, label0.BackgroundColor);
-			Assert.AreEqual(Colors.Red, label0.TextColor);
-			Assert.AreEqual("foo", label0.Text);
+			Assert.Equal(Colors.Red, label0.BackgroundColor);
+			Assert.Equal(Colors.Red, label0.TextColor);
+			Assert.Equal("foo", label0.Text);
 
 			var label1 = new Label
 			{
 				Style = style
 			};
 
-			Assert.AreEqual(Colors.Red, label1.BackgroundColor);
-			Assert.AreEqual(Colors.Red, label1.TextColor);
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label1.Text);
+			Assert.Equal(Colors.Red, label1.BackgroundColor);
+			Assert.Equal(Colors.Red, label1.TextColor);
+			Assert.Equal(Label.TextProperty.DefaultValue, label1.Text);
 
 			var layout1 = new StackLayout
 			{
@@ -354,12 +354,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				{"basestyle", baseStyle1}
 			};
 
-			Assert.AreEqual(Colors.Red, label1.BackgroundColor);
-			Assert.AreEqual(Colors.Red, label1.TextColor);
-			Assert.AreEqual("bar", label1.Text);
+			Assert.Equal(Colors.Red, label1.BackgroundColor);
+			Assert.Equal(Colors.Red, label1.TextColor);
+			Assert.Equal("bar", label1.Text);
 		}
 
-		[Test]
+		[Fact]
 		public void TestTriggersAndBehaviors()
 		{
 			var behavior = new MockBehavior<Entry>();
@@ -379,23 +379,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var entry = new Entry { Style = style };
-			Assert.AreEqual("foo", entry.Text);
-			Assert.AreEqual(1d, entry.Scale);
+			Assert.Equal("foo", entry.Text);
+			Assert.Equal(1d, entry.Scale);
 
 			entry.IsPassword = true;
-			Assert.AreEqual(2d, entry.Scale);
+			Assert.Equal(2d, entry.Scale);
 
 			Assert.True(behavior.attached);
 
 			entry.Style = null;
 
-			Assert.AreEqual(Entry.TextProperty.DefaultValue, entry.Text);
+			Assert.Equal(Entry.TextProperty.DefaultValue, entry.Text);
 			Assert.True(entry.IsPassword);
-			Assert.AreEqual(1d, entry.Scale);
+			Assert.Equal(1d, entry.Scale);
 			Assert.True(behavior.detached);
 		}
 
-		[Test]
+		[Fact]
 		//Issue #2124
 		public void SetValueOverridesStyle()
 		{
@@ -407,10 +407,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var label = new Label { TextColor = Colors.White, Style = style };
-			Assert.AreEqual(Colors.White, label.TextColor);
+			Assert.Equal(Colors.White, label.TextColor);
 		}
 
-		[Test]
+		[Fact]
 		//https://bugzilla.xamarin.com/show_bug.cgi?id=28556
 		public void TriggersAppliedAfterSetters()
 		{
@@ -431,12 +431,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var entry = new Entry { IsEnabled = false, Style = style };
-			Assert.AreEqual(Colors.Red, entry.TextColor);
+			Assert.Equal(Colors.Red, entry.TextColor);
 			entry.IsEnabled = true;
-			Assert.AreEqual(Colors.Yellow, entry.TextColor);
+			Assert.Equal(Colors.Yellow, entry.TextColor);
 		}
 
-		[Test]
+		[Fact]
 		//https://bugzilla.xamarin.com/show_bug.cgi?id=31207
 		public async Task StyleDontHoldStrongReferences()
 		{
@@ -461,7 +461,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesNotAppliedToDerivedTypesByDefault()
 		{
 			var style = new Style(typeof(Label))
@@ -476,10 +476,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Content = new MyLabel(),
 			};
 
-			Assert.AreEqual(Label.TextProperty.DefaultValue, ((MyLabel)view.Content).Text);
+			Assert.Equal(Label.TextProperty.DefaultValue, ((MyLabel)view.Content).Text);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesAreAppliedToDerivedIfSpecified()
 		{
 			var style = new Style(typeof(Label))
@@ -495,10 +495,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Content = new MyLabel(),
 			};
 
-			Assert.AreEqual("Foo", ((MyLabel)view.Content).Text);
+			Assert.Equal("Foo", ((MyLabel)view.Content).Text);
 		}
 
-		[Test]
+		[Fact]
 		public void ClassStylesAreApplied()
 		{
 			var classstyle = new Style(typeof(Label))
@@ -523,11 +523,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					Style = style
 				}
 			};
-			Assert.AreEqual("Foo", ((Label)view.Content).Text);
-			Assert.AreEqual(Colors.Red, ((Label)view.Content).TextColor);
+			Assert.Equal("Foo", ((Label)view.Content).Text);
+			Assert.Equal(Colors.Red, ((Label)view.Content).TextColor);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesNotAppliedByDefaultIfAStyleExists()
 		{
 			var implicitstyle = new Style(typeof(Label))
@@ -550,11 +550,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					Style = style
 				}
 			};
-			Assert.AreEqual(Label.TextProperty.DefaultValue, ((Label)view.Content).Text);
-			Assert.AreEqual(Colors.Red, ((Label)view.Content).TextColor);
+			Assert.Equal(Label.TextProperty.DefaultValue, ((Label)view.Content).Text);
+			Assert.Equal(Colors.Red, ((Label)view.Content).TextColor);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStylesAppliedIfStyleCanCascade()
 		{
 			var implicitstyle = new Style(typeof(Label))
@@ -578,11 +578,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					Style = style
 				}
 			};
-			Assert.AreEqual("Foo", ((Label)view.Content).Text);
-			Assert.AreEqual(Colors.Red, ((Label)view.Content).TextColor);
+			Assert.Equal("Foo", ((Label)view.Content).Text);
+			Assert.Equal(Colors.Red, ((Label)view.Content).TextColor);
 		}
 
-		[Test]
+		[Fact]
 		public void MultipleStylesCanShareTheSameClassName()
 		{
 			var buttonStyle = new Style(typeof(Button))
@@ -633,20 +633,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.AreEqual(Colors.Pink, button.TextColor);
-			Assert.AreEqual(null, button.BackgroundColor);
+			Assert.Equal(Colors.Pink, button.TextColor);
+			Assert.Equal(null, button.BackgroundColor);
 
-			Assert.AreEqual(Colors.Pink, myButton.TextColor);
-			Assert.AreEqual(null, myButton.BackgroundColor);
+			Assert.Equal(Colors.Pink, myButton.TextColor);
+			Assert.Equal(null, myButton.BackgroundColor);
 
-			Assert.AreEqual(Colors.Pink, label.BackgroundColor);
-			Assert.AreEqual(null, label.TextColor);
+			Assert.Equal(Colors.Pink, label.BackgroundColor);
+			Assert.Equal(null, label.TextColor);
 
-			Assert.AreEqual(null, myLabel.BackgroundColor);
-			Assert.AreEqual(null, myLabel.TextColor);
+			Assert.Equal(null, myLabel.BackgroundColor);
+			Assert.Equal(null, myLabel.TextColor);
 		}
 
-		[Test]
+		[Fact]
 		public void StyleClassAreCorrecltyMerged()
 		{
 			var buttonStyle = new Style(typeof(Button))
@@ -688,14 +688,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.AreEqual(Colors.Pink, button.TextColor);
-			Assert.AreEqual(null, button.BackgroundColor);
+			Assert.Equal(Colors.Pink, button.TextColor);
+			Assert.Equal(null, button.BackgroundColor);
 
-			Assert.AreEqual(Colors.Pink, label.BackgroundColor);
-			Assert.AreEqual(null, label.TextColor);
+			Assert.Equal(Colors.Pink, label.BackgroundColor);
+			Assert.Equal(null, label.TextColor);
 		}
 
-		[Test]
+		[Fact]
 		public void StyleClassAreCorrecltyMergedForAlreadyParentedPArents()
 		{
 			var buttonStyle = new Style(typeof(Button))
@@ -736,14 +736,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			(cv.Content as StackLayout).Children.Add(button);
 			(cv.Content as StackLayout).Children.Add(label);
 
-			Assert.AreEqual(Colors.Pink, button.TextColor);
-			Assert.AreEqual(null, button.BackgroundColor);
+			Assert.Equal(Colors.Pink, button.TextColor);
+			Assert.Equal(null, button.BackgroundColor);
 
-			Assert.AreEqual(Colors.Pink, label.BackgroundColor);
-			Assert.AreEqual(null, label.TextColor);
+			Assert.Equal(Colors.Pink, label.BackgroundColor);
+			Assert.Equal(null, label.TextColor);
 		}
 
-		[Test]
+		[Fact]
 		public void MultipleStyleClassAreApplied()
 		{
 			var pinkStyle = new Style(typeof(Button))
@@ -773,11 +773,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Content = button
 			};
 
-			Assert.AreEqual(Colors.Pink, button.TextColor);
-			Assert.AreEqual(20d, button.FontSize);
+			Assert.Equal(Colors.Pink, button.TextColor);
+			Assert.Equal(20d, button.FontSize);
 		}
 
-		[Test]
+		[Fact]
 		public void ReplacingResourcesDoesNotOverrideManuallySetProperties()
 		{
 			var label0 = new Label
@@ -828,7 +828,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label1.TextColor, Is.EqualTo(Colors.Lavender));
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitInheritedStyleForTemplatedElementIsAppliedCorrectlyForContentPage()
 		{
 			var controlTemplate = new ControlTemplate(typeof(ContentPresenter));
@@ -853,7 +853,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(Equals(pageContent?.Parent, parentPage));
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitInheritedStyleForTemplatedElementIsAppliedCorrectlyForContentView()
 		{
 			var controlTemplate = new ControlTemplate(typeof(ContentPresenter));
@@ -892,7 +892,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 		}
 
-		[Test]
+		[Fact]
 		public void MismatchTargetTypeLogsWarningMessage1()
 		{
 			var s = new Style(typeof(Button));
@@ -900,11 +900,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			t.Style = s;
 
-			Assert.AreEqual(MockApplication.MockLogger.Messages.Count, 1);
-			Assert.AreEqual(MockApplication.MockLogger.Messages.FirstOrDefault(), $"Style TargetType Microsoft.Maui.Controls.Button is not compatible with element target type Microsoft.Maui.Controls.View");
+			Assert.Equal(MockApplication.MockLogger.Messages.Count, 1);
+			Assert.Equal(MockApplication.MockLogger.Messages.FirstOrDefault(), $"Style TargetType Microsoft.Maui.Controls.Button is not compatible with element target type Microsoft.Maui.Controls.View");
 		}
 
-		[Test]
+		[Fact]
 		public void MismatchTargetTypeLogsWarningMessage2()
 		{
 			var s = new Style(typeof(Button));
@@ -912,11 +912,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			t.Style = s;
 
-			Assert.AreEqual(MockApplication.MockLogger.Messages.Count, 1);
-			Assert.AreEqual(MockApplication.MockLogger.Messages.FirstOrDefault(), $"Style TargetType Microsoft.Maui.Controls.Button is not compatible with element target type Microsoft.Maui.Controls.Label");
+			Assert.Equal(MockApplication.MockLogger.Messages.Count, 1);
+			Assert.Equal(MockApplication.MockLogger.Messages.FirstOrDefault(), $"Style TargetType Microsoft.Maui.Controls.Button is not compatible with element target type Microsoft.Maui.Controls.Label");
 		}
 
-		[Test]
+		[Fact]
 		public void MatchTargetTypeDoesntLogWarningMessage()
 		{
 			var s = new Style(typeof(View));
@@ -928,7 +928,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"A warning was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Test]
+		[Fact]
 		public async Task CreatingStyledElementsOffMainThreadShouldNotCrash()
 		{
 			List<Task> tasks = new List<Task>();
@@ -955,7 +955,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await Task.WhenAll(tasks);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ApplyAndRemoveStyleOffMainThreadShouldNotCrash()
 		{
 			List<Task> tasks = new List<Task>();
@@ -984,7 +984,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await Task.WhenAll(tasks);
 		}
 
-		[Test]
+		[Fact]
 		//https://github.com/dotnet/maui/issues/4617
 		public void ClearValueShouldntUnapplyStyles()
 		{

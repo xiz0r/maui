@@ -1,13 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class FormattedStringTests : BaseTestFixture
+	
+	public class FormattedStringTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void NullSpansNotAllowed()
 		{
 			var fs = new FormattedString();
@@ -22,7 +22,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}, Throws.InstanceOf<ArgumentNullException>());
 		}
 
-		[Test]
+		[Fact]
 		public void SpanChangeTriggersSpansPropertyChange()
 		{
 			var span = new Span();
@@ -41,7 +41,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(spansChanged, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void SpanChangesUnsubscribes()
 		{
 			var span = new Span();
@@ -61,7 +61,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(spansChanged, Is.False);
 		}
 
-		[Test]
+		[Fact]
 		public void AddingSpanTriggersSpansPropertyChange()
 		{
 			var span = new Span();
@@ -79,7 +79,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(spansChanged, Is.True);
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStringConversion()
 		{
 			string original = "fubar";
@@ -90,7 +90,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(fs.Spans[0].Text, Is.EqualTo(original));
 		}
 
-		[Test]
+		[Fact]
 		public void ImplicitStringConversionNull()
 		{
 			string original = null;

@@ -8,19 +8,19 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using Grid = Microsoft.Maui.Controls.Compatibility.Grid;
 
-	[TestFixture]
-	public class MultiBindingTests : BaseTestFixture
+	
+	public class MultiBindingTests : BaseTestFixtureXUnit
 	{
 		const string c_Fallback = "First Middle Last";
 		const string c_TargetNull = "No Name Given";
 
-		[Test]
+		[Fact]
 		public void TestChildOneWayOnMultiTwoWay()
 		{
 			var group = new GroupViewModel();
@@ -48,14 +48,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 			stack.Children.Add(label);
 
-			Assert.AreEqual(oldName, label.Text);
-			Assert.AreEqual(oldName, group.Person1.FullName);
+			Assert.Equal(oldName, label.Text);
+			Assert.Equal(oldName, group.Person1.FullName);
 
 			label.SetValueCore(Label.TextProperty, $"{oldFirstName.ToUpper()} {oldMiddleName} {oldLastName.ToUpper()}", Internals.SetValueFlags.None);
-			Assert.AreEqual($"{oldFirstName} {oldMiddleName} {oldLastName.ToUpper()}", group.Person1.FullName);
+			Assert.Equal($"{oldFirstName} {oldMiddleName} {oldLastName.ToUpper()}", group.Person1.FullName);
 		}
 
-		[Test]
+		[Fact]
 		public void TestRelativeSources()
 		{
 			// Self
@@ -76,7 +76,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					},
 					Converter = new StringConcatenationConverter()
 				});
-			Assert.AreEqual("Courier New 12 Italic", entry1.Text);
+			Assert.Equal("Courier New 12 Italic", entry1.Text);
 			// Our unit test's ConvertBack should throw an exception below because the desired
 			// return types aren't all strings
 			Assert.Throws<Exception>(() => entry1.SetValueCore(Entry.TextProperty, "Arial 12 Italic", Internals.SetValueFlags.None));
@@ -104,7 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(cp.IsVisible);
 		}
 
-		[Test]
+		[Fact]
 		public void TestNestedMultiBindings()
 		{
 			var group = new GroupViewModel();
@@ -176,7 +176,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(checkBox.IsChecked);
 		}
 
-		[Test]
+		[Fact]
 		public void TestConverterReturnValues()
 		{
 			var group = new GroupViewModel();
@@ -193,16 +193,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label1 = GenerateNameLabel(nameof(group.Person1), BindingMode.TwoWay);
 			stack.Children.Add(label1);
 			group.Person1.FirstName = "DoNothing";
-			Assert.AreEqual(oldName, label1.Text);
-			Assert.AreEqual("DoNothing", group.Person1.FirstName);
+			Assert.Equal(oldName, label1.Text);
+			Assert.Equal("DoNothing", group.Person1.FirstName);
 
 			group.Person1.FirstName = "UnsetValue";
-			Assert.AreEqual(c_Fallback, label1.Text);
-			Assert.AreEqual("UnsetValue", group.Person1.FirstName);
+			Assert.Equal(c_Fallback, label1.Text);
+			Assert.Equal("UnsetValue", group.Person1.FirstName);
 
 			group.Person1.FirstName = "null";
-			Assert.AreEqual(c_TargetNull, label1.Text);
-			Assert.AreEqual("null", group.Person1.FirstName);
+			Assert.Equal(c_TargetNull, label1.Text);
+			Assert.Equal("null", group.Person1.FirstName);
 
 			// "ConvertBack" return values
 			oldName = group.Person2.FullName;
@@ -213,42 +213,42 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label2 = GenerateNameLabel(nameof(group.Person2), BindingMode.TwoWay);
 			stack.Children.Add(label2);
 			label2.SetValueCore(Label.TextProperty, $"DoNothing {oldMiddleName} {oldLastName.ToUpper()}", Internals.SetValueFlags.None);
-			Assert.AreEqual($"{oldFirstName} {oldMiddleName} {oldLastName.ToUpper()}", group.Person2.FullName);
-			Assert.AreEqual($"DoNothing {oldMiddleName} {oldLastName.ToUpper()}", label2.Text);
+			Assert.Equal($"{oldFirstName} {oldMiddleName} {oldLastName.ToUpper()}", group.Person2.FullName);
+			Assert.Equal($"DoNothing {oldMiddleName} {oldLastName.ToUpper()}", label2.Text);
 
 			label2.Text = oldName;
-			Assert.AreEqual(oldName, group.Person2.FullName);
-			Assert.AreEqual(oldName, label2.Text);
+			Assert.Equal(oldName, group.Person2.FullName);
+			Assert.Equal(oldName, label2.Text);
 			// Any UnsetValue prevents any changes to source but target accepts value
 			label2.SetValueCore(Label.TextProperty, $"{oldFirstName.ToUpper()} UnsetValue {oldLastName}");
-			Assert.AreEqual($"{oldFirstName.ToUpper()} {oldMiddleName} {oldLastName}", group.Person2.FullName);
-			Assert.AreEqual($"{oldFirstName.ToUpper()} UnsetValue {oldLastName}", label2.Text);
+			Assert.Equal($"{oldFirstName.ToUpper()} {oldMiddleName} {oldLastName}", group.Person2.FullName);
+			Assert.Equal($"{oldFirstName.ToUpper()} UnsetValue {oldLastName}", label2.Text);
 
 			label2.Text = oldName;
-			Assert.AreEqual(oldName, group.Person2.FullName);
-			Assert.AreEqual(oldName, label2.Text);
+			Assert.Equal(oldName, group.Person2.FullName);
+			Assert.Equal(oldName, label2.Text);
 			label2.SetValueCore(Label.TextProperty, "null");
 			// Returning null prevents changes to source but target accepts value
-			Assert.AreEqual(oldName, group.Person2.FullName);
-			Assert.AreEqual("null", label2.Text);
+			Assert.Equal(oldName, group.Person2.FullName);
+			Assert.Equal("null", label2.Text);
 
 			// Insufficient memebrs in ConvertBack array don't affect remaining
 			label2.Text = oldName;
-			Assert.AreEqual(oldName, group.Person2.FullName);
-			Assert.AreEqual(oldName, label2.Text);
+			Assert.Equal(oldName, group.Person2.FullName);
+			Assert.Equal(oldName, label2.Text);
 			label2.SetValueCore(Label.TextProperty, $"Duck Duck", Internals.SetValueFlags.None);
-			Assert.AreEqual($"Duck Duck {oldLastName}", group.Person2.FullName);
-			Assert.AreEqual($"Duck Duck", label2.Text);
+			Assert.Equal($"Duck Duck {oldLastName}", group.Person2.FullName);
+			Assert.Equal($"Duck Duck", label2.Text);
 
 			// Too many members are no problem either 
 			label2.Text = oldName;
-			Assert.AreEqual(oldName, group.Person2.FullName);
+			Assert.Equal(oldName, group.Person2.FullName);
 			label2.SetValueCore(Label.TextProperty, oldName + " Extra", Internals.SetValueFlags.None);
-			Assert.AreEqual(oldName, group.Person2.FullName);
-			Assert.AreEqual(oldName + " Extra", label2.Text);
+			Assert.Equal(oldName, group.Person2.FullName);
+			Assert.Equal(oldName + " Extra", label2.Text);
 		}
 
-		//[Test]
+		//[Fact]
 		//public void TestEfficiency()
 		//{
 		//	var group = new GroupViewModel();
@@ -275,28 +275,28 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		//	});
 
 		//	// Initial binding should result in 1 Convert, no ConvertBack's
-		//	Assert.AreEqual(1, converter.Converts);
-		//	Assert.AreEqual(0, converter.ConvertBacks);
+		//	Assert.Equal(1, converter.Converts);
+		//	Assert.Equal(0, converter.ConvertBacks);
 
 		//	// Parenting results in bctx change; should be 1 additional Convert, no ConvertBack's
 		//	stack.Children.Add(label);
-		//	Assert.AreEqual(group.Person1.FullName, label.Text);
-		//	Assert.AreEqual(2, converter.Converts);
-		//	Assert.AreEqual(0, converter.ConvertBacks);
+		//	Assert.Equal(group.Person1.FullName, label.Text);
+		//	Assert.Equal(2, converter.Converts);
+		//	Assert.Equal(0, converter.ConvertBacks);
 
 		//	// Source change results in 1 additional Convert, no ConvertBack's
 		//	group.Person1.FirstName = group.Person1.FullName.ToUpper();
-		//	Assert.AreEqual(3, converter.Converts);
-		//	Assert.AreEqual(0, converter.ConvertBacks);
+		//	Assert.Equal(3, converter.Converts);
+		//	Assert.Equal(0, converter.ConvertBacks);
 
 		//	// Target change results in 1 ConvertBack, one additional Convert
 		//	label.Text = oldName;
-		//	Assert.AreEqual(oldName, group.Person1.FullName);
-		//	Assert.AreEqual(4, converter.Converts);
-		//	Assert.AreEqual(1, converter.ConvertBacks);
+		//	Assert.Equal(oldName, group.Person1.FullName);
+		//	Assert.Equal(4, converter.Converts);
+		//	Assert.Equal(1, converter.ConvertBacks);
 		//}
 
-		[Test]
+		[Fact]
 		public void TestBindingModes()
 		{
 			var group = new GroupViewModel();
@@ -308,40 +308,40 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			string oldName = group.Person1.FullName;
 			var label1W = GenerateNameLabel(nameof(group.Person1), BindingMode.OneWay);
 			stack.Children.Add(label1W);
-			Assert.AreEqual(group.Person1.FullName, label1W.Text);
+			Assert.Equal(group.Person1.FullName, label1W.Text);
 			label1W.SetValueCore(Label.TextProperty, "don't change source", Internals.SetValueFlags.None);
-			Assert.AreEqual(oldName, group.Person1.FullName);
+			Assert.Equal(oldName, group.Person1.FullName);
 
 			var label2W = GenerateNameLabel(nameof(group.Person2), BindingMode.TwoWay);
 			stack.Children.Add(label2W);
-			Assert.AreEqual(group.Person2.FullName, label2W.Text);
+			Assert.Equal(group.Person2.FullName, label2W.Text);
 			label2W.Text = group.Person2.FullName.ToUpper();
-			Assert.AreEqual(group.Person2.FullName.ToUpper(), label2W.Text);
+			Assert.Equal(group.Person2.FullName.ToUpper(), label2W.Text);
 
 			oldName = group.Person3.FullName;
 			var label1WTS = GenerateNameLabel(nameof(group.Person3), BindingMode.OneWayToSource);
 			stack.Children.Add(label1WTS);
-			Assert.AreEqual(Label.TextProperty.DefaultValue, label1WTS.Text);
+			Assert.Equal(Label.TextProperty.DefaultValue, label1WTS.Text);
 			label1WTS.SetValueCore(Label.TextProperty, oldName, Internals.SetValueFlags.None);
-			Assert.AreEqual(oldName, label1WTS.Text);
-			Assert.AreEqual(oldName, group.Person3.FullName);
+			Assert.Equal(oldName, label1WTS.Text);
+			Assert.Equal(oldName, group.Person3.FullName);
 
 			oldName = group.Person4.FullName;
 			var label1T = GenerateNameLabel(nameof(group.Person4), BindingMode.OneTime);
 			stack.Children.Add(label1T);
-			Assert.AreEqual(group.Person4.FullName, label1T.Text);
+			Assert.Equal(group.Person4.FullName, label1T.Text);
 			group.Person4.FirstName = "Do";
 			group.Person4.MiddleName = "Not";
 			group.Person4.LastName = "Update";
 			// changing source values should not trigger update
-			Assert.AreEqual(oldName, label1T.Text);
-			Assert.AreEqual("Do Not Update", group.Person4.FullName);
+			Assert.Equal(oldName, label1T.Text);
+			Assert.Equal("Do Not Update", group.Person4.FullName);
 			group.Person4 = group.Person1;
 			// changing the bctx should trigger update
-			Assert.AreEqual(group.Person1.FullName, label1T.Text);
+			Assert.Equal(group.Person1.FullName, label1T.Text);
 		}
 
-		[Test]
+		[Fact]
 		public void TestStringFormat()
 		{
 			var property = BindableProperty.Create("foo", typeof(string), typeof(MockBindable), null);
@@ -360,7 +360,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.GetValue(property), Is.EqualTo("FOO - 42 - BAZ"));
 		}
 
-		[Test]
+		[Fact]
 		public void TestConverterWithStringFormat()
 		{
 			var property = BindableProperty.Create("foo", typeof(string), typeof(MockBindable), null);

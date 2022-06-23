@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls.Internals;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class NotifyCollectionChangedEventArgsExtensionsTests : BaseTestFixture
+	
+	public class NotifyCollectionChangedEventArgsExtensionsTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void Add()
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
@@ -28,10 +28,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Add("monkey");
 
-			CollectionAssert.AreEqual(items, applied);
+			CollectionAssert.Equal(items, applied);
 		}
 
-		[Test]
+		[Fact]
 		public void Insert()
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
@@ -49,10 +49,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Insert(1, "monkey");
 
-			CollectionAssert.AreEqual(items, applied);
+			CollectionAssert.Equal(items, applied);
 		}
 
-		[Test]
+		[Fact]
 		public void Move()
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
@@ -71,10 +71,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Move(0, 2);
 
-			CollectionAssert.AreEqual(items, applied);
+			CollectionAssert.Equal(items, applied);
 		}
 
-		[Test]
+		[Fact]
 		public void Replace()
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
@@ -93,7 +93,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items[1] = "monkey";
 
-			CollectionAssert.AreEqual(items, applied);
+			CollectionAssert.Equal(items, applied);
 		}
 	}
 }

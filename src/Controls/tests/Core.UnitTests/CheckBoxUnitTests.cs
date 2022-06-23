@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class CheckBoxUnitTests : BaseTestFixture
+	
+	public class CheckBoxUnitTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			var checkBox = new CheckBox();
@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(checkBox.IsChecked);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOnEvent()
 		{
 			var checkBox = new CheckBox();
@@ -30,7 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(fired);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOnEventNotDoubleFired()
 		{
 			var checkBox = new CheckBox();

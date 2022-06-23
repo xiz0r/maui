@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public abstract class MultiPageTests<T> : BaseTestFixture
+	public abstract class MultiPageTests<T> : BaseTestFixtureXUnit
 		where T : Page
 	{
 		protected abstract MultiPage<T> CreateMultiPage();
 		protected abstract T CreateContainedPage();
 		protected abstract int GetIndex(T page);
 
-		[Test]
+		[Fact]
 		public void TestSetChildren()
 		{
 			var container = CreateMultiPage();
@@ -33,12 +33,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			container.Children.Add(CreateContainedPage());
 			container.Children.Add(CreateContainedPage());
 
-			Assert.AreEqual(2, childCount);
-			Assert.AreEqual(2, ((IElementController)page).LogicalChildren.Count);
-			Assert.AreEqual(2, pagesAdded);
+			Assert.Equal(2, childCount);
+			Assert.Equal(2, ((IElementController)page).LogicalChildren.Count);
+			Assert.Equal(2, pagesAdded);
 		}
 
-		[Test]
+		[Fact]
 		public void TestOverwriteChildren()
 		{
 			var page = CreateMultiPage();
@@ -56,12 +56,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.Children.Add(CreateContainedPage());
 			page.Children.Add(CreateContainedPage());
 
-			Assert.AreEqual(2, removeCount);
-			Assert.AreEqual(2, childCount);
-			Assert.AreEqual(2, ((IElementController)page).LogicalChildren.Count);
+			Assert.Equal(2, removeCount);
+			Assert.Equal(2, childCount);
+			Assert.Equal(2, ((IElementController)page).LogicalChildren.Count);
 		}
 
-		[Test]
+		[Fact]
 		public void CurrentPageSetAfterAdd()
 		{
 			var page = CreateMultiPage();
@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(property, Is.True, "CurrentPage property change did not fire");
 		}
 
-		[Test]
+		[Fact]
 		public void CurrentPageChangedAfterRemove()
 		{
 			var page = CreateMultiPage();
@@ -104,7 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(property, Is.True, "CurrentPage property change did not fire");
 		}
 
-		[Test]
+		[Fact]
 		public void CurrentPageNullAfterRemove()
 		{
 			var page = CreateMultiPage();
@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(property, Is.True, "CurrentPage property change did not fire");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatedPage()
 		{
 			var page = CreateMultiPage();
@@ -154,7 +154,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage((Page)pages[1], "Bar");
 		}
 
-		[Test]
+		[Fact]
 		public void SelectedItemSetAfterAdd()
 		{
 			var page = CreateMultiPage();
@@ -182,7 +182,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(selected, Is.True, "SelectedItem property change did not fire");
 		}
 
-		[Test]
+		[Fact]
 		public void SelectedItemNullAfterRemove()
 		{
 			var page = CreateMultiPage();
@@ -209,8 +209,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(selected, Is.True, "SelectedItem property change did not fire");
 		}
 
-		[Test]
-		[Description("When ItemsSource is set with items, the first item should automatically be selected")]
+		[Fact("When ItemsSource is set with items, the first item should automatically be selected")]
 		public void SelectedItemSetAfterItemsSourceSet()
 		{
 			var page = CreateMultiPage();
@@ -233,7 +232,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(selected, Is.True, "SelectedItem property change did not fire");
 		}
 
-		[Test]
+		[Fact]
 		public void SelectedItemNoLongerPresent()
 		{
 			var page = CreateMultiPage();
@@ -248,7 +247,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(page.SelectedItem, Is.SameAs(items[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void SelectedItemAfterMove()
 		{
 			var page = CreateMultiPage();
@@ -270,7 +269,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(page.CurrentPage.BindingContext, Is.SameAs(items[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void UntemplatedItemsSourcePage()
 		{
 			var page = CreateMultiPage();
@@ -283,7 +282,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((Page)pages[1]).Title, Is.EqualTo("Bar"));
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesAdded()
 		{
 			var page = CreateMultiPage();
@@ -319,7 +318,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 2, "Baz");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesRangeAdded()
 		{
 			var page = CreateMultiPage();
@@ -368,7 +367,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 3, "Bam");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesInserted()
 		{
 			var page = CreateMultiPage();
@@ -404,7 +403,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 2, "Bar");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesRangeInserted()
 		{
 			var page = CreateMultiPage();
@@ -441,7 +440,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 3, "Bar");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesRemoved()
 		{
 			var page = CreateMultiPage();
@@ -475,7 +474,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 0, "Bar");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesRangeRemoved()
 		{
 			var page = CreateMultiPage();
@@ -511,7 +510,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 2, "Who");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesReordered()
 		{
 			var page = CreateMultiPage();
@@ -546,7 +545,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 1, "Foo");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesRangeReorderedForward()
 		{
 			var page = CreateMultiPage();
@@ -585,7 +584,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 5, "Where");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesRangeReorderedBackward()
 		{
 			var page = CreateMultiPage();
@@ -625,7 +624,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 6, "When");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatePagesReplaced()
 		{
 			var page = CreateMultiPage();
@@ -660,7 +659,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage(pages, 1, "Bar");
 		}
 
-		[Test]
+		[Fact]
 		public void TemplatedPagesSourceReplaced()
 		{
 			var page = CreateMultiPage();
@@ -692,8 +691,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			assertPage((Page)pages[1], "Bar");
 		}
 
-		[Test]
-		[Description("If you have a templated set of items, setting CurrentPage (usually from renderers) should update SelectedItem properly")]
+		[Fact("If you have a templated set of items, setting CurrentPage (usually from renderers) should update SelectedItem properly")]
 		public void SettingCurrentPageWithTemplatesUpdatesSelectedItem()
 		{
 			var page = CreateMultiPage();
@@ -710,7 +708,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(page.SelectedItem, Is.SameAs(items[1]));
 		}
 
-		[Test]
+		[Fact]
 		public void PagesChangedOnItemsSourceChange()
 		{
 			var page = CreateMultiPage();
@@ -733,7 +731,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(fail, Is.EqualTo(0), "PagesChanged was raised with an unexpected action");
 		}
 
-		[Test]
+		[Fact]
 		public void PagesChangedOnTemplateChange()
 		{
 			var page = CreateMultiPage();
@@ -759,7 +757,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(fail, Is.EqualTo(0), "PagesChanged was raised with an unexpected action");
 		}
 
-		[Test]
+		[Fact]
 		public void SelectedItemSetBeforeTemplate()
 		{
 			var page = CreateMultiPage();
@@ -775,7 +773,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(page.SelectedItem, Is.SameAs(items[1]));
 		}
 
-		[Test]
+		[Fact]
 		public void CurrentPageUpdatedWithTemplate()
 		{
 			var page = CreateMultiPage();
@@ -804,7 +802,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(page.CurrentPage, Is.Not.SameAs(untemplated));
 		}
 
-		[Test]
+		[Fact]
 		public void CurrentPageChanged()
 		{
 			var page = CreateMultiPage();

@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
-	[TestFixture]
+	
 	public class ShellTests : ShellTestBase
 	{
 
-		[Test]
+		[Fact]
 		public void DefaultState()
 		{
 			var shell = new Shell();
@@ -22,7 +22,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsEmpty(shell.Items);
 		}
 
-		[Test]
+		[Fact]
 		public void CurrentItemAutoSets()
 		{
 			var shell = new Shell();
@@ -58,20 +58,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var item2 = shell.Items[1];
 
-			Assert.AreEqual(shellElement.FindParentOfType<ShellItem>(), item2);
+			Assert.Equal(shellElement.FindParentOfType<ShellItem>(), item2);
 
 			if (useShellContent)
 				shell.CurrentItem = (ShellContent)shellElement;
 			else
 				shell.CurrentItem = (ShellSection)shellElement;
 
-			Assert.AreEqual(2, shell.Items.Count);
-			Assert.AreEqual(shellElement.FindParentOfType<ShellItem>(), item2);
-			Assert.AreEqual(item2, shell.CurrentItem);
+			Assert.Equal(2, shell.Items.Count);
+			Assert.Equal(shellElement.FindParentOfType<ShellItem>(), item2);
+			Assert.Equal(item2, shell.CurrentItem);
 		}
 
 
-		[Test]
+		[Fact]
 		public void SettingCurrentItemOnShellViaContentPage()
 		{
 			var page1 = new ContentPage();
@@ -92,14 +92,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			shell.CurrentItem = page2;
-			Assert.AreEqual(1, shell.Items.Count);
-			Assert.AreEqual(2, shell.Items[0].Items.Count);
-			Assert.AreEqual(1, shell.Items[0].Items[0].Items.Count);
-			Assert.AreEqual(1, shell.Items[0].Items[1].Items.Count);
-			Assert.AreEqual(shell.CurrentItem.CurrentItem, shell.Items[0].Items[1]);
+			Assert.Equal(1, shell.Items.Count);
+			Assert.Equal(2, shell.Items[0].Items.Count);
+			Assert.Equal(1, shell.Items[0].Items[0].Items.Count);
+			Assert.Equal(1, shell.Items[0].Items[1].Items.Count);
+			Assert.Equal(shell.CurrentItem.CurrentItem, shell.Items[0].Items[1]);
 		}
 
-		[Test]
+		[Fact]
 		public void SetCurrentItemAddsToShellCollection()
 		{
 			var shell = new Shell();
@@ -109,17 +109,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.CurrentItem = shellItem;
 			Assert.IsTrue(shell.Items.Contains(shellItem));
-			Assert.AreEqual(shell.CurrentItem, shellItem);
+			Assert.Equal(shell.CurrentItem, shellItem);
 
 			shell.CurrentItem = shellSection;
-			Assert.AreEqual(shell.CurrentItem, shellSection.Parent);
+			Assert.Equal(shell.CurrentItem, shellSection.Parent);
 
 			shell.CurrentItem = shellContent;
-			Assert.AreEqual(shell.CurrentItem, shellContent.Parent.Parent);
+			Assert.Equal(shell.CurrentItem, shellContent.Parent.Parent);
 		}
 
 
-		[Test]
+		[Fact]
 		public void ShellChildrenBindingContext()
 		{
 			var shell = new Shell();
@@ -137,7 +137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame((shellItem.Items[0].Items[0].Content as BindableObject).BindingContext, viewModel);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellPropagateBindingContextWhenAddingNewShellItem()
 		{
 			var shell = new Shell();
@@ -155,7 +155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame((shellItem.Items[0].Items[0].Content as BindableObject).BindingContext, viewModel);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellPropagateBindingContextWhenAddingNewShellSection()
 		{
 			var shell = new Shell();
@@ -172,7 +172,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame((GetItems(shellSection)[0].Content as BindableObject).BindingContext, viewModel);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellPropagateBindingContextWhenAddingNewShellContent()
 		{
 			var shell = new Shell();
@@ -188,7 +188,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame((shellContent.Content as BindableObject).BindingContext, viewModel);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellPropagateBindingContextWhenChangingContent()
 		{
 			var shell = new Shell();
@@ -203,7 +203,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(contentPage.BindingContext, viewModel);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellPropagateBindingContextWhenPushingContent()
 		{
 			var shell = new Shell();
@@ -217,7 +217,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(contentPage.BindingContext, viewModel);
 		}
 
-		[Test]
+		[Fact]
 		public void NavigationProxyWireUpTest()
 		{
 			var page = new ContentPage();
@@ -237,7 +237,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public void CurrentItemDoesNotChangeOnSecondAdd()
 		{
 			var shell = new Shell();
@@ -252,10 +252,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.Items.Add(new ShellItem());
 
-			Assert.AreEqual(shellItem, shell.CurrentItem);
+			Assert.Equal(shellItem, shell.CurrentItem);
 		}
 
-		[Test]
+		[Fact]
 		public void SimpleGoTo()
 		{
 			var shell = new Shell();
@@ -284,7 +284,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tabfour/content"));
 		}
 
-		[Test]
+		[Fact]
 		public async Task CaseIgnoreRouting()
 		{
 			var routes = new[] { "Tab1", "TAB2", "@-_-@", "+:~", "=%", "Super_Simple+-Route.doc", "1/2", @"1\2/3", "app://tab" };
@@ -297,7 +297,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 				var content1 = Routing.GetOrCreateContent(formattedRoute, services);
 				Assert.IsNotNull(content1);
-				Assert.AreEqual(Routing.GetRoute(content1), formattedRoute);
+				Assert.Equal(Routing.GetRoute(content1), formattedRoute);
 			}
 
 			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("app://IMPL_tab21", typeof(ShellItem)));
@@ -315,7 +315,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("app://tab2/IMPL_tab21", typeof(ShellItem)));
 		}
 
-		[Test]
+		[Fact]
 		public async Task FailWhenAddingDuplicatedRouting()
 		{
 			var route = "dogs";
@@ -324,7 +324,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("dogs", typeof(ContentPage)));
 		}
 
-		[Test]
+		[Fact]
 		public async Task SucceedWhenAddingDuplicateRouteOfSameType()
 		{
 			var route = "dogs";
@@ -332,7 +332,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Routing.RegisterRoute(route, typeof(ShellItem));
 		}
 
-		[Test]
+		[Fact]
 		public async Task RelativeGoTo()
 		{
 			Routing.RegisterRoute("RelativeGoTo_Page1", typeof(ContentPage));
@@ -394,7 +394,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync(new ShellNavigationState($"../two/tab23/content?{nameof(ShellTestPage.SomeQueryParameter)}=1234"));
 			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/two/tab23/content/"));
-			Assert.AreEqual("1234", (two.CurrentItem.CurrentItem.Content as ShellTestPage).SomeQueryParameter);
+			Assert.Equal("1234", (two.CurrentItem.CurrentItem.Content as ShellTestPage).SomeQueryParameter);
 
 			await shell.GoToAsync(new ShellNavigationState($"../one/tab11#fragment"));
 			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/one/tab11/content/"));
@@ -402,7 +402,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task DotDotAdheresToAnimationParameter()
 		{
 			Routing.RegisterRoute(nameof(DotDotAdheresToAnimationParameter), typeof(ContentPage));
@@ -413,7 +413,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(shell.LastPopWasAnimated);
 		}
 
-		[Test]
+		[Fact]
 		public async Task DefaultRoutesMaintainedIfThatsAllThereIs()
 		{
 			Routing.RegisterRoute(nameof(DefaultRoutesMaintainedIfThatsAllThereIs), typeof(ContentPage));
@@ -433,7 +433,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("..");
 		}
 
-		[Test]
+		[Fact]
 		public async Task RoutePathDefaultRemovalWithGlobalRoutesKeepsOneDefaultRoute()
 		{
 			var shell = new Shell();
@@ -448,7 +448,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task RoutePathDefaultRemovalWithGlobalRoutesKeepsOneNamedRoute()
 		{
 			var shell = new Shell();
@@ -457,12 +457,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Routing.RegisterRoute(nameof(RoutePathDefaultRemovalWithGlobalRoutesKeepsOneNamedRoute), typeof(ContentPage));
 			await shell.GoToAsync(nameof(RoutePathDefaultRemovalWithGlobalRoutesKeepsOneNamedRoute));
 
-			Assert.AreEqual($"//content/{nameof(RoutePathDefaultRemovalWithGlobalRoutesKeepsOneNamedRoute)}", shell.CurrentState.Location.ToString());
+			Assert.Equal($"//content/{nameof(RoutePathDefaultRemovalWithGlobalRoutesKeepsOneNamedRoute)}", shell.CurrentState.Location.ToString());
 		}
 
 
 
-		[Test]
+		[Fact]
 		public async Task OnBackbuttonPressedPageReturnsTrue()
 		{
 			TestShell shell = new TestShell();
@@ -472,10 +472,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync($"OnBackbuttonPressedFiresOnPage?CancelNavigationOnBackButtonPressed=true");
 
 			shell.SendBackButtonPressed();
-			Assert.AreEqual(2, shell.Navigation.NavigationStack.Count);
+			Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 		}
 
-		[Test]
+		[Fact]
 		public async Task OnBackbuttonPressedPageReturnsFalse()
 		{
 			TestShell shell = new TestShell();
@@ -485,10 +485,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync($"OnBackbuttonPressedFiresOnPage?CancelNavigationOnBackButtonPressed=false");
 
 			shell.SendBackButtonPressed();
-			Assert.AreEqual(1, shell.Navigation.NavigationStack.Count);
+			Assert.Equal(1, shell.Navigation.NavigationStack.Count);
 		}
 
-		[Test]
+		[Fact]
 		public async Task OnBackbuttonPressedShellReturnsTrue()
 		{
 			TestShell shell = new TestShell();
@@ -498,10 +498,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync($"OnBackbuttonPressedShellReturnsTrue");
 			shell.OnBackButtonPressedFunc = () => true;
 			shell.SendBackButtonPressed();
-			Assert.AreEqual(2, shell.Navigation.NavigationStack.Count);
+			Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 		}
 
-		[Test]
+		[Fact]
 		public void ModalSetters()
 		{
 			var page = new ContentPage();
@@ -515,7 +515,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(IsAnimated(page));
 		}
 
-		[Test]
+		[Fact]
 		public void FlyoutHeaderProjection()
 		{
 			var shell = new Shell();
@@ -527,7 +527,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.FlyoutHeader = label;
 
-			Assert.AreEqual(((IShellController)shell).FlyoutHeader, label);
+			Assert.Equal(((IShellController)shell).FlyoutHeader, label);
 
 			Label label2 = null;
 
@@ -536,15 +536,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				return label2 = new Label();
 			});
 
-			Assert.AreEqual(((IShellController)shell).FlyoutHeader, label2);
-			Assert.AreEqual(((IShellController)shell).FlyoutHeader.BindingContext, viewModel);
+			Assert.Equal(((IShellController)shell).FlyoutHeader, label2);
+			Assert.Equal(((IShellController)shell).FlyoutHeader.BindingContext, viewModel);
 
 			shell.FlyoutHeaderTemplate = null;
 
-			Assert.AreEqual(((IShellController)shell).FlyoutHeader, label);
+			Assert.Equal(((IShellController)shell).FlyoutHeader, label);
 		}
 
-		[Test]
+		[Fact]
 		public async Task FlyoutNavigateToImplicitContentPage()
 		{
 			var shell = new Shell();
@@ -565,20 +565,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IShellController shellController = (IShellController)shell;
 
 			await shellController.OnFlyoutItemSelectedAsync(shellSection2);
-			Assert.AreEqual(shellSection2, shell.CurrentItem.CurrentItem);
+			Assert.Equal(shellSection2, shell.CurrentItem.CurrentItem);
 
 			await shellController.OnFlyoutItemSelectedAsync(shellSection);
-			Assert.AreEqual(shellSection, shell.CurrentItem.CurrentItem);
+			Assert.Equal(shellSection, shell.CurrentItem.CurrentItem);
 
 			await shellController.OnFlyoutItemSelectedAsync(implicitSection);
-			Assert.AreEqual(implicitSection, shell.CurrentItem.CurrentItem);
+			Assert.Equal(implicitSection, shell.CurrentItem.CurrentItem);
 
 		}
 
 
 
 
-		[Test]
+		[Fact]
 		public async Task UriNavigationTests()
 		{
 			var shell = new Shell();
@@ -589,13 +589,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item2);
 
 			shell.GoToAsync("//rootlevelcontent2");
-			Assert.AreEqual(shell.CurrentItem, item2);
+			Assert.Equal(shell.CurrentItem, item2);
 
 			shell.GoToAsync("//rootlevelcontent1");
-			Assert.AreEqual(shell.CurrentItem, item1);
+			Assert.Equal(shell.CurrentItem, item1);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TitleViewBindingContext()
 		{
 			Shell shell = new Shell();
@@ -610,12 +610,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(label);
 			Shell.SetTitleView(page, layout);
 
-			Assert.AreEqual("Binding", label.Text);
+			Assert.Equal("Binding", label.Text);
 			page.BindingContext = new { Text = "Binding Changed" };
-			Assert.AreEqual("Binding Changed", label.Text);
+			Assert.Equal("Binding Changed", label.Text);
 		}
 
-		[Test]
+		[Fact]
 		public async Task VisualPropagationPageLevel()
 		{
 			Shell shell = new Shell();
@@ -630,14 +630,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IVisualController visualController = button as IVisualController;
 
 
-			Assert.AreEqual(page, titleView.Parent);
+			Assert.Equal(page, titleView.Parent);
 
-			Assert.AreEqual(VisualMarker.Default, ((IVisualController)button).EffectiveVisual);
+			Assert.Equal(VisualMarker.Default, ((IVisualController)button).EffectiveVisual);
 			page.Visual = VisualMarker.Material;
-			Assert.AreEqual(VisualMarker.Material, ((IVisualController)button).EffectiveVisual);
+			Assert.Equal(VisualMarker.Material, ((IVisualController)button).EffectiveVisual);
 		}
 
-		[Test]
+		[Fact]
 		public async Task VisualPropagationShellLevel()
 		{
 			Shell shell = new Shell();
@@ -652,13 +652,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IVisualController visualController = button as IVisualController;
 
 
-			Assert.AreEqual(page, titleView.Parent);
-			Assert.AreEqual(VisualMarker.Default, ((IVisualController)button).EffectiveVisual);
+			Assert.Equal(page, titleView.Parent);
+			Assert.Equal(VisualMarker.Default, ((IVisualController)button).EffectiveVisual);
 			shell.Visual = VisualMarker.Material;
-			Assert.AreEqual(VisualMarker.Material, ((IVisualController)button).EffectiveVisual);
+			Assert.Equal(VisualMarker.Material, ((IVisualController)button).EffectiveVisual);
 		}
 
-		[Test]
+		[Fact]
 		public async Task FlyoutViewVisualPropagation()
 		{
 			Shell shell = new Shell();
@@ -673,12 +673,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.SetValue(Shell.FlyoutHeaderProperty, flyoutView);
 
 			IVisualController visualController = button as IVisualController;
-			Assert.AreEqual(VisualMarker.Default, visualController.EffectiveVisual);
+			Assert.Equal(VisualMarker.Default, visualController.EffectiveVisual);
 			shell.Visual = VisualMarker.Material;
-			Assert.AreEqual(VisualMarker.Material, visualController.EffectiveVisual);
+			Assert.Equal(VisualMarker.Material, visualController.EffectiveVisual);
 		}
 
-		[Test]
+		[Fact]
 		public async Task FlyoutViewBindingContext()
 		{
 			Shell shell = new Shell();
@@ -693,14 +693,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			flyoutView.Children.Add(label);
 			shell.SetValue(Shell.FlyoutHeaderProperty, flyoutView);
 
-			Assert.AreEqual("Binding", label.Text);
+			Assert.Equal("Binding", label.Text);
 			shell.BindingContext = new { Text = "Binding Changed" };
-			Assert.AreEqual("Binding Changed", label.Text);
+			Assert.Equal("Binding Changed", label.Text);
 			shell.SetValue(Shell.FlyoutHeaderProperty, new ContentView());
-			Assert.AreEqual(null, flyoutView.BindingContext);
+			Assert.Equal(null, flyoutView.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void MenuItemBindingContext()
 		{
 			Shell shell = new Shell();
@@ -720,11 +720,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(new MenuShellItem(menuItem2));
 
 
-			Assert.AreEqual(bindingContext, menuItem.BindingContext);
-			Assert.AreEqual(bindingContext, menuItem2.BindingContext);
+			Assert.Equal(bindingContext, menuItem.BindingContext);
+			Assert.Equal(bindingContext, menuItem2.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public async Task TitleViewLogicalChild()
 		{
 			Shell shell = new Shell();
@@ -744,7 +744,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task FlyoutHeaderLogicalChild()
 		{
 			Shell shell = new Shell();
@@ -768,62 +768,62 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task ShellFlyoutChangeableOnShellWithFlyoutItem()
 		{
 			Shell shell = new Shell();
 			var flyoutItem = CreateShellItem<FlyoutItem>();
 			shell.Items.Add(flyoutItem);
-			Assert.AreEqual(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
 			shell.FlyoutBehavior = FlyoutBehavior.Locked;
-			Assert.AreEqual(FlyoutBehavior.Locked, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Locked, shell.GetEffectiveFlyoutBehavior());
 			shell.FlyoutBehavior = FlyoutBehavior.Disabled;
-			Assert.AreEqual(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellFlyoutChangeableOnShellWithTabBar()
 		{
 			Shell shell = new Shell();
 			var tabBarItem = CreateShellItem<TabBar>();
 			shell.Items.Add(tabBarItem);
-			Assert.AreEqual(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
 			shell.FlyoutBehavior = FlyoutBehavior.Flyout;
-			Assert.AreEqual(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
 			shell.FlyoutBehavior = FlyoutBehavior.Locked;
-			Assert.AreEqual(FlyoutBehavior.Locked, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Locked, shell.GetEffectiveFlyoutBehavior());
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task ShellFlyoutBehaviorCalculation()
 		{
 			Shell shell = new Shell();
 			ContentPage page = new ContentPage();
 			shell.Items.Add(CreateShellItem(page: page));
-			Assert.AreEqual(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
 
 			Shell.SetFlyoutBehavior(page, FlyoutBehavior.Disabled);
 			Shell.SetFlyoutBehavior(shell.Items[0].Items[0].Items[0], FlyoutBehavior.Flyout);
 			Shell.SetFlyoutBehavior(shell.Items[0].Items[0], FlyoutBehavior.Disabled);
 			Shell.SetFlyoutBehavior(shell.Items[0], FlyoutBehavior.Locked);
 
-			Assert.AreEqual(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
 
 			page.ClearValue(Shell.FlyoutBehaviorProperty);
-			Assert.AreEqual(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
 
 			shell.Items[0].Items[0].Items[0].ClearValue(Shell.FlyoutBehaviorProperty);
-			Assert.AreEqual(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
 
 			shell.Items[0].Items[0].ClearValue(Shell.FlyoutBehaviorProperty);
-			Assert.AreEqual(FlyoutBehavior.Locked, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Locked, shell.GetEffectiveFlyoutBehavior());
 
 			shell.Items[0].ClearValue(Shell.FlyoutBehaviorProperty);
-			Assert.AreEqual(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Flyout, shell.GetEffectiveFlyoutBehavior());
 		}
 
-		[Test]
+		[Fact]
 		public async Task TabBarAutoCreation()
 		{
 			Shell shell = new Shell();
@@ -831,10 +831,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(ShellItem.CreateFromShellSection(CreateShellSection<Tab>()));
 			shell.Items.Add(ShellItem.CreateFromShellSection(CreateShellSection<Tab>()));
 
-			Assert.AreEqual(1, shell.Items.Count);
-			Assert.AreEqual(3, shell.Items[0].Items.Count);
+			Assert.Equal(1, shell.Items.Count);
+			Assert.Equal(3, shell.Items[0].Items.Count);
 
-			Assert.AreEqual(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
+			Assert.Equal(FlyoutBehavior.Disabled, shell.GetEffectiveFlyoutBehavior());
 
 
 			shell = new Shell();
@@ -843,9 +843,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(ShellItem.CreateFromShellSection(CreateShellSection<Tab>()));
 			shell.Items.Add(ShellItem.CreateFromShellSection(CreateShellSection<Tab>()));
 
-			Assert.AreEqual(2, shell.Items.Count);
-			Assert.AreEqual(0, shell.Items[0].Items.Count);
-			Assert.AreEqual(3, shell.Items[1].Items.Count);
+			Assert.Equal(2, shell.Items.Count);
+			Assert.Equal(0, shell.Items[0].Items.Count);
+			Assert.Equal(3, shell.Items[1].Items.Count);
 
 
 			shell = new Shell();
@@ -857,14 +857,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(ShellItem.CreateFromShellSection(CreateShellSection<Tab>()));
 			shell.Items.Add(ShellItem.CreateFromShellSection(CreateShellSection<Tab>()));
 
-			Assert.AreEqual(3, shell.Items.Count);
-			Assert.AreEqual(3, shell.Items[0].Items.Count);
-			Assert.AreEqual(0, shell.Items[1].Items.Count);
-			Assert.AreEqual(3, shell.Items[0].Items.Count);
+			Assert.Equal(3, shell.Items.Count);
+			Assert.Equal(3, shell.Items[0].Items.Count);
+			Assert.Equal(0, shell.Items[1].Items.Count);
+			Assert.Equal(3, shell.Items[0].Items.Count);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task NavigatedFiresAfterContentIsCreatedWhenUsingTemplate()
 		{
 
@@ -878,12 +878,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("cat");
 			await shell.GoToAsync("details");
 
-			Assert.AreEqual("//rootlevelcontent1/cat/details", shell.CurrentState.Location.ToString());
+			Assert.Equal("//rootlevelcontent1/cat/details", shell.CurrentState.Location.ToString());
 			await shell.GoToAsync("//rootlevelcontent1/details");
-			Assert.AreEqual("//rootlevelcontent1/details", shell.CurrentState.Location.ToString());
+			Assert.Equal("//rootlevelcontent1/details", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellItemNotVisibleWhenContentPageNotVisible()
 		{
 			var shell = new Shell();
@@ -897,7 +897,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(GetItems(shell).Contains(item2));
 		}
 
-		[Test]
+		[Fact]
 		public async Task BaseShellItemNotVisible()
 		{
 			var shell = new Shell();
@@ -925,7 +925,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(GetItems(shell).Contains(item1));
 		}
 
-		[Test]
+		[Fact]
 		public async Task CantNavigateToNotVisibleShellItem()
 		{
 			var shell = new Shell();
@@ -939,11 +939,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.That(async () => await shell.GoToAsync($"//NotVisible"), Throws.Exception);
 
-			Assert.AreEqual(shell.CurrentItem, item2);
+			Assert.Equal(shell.CurrentItem, item2);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task FlyoutItemVisible()
 		{
 			var shell = new Shell();
@@ -965,7 +965,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(hasFlyoutItem);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellContentCollectionClear()
 		{
 			var shell = new Shell();
@@ -983,11 +983,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			mainTab.Items.Add(CreateShellContent());
 
 			Assert.IsNull(clearedContent.Parent);
-			Assert.AreEqual(2, mainTab.Items.Count);
-			Assert.AreEqual(content1, mainTab.CurrentItem);
+			Assert.Equal(2, mainTab.Items.Count);
+			Assert.Equal(content1, mainTab.CurrentItem);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellItemCollectionClear()
 		{
 			var shell = new Shell();
@@ -1003,11 +1003,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item3);
 
 			Assert.IsNull(item1.Parent);
-			Assert.AreEqual(2, shell.Items.Count);
-			Assert.AreEqual(item2, shell.CurrentItem);
+			Assert.Equal(2, shell.Items.Count);
+			Assert.Equal(item2, shell.CurrentItem);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellSectionCollectionClear()
 		{
 			var shell = new Shell();
@@ -1024,11 +1024,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			item1.Items.Add(section2);
 
 			Assert.IsNull(clearedSection.Parent);
-			Assert.AreEqual(2, item1.Items.Count);
-			Assert.AreEqual(section1, shell.CurrentItem.CurrentItem);
+			Assert.Equal(2, item1.Items.Count);
+			Assert.Equal(section1, shell.CurrentItem.CurrentItem);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellVisibleItemsReAddedIntoSameOrder()
 		{
 			var shell = new Shell();
@@ -1042,21 +1042,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shellSection.Items.Insert(0, shellContent);
 
-			Assert.AreEqual(0, shellSection.Items.IndexOf(shellContent));
-			Assert.AreEqual(0, shellSectionController.GetItems().IndexOf(shellContent));
+			Assert.Equal(0, shellSection.Items.IndexOf(shellContent));
+			Assert.Equal(0, shellSectionController.GetItems().IndexOf(shellContent));
 
 			hideMe.IsVisible = false;
 
-			Assert.AreEqual(0, shellSection.Items.IndexOf(shellContent));
-			Assert.AreEqual(-1, shellSectionController.GetItems().IndexOf(shellContent));
+			Assert.Equal(0, shellSection.Items.IndexOf(shellContent));
+			Assert.Equal(-1, shellSectionController.GetItems().IndexOf(shellContent));
 
 			hideMe.IsVisible = true;
 
-			Assert.AreEqual(0, shellSection.Items.IndexOf(shellContent));
-			Assert.AreEqual(0, shellSectionController.GetItems().IndexOf(shellContent));
+			Assert.Equal(0, shellSection.Items.IndexOf(shellContent));
+			Assert.Equal(0, shellSectionController.GetItems().IndexOf(shellContent));
 		}
 
-		[Test]
+		[Fact]
 		public async Task HidingShellItemSetsNewCurrentItem()
 		{
 			var shell = new Shell();
@@ -1066,13 +1066,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var item2 = CreateShellItem();
 			shell.Items.Add(item2);
 
-			Assert.AreEqual(shell.CurrentItem, item1);
+			Assert.Equal(shell.CurrentItem, item1);
 			contentPage.IsVisible = false;
-			Assert.AreEqual(shell.CurrentItem, item2);
+			Assert.Equal(shell.CurrentItem, item2);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task HidingShellSectionSetsNewCurrentItem()
 		{
 			var shell = new Shell();
@@ -1082,13 +1082,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var shellSection2 = CreateShellSection();
 			item1.Items.Add(shellSection2);
 
-			Assert.AreEqual(shell.CurrentItem.CurrentItem, item1.Items[0]);
+			Assert.Equal(shell.CurrentItem.CurrentItem, item1.Items[0]);
 			contentPage.IsVisible = false;
-			Assert.AreEqual(shell.CurrentItem.CurrentItem, shellSection2);
+			Assert.Equal(shell.CurrentItem.CurrentItem, shellSection2);
 		}
 
 
-		[Test]
+		[Fact]
 		public async Task HidingShellContentSetsNewCurrentItem()
 		{
 			var shell = new Shell();
@@ -1098,12 +1098,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var shellContent2 = CreateShellContent();
 			item1.Items[0].Items.Add(shellContent2);
 
-			Assert.AreEqual(shell.CurrentItem.CurrentItem.CurrentItem, item1.Items[0].Items[0]);
+			Assert.Equal(shell.CurrentItem.CurrentItem.CurrentItem, item1.Items[0].Items[0]);
 			contentPage.IsVisible = false;
-			Assert.AreEqual(shell.CurrentItem.CurrentItem.CurrentItem, shellContent2);
+			Assert.Equal(shell.CurrentItem.CurrentItem.CurrentItem, shellContent2);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellLocationRestoredWhenItemsAreReAdded()
 		{
 			var shell = new Shell();
@@ -1111,16 +1111,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(CreateShellItem(shellContentRoute: "root2"));
 
 			await shell.GoToAsync("//root2");
-			Assert.AreEqual("//root2", shell.CurrentState.Location.ToString());
+			Assert.Equal("//root2", shell.CurrentState.Location.ToString());
 
 			shell.Items.Add(CreateShellItem(shellContentRoute: "root1"));
 			shell.Items.Add(CreateShellItem(shellContentRoute: "root2"));
 
 			shell.Items.Clear();
-			Assert.AreEqual("//root2", shell.CurrentState.Location.ToString());
+			Assert.Equal("//root2", shell.CurrentState.Location.ToString());
 		}
 
-		[Test]
+		[Fact]
 		public void ClearingShellContentAndReAddingSetsCurrentItem()
 		{
 			Shell shell = new Shell();
@@ -1142,7 +1142,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(item.CurrentItem.CurrentItem);
 		}
 
-		[Test]
+		[Fact]
 		public void ClearingShellSectionAndReAddingSetsCurrentItem()
 		{
 			Shell shell = new Shell();
@@ -1164,7 +1164,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsNotNull(item.CurrentItem.CurrentItem);
 		}
 
-		[Test]
+		[Fact]
 
 		public async Task GetCurrentPageInShellNavigation()
 		{
@@ -1183,11 +1183,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("cat");
 			Assert.IsNotNull(page);
-			Assert.AreEqual(page.GetType(), typeof(ContentPage));
-			Assert.AreEqual(shell.Navigation.NavigationStack[1], page);
+			Assert.Equal(page.GetType(), typeof(ContentPage));
+			Assert.Equal(shell.Navigation.NavigationStack[1], page);
 		}
 
-		[Test]
+		[Fact]
 		public async Task GetCurrentPageBetweenSections()
 		{
 			var shell = new Shell();
@@ -1217,11 +1217,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.GoToAsync(new ShellNavigationState("//two/tabfour/"));
 			Assert.IsNotNull(page);
-			Assert.AreEqual(page.GetType(), typeof(ShellTestPage));
-			Assert.AreEqual((tabfour as IShellSectionController).PresentedPage, page);
+			Assert.Equal(page.GetType(), typeof(ShellTestPage));
+			Assert.Equal((tabfour as IShellSectionController).PresentedPage, page);
 		}
 
-		[Test]
+		[Fact]
 		public void GetCurrentPageOnInit()
 		{
 			var shell = new Shell();
@@ -1245,7 +1245,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(CreateShellItem(shellItemRoute: "item3"));
 
 			await shell.GoToAsync("//item3");
-			Assert.AreEqual("//item3", shell.CurrentState.Location.ToString());
+			Assert.Equal("//item3", shell.CurrentState.Location.ToString());
 
 			shell.Items.Add(CreateShellItem(shellItemRoute: "item1"));
 			shell.Items.Add(CreateShellItem(shellItemRoute: "item2"));
@@ -1255,7 +1255,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.RemoveAt(0);
 			shell.Items.RemoveAt(0);
 
-			Assert.AreEqual("//item3", shell.CurrentState.Location.ToString());
+			Assert.Equal("//item3", shell.CurrentState.Location.ToString());
 
 		}
 
@@ -1285,7 +1285,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse((shellItem as IShellItemController).ShowTabs);
 		}
 
-		[Test]
+		[Fact]
 		public void SendStructureChangedFiresWhenAddingItems()
 		{
 			Shell shell = new Shell();
@@ -1308,7 +1308,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Greater(count, previousCount, "StructureChanged not fired when adding Shell Content");
 		}
 
-		[Test]
+		[Fact]
 		public void VisualTreeHelperCount()
 		{
 			Shell shell = new Shell();
@@ -1317,11 +1317,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.CurrentItem.CurrentItem.Items.Add(CreateShellContent());
 			var shellCount = (shell as IVisualTreeElement).GetVisualChildren();
 			var shellItemCount = (shell.CurrentItem as IVisualTreeElement).GetVisualChildren();
-			Assert.AreEqual(shellCount.Count, 1);
-			Assert.AreEqual(shellItemCount.Count, 2);
+			Assert.Equal(shellCount.Count, 1);
+			Assert.Equal(shellItemCount.Count, 2);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellToolbarTitle()
 		{
 			var shellContent = CreateShellContent();
@@ -1332,17 +1332,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var shellToolBar = testShell.Toolbar;
 
-			Assert.AreEqual(String.Empty, shellToolBar.Title);
+			Assert.Equal(String.Empty, shellToolBar.Title);
 
 			shellContent.Title = "Shell Content Title";
-			Assert.AreEqual("Shell Content Title", shellToolBar.Title);
+			Assert.Equal("Shell Content Title", shellToolBar.Title);
 
 			var page = testShell.CurrentPage;
 			page.Title = "ContentPage Title";
-			Assert.AreEqual("ContentPage Title", shellToolBar.Title);
+			Assert.Equal("ContentPage Title", shellToolBar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellToolbarTitleChangesWithCurrentItem()
 		{
 			var shellContent = CreateShellContent();
@@ -1356,13 +1356,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shellContent2.Title = "Content 2";
 
 			var shellToolBar = testShell.Toolbar;
-			Assert.AreEqual("Content 1", shellToolBar.Title);
+			Assert.Equal("Content 1", shellToolBar.Title);
 
 			testShell.CurrentItem = shellContent2;
-			Assert.AreEqual("Content 2", shellToolBar.Title);
+			Assert.Equal("Content 2", shellToolBar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public void ShellToolbarTitleEmptyStringOnNullOrEmptyPageTitle()
 		{
 			var shellContent = CreateShellContent();
@@ -1373,18 +1373,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var shellToolBar = testShell.Toolbar;
-			Assert.AreEqual(String.Empty, shellToolBar.Title);
+			Assert.Equal(String.Empty, shellToolBar.Title);
 
 			var page = testShell.CurrentPage;
 			page.Title = String.Empty;
-			Assert.AreEqual(String.Empty, shellToolBar.Title);
+			Assert.Equal(String.Empty, shellToolBar.Title);
 			page.Title = "set";
-			Assert.AreEqual("set", shellToolBar.Title);
+			Assert.Equal("set", shellToolBar.Title);
 			page.Title = null;
-			Assert.AreEqual(String.Empty, shellToolBar.Title);
+			Assert.Equal(String.Empty, shellToolBar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellToolbarTitleIgnoresModalTitle()
 		{
 			var shellContent = CreateShellContent();
@@ -1397,14 +1397,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var shellToolBar = testShell.Toolbar;
-			Assert.AreEqual("Shell Title", shellToolBar.Title);
+			Assert.Equal("Shell Title", shellToolBar.Title);
 
 			await testShell.CurrentSection.Navigation.PopModalAsync();
 
-			Assert.AreEqual("Shell Title", shellToolBar.Title);
+			Assert.Equal("Shell Title", shellToolBar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public async Task ShellToolbarTitleIgnoresModalTitle_ShellContent()
 		{
 			var shellContent = CreateShellContent();
@@ -1430,12 +1430,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			var shellToolBar = testShell.Toolbar;
-			Assert.AreEqual("Shell Content Title", shellToolBar.Title);
+			Assert.Equal("Shell Content Title", shellToolBar.Title);
 			await testShell.CurrentSection.Navigation.PopModalAsync();
-			Assert.AreEqual("Shell Content Title", shellToolBar.Title);
+			Assert.Equal("Shell Content Title", shellToolBar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public async Task PushedPageDoesntUsesTitleOnShellSection()
 		{
 			var shellContent = CreateShellContent();
@@ -1451,17 +1451,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var shellToolBar = testShell.Toolbar;
-			Assert.AreEqual("Shell Content Title", shellToolBar.Title);
+			Assert.Equal("Shell Content Title", shellToolBar.Title);
 
 			await testShell.CurrentSection.Navigation.PushAsync(new ContentPage());
 
-			Assert.AreEqual("", shellToolBar.Title);
+			Assert.Equal("", shellToolBar.Title);
 
 			await testShell.CurrentSection.Navigation.PopAsync();
-			Assert.AreEqual("Shell Content Title", shellToolBar.Title);
+			Assert.Equal("Shell Content Title", shellToolBar.Title);
 		}
 
-		[Test]
+		[Fact]
 		public void WindowTitleSetToShellTitle()
 		{
 			TestShell testShell = new TestShell(new ContentPage())
@@ -1474,16 +1474,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Page = testShell
 			};
 
-			Assert.AreEqual("Shell Title", (window as IWindow).Title);
+			Assert.Equal("Shell Title", (window as IWindow).Title);
 
 			window.Title = "Window Title";
-			Assert.AreEqual("Window Title", (window as IWindow).Title);
+			Assert.Equal("Window Title", (window as IWindow).Title);
 
 			window.Title = null;
-			Assert.AreEqual("Shell Title", (window as IWindow).Title);
+			Assert.Equal("Shell Title", (window as IWindow).Title);
 		}
 
-		[Test]
+		[Fact]
 		public void FlyoutIsPresentedRemainsTrueAfterShellIsInitialized()
 		{
 			TestShell testShell = new TestShell()

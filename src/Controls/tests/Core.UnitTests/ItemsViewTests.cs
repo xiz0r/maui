@@ -1,21 +1,21 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Maui.Devices;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ItemsViewTests : BaseTestFixture
+	
+	public class ItemsViewTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
 		}
 
-		[Test]
+		[Fact]
 		public void VerticalListMeasurement()
 		{
 			var itemsView = new StructuredItemsView();
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(sizeRequest.Request.Width, Is.EqualTo(scaled.Width));
 		}
 
-		[Test]
+		[Fact]
 		public void HorizontalListMeasurement()
 		{
 			var itemsView = new StructuredItemsView();
@@ -41,7 +41,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(sizeRequest.Request.Width, Is.EqualTo(scaled.Width));
 		}
 
-		[Test]
+		[Fact]
 		public void BindingContextPropagatesLayouts()
 		{
 			var bindingContext = new object();
@@ -51,12 +51,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			itemsView.ItemsLayout = linearItemsLayout;
 
 			// BindingContext is set when ItemsLayout is set
-			Assert.AreEqual(itemsView.BindingContext, linearItemsLayout.BindingContext);
+			Assert.Equal(itemsView.BindingContext, linearItemsLayout.BindingContext);
 
 			// BindingContext is updated when BindingContext on ItemsView is changed
 			bindingContext = new object();
 			itemsView.BindingContext = bindingContext;
-			Assert.AreEqual(itemsView.BindingContext, linearItemsLayout.BindingContext);
+			Assert.Equal(itemsView.BindingContext, linearItemsLayout.BindingContext);
 		}
 	}
 }

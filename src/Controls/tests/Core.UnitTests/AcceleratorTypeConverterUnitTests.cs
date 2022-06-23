@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class AcceleratorTypeConverterUnitTests : BaseTestFixtureXUnit
+	public class AcceleratorTypeConverterUnitTests : BaseTestFixtureXUnitXUnit
 	{
 		[Fact]
 		public void TestAcceleratorTypeConverter()

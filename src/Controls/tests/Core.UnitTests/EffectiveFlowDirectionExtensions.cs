@@ -1,12 +1,12 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class EffectiveFlowDirectionExtensions : BaseTestFixture
+	
+	public class EffectiveFlowDirectionExtensions : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void LeftToRightImplicit()
 		{
 			var target = FlowDirection.LeftToRight.ToEffectiveFlowDirection();
@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(target.IsExplicit());
 		}
 
-		[Test]
+		[Fact]
 		public void LeftToRightExplicit()
 		{
 			var target = FlowDirection.LeftToRight.ToEffectiveFlowDirection(isExplicit: true);
@@ -30,7 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(target.IsImplicit());
 		}
 
-		[Test]
+		[Fact]
 		public void RightToLeftImplicit()
 		{
 			var target = FlowDirection.RightToLeft.ToEffectiveFlowDirection();
@@ -42,7 +42,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsFalse(target.IsExplicit());
 		}
 
-		[Test]
+		[Fact]
 		public void RightToLeftExplicit()
 		{
 			var target = FlowDirection.RightToLeft.ToEffectiveFlowDirection(isExplicit: true);

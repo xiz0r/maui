@@ -2,18 +2,18 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 using IOPath = System.IO.Path;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class UriImageSourceTests : BaseTestFixture
+	
+	public class UriImageSourceTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			networkcalls = 0;
 		}
 
@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return typeof(UriImageSourceTests).Assembly.GetManifestResourceStream(uri.LocalPath.Substring(1));
 		}
 
-		[Test]
+		[Fact]
 		[Ignore("LoadImageFromStream")]
 		public void LoadImageFromStream()
 		{
@@ -38,10 +38,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Stream s0 = loader.GetStreamAsync().Result;
 
-			Assert.AreEqual(79109, s0.Length);
+			Assert.Equal(79109, s0.Length);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore("SecondCallLoadFromCache")]
 		public void SecondCallLoadFromCache()
 		{
@@ -49,22 +49,22 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Uri = new Uri("http://foo.com/Images/crimson.jpg"),
 			};
-			Assert.AreEqual(0, networkcalls);
+			Assert.Equal(0, networkcalls);
 
 			using (var s0 = loader.GetStreamAsync().Result)
 			{
-				Assert.AreEqual(79109, s0.Length);
-				Assert.AreEqual(1, networkcalls);
+				Assert.Equal(79109, s0.Length);
+				Assert.Equal(1, networkcalls);
 			}
 
 			using (var s1 = loader.GetStreamAsync().Result)
 			{
-				Assert.AreEqual(79109, s1.Length);
-				Assert.AreEqual(1, networkcalls);
+				Assert.Equal(79109, s1.Length);
+				Assert.Equal(1, networkcalls);
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Ignore("DoNotKeepFailedRetrieveInCache")]
 		public void DoNotKeepFailedRetrieveInCache()
 		{
@@ -72,18 +72,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Uri = new Uri("http://foo.com/missing.png"),
 			};
-			Assert.AreEqual(0, networkcalls);
+			Assert.Equal(0, networkcalls);
 
 			var s0 = loader.GetStreamAsync().Result;
 			Assert.IsNull(s0);
-			Assert.AreEqual(1, networkcalls);
+			Assert.Equal(1, networkcalls);
 
 			var s1 = loader.GetStreamAsync().Result;
 			Assert.IsNull(s1);
-			Assert.AreEqual(2, networkcalls);
+			Assert.Equal(2, networkcalls);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore("ConcurrentCallsOnSameUriAreQueued")]
 		public void ConcurrentCallsOnSameUriAreQueued()
 		{
@@ -91,7 +91,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Uri = new Uri("http://foo.com/Images/crimson.jpg"),
 			};
-			Assert.AreEqual(0, networkcalls);
+			Assert.Equal(0, networkcalls);
 
 			var t0 = loader.GetStreamAsync();
 			var t1 = loader.GetStreamAsync();
@@ -99,12 +99,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			//var s0 = t0.Result;
 			using (var s1 = t1.Result)
 			{
-				Assert.AreEqual(1, networkcalls);
-				Assert.AreEqual(79109, s1.Length);
+				Assert.Equal(1, networkcalls);
+				Assert.Equal(79109, s1.Length);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void NullUriDoesNotCrash()
 		{
 			var loader = new UriImageSource();
@@ -114,7 +114,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
-		[Test]
+		[Fact]
 		public void UrlHashKeyAreTheSame()
 		{
 			var urlHash1 = Crc64.ComputeHashString("http://www.optipess.com/wp-content/uploads/2010/08/02_Bad-Comics6-10.png?a=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbasdasdasdasdasasdasdasdasdasd");
@@ -122,7 +122,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.IsTrue(urlHash1 == urlHash2);
 		}
 
-		[Test]
+		[Fact]
 		public void UrlHashKeyAreNotTheSame()
 		{
 			var urlHash1 = Crc64.ComputeHashString("http://www.optipess.com/wp-content/uploads/2010/08/02_Bad-Comics6-10.png?a=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbasdasdasdasdasasdasdasdasdasd");

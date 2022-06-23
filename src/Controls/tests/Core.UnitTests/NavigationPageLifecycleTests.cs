@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class NavigationPageLifecycleTests : BaseTestFixture
+	
+	public class NavigationPageLifecycleTests : BaseTestFixtureXUnit
 	{
 		[TestCase(false)]
 		[TestCase(true)]
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.IsNull(resultPage);
 			_ = new Window(nav);
-			Assert.AreEqual(resultPage, contentPage);
+			Assert.Equal(resultPage, contentPage);
 		}
 
 
@@ -49,8 +49,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await nav.PushAsync(pushedPage);
 
-			Assert.AreEqual(initialPageDisappear, initialPage);
-			Assert.AreEqual(pageAppearing, pushedPage);
+			Assert.Equal(initialPageDisappear, initialPage);
+			Assert.Equal(pageAppearing, pushedPage);
 		}
 
 		[TestCase(false)]
@@ -79,8 +79,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await nav.PopAsync();
 
-			Assert.AreEqual(initialPage, rootPageFiresAppearingAfterPop);
-			Assert.AreEqual(pushedPage, pageDisappeared);
+			Assert.Equal(initialPage, rootPageFiresAppearingAfterPop);
+			Assert.Equal(pushedPage, pageDisappeared);
 		}
 
 		[TestCase(false)]
@@ -109,8 +109,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			nav.Navigation.RemovePage(pushedPage);
 
-			Assert.AreEqual(initialPageAppearing, initialPage);
-			Assert.AreEqual(pageDisappeared, pushedPage);
+			Assert.Equal(initialPageAppearing, initialPage);
+			Assert.Equal(pageDisappeared, pushedPage);
 		}
 
 		[TestCase(false)]

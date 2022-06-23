@@ -1,54 +1,54 @@
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	public class SolidColorBrushTests : BaseTestFixture
+	public class SolidColorBrushTests : BaseTestFixtureXUnit
 	{
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructor()
 		{
 			SolidColorBrush solidColorBrush = new SolidColorBrush();
 			Assert.Null(solidColorBrush.Color, "Color");
 		}
 
-		[Test]
+		[Fact]
 		public void TestConstructorUsingColor()
 		{
 			SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Red);
 			Assert.That(solidColorBrush.Color, Is.EqualTo(Colors.Red));
 		}
 
-		[Test]
+		[Fact]
 		public void TestEmptySolidColorBrush()
 		{
 			SolidColorBrush solidColorBrush = new SolidColorBrush();
-			Assert.AreEqual(true, solidColorBrush.IsEmpty, "IsEmpty");
+			Assert.Equal(true, solidColorBrush.IsEmpty, "IsEmpty");
 
 			SolidColorBrush red = Brush.Red;
-			Assert.AreEqual(false, red.IsEmpty, "IsEmpty");
+			Assert.Equal(false, red.IsEmpty, "IsEmpty");
 		}
 
-		[Test]
+		[Fact]
 		public void TestNullOrEmptySolidColorBrush()
 		{
 			SolidColorBrush nullSolidColorBrush = null;
-			Assert.AreEqual(true, Brush.IsNullOrEmpty(nullSolidColorBrush), "IsNullOrEmpty");
+			Assert.Equal(true, Brush.IsNullOrEmpty(nullSolidColorBrush), "IsNullOrEmpty");
 
 			SolidColorBrush emptySolidColorBrush = new SolidColorBrush();
-			Assert.AreEqual(true, Brush.IsNullOrEmpty(emptySolidColorBrush), "IsNullOrEmpty");
+			Assert.Equal(true, Brush.IsNullOrEmpty(emptySolidColorBrush), "IsNullOrEmpty");
 
 			SolidColorBrush solidColorBrush = Brush.Yellow;
-			Assert.AreEqual(false, Brush.IsNullOrEmpty(solidColorBrush), "IsNullOrEmpty");
+			Assert.Equal(false, Brush.IsNullOrEmpty(solidColorBrush), "IsNullOrEmpty");
 		}
 
-		[Test]
+		[Fact]
 		public void TestDefaultBrushes()
 		{
 			SolidColorBrush black = Brush.Black;

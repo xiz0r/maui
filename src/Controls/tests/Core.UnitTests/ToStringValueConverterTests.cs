@@ -1,23 +1,23 @@
 using System;
 using System.Globalization;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ToStringValueConverterTests : BaseTestFixture
+	
+	public class ToStringValueConverterTests : BaseTestFixtureXUnit
 	{
 		static readonly CultureInfo _enUsCulture = CultureInfo.GetCultureInfo("en-US");
 		static readonly CultureInfo _skSkCulture = CultureInfo.GetCultureInfo("sk-SK");
 
-		[SetUp]
+		
 		public override void Setup()
 		{
-			base.Setup();
+			
 			System.Threading.Thread.CurrentThread.CurrentCulture = _enUsCulture;
 		}
 
-		[Test]
+		[Fact]
 		public void NullObjectConvertsToNull()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void NullObjectWithTargetTypeConvertsToNull()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.Null);
 		}
 
-		[Test]
+		[Fact]
 		public void ObjectConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -47,7 +47,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("System.Object"));
 		}
 
-		[Test]
+		[Fact]
 		public void EmptyStringConvertsToEmptyString()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -57,7 +57,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo(string.Empty));
 		}
 
-		[Test]
+		[Fact]
 		public void StringConvertsToString()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -85,7 +85,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CustomObjectWithNullValueConvertsToNull()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -97,7 +97,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(value.ToStringCounter, Is.EqualTo(1));
 		}
 
-		[Test]
+		[Fact]
 		public void CustomObjectWithEmptyStringConvertsToEmptyString()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -109,7 +109,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(value.ToStringCounter, Is.EqualTo(1));
 		}
 
-		[Test]
+		[Fact]
 		public void CustomObjectWithStringConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -121,7 +121,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(value.ToStringCounter, Is.EqualTo(1));
 		}
 
-		[Test]
+		[Fact]
 		public void ExecutesToStringTwice()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(value.ToStringCounter, Is.EqualTo(2));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -148,7 +148,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99123.567"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithSkCultureConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -158,7 +158,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99123,567"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithEmptyParameterConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -168,7 +168,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99123.567"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithEmptyParameterAndSkCultureConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -178,7 +178,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99123,567"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithNumberFormatConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -188,7 +188,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99,123.57"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithNumberFormatAndSkCultureConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -198,7 +198,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99 123,57"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithSpecificFormatConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -209,7 +209,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99,123.560"));
 		}
 
-		[Test]
+		[Fact]
 		public void DoubleValueWithSpecificFormatAndSkCultureConvertsToStringValue()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -220,7 +220,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(result, Is.EqualTo("99 123,560"));
 		}
 
-		[Test]
+		[Fact]
 		public void NullObjectConvertsBackThrowsException()
 		{
 			var toStringValueConverter = new ToStringValueConverter();
@@ -230,7 +230,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(action, Throws.InstanceOf<NotSupportedException>());
 		}
 
-		[Test]
+		[Fact]
 		public void ObjectConvertsBackThrowsException()
 		{
 			var toStringValueConverter = new ToStringValueConverter();

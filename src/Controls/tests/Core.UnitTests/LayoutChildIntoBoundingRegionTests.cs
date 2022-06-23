@@ -1,11 +1,11 @@
 using System;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class LayoutChildIntoBoundingRegionTests : BaseTestFixture
+	
+	public class LayoutChildIntoBoundingRegionTests : BaseTestFixtureXUnit
 	{
 		const int Layout_Width = 100;
 		const int Margin_Large = 12;
@@ -48,10 +48,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -78,13 +78,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_Region_Right, region.Right, "region.Right");
-			Assert.AreEqual(Layout_Width, layout.Width, "layout.Width");
+			Assert.Equal(Expected_Region_Right, region.Right, "region.Right");
+			Assert.Equal(Layout_Width, layout.Width, "layout.Width");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -112,10 +112,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Center, target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Center, target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -144,10 +144,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Center_RTL_Plus_Margin(0), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Center_RTL_Plus_Margin(0), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -174,10 +174,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Center, target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Center, target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -204,10 +204,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Center_RTL_Plus_Margin(0), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Center_RTL_Plus_Margin(0), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -234,10 +234,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_End_Less_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_End_Less_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -264,10 +264,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_End_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_End_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -294,10 +294,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_End_Less_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_End_Less_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -324,10 +324,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_End_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_End_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -354,10 +354,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -384,10 +384,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Start_Less_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Start_Less_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -414,10 +414,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -444,10 +444,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Start_Less_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Start_End, target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
+			Assert.Equal(Expected_X_Start_Less_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
+			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -475,10 +475,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Center, target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Center, target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -506,10 +506,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Center, target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Center, target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -536,10 +536,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Center, target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Center, target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -566,10 +566,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Center, target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Center, target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -596,10 +596,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -626,10 +626,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -656,10 +656,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -686,10 +686,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_End_Less_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -716,10 +716,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -746,10 +746,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -776,10 +776,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		[TestCase(Margin_None)]
@@ -806,10 +806,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
-			Assert.AreEqual(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
-			Assert.AreEqual(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
-			Assert.AreEqual(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
-			Assert.AreEqual(Expected_Height_Start_End, target.Height, "Height");
+			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
+			Assert.Equal(Expected_Y_Fill_Plus_Margin(margin), target.Y, "Y");
+			Assert.Equal(Expected_Width_Fill_Less_Thickness(thickness), target.Width, "Width");
+			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
 		int Expected_Height_Fill_Less_Thickness(int thickness) => Region_Height - thickness;

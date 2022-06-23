@@ -2,16 +2,16 @@ using System;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
-using NUnit.Framework;
+using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	using FlexLayout = Microsoft.Maui.Controls.Compatibility.FlexLayout;
 
-	[TestFixture]
-	public class FlexLayoutFlexDirectionTests : BaseTestFixture
+	
+	public class FlexLayoutFlexDirectionTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void TestFlexDirectionColumnWithoutHeight()
 		{
 			var view0 = new View { IsPlatformEnabled = true, HeightRequest = 10 };
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view2.Bounds, Is.EqualTo(new Rect(0, 20, 100, 10)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestFlexDirectionRowNoWidth()
 		{
 			var view0 = new View { IsPlatformEnabled = true, WidthRequest = 10, };
@@ -64,7 +64,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view2.Bounds, Is.EqualTo(new Rect(20, 0, 10, 100)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestFlexDirectionColumn()
 		{
 			var view0 = new View { IsPlatformEnabled = true, HeightRequest = 10 };
@@ -89,7 +89,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view2.Bounds, Is.EqualTo(new Rect(0, 20, 100, 10)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestFlexDirectionRow()
 		{
 			var view0 = new View { IsPlatformEnabled = true, WidthRequest = 10, };
@@ -114,7 +114,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view2.Bounds, Is.EqualTo(new Rect(20, 0, 10, 100)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestFlexDirectionColumnReverse()
 		{
 			var view0 = new View { IsPlatformEnabled = true, HeightRequest = 10 };
@@ -139,7 +139,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(view2.Bounds, Is.EqualTo(new Rect(0, 70, 100, 10)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestFlexDirectionRowReverse()
 		{
 			var view0 = new View { IsPlatformEnabled = true, WidthRequest = 10, };

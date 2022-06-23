@@ -37,6 +37,7 @@
     <ProjectReference Include="..\..\..\Controls\src\Xaml\Controls.Xaml.csproj" />
     <ProjectReference Include="..\..\..\Core\src\Core.csproj" />
     <ProjectReference Include="..\..\..\Essentials\src\Essentials.csproj" />
+    <ProjectReference Include="..\..\..\TestUtils\src\TestUtils\TestUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

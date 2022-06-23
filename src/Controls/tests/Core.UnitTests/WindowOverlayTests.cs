@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Maui.Graphics;
-using NUnit.Framework;
+using Xunit;
 using static Microsoft.Maui.Controls.Core.UnitTests.WindowsTests;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class WindowOverlayTests : BaseTestFixture
+	
+	public class WindowOverlayTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void CreateAndRemoveOverlayWindow()
 		{
 			var app = new TestApp();
@@ -48,7 +48,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(windowOverlay.IsPlatformViewInitialized);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateWindowOverlayAndElements()
 		{
 			var app = new TestApp();

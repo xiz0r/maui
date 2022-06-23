@@ -1,13 +1,13 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture]
-	public class ViewCellTests : BaseTestFixture
+	
+	public class ViewCellTests : BaseTestFixtureXUnit
 	{
-		[Test]
+		[Fact]
 		public void SetParentBeforeView()
 		{
 			var parent = new View();
@@ -22,7 +22,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(viewCell, child.Parent);
 		}
 
-		[Test]
+		[Fact]
 		//issue 550
 		public void SetBindingContextBeforeParent()
 		{
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(itemcontext, cell.View.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void SetBindingContextBeforeView()
 		{
 			var context = new object();
@@ -50,7 +50,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.AreSame(context, view.BindingContext);
 		}
 
-		[Test]
+		[Fact]
 		public void SetViewBeforeBindingContext()
 		{
 			var context = new object();

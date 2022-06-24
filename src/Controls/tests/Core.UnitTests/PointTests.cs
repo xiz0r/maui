@@ -100,8 +100,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(0, 0, ExpectedResult = "{X=0 Y=0}")]
-		[TestCase(5, 2, ExpectedResult = "{X=5 Y=2}")]
+		[InlineData(0, 0, ExpectedResult = "{X=0 Y=0}")]
+		[InlineData(5, 2, ExpectedResult = "{X=5 Y=2}")]
 		public string TestPointToString(double x, double y)
 		{
 			return new Point(x, y).ToString();

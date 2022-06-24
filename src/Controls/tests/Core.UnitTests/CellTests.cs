@@ -73,13 +73,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			cell.BindingContext = context;
 			var source = new FileImageSource();
 			cell.ImageSource = source;
-			Assert.AreSame(context, source.BindingContext);
+			Assert.Same(context, source.BindingContext);
 
 			cell = new ImageCell();
 			source = new FileImageSource();
 			cell.ImageSource = source;
 			cell.BindingContext = context;
-			Assert.AreSame(context, source.BindingContext);
+			Assert.Same(context, source.BindingContext);
 		}
 
 		[Fact]

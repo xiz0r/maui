@@ -355,7 +355,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(IsMapWithItemsSource(itemsSource, map));
 		}
 
-		[Test, Ignore("https://github.com/dotnet/maui/issues/1524")]
+		[Fact(Skip ="https://github.com/dotnet/maui/issues/1524")]
 		public void ElementIsGarbageCollectedAfterItsRemoved()
 		{
 			var map = new Map()

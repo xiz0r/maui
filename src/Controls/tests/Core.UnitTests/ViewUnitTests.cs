@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		MockDeviceInfo mockDeviceInfo;
 
 		
-		public override void Setup()
+		public ViewUnitTests()
 		{
 			
 			DeviceInfo.SetCurrent(mockDeviceInfo = new MockDeviceInfo());
@@ -385,8 +385,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(view.Focus());
 		}
 
-		[Fact]
-		public void FocusWithSubscriber([Values(true, false)] bool result)
+		[Theory, InlineData(true), InlineData(false)]
+		public void FocusWithSubscriber(bool result)
 		{
 			var view = new View();
 			view.FocusChangeRequested += (sender, arg) => arg.Result = result;

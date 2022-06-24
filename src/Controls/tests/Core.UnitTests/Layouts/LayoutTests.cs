@@ -52,10 +52,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			Assert.Null(child1.Parent);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void AddCallsCorrectHandlerMethod(Type TLayout)
 		{
 			var layout = CreateLayout(TLayout);
@@ -71,10 +71,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			handler.Received().Invoke(command, args);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void RemoveCallsCorrectHandlerMethod(Type TLayout)
 		{
 			var layout = CreateLayout(TLayout);
@@ -91,10 +91,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			handler.Received().Invoke(command, args);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void InsertCallsCorrectHandlerMethod(Type TLayout)
 		{
 			var events = new List<(string Name, LayoutHandlerUpdate? Args)>();

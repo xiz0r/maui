@@ -67,7 +67,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class PriorityRegistrarTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public PriorityRegistrarTests()
 		{
 			
 			Internals.Registrar.RegisterAll(new[] {
@@ -89,7 +89,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class VisualRegistrarTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public VisualRegistrarTests()
 		{
 			
 			Internals.Registrar.RegisterAll(new[] {
@@ -182,7 +182,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class RegistrarTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public RegistrarTests()
 		{
 			
 			Internals.Registrar.RegisterAll(new[] { typeof(TestHandlerAttribute) });

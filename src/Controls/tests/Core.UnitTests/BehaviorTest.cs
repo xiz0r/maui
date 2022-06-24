@@ -45,7 +45,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.True(behavior.attached);
 			Assert.False(behavior.detached);
-			Assert.AreSame(bindable, behavior.AssociatedObject);
+			Assert.Same(bindable, behavior.AssociatedObject);
 
 			((IAttachedObject)behavior).DetachFrom(bindable);
 
@@ -73,7 +73,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(behavior.AssociatedObject);
 
 			((IAttachedObject)collection).AttachTo(bindable);
-			Assert.AreSame(bindable, behavior.AssociatedObject);
+			Assert.Same(bindable, behavior.AssociatedObject);
 
 			((IAttachedObject)collection).DetachFrom(bindable);
 			Assert.Null(behavior.AssociatedObject);
@@ -89,7 +89,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(behavior.AssociatedObject);
 
 			collection.Add(behavior);
-			Assert.AreSame(bindable, behavior.AssociatedObject);
+			Assert.Same(bindable, behavior.AssociatedObject);
 
 			collection.Remove(behavior);
 			Assert.Null(behavior.AssociatedObject);
@@ -104,7 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(behavior.AssociatedObject);
 
 			collection.Add(behavior);
-			Assert.AreSame(bindable, behavior.AssociatedObject);
+			Assert.Same(bindable, behavior.AssociatedObject);
 
 			collection.Remove(behavior);
 			Assert.Null(behavior.AssociatedObject);

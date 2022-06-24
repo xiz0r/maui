@@ -318,8 +318,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase("..")]
-		[TestCase("../")]
+		[InlineData("..")]
+		[InlineData("../")]
 		public async Task PoppingWithQueryString(string input)
 		{
 			Routing.RegisterRoute("details", typeof(ShellTestPage));
@@ -509,7 +509,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		public override void Setup()
+		public ShellModalTests()
 		{
 			
 			Routing.RegisterRoute("ModalTestPage", typeof(ModalTestPage));

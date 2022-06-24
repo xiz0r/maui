@@ -14,6 +14,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class RelativeLayoutTests : BaseTestFixtureXUnit
 	{
+		public RelativeLayoutTests()
+		{
+			ExpressionSearch.Default = new UnitExpressionSearch();
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				ExpressionSearch.Default = new UnitExpressionSearch();
+			}
+
+			base.Dispose(disposing);
+		}
+
 		class UnitExpressionSearch : ExpressionVisitor, IExpressionSearch
 		{
 			List<object> results;
@@ -43,18 +58,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		
-		public override void Setup()
-		{
-			
-			ExpressionSearch.Default = new UnitExpressionSearch();
-		}
+		
 
 		
-		public override void TearDown()
-		{
-			base.TearDown();
-			ExpressionSearch.Default = new UnitExpressionSearch();
-		}
+		
 
 		[Fact]
 		public void SimpleLayout()

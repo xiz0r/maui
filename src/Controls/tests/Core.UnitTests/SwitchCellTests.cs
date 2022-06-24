@@ -36,8 +36,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.On, Is.EqualTo(true));
 		}
 
-		[TestCase(false, true)]
-		[TestCase(true, false)]
+		[InlineData(false, true)]
+		[InlineData(true, false)]
 		public void SwitchCellSwitchChangedArgs(bool initialValue, bool finalValue)
 		{
 			var template = new DataTemplate(typeof(SwitchCell));

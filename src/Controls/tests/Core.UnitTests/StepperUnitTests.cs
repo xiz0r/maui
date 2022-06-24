@@ -146,9 +146,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
-		[TestCase(100.0, 0.5)]
-		[TestCase(10.0, 25.0)]
-		[TestCase(0, 39.5)]
+		[InlineData(100.0, 0.5)]
+		[InlineData(10.0, 25.0)]
+		[InlineData(0, 39.5)]
 		public void StepperValueChangedEventArgs(double initialValue, double finalValue)
 		{
 			var stepper = new Stepper
@@ -177,7 +177,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(finalValue, newValue);
 		}
 
-		[TestCase(10)]
+		[InlineData(10)]
 		public void TestReturnToZero(int steps)
 		{
 			var stepper = new Stepper(0, 10, 0, 0.5);
@@ -191,23 +191,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(0.0, stepper.Value);
 		}
 
-		[TestCase(100, .5, 0, 100)]
-		[TestCase(100, .3, 0, 100)]
-		[TestCase(100, .03, 0, 100)]
-		[TestCase(100, .003, 0, 100)]
-		[TestCase(100, .0003, 0, 100)]
-		[TestCase(100, .0000003, 0, 100)]
-		[TestCase(100, .0000000003, 0, 100)]
-		[TestCase(100, .0000000000003, 0, 100)]
-		[TestCase(100, .5, -10000, 10000)]
-		[TestCase(100, .3, -10000, 10000)]
-		[TestCase(100, .03, -10000, 10000)]
-		[TestCase(100, .003, -10000, 10000)]
-		[TestCase(100, .0003, -10000, 10000)]
-		[TestCase(100, .0000003, -10000, 10000)]
-		[TestCase(100, .0000000003, -10000, 10000)]
-		[TestCase(100, .0000000000003, -10000, 10000)]
-		[TestCase(100, .00003456, -10000, 10000)] //we support 4 significant digits for the increment. no less, no more
+		[InlineData(100, .5, 0, 100)]
+		[InlineData(100, .3, 0, 100)]
+		[InlineData(100, .03, 0, 100)]
+		[InlineData(100, .003, 0, 100)]
+		[InlineData(100, .0003, 0, 100)]
+		[InlineData(100, .0000003, 0, 100)]
+		[InlineData(100, .0000000003, 0, 100)]
+		[InlineData(100, .0000000000003, 0, 100)]
+		[InlineData(100, .5, -10000, 10000)]
+		[InlineData(100, .3, -10000, 10000)]
+		[InlineData(100, .03, -10000, 10000)]
+		[InlineData(100, .003, -10000, 10000)]
+		[InlineData(100, .0003, -10000, 10000)]
+		[InlineData(100, .0000003, -10000, 10000)]
+		[InlineData(100, .0000000003, -10000, 10000)]
+		[InlineData(100, .0000000000003, -10000, 10000)]
+		[InlineData(100, .00003456, -10000, 10000)] //we support 4 significant digits for the increment. no less, no more
 												  //https://github.com/xamarin/Microsoft.Maui.Controls/issues/5168
 		public void SmallIncrements(int steps, double increment, double min, double max)
 		{

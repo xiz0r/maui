@@ -269,8 +269,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void TestClickedvent(bool isEnabled)
 		{
 			var view = new ImageButton()
@@ -287,8 +287,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void TestPressedEvent(bool isEnabled)
 		{
 			var view = new ImageButton()
@@ -305,8 +305,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void TestReleasedEvent(bool isEnabled)
 		{
 			var view = new ImageButton()
@@ -356,13 +356,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			button.BindingContext = context;
 			var source = new FileImageSource();
 			button.Source = source;
-			Assert.AreSame(context, source.BindingContext);
+			Assert.Same(context, source.BindingContext);
 
 			button = new ImageButton();
 			source = new FileImageSource();
 			button.Source = source;
 			button.BindingContext = context;
-			Assert.AreSame(context, source.BindingContext);
+			Assert.Same(context, source.BindingContext);
 		}
 
 		[Fact]

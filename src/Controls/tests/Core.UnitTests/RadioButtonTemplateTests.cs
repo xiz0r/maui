@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	[TestFixture(Category = "RadioButton")]
+	[Category("RadioButton")]
 	public class RadioButtonTemplateTests : BaseTestFixtureXUnit
 	{
 		class FrameStyleCases : IEnumerable

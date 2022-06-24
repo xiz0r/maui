@@ -20,7 +20,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			object context = new object();
 			content.BindingContext = context;
 
-			Assert.AreSame(context, stack.BindingContext);
+			Assert.Same(context, stack.BindingContext);
 		}
 
 		[Fact]
@@ -35,7 +35,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			content.Content = stack;
 
-			Assert.AreSame(context, stack.BindingContext);
+			Assert.Same(context, stack.BindingContext);
 		}
 
 		[Fact]
@@ -79,7 +79,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			sut.Content = expected;
 
 			Assert.Equal(1, internalChildren.Count);
-			Assert.AreSame(expected, internalChildren[0]);
+			Assert.Same(expected, internalChildren[0]);
 		}
 	}
 }

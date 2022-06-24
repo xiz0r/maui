@@ -30,7 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label = new Label();
 			layout.Children.Add(label);
 
-			Assert.AreSame(layout, label.Parent);
+			Assert.Same(layout, label.Parent);
 
 			layout.Children.Remove(label);
 			Assert.Null(label.Parent);
@@ -442,8 +442,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(0.1), TestCase(0.2), TestCase(0.3), TestCase(0.4), TestCase(0.5)]
-		[TestCase(0.6), TestCase(0.7), TestCase(0.8), TestCase(0.9)]
+		[InlineData(0.1), TestCase(0.2), TestCase(0.3), TestCase(0.4), TestCase(0.5)]
+		[InlineData(0.6), TestCase(0.7), TestCase(0.8), TestCase(0.9)]
 		public void AbsoluteColumnShouldNotBloatStarredColumns(double firstColumnWidth)
 		{
 			// This is a re-creation of the layout from Issue 12292
@@ -1922,8 +1922,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			(grid as Compatibility.Layout<View>).Children.Add(view);
 			Assert.Equal(1, grid.Children.Count);
 			Assert.Equal(1, (grid as Compatibility.Layout<View>).Children.Count);
-			Assert.AreSame(view, (grid as Compatibility.Layout<View>).Children.First());
-			Assert.AreSame(view, grid.Children.First());
+			Assert.Same(view, (grid as Compatibility.Layout<View>).Children.First());
+			Assert.Same(view, grid.Children.First());
 		}
 
 		[Fact]
@@ -2394,42 +2394,42 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Fixed = LayoutConstraint.Fixed
 		}
 
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Star, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.None, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Star, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.VerticallyFixed, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Star, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Star, GridUnitType.Star, ExpectedResult = true)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
-		[TestCase(HackLayoutConstraint.Fixed, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Star, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.None, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Star, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.VerticallyFixed, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Star, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.HorizontallyFixed, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Absolute, GridUnitType.Absolute, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Star, GridUnitType.Absolute, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Absolute, GridUnitType.Star, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Auto, GridUnitType.Absolute, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Absolute, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Star, GridUnitType.Star, ExpectedResult = true)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Auto, GridUnitType.Star, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Star, GridUnitType.Auto, ExpectedResult = false)]
+		[InlineData(HackLayoutConstraint.Fixed, GridUnitType.Auto, GridUnitType.Auto, ExpectedResult = false)]
 		public bool InvalidationPropogationTests(HackLayoutConstraint gridConstraint, GridUnitType horizontalType, GridUnitType verticalType)
 		{
 			var grid = new Grid

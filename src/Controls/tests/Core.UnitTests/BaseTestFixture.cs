@@ -60,13 +60,31 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		public void Dispose()
 		{
-			MockPlatformSizeService.Current?.Reset();
-			AppInfo.SetCurrent(null);
-			DeviceDisplay.SetCurrent(null);
-			DeviceInfo.SetCurrent(null);
-			System.Threading.Thread.CurrentThread.CurrentCulture = _defaultCulture;
-			System.Threading.Thread.CurrentThread.CurrentUICulture = _defaultUICulture;
-			DispatcherProvider.SetCurrent(null);
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		bool _disposed;
+
+		protected virtual void Dispose(bool disposing) 
+		{
+			if (_disposed)
+			{
+				return;
+			}
+
+			if (disposing)
+			{
+				MockPlatformSizeService.Current?.Reset();
+				AppInfo.SetCurrent(null);
+				DeviceDisplay.SetCurrent(null);
+				DeviceInfo.SetCurrent(null);
+				System.Threading.Thread.CurrentThread.CurrentCulture = _defaultCulture;
+				System.Threading.Thread.CurrentThread.CurrentUICulture = _defaultUICulture;
+				DispatcherProvider.SetCurrent(null);
+			}
+
+			_disposed = true;
 		}
 	}
 }

@@ -10,11 +10,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class PageTests : BaseTestFixtureXUnit
 	{
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			MessagingCenter.ClearSubscribers();
+			if (disposing)
+			{
+				MessagingCenter.ClearSubscribers();
+			}
+
+			base.Dispose(disposing);
 		}
 
 		[Fact]
@@ -26,7 +29,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(root, child.Parent);
 
 			Assert.Equal(((IElementController)root).LogicalChildren.Count, 1);
-			Assert.AreSame(((IElementController)root).LogicalChildren.First(), child);
+			Assert.Same(((IElementController)root).LogicalChildren.First(), child);
 
 			((ContentPage)root).Content = null;
 			Assert.Null(child.Parent);
@@ -438,7 +441,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			((IPageController)page).SendDisappearing();
 			((IPageController)page).SendAppearing();
 
-			Assert.AreSame(page, actual);
+			Assert.Same(page, actual);
 		}
 
 		[Fact]
@@ -454,7 +457,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			((IPageController)page).SendAppearing();
 			((IPageController)page).SendDisappearing();
 
-			Assert.AreSame(page, actual);
+			Assert.Same(page, actual);
 		}
 
 		[Fact]

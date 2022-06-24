@@ -247,7 +247,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(IsLayoutWithItemsSource(itemsSource, layout));
 		}
 
-		[Test, Ignore("https://github.com/dotnet/maui/issues/1524")]
+		[Fact, Ignore("https://github.com/dotnet/maui/issues/1524")]
 		public void LayoutIsGarbageCollectedAfterItsRemoved()
 		{
 			var layout = new StackLayout

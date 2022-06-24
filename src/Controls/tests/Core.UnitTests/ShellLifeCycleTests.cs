@@ -108,8 +108,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void EnsureOnAppearingFiresAfterParentIsSet(bool templated)
 		{
 			Shell shell = new TestShell();
@@ -557,7 +557,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		public override void Setup()
+		public ShellLifeCycleTests()
 		{
 			
 			Routing.RegisterRoute("LifeCyclePage", typeof(LifeCyclePage));

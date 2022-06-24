@@ -11,7 +11,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class VisualTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public VisualTests()
 		{
 			
 			var mockDeviceInfo = new MockDeviceDisplay();

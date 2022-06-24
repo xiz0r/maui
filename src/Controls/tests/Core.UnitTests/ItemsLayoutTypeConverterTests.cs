@@ -11,7 +11,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("HorizontalList");
-			Assert.AreSame(LinearItemsLayout.Horizontal, result);
+			Assert.Same(LinearItemsLayout.Horizontal, result);
 		}
 
 		[Fact]
@@ -19,7 +19,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("VerticalList");
-			Assert.AreSame(LinearItemsLayout.Vertical, result);
+			Assert.Same(LinearItemsLayout.Vertical, result);
 		}
 
 		[Fact]

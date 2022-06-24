@@ -18,8 +18,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(tapped);
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void TappedHonorsCanExecute(bool canExecute)
 		{
 			bool executed = false;
@@ -52,7 +52,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			object obj = new object();
 			var cmd = new Command(p =>
 			{
-				Assert.AreSame(obj, p);
+				Assert.Same(obj, p);
 				executed = true;
 			});
 

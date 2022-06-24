@@ -25,9 +25,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		int Expected_X_Center => Expected_Empty_Region_Width / 2 + Region_X;
 		int Expected_Y_Center => Expected_Empty_Region_Height / 2 + Region_Y;
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void Default(int margin)
 		{
 			var layout = new StackLayout();
@@ -54,9 +54,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void Default_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -87,9 +87,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalCenter(int margin)
 		{
 			var layout = new StackLayout();
@@ -118,9 +118,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalCenter_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -150,9 +150,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalCenterAndExpand(int margin)
 		{
 			var layout = new StackLayout();
@@ -180,9 +180,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalCenterAndExpand_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -210,9 +210,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalEnd(int margin)
 		{
 			var layout = new StackLayout();
@@ -240,9 +240,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalEnd_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -270,9 +270,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalEndAndExpand(int margin)
 		{
 			var layout = new StackLayout();
@@ -300,9 +300,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalEndAndExpand_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -330,9 +330,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalStart(int margin)
 		{
 			var layout = new StackLayout();
@@ -360,9 +360,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalStart_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -390,9 +390,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalStartAndExpand(int margin)
 		{
 			var layout = new StackLayout();
@@ -420,9 +420,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void HorizontalStartAndExpand_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -450,9 +450,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalCenter(int margin)
 		{
 			var layout = new StackLayout();
@@ -481,9 +481,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalCenter_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -512,9 +512,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalCenterAndExpand(int margin)
 		{
 			var layout = new StackLayout();
@@ -542,9 +542,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalCenterAndExpand_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -572,9 +572,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalEnd(int margin)
 		{
 			var layout = new StackLayout();
@@ -602,9 +602,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalEnd_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -632,9 +632,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalEndAndExpand(int margin)
 		{
 			var layout = new StackLayout();
@@ -662,9 +662,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalEndAndExpand_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -692,9 +692,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalStart(int margin)
 		{
 			var layout = new StackLayout();
@@ -722,9 +722,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalStart_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };
@@ -752,9 +752,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalStartAndExpand(int margin)
 		{
 			var layout = new StackLayout();
@@ -782,9 +782,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
-		[TestCase(Margin_None)]
-		[TestCase(Margin_Small)]
-		[TestCase(Margin_Large)]
+		[InlineData(Margin_None)]
+		[InlineData(Margin_Small)]
+		[InlineData(Margin_Large)]
 		public void VerticalStartAndExpand_RTL(int margin)
 		{
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft };

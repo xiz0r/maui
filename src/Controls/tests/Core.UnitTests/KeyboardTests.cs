@@ -40,7 +40,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				{"Keyboard.Telephone", Keyboard.Telephone},
 				{"Keyboard.Chat", Keyboard.Chat},
 			})
-				Assert.AreSame(kvp.Value, converter.ConvertFromInvariantString(kvp.Key));
+				Assert.Same(kvp.Value, converter.ConvertFromInvariantString(kvp.Key));
 		}
 
 		[Fact]

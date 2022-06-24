@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var fs = new FormattedString();
 			label.FormattedText = fs;
 			Assert.Null(label.Text);
-			Assert.AreSame(fs, label.FormattedText);
+			Assert.Same(fs, label.FormattedText);
 
 			label.Text = "Foo";
 			Assert.Equal("Foo", label.Text);

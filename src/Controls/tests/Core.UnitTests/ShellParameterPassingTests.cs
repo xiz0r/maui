@@ -7,8 +7,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	public class ShellParameterPassingTests : ShellTestBase
 	{
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public async Task ReNavigatingToCurrentLocationPassesParameters(bool useDataTemplates)
 		{
 			var shell = new Shell();

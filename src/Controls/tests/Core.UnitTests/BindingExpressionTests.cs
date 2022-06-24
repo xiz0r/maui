@@ -15,7 +15,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var be = new BindingExpression(binding, path);
 
-			Assert.AreSame(binding, be.Binding);
+			Assert.Same(binding, be.Binding);
 			Assert.Equal(path, be.Path);
 		}
 
@@ -43,10 +43,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		// We only throw on invalid path features, if they give an invalid property
 		// name, it won't have compiled in the first place or they misstyped.
-		[TestCase("Foo.")]
-		[TestCase("Foo[]")]
-		[TestCase("Foo.Bar[]")]
-		[TestCase("Foo[1")]
+		[InlineData("Foo.")]
+		[InlineData("Foo[]")]
+		[InlineData("Foo.Bar[]")]
+		[InlineData("Foo[1")]
 		public void InvalidPaths(string path)
 		{
 			var fex = Assert.Throws<FormatException>(() =>

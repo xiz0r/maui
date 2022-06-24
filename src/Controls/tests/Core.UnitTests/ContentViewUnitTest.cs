@@ -381,7 +381,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			sut.Content = expected;
 
 			Assert.Equal(1, internalChildren.Count);
-			Assert.AreSame(expected, internalChildren[0]);
+			Assert.Same(expected, internalChildren[0]);
 		}
 	}
 }

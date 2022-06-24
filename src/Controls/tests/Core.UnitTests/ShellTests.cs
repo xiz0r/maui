@@ -37,8 +37,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void SetCurrentItemWithImplicitlyWrappedShellContent(bool useShellContent)
 		{
 			var shell = new Shell();
@@ -130,11 +130,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			object viewModel = new object();
 			shell.BindingContext = viewModel;
 
-			Assert.AreSame(shell.BindingContext, viewModel);
-			Assert.AreSame(shellItem.BindingContext, viewModel);
-			Assert.AreSame(shellItem.Items[0].BindingContext, viewModel);
-			Assert.AreSame(shellItem.Items[0].Items[0].BindingContext, viewModel);
-			Assert.AreSame((shellItem.Items[0].Items[0].Content as BindableObject).BindingContext, viewModel);
+			Assert.Same(shell.BindingContext, viewModel);
+			Assert.Same(shellItem.BindingContext, viewModel);
+			Assert.Same(shellItem.Items[0].BindingContext, viewModel);
+			Assert.Same(shellItem.Items[0].Items[0].BindingContext, viewModel);
+			Assert.Same((shellItem.Items[0].Items[0].Content as BindableObject).BindingContext, viewModel);
 		}
 
 		[Fact]
@@ -149,10 +149,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var shellItem = CreateShellItem();
 			shell.Items.Add(shellItem);
 
-			Assert.AreSame(shellItem.BindingContext, viewModel);
-			Assert.AreSame(shellItem.Items[0].BindingContext, viewModel);
-			Assert.AreSame(shellItem.Items[0].Items[0].BindingContext, viewModel);
-			Assert.AreSame((shellItem.Items[0].Items[0].Content as BindableObject).BindingContext, viewModel);
+			Assert.Same(shellItem.BindingContext, viewModel);
+			Assert.Same(shellItem.Items[0].BindingContext, viewModel);
+			Assert.Same(shellItem.Items[0].Items[0].BindingContext, viewModel);
+			Assert.Same((shellItem.Items[0].Items[0].Content as BindableObject).BindingContext, viewModel);
 		}
 
 		[Fact]
@@ -167,9 +167,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var shellSection = CreateShellSection();
 			shell.Items[0].Items.Add(shellSection);
 
-			Assert.AreSame(shellSection.BindingContext, viewModel);
-			Assert.AreSame(GetItems(shellSection)[0].BindingContext, viewModel);
-			Assert.AreSame((GetItems(shellSection)[0].Content as BindableObject).BindingContext, viewModel);
+			Assert.Same(shellSection.BindingContext, viewModel);
+			Assert.Same(GetItems(shellSection)[0].BindingContext, viewModel);
+			Assert.Same((GetItems(shellSection)[0].Content as BindableObject).BindingContext, viewModel);
 		}
 
 		[Fact]
@@ -184,8 +184,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var shellContent = CreateShellContent();
 			shell.Items[0].Items[0].Items.Add(shellContent);
 
-			Assert.AreSame(shellContent.BindingContext, viewModel);
-			Assert.AreSame((shellContent.Content as BindableObject).BindingContext, viewModel);
+			Assert.Same(shellContent.BindingContext, viewModel);
+			Assert.Same((shellContent.Content as BindableObject).BindingContext, viewModel);
 		}
 
 		[Fact]
@@ -200,7 +200,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var contentPage = new ContentPage();
 
 			shell.Items[0].Items[0].Items[0].Content = contentPage;
-			Assert.AreSame(contentPage.BindingContext, viewModel);
+			Assert.Same(contentPage.BindingContext, viewModel);
 		}
 
 		[Fact]
@@ -214,7 +214,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var contentPage = new ContentPage();
 			await shell.Navigation.PushAsync(contentPage);
 
-			Assert.AreSame(contentPage.BindingContext, viewModel);
+			Assert.Same(contentPage.BindingContext, viewModel);
 		}
 
 		[Fact]
@@ -1259,9 +1259,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
-		[TestCase("ContentPage")]
-		[TestCase("ShellItem")]
-		[TestCase("Shell")]
+		[InlineData("ContentPage")]
+		[InlineData("ShellItem")]
+		[InlineData("Shell")]
 		public void TabBarIsVisible(string test)
 		{
 			Shell shell = new Shell();

@@ -12,17 +12,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class StyleTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public StyleTests()
 		{
 			
 			ApplicationExtensions.CreateAndSetMockApplication();
 		}
 
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			Application.ClearCurrent();
+			if (disposing)
+			{
+				Application.ClearCurrent();
+			}
+			base.Dispose(disposing);
 		}
 
 		[Fact]

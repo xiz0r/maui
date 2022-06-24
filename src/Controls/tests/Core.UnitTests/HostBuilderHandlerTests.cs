@@ -45,13 +45,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(typeof(Label), typeof(LabelHandler))]
-		[TestCase(typeof(Button), typeof(ButtonHandler))]
-		[TestCase(typeof(ContentPage), typeof(PageHandler))]
-		[TestCase(typeof(Page), typeof(PageHandler))]
-		[TestCase(typeof(TemplatedView), typeof(ContentViewHandler))]
-		[TestCase(typeof(ContentView), typeof(ContentViewHandler))]
-		[TestCase(typeof(MyTestCustomTemplatedView), typeof(ContentViewHandler))]
+		[InlineData(typeof(Label), typeof(LabelHandler))]
+		[InlineData(typeof(Button), typeof(ButtonHandler))]
+		[InlineData(typeof(ContentPage), typeof(PageHandler))]
+		[InlineData(typeof(Page), typeof(PageHandler))]
+		[InlineData(typeof(TemplatedView), typeof(ContentViewHandler))]
+		[InlineData(typeof(ContentView), typeof(ContentViewHandler))]
+		[InlineData(typeof(MyTestCustomTemplatedView), typeof(ContentViewHandler))]
 		public void VariousControlsGetCorrectHandler(Type viewType, Type handlerType)
 		{
 			var mauiApp = MauiApp.CreateBuilder()

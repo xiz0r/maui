@@ -11,11 +11,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class ShellNavigatedArgsTests : ShellTestBase
 	{
-		
-		public override void TearDown()
+
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			Routing.Clear();
+			if (disposing)
+			{
+				Routing.Clear();
+			}
+
+			base.Dispose(disposing);
 		}
 
 		[Fact]

@@ -140,13 +140,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			image.BindingContext = context;
 			var source = new MockImageSource();
 			image.Source = source;
-			Assert.AreSame(context, source.BindingContext);
+			Assert.Same(context, source.BindingContext);
 
 			image = new Image();
 			source = new MockImageSource();
 			image.Source = source;
 			image.BindingContext = context;
-			Assert.AreSame(context, source.BindingContext);
+			Assert.Same(context, source.BindingContext);
 		}
 
 		[Fact]

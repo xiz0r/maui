@@ -11,7 +11,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class UriImageSourceTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public UriImageSourceTests()
 		{
 			
 			networkcalls = 0;

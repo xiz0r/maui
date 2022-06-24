@@ -41,7 +41,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(accelerator.Keys.ElementAt(0), shourtCutKeyBinding);
 		}
 
-		[Test, TestCaseSource(nameof(GenerateTests))]
+		[Fact, TestCaseSource(nameof(GenerateTests))]
 		public void AcceleratorFromLetterAndModifier(TestShortcut shourtcut)
 		{
 			string modifier = shourtcut.Modifier;

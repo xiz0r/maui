@@ -60,13 +60,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(commandExecuted, parameter);
 		}
 
-		[TestCase(typeof(Entry), "EntryTest")]
-		[TestCase(typeof(Label), "LabelTest")]
-		[TestCase(typeof(Editor), "EditorTest")]
-		[TestCase(typeof(TimePicker), "01:00:00")]
-		[TestCase(typeof(CheckBox), "True")]
-		[TestCase(typeof(Switch), "True")]
-		[TestCase(typeof(RadioButton), "True")]
+		[InlineData(typeof(Entry), "EntryTest")]
+		[InlineData(typeof(Label), "LabelTest")]
+		[InlineData(typeof(Editor), "EditorTest")]
+		[InlineData(typeof(TimePicker), "01:00:00")]
+		[InlineData(typeof(CheckBox), "True")]
+		[InlineData(typeof(Switch), "True")]
+		[InlineData(typeof(RadioButton), "True")]
 		public async Task TextPackageCorrectlySetsOnCompatibleTarget(Type fieldType, string result)
 		{
 			var dropRec = new DropGestureRecognizer() { AllowDrop = true };
@@ -77,7 +77,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(element.GetStringValue(), result);
 		}
 
-		[TestCase(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
+		[InlineData(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
 		public void DateTextPackageCorrectlySetsOnCompatibleTarget(Type fieldType, string result)
 		{
 			var date = DateTime.Parse(result);

@@ -62,9 +62,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await nav.Navigation.PushAsync(childRoot);
 
-			Assert.AreSame(childRoot, nav.RootPage);
-			Assert.AreSame(childRoot, nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(childRoot, nav.RootPage);
+			Assert.Same(childRoot, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 		}
 
 		[InlineData(true)]
@@ -86,16 +86,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool fired = false;
 			nav.Popped += (sender, e) => fired = true;
 
-			Assert.AreSame(childRoot, nav.RootPage);
+			Assert.Same(childRoot, nav.RootPage);
 			Assert.AreNotSame(childRoot2, nav.RootPage);
 			Assert.AreNotSame(nav.RootPage, nav.CurrentPage);
 
 			var popped = await nav.Navigation.PopAsync();
 
 			Assert.True(fired);
-			Assert.AreSame(childRoot, nav.RootPage);
-			Assert.AreSame(childRoot, nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(childRoot, nav.RootPage);
+			Assert.Same(childRoot, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 			Assert.Equal(childRoot2, popped);
 
 			await nav.PopAsync();
@@ -104,7 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(last);
 			Assert.NotNull(nav.RootPage);
 			Assert.NotNull(nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 		}
 
 		[InlineData(true)]
@@ -122,9 +122,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await nav.PushAsync(childRoot);
 
-			Assert.AreSame(childRoot, nav.RootPage);
-			Assert.AreSame(childRoot, nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(childRoot, nav.RootPage);
+			Assert.Same(childRoot, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 		}
 
 		[InlineData(true)]
@@ -160,15 +160,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool fired = false;
 			nav.Pushed += (sender, e) => fired = true;
 
-			Assert.AreSame(childRoot, nav.RootPage);
-			Assert.AreSame(childRoot, nav.CurrentPage);
+			Assert.Same(childRoot, nav.RootPage);
+			Assert.Same(childRoot, nav.CurrentPage);
 
 			await nav.PushAsync(childRoot);
 
 			Assert.False(fired);
-			Assert.AreSame(childRoot, nav.RootPage);
-			Assert.AreSame(childRoot, nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(childRoot, nav.RootPage);
+			Assert.Same(childRoot, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 		}
 
 		[InlineData(true)]
@@ -192,7 +192,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var popped = await nav.PopAsync();
 
 			Assert.True(fired);
-			Assert.AreSame(childRoot, nav.CurrentPage);
+			Assert.Same(childRoot, nav.CurrentPage);
 			Assert.Equal(childRoot2, popped);
 
 			await nav.PopAsync();
@@ -222,9 +222,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PopToRootAsync();
 
 			Assert.True(signaled);
-			Assert.AreSame(root, nav.RootPage);
-			Assert.AreSame(root, nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(root, nav.RootPage);
+			Assert.Same(root, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 		}
 
 		[InlineData(true)]
@@ -251,9 +251,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(2, poppedChildren.Count);
 			Assert.Contains(child1, poppedChildren);
 			Assert.Contains(child2, poppedChildren);
-			Assert.AreSame(root, nav.RootPage);
-			Assert.AreSame(root, nav.CurrentPage);
-			Assert.AreSame(nav.RootPage, nav.CurrentPage);
+			Assert.Same(root, nav.RootPage);
+			Assert.Same(root, nav.CurrentPage);
+			Assert.Same(nav.RootPage, nav.CurrentPage);
 		}
 
 		[InlineData(true)]
@@ -380,7 +380,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var result = NavigationPage.GetTitleView(root);
 
-			Assert.AreSame(result, target);
+			Assert.Same(result, target);
 		}
 
 		[InlineData(true)]
@@ -395,7 +395,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			NavigationPage.SetTitleView(root, target);
 
-			Assert.AreSame(root, target.Parent);
+			Assert.Same(root, target.Parent);
 		}
 
 		[InlineData(true)]
@@ -595,10 +595,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			navPage.Navigation.InsertPageBefore(newPage, navPage.RootPage);
 
-			Assert.AreSame(newPage, navPage.RootPage);
+			Assert.Same(newPage, navPage.RootPage);
 			Assert.AreNotSame(newPage, navPage.CurrentPage);
 			Assert.AreNotSame(navPage.RootPage, navPage.CurrentPage);
-			Assert.AreSame(root, navPage.CurrentPage);
+			Assert.Same(root, navPage.CurrentPage);
 
 			Assert.Throws<ArgumentException>(() =>
 			{
@@ -633,9 +633,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			navPage.Navigation.RemovePage(root);
 
-			Assert.AreSame(newPage, navPage.RootPage);
-			Assert.AreSame(newPage, navPage.CurrentPage);
-			Assert.AreSame(navPage.RootPage, navPage.CurrentPage);
+			Assert.Same(newPage, navPage.RootPage);
+			Assert.Same(newPage, navPage.CurrentPage);
+			Assert.Same(navPage.RootPage, navPage.CurrentPage);
 			Assert.AreNotSame(root, navPage.CurrentPage);
 
 			Assert.Throws<ArgumentException>(() =>
@@ -666,8 +666,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(navPage.CurrentPage, root);
 		}
 
-		[TestCase(false, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
-		[TestCase(true, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
+		[InlineData(false, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
+		[InlineData(true, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
 		[Property("Bugzilla", 28335)]
 		public async Task CurrentPageNotNullPoppingRoot(bool useMaui)
 		{

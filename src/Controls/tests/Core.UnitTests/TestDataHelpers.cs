@@ -40,5 +40,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			return TestDataHelpers.Combinations(new List<bool>() { true, false });
 		}
+
+
+
+		// [Theory, InlineData(true), InlineData(false)]
 	}
 }

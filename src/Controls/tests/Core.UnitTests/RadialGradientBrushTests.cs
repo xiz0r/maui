@@ -5,12 +5,6 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	public class RadialGradientBrushTests : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
-		{
-			
-		}
-
 		[Fact]
 		public void TestConstructor()
 		{

@@ -427,18 +427,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(new Rect(35, 0, 35, 70), child2.Bounds);
 		}
 
-		[TestCase(StackOrientation.Vertical, LayoutAlignment.Start, false, 0, 0, 200, 100, 0, 100, 200, 10)]
-		[TestCase(StackOrientation.Vertical, LayoutAlignment.Start, true, 0, 0, 200, 100, 0, 190, 200, 10)]
-		[TestCase(StackOrientation.Vertical, LayoutAlignment.Center, false, 0, 0, 200, 100, 0, 100, 200, 10)]
-		[TestCase(StackOrientation.Vertical, LayoutAlignment.Center, true, 0, 45, 200, 100, 0, 190, 200, 10)]
-		[TestCase(StackOrientation.Vertical, LayoutAlignment.End, false, 0, 0, 200, 100, 0, 100, 200, 10)]
-		[TestCase(StackOrientation.Vertical, LayoutAlignment.End, true, 0, 90, 200, 100, 0, 190, 200, 10)]
-		[TestCase(StackOrientation.Horizontal, LayoutAlignment.Start, false, 0, 0, 100, 200, 100, 0, 10, 200)]
-		[TestCase(StackOrientation.Horizontal, LayoutAlignment.Start, true, 0, 0, 100, 200, 190, 0, 10, 200)]
-		[TestCase(StackOrientation.Horizontal, LayoutAlignment.Center, false, 0, 0, 100, 200, 100, 0, 10, 200)]
-		[TestCase(StackOrientation.Horizontal, LayoutAlignment.Center, true, 45, 0, 100, 200, 190, 0, 10, 200)]
-		[TestCase(StackOrientation.Horizontal, LayoutAlignment.End, false, 0, 0, 100, 200, 100, 0, 10, 200)]
-		[TestCase(StackOrientation.Horizontal, LayoutAlignment.End, true, 90, 0, 100, 200, 190, 0, 10, 200)]
+		[InlineData(StackOrientation.Vertical, LayoutAlignment.Start, false, 0, 0, 200, 100, 0, 100, 200, 10)]
+		[InlineData(StackOrientation.Vertical, LayoutAlignment.Start, true, 0, 0, 200, 100, 0, 190, 200, 10)]
+		[InlineData(StackOrientation.Vertical, LayoutAlignment.Center, false, 0, 0, 200, 100, 0, 100, 200, 10)]
+		[InlineData(StackOrientation.Vertical, LayoutAlignment.Center, true, 0, 45, 200, 100, 0, 190, 200, 10)]
+		[InlineData(StackOrientation.Vertical, LayoutAlignment.End, false, 0, 0, 200, 100, 0, 100, 200, 10)]
+		[InlineData(StackOrientation.Vertical, LayoutAlignment.End, true, 0, 90, 200, 100, 0, 190, 200, 10)]
+		[InlineData(StackOrientation.Horizontal, LayoutAlignment.Start, false, 0, 0, 100, 200, 100, 0, 10, 200)]
+		[InlineData(StackOrientation.Horizontal, LayoutAlignment.Start, true, 0, 0, 100, 200, 190, 0, 10, 200)]
+		[InlineData(StackOrientation.Horizontal, LayoutAlignment.Center, false, 0, 0, 100, 200, 100, 0, 10, 200)]
+		[InlineData(StackOrientation.Horizontal, LayoutAlignment.Center, true, 45, 0, 100, 200, 190, 0, 10, 200)]
+		[InlineData(StackOrientation.Horizontal, LayoutAlignment.End, false, 0, 0, 100, 200, 100, 0, 10, 200)]
+		[InlineData(StackOrientation.Horizontal, LayoutAlignment.End, true, 90, 0, 100, 200, 190, 0, 10, 200)]
 		public void LayoutExpansion(StackOrientation orientation, LayoutAlignment align, bool expand, double x1, double y1, double w1, double h1, double x2, double y2, double w2, double h2)
 		{
 			var options = new LayoutOptions(align, expand);

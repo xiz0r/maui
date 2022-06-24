@@ -68,20 +68,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			ComplexMockViewModel model;
 		}
 
-
-		
-		public override void Setup()
+		public BindingBaseUnitTests()
 		{
-			
 			ApplicationExtensions.CreateAndSetMockApplication();
 		}
 
-
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			Application.ClearCurrent();
+			if (disposing)
+			{
+				Application.Current = null;
+			}
+
+			base.Dispose(disposing);
 		}
 
 		[Fact]
@@ -166,7 +165,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => binding.StringFormat = "{0}", Throws.InvalidOperationException);
 		}
 
-		[TestCase("en-US"), TestCase("tr-TR")]
+		[InlineData("en-US"), TestCase("tr-TR")]
 		public void StringFormatNonStringType(string culture)
 		{
 			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
@@ -716,7 +715,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			CollectionSynchronizationContext syncContext;
 			Assert.True(BindingBase.TryGetSynchronizedCollection(stuff, out syncContext));
 			Assert.That(syncContext, Is.Not.Null);
-			Assert.AreSame(syncContext.Callback, callback);
+			Assert.Same(syncContext.Callback, callback);
 			Assert.That(syncContext.ContextReference, Is.Not.Null);
 			Assert.That(syncContext.ContextReference.Target, Is.SameAs(context));
 		}

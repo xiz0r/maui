@@ -137,7 +137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			new object[] { new DateTime (2006, 12, 20), new DateTime (2100, 12, 31) } // Maximum Date
 		};
 
-		[Test, TestCaseSource(nameof(DateTimes))]
+		[Fact, TestCaseSource(nameof(DateTimes))]
 		public void DatePickerSelectedEventArgs(DateTime initialDate, DateTime finalDate)
 		{
 			var datePicker = new DatePicker();

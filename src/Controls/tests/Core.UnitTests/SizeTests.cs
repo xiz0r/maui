@@ -74,8 +74,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(0, 0, ExpectedResult = "{Width=0 Height=0}")]
-		[TestCase(1, 5, ExpectedResult = "{Width=1 Height=5}")]
+		[InlineData(0, 0, ExpectedResult = "{Width=0 Height=0}")]
+		[InlineData(1, 5, ExpectedResult = "{Width=1 Height=5}")]
 		public string TestToString(double w, double h)
 		{
 			return new Size(w, h).ToString();

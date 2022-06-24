@@ -9,8 +9,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class NavigationPageLifecycleTests : BaseTestFixtureXUnit
 	{
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task AppearingFiresForInitialPage(bool useMaui)
 		{
 			ContentPage contentPage = new ContentPage();
@@ -27,8 +27,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task PushLifeCycle(bool useMaui)
 		{
 			ContentPage initialPage = new ContentPage();
@@ -53,8 +53,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(pageAppearing, pushedPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task PopLifeCycle(bool useMaui)
 		{
 			ContentPage initialPage = new ContentPage();
@@ -83,8 +83,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(pushedPage, pageDisappeared);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task RemoveLastPage(bool useMaui)
 		{
 			ContentPage initialPage = new ContentPage();
@@ -113,8 +113,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(pageDisappeared, pushedPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task RemoveInnerPage(bool useMaui)
 		{
 			ContentPage initialPage = new ContentPage();

@@ -3,16 +3,8 @@ using FormsRectangle = Microsoft.Maui.Controls.Shapes.Rectangle;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	
 	public class RectTests : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
-		{
-			
-
-		}
-
 		[Fact]
 		public void RadiusCanBeSetFromStyle()
 		{

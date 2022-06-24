@@ -12,7 +12,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var label = new Label();
 			var bp = ((IStylable)label).GetProperty("background-color", false);
-			Assert.AreSame(VisualElement.BackgroundColorProperty, bp);
+			Assert.Same(VisualElement.BackgroundColorProperty, bp);
 		}
 
 		[TestCase]
@@ -20,7 +20,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var label = new Label();
 			var bp = ((IStylable)label).GetProperty("color", false);
-			Assert.AreSame(Label.TextColorProperty, bp);
+			Assert.Same(Label.TextColorProperty, bp);
 		}
 
 		[TestCase]
@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var entry = new Entry();
 			var bp = ((IStylable)entry).GetProperty("color", false);
-			Assert.AreSame(Entry.TextColorProperty, bp);
+			Assert.Same(Entry.TextColorProperty, bp);
 		}
 
 		[TestCase]
@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var indicator = new ActivityIndicator();
 			var bp = ((IStylable)indicator).GetProperty("color", false);
-			Assert.AreSame(ActivityIndicator.ColorProperty, bp);
+			Assert.Same(ActivityIndicator.ColorProperty, bp);
 		}
 
 		[TestCase]

@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object obj = new object();
 			mock.BindingContext = obj;
-			Assert.AreSame(obj, mock.BindingContext);
+			Assert.Same(obj, mock.BindingContext);
 		}
 
 		[Fact]
@@ -540,8 +540,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var property = BindableProperty.Create(nameof(MockBindable.Foo), typeof(string), typeof(MockBindable), oldv,
 				propertyChanged: (b, ov, nv) =>
 				{
-					Assert.AreSame(oldv, ov);
-					Assert.AreSame(newv, nv);
+					Assert.Same(oldv, ov);
+					Assert.Same(newv, nv);
 					changed = true;
 				});
 
@@ -642,7 +642,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.SetBinding(BindableObject.BindingContextProperty, "item0");
 			label.SetBinding(Label.TextProperty, Binding.SelfPath);
 
-			Assert.AreSame(label.BindingContext, label.GetValue(BindableObject.BindingContextProperty));
+			Assert.Same(label.BindingContext, label.GetValue(BindableObject.BindingContextProperty));
 		}
 
 		[Fact]
@@ -728,7 +728,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 			var bindable = new MockBindable();
 
-			Assert.AreSame(defaultValue, bindableProperty.DefaultValue);
+			Assert.Same(defaultValue, bindableProperty.DefaultValue);
 			var newvalue = bindable.GetValue(bindableProperty);
 			Assert.AreNotSame(defaultValue, newvalue);
 			Assert.NotNull(newvalue);
@@ -750,7 +750,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value1 = bindable.GetValue(bindableProperty);
 			Assert.NotNull(value0);
 			Assert.NotNull(value1);
-			Assert.AreSame(value0, value1);
+			Assert.Same(value0, value1);
 			Assert.Equal(1, invoked);
 		}
 

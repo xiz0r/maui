@@ -7,10 +7,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		where TView : IView, new()
 	{
 		[Fact]
-		[TestCase(nameof(IFontElement.FontAttributes), FontAttributes.Bold)]
-		[TestCase(nameof(IFontElement.FontAutoScalingEnabled), false)]
-		[TestCase(nameof(IFontElement.FontFamily), "Arial")]
-		[TestCase(nameof(IFontElement.FontSize), 10)]
+		[InlineData(nameof(IFontElement.FontAttributes), FontAttributes.Bold)]
+		[InlineData(nameof(IFontElement.FontAutoScalingEnabled), false)]
+		[InlineData(nameof(IFontElement.FontFamily), "Arial")]
+		[InlineData(nameof(IFontElement.FontSize), 10)]
 		public void FontPropertyTriggersFontProperty(string propertyName, object value)
 		{
 			var handler = new FontElementHandlerStub();

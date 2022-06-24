@@ -6,8 +6,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class PageLifeCycleTests : BaseTestFixtureXUnit
 	{
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public void NavigationPageInitialPage(bool useMaui)
 		{
 			var lcPage = new LCPage();
@@ -19,8 +19,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(lcPage.NavigatedToArgs.PreviousPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task NavigationPagePushPage(bool useMaui)
 		{
 			var previousPage = new LCPage();
@@ -33,8 +33,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(lcPage, previousPage.NavigatedFromArgs.DestinationPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task NavigationPagePopPage(bool useMaui)
 		{
 			var firstPage = new LCPage();
@@ -49,8 +49,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(firstPage, poppedPage.NavigatedFromArgs.DestinationPage);
 		}
 
-		[TestCase(false)]
-		[TestCase(true)]
+		[InlineData(false)]
+		[InlineData(true)]
 		public async Task NavigationPagePopToRoot(bool useMaui)
 		{
 			var firstPage = new LCPage();

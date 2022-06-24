@@ -18,18 +18,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class TypedBindingUnitTests : BindingBaseUnitTests
 	{
 		
-		public override void Setup()
+		public TypedBindingUnitTests()
 		{
 			
 			ApplicationExtensions.CreateAndSetMockApplication();
 		}
 
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			Application.ClearCurrent();
+			if (disposing)
+			{
+				Application.ClearCurrent();
+			}
+
+			base.Dispose(disposing);
 		}
+
+		
 
 		protected override BindingBase CreateBinding(BindingMode mode = BindingMode.Default, string stringFormat = null)
 		{
@@ -51,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentNullException>(() => new TypedBinding<MockViewModel, string>((Func<MockViewModel, (string, bool)>)null, (mvm, s) => mvm.Text = s, null), "Allowed null getter");
 		}
 
-		[Test, NUnit.Framework.Category("[Binding] Set Value")]
+		[Fact, NUnit.Framework.Category("[Binding] Set Value")]
 		public void ValueSetOnOneWayWithComplexPathBinding(
 			[Values(true, false)] bool setContextFirst,
 			[Values(true, false)] bool isDefault)
@@ -217,8 +222,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnOneWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -265,8 +270,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnOneWayToSourceBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -318,8 +323,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnTwoWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -376,8 +381,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnOneWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -422,8 +427,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnOneWayToSourceBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -474,8 +479,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnTwoWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -528,8 +533,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedArrayPathOnTwoWayBinding(bool isDefault)
 		{
 			var viewmodel = new ComplexMockViewModel
@@ -569,8 +574,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Self paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithSelfPathOnOneWayBinding(bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
@@ -607,8 +612,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Self paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueDoesNotUpdateWithSelfPathOnOneWayToSourceBinding(bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
@@ -645,8 +650,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Self paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithSelfPathOnTwoWayBinding(bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
@@ -685,9 +690,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase(BindingMode.OneWay)]
-		[TestCase(BindingMode.OneWayToSource)]
-		[TestCase(BindingMode.TwoWay)]
+		[InlineData(BindingMode.OneWay)]
+		[InlineData(BindingMode.OneWayToSource)]
+		[InlineData(BindingMode.TwoWay)]
 		public void SourceAndTargetAreWeakComplexPath(BindingMode mode)
 		{
 			var property = BindableProperty.Create("Text", typeof(string), typeof(MockBindable), "default value");
@@ -862,7 +867,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 #if !WINDOWS_PHONE
-		[TestCase("en-US"), TestCase("pt-PT")]
+		[InlineData("en-US"), TestCase("pt-PT")]
 		public void ValueConverterCulture(string culture)
 		{
 			System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -1263,8 +1268,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 #if !WINDOWS_PHONE
-		[TestCase("en-US", "0.5", 0.5, 0.9, "0.9")]
-		[TestCase("pt-PT", "0,5", 0.5, 0.9, "0,9")]
+		[InlineData("en-US", "0.5", 0.5, 0.9, "0.9")]
+		[InlineData("pt-PT", "0,5", 0.5, 0.9, "0,9")]
 		public void ConvertIsCultureAware(string culture, string sliderSetStringValue, double sliderExpectedDoubleValue, double sliderSetDoubleValue, string sliderExpectedStringValue)
 
 		{
@@ -1330,8 +1335,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void NullPropertyUpdatesAllBindings(bool useStringEmpty)
 		{
 			var vm = new NullViewModel();

@@ -57,10 +57,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.StyleSheets
 				SetParents(s, stylable);
 		}
 
-		[TestCase("stacklayout label", true, true, false, false, false)]
-		[TestCase("stacklayout>label", true, false, false, false, false)]
-		[TestCase("stacklayout ^label", true, true, true, true, false)]
-		[TestCase("stacklayout>^label", true, false, true, false, false)]
+		[InlineData("stacklayout label", true, true, false, false, false)]
+		[InlineData("stacklayout>label", true, false, false, false, false)]
+		[InlineData("stacklayout ^label", true, true, true, true, false)]
+		[InlineData("stacklayout>^label", true, false, true, false, false)]
 		public void TestCase(string selectorString, bool label0match, bool label1match, bool customLabel0match, bool customLabel1match, bool absoluteLayout0match)
 		{
 			var selector = Selector.Parse(new CssReader(new StringReader(selectorString)));

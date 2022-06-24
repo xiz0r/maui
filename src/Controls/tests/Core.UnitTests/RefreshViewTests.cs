@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class RefreshViewTests : BaseTestFixtureXUnit
 	{
 		
-		public override void Setup()
+		public RefreshViewTests()
 		{
 			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());

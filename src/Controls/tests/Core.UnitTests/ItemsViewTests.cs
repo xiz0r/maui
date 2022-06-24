@@ -8,8 +8,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class ItemsViewTests : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
+		public ItemsViewTests()
 		{
 			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());

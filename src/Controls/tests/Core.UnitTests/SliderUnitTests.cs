@@ -82,8 +82,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(changed);
 		}
 
-		[TestCase(0.0, 1.0)]
-		[TestCase(1.0, 0.5)]
+		[InlineData(0.0, 1.0)]
+		[InlineData(1.0, 0.5)]
 		public void SliderValueChangedEventArgs(double initialValue, double finalValue)
 		{
 			var slider = new Slider

@@ -104,10 +104,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase("Foo_Bar")]
-		[TestCase("if")]
+		[InlineData("Foo_Bar")]
+		[InlineData("if")]
 		//TODO FIXME [TestCase ("P̀ः०‿")]
-		[TestCase("_UnderscoreStart")]
+		[InlineData("_UnderscoreStart")]
 		public void ComplexPropertyNames(string propertyName)
 		{
 			var vm = new ComplexPropertyNamesViewModel();
@@ -122,10 +122,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
 		[Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayWithComplexPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -170,10 +171,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
 		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayToSourceWithComplexPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -217,10 +219,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
 		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnTwoWayWithComplexPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -324,10 +327,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -371,10 +375,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithSelfIndexedPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel();
@@ -412,10 +417,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedPathArrayBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Bar";
 			var viewmodel = new ComplexMockViewModel
@@ -458,10 +464,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedSelfPathArrayBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "bar";
 			string[] context = new[] { "foo", value };
@@ -498,10 +505,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayToSourceWithIndexedPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -544,10 +552,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -591,10 +600,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedArrayPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -638,10 +648,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Indexed paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedArraySelfPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			const string value = "Foo";
 			string[] viewmodel = new[] { "bar", value };
@@ -678,10 +689,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Self paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[Theory, Category("[Binding] Self paths")]
 		public void ValueSetOnOneWayWithSelfPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
 			BindingMode bindingMode = BindingMode.OneWay;
@@ -717,9 +729,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Self paths")]
+		[InlineData(true)]
+		[InlineData(false)]
+		[Theory, Category("[Binding] Self paths")]
 		public void ValueNotSetOnOneWayToSourceWithSelfPathBinding(
-			[Values(true, false)] bool isDefault)
+			bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
 			BindingMode bindingMode = BindingMode.OneWayToSource;
@@ -749,8 +763,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		[Fact, Category("[Binding] Self paths")]
 		public void ValueSetOnTwoWayWithSelfPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			 bool setContextFirst,
+			 bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
 			BindingMode bindingMode = BindingMode.TwoWay;
@@ -785,9 +799,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Complex paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[Theory, Category("[Binding] Complex paths")]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnOneWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -825,9 +839,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Complex paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[Theory, Category("[Binding] Complex paths")]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnOneWayToSourceBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -873,8 +887,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnTwoWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -921,8 +935,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnOneWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -959,8 +973,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnOneWayToSourceBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -1003,8 +1017,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnTwoWayBinding(bool isDefault)
 		{
 			const string newvalue = "New Value";
@@ -1049,8 +1063,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Indexed paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithIndexedArrayPathOnTwoWayBinding(bool isDefault)
 		{
 			var viewmodel = new ComplexMockViewModel
@@ -1085,8 +1099,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Self paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithSelfPathOnOneWayBinding(bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
@@ -1120,8 +1134,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Self paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueDoesNotUpdateWithSelfPathOnOneWayToSourceBinding(bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
@@ -1157,8 +1171,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Self paths")]
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ValueUpdatedWithSelfPathOnTwoWayBinding(bool isDefault)
 		{
 			BindingMode propertyDefault = BindingMode.OneWay;
@@ -1196,9 +1210,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Category("[Binding] Complex paths")]
-		[TestCase(BindingMode.OneWay)]
-		[TestCase(BindingMode.OneWayToSource)]
-		[TestCase(BindingMode.TwoWay)]
+		[InlineData(BindingMode.OneWay)]
+		[InlineData(BindingMode.OneWayToSource)]
+		[InlineData(BindingMode.TwoWay)]
 		public void SourceAndTargetAreWeakComplexPath(BindingMode mode)
 		{
 			var property = BindableProperty.Create(nameof(MockBindable.Text), typeof(string), typeof(MockBindable), "default value");
@@ -1347,7 +1361,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 #if !WINDOWS_PHONE
-		[TestCase("en-US"), TestCase("pt-PT"), TestCase("tr-TR")]
+		[InlineData("en-US"), InlineData("pt-PT"), InlineData("tr-TR")]
 		public void ValueConverterCulture(string culture)
 		{
 			System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
@@ -1630,8 +1644,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var binding = new Binding(".", converter: new TestConverter<string, int>(), converterParameter: param, stringFormat: "{0}");
 			var clone = (Binding)binding.Clone();
 
-			Assert.AreSame(binding.Converter, clone.Converter);
-			Assert.AreSame(binding.ConverterParameter, clone.ConverterParameter);
+			Assert.Same(binding.Converter, clone.Converter);
+			Assert.Same(binding.ConverterParameter, clone.ConverterParameter);
 			Assert.Equal(binding.Mode, clone.Mode);
 			Assert.Equal(binding.Path, clone.Path);
 			Assert.Equal(binding.StringFormat, clone.StringFormat);
@@ -1858,8 +1872,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 #if !WINDOWS_PHONE
-		[TestCase("en-US", "0.5", 0.5, 0.9, "0.9")]
-		[TestCase("pt-PT", "0,5", 0.5, 0.9, "0,9")]
+		[InlineData("en-US", "0.5", 0.5, 0.9, "0.9")]
+		[InlineData("pt-PT", "0,5", 0.5, 0.9, "0,9")]
 		public void ConvertIsCultureAware(string culture, string sliderSetStringValue, double sliderExpectedDoubleValue, double sliderSetDoubleValue, string sliderExpectedStringValue)
 		{
 			System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
@@ -1926,8 +1940,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void NullPropertyUpdatesAllBindings(bool useStringEmpty)
 		{
 			var vm = new NullViewModel();
@@ -1944,7 +1958,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.Text2, Is.EqualTo("Bar"));
 		}
 
-		[TestCase]
+		[Fact]
 		public void BindingSourceOverContext()
 		{
 			var label = new Label();

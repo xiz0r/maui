@@ -4,20 +4,21 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	
 	public class DynamicResourceTests : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
+		public DynamicResourceTests()
 		{
-			
 			Application.Current = new MockApplication();
 		}
 
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			Application.Current = null;
+			if (disposing)
+			{
+				Application.Current = null;
+			}
+
+			base.Dispose(disposing);
 		}
 
 		[Fact]

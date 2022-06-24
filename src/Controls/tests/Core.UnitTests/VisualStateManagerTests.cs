@@ -565,10 +565,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		[Fact]
 		[Explicit("This test was created to check performance characteristics; leaving it in because it may be useful again.")]
-		[TestCase(1, 10)]
-		[TestCase(1, 10000)]
-		[TestCase(10, 100)]
-		[TestCase(10, 10000)]
+		[InlineData(1, 10)]
+		[InlineData(1, 10000)]
+		[InlineData(10, 100)]
+		[InlineData(10, 10000)]
 		public void ValidatePerformance(int groups, int states)
 		{
 			IList<VisualStateGroup> vsgs = new VisualStateGroupList();

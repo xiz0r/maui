@@ -60,9 +60,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(param, result);
 		}
 
-		[TestCase(null, "Text Changed")]
-		[TestCase("Initial Text", null)]
-		[TestCase("Initial Text", "Text Changed")]
+		[InlineData(null, "Text Changed")]
+		[InlineData("Initial Text", null)]
+		[InlineData("Initial Text", "Text Changed")]
 		public void SearchBarTextChangedEventArgs(string initialText, string finalText)
 		{
 			var searchBar = new SearchBar

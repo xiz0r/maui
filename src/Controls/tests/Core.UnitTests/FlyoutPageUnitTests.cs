@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		MockDeviceInfo mockDeviceInfo;
 
 		
-		public override void Setup()
+		public FlyoutPageUnitTests()
 		{
 			
 			DeviceDisplay.SetCurrent(mockDeviceDisplay = new MockDeviceDisplay());

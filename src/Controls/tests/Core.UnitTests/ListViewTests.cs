@@ -16,9 +16,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class ListViewTests : BaseTestFixtureXUnit
 	{
 		MockDeviceInfo mockDeviceInfo;
-
 		
-		public override void Setup()
+		public ListViewTests()
 		{
 			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
@@ -1330,8 +1329,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(commandExecuted, Is.True);
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void RefreshCommandCanExecute(bool initial)
 		{
 			var lv = new ListView { IsPullToRefreshEnabled = initial };
@@ -1346,8 +1345,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That((lv as IListViewController).RefreshAllowed, Is.EqualTo(!initial));
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void RefreshCommandCanExecuteChanges(bool initial)
 		{
 			var lv = new ListView { IsPullToRefreshEnabled = initial };
@@ -1590,10 +1589,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.Parent, Is.Null);
 		}
 
-		[TestCase("Android", ListViewCachingStrategy.RecycleElement)]
-		[TestCase("iOS", ListViewCachingStrategy.RecycleElement)]
-		[TestCase("UWP", ListViewCachingStrategy.RetainElement)]
-		[TestCase("Other", ListViewCachingStrategy.RetainElement)]
+		[InlineData("Android", ListViewCachingStrategy.RecycleElement)]
+		[InlineData("iOS", ListViewCachingStrategy.RecycleElement)]
+		[InlineData("UWP", ListViewCachingStrategy.RetainElement)]
+		[InlineData("Other", ListViewCachingStrategy.RetainElement)]
 		public void EnforcesCachingStrategy(string platform, ListViewCachingStrategy expected)
 		{
 			// we need to do this because otherwise we cant set the caching strategy

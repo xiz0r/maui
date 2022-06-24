@@ -228,8 +228,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindingBase.EnableCollectionSynchronization(collection, context, (enumerable, o, method, access) =>
 			{
 				executed = true;
-				Assert.AreSame(collection, enumerable);
-				Assert.AreSame(context, o);
+				Assert.Same(collection, enumerable);
+				Assert.Same(context, o);
 				Assert.NotNull(method);
 				Assert.False(access);
 
@@ -265,8 +265,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			BindingBase.EnableCollectionSynchronization(collection, context, (enumerable, o, method, access) =>
 			{
 				executed = true;
-				Assert.AreSame(collection, enumerable);
-				Assert.AreSame(context, o);
+				Assert.Same(collection, enumerable);
+				Assert.Same(context, o);
 				Assert.NotNull(method);
 				Assert.False(access);
 
@@ -432,7 +432,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		ListProxy _proxyForWeakToWeakTest;
 #pragma warning restore 0414
 
-		[Test, Ignore("https://github.com/dotnet/maui/issues/1524")]
+		[Fact(Skip = "https://github.com/dotnet/maui/issues/1524")]
 		public void WeakToWeak()
 		{
 			WeakCollectionChangedList list = new WeakCollectionChangedList();

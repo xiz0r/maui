@@ -107,13 +107,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(1, counter);
 		}
 
-		[TestCase(typeof(Entry), "EntryTest")]
-		[TestCase(typeof(Label), "LabelTest")]
-		[TestCase(typeof(Editor), "EditorTest")]
-		[TestCase(typeof(TimePicker), "01:00:00")]
-		[TestCase(typeof(CheckBox), "True")]
-		[TestCase(typeof(Switch), "True")]
-		[TestCase(typeof(RadioButton), "True")]
+		[InlineData(typeof(Entry), "EntryTest")]
+		[InlineData(typeof(Label), "LabelTest")]
+		[InlineData(typeof(Editor), "EditorTest")]
+		[InlineData(typeof(TimePicker), "01:00:00")]
+		[InlineData(typeof(CheckBox), "True")]
+		[InlineData(typeof(Switch), "True")]
+		[InlineData(typeof(RadioButton), "True")]
 		public void TextPackageCorrectlyExtractedFromCompatibleElement(Type fieldType, string result)
 		{
 			var dragRec = new DragGestureRecognizer();
@@ -123,7 +123,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(result, args.Data.Text);
 		}
 
-		[TestCase(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
+		[InlineData(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
 		public void DateTextPackageCorrectlyExtractedFromCompatibleElement(Type fieldType, string result)
 		{
 			var date = DateTime.Parse(result);

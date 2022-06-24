@@ -15,12 +15,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase("rgb(6, 201, 198)")]
-		[TestCase("rgba(6, 201, 188, 0.2)")]
-		[TestCase("hsl(6, 20%, 45%)")]
-		[TestCase("hsla(6, 20%, 45%,0.75)")]
-		[TestCase("rgb(100%, 32%, 64%)")]
-		[TestCase("rgba(100%, 32%, 64%,0.27)")]
+		[InlineData("rgb(6, 201, 198)")]
+		[InlineData("rgba(6, 201, 188, 0.2)")]
+		[InlineData("hsl(6, 20%, 45%)")]
+		[InlineData("hsla(6, 20%, 45%,0.75)")]
+		[InlineData("rgb(100%, 32%, 64%)")]
+		[InlineData("rgba(100%, 32%, 64%,0.27)")]
 		public void TestBrushTypeConverterWithColorDefinition(string colorDefinition)
 		{
 			Assert.True(_converter.CanConvertFrom(typeof(string)));
@@ -28,9 +28,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase("#ff00ff")]
-		[TestCase("#00FF33")]
-		[TestCase("#00FFff 40%")]
+		[InlineData("#ff00ff")]
+		[InlineData("#00FF33")]
+		[InlineData("#00FFff 40%")]
 		public void TestBrushTypeConverterWithColorHex(string colorHex)
 		{
 			Assert.True(_converter.CanConvertFrom(typeof(string)));
@@ -38,8 +38,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase("linear-gradient(90deg, rgb(255, 0, 0),rgb(255, 153, 51))")]
-		[TestCase("radial-gradient(circle, rgb(255, 0, 0) 25%, rgb(0, 255, 0) 50%, rgb(0, 0, 255) 75%)")]
+		[InlineData("linear-gradient(90deg, rgb(255, 0, 0),rgb(255, 153, 51))")]
+		[InlineData("radial-gradient(circle, rgb(255, 0, 0) 25%, rgb(0, 255, 0) 50%, rgb(0, 0, 255) 75%)")]
 		public void TestBrushTypeConverterWithBrush(string brush)
 		{
 			Assert.True(_converter.CanConvertFrom(typeof(string)));
@@ -60,8 +60,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			linearGradientBrush.BindingContext = context;
 
-			Assert.AreSame(context, firstStop.BindingContext);
-			Assert.AreSame(context, secondStop.BindingContext);
+			Assert.Same(context, firstStop.BindingContext);
+			Assert.Same(context, secondStop.BindingContext);
 		}
 
 		[Fact]
@@ -84,8 +84,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			parent.Background = linearGradientBrush;
 
-			Assert.AreSame(parent, parent.Background.Parent);
-			Assert.AreSame(context, parent.Background.BindingContext);
+			Assert.Same(parent, parent.Background.Parent);
+			Assert.Same(context, parent.Background.BindingContext);
 		}
 	}
 }

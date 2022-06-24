@@ -8,7 +8,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		PointCollectionConverter _pointCollectionConverter;
 
 		
-		public override void Setup()
+		public PolygonTests()
 		{
 			
 

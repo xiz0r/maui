@@ -5,14 +5,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class TextDecorationUnitTests : BaseTestFixtureXUnit
 	{
-		[TestCase("strikethrough", TextDecorations.Strikethrough)]
-		[TestCase("underline", TextDecorations.Underline)]
-		[TestCase("line-through", TextDecorations.Strikethrough)]
-		[TestCase("none", TextDecorations.None)]
-		[TestCase("strikethrough underline", TextDecorations.Underline | TextDecorations.Strikethrough)]
-		[TestCase("underline strikethrough", TextDecorations.Underline | TextDecorations.Strikethrough)]
-		[TestCase("underline line-through", TextDecorations.Underline | TextDecorations.Strikethrough)]
-		[TestCase("line-through underline", TextDecorations.Underline | TextDecorations.Strikethrough)]
+		[InlineData("strikethrough", TextDecorations.Strikethrough)]
+		[InlineData("underline", TextDecorations.Underline)]
+		[InlineData("line-through", TextDecorations.Strikethrough)]
+		[InlineData("none", TextDecorations.None)]
+		[InlineData("strikethrough underline", TextDecorations.Underline | TextDecorations.Strikethrough)]
+		[InlineData("underline strikethrough", TextDecorations.Underline | TextDecorations.Strikethrough)]
+		[InlineData("underline line-through", TextDecorations.Underline | TextDecorations.Strikethrough)]
+		[InlineData("line-through underline", TextDecorations.Underline | TextDecorations.Strikethrough)]
 
 		public void TestTextDecorationConverter(string input, TextDecorations expected)
 		{

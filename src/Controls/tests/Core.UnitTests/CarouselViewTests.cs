@@ -10,10 +10,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	public class CarouselViewTests : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
+		public CarouselViewTests()
 		{
-			
 			DeviceDisplay.SetCurrent(new MockDeviceDisplay());
 		}
 
@@ -41,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				countFired = countFired + 1;
 			});
-			Assert.AreSame(source, carouselView.ItemsSource);
+			Assert.Same(source, carouselView.ItemsSource);
 			carouselView.Position = 1;
 			Assert.True(countFired == 1);
 		}
@@ -61,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				countFired += 1;
 			};
-			Assert.AreSame(source, carouselView.ItemsSource);
+			Assert.Same(source, carouselView.ItemsSource);
 			carouselView.Position = gotoPosition;
 			Assert.True(countFired == 1);
 		}
@@ -81,7 +79,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				countFired += 1;
 			});
-			Assert.AreSame(source, carouselView.ItemsSource);
+			Assert.Same(source, carouselView.ItemsSource);
 			carouselView.CurrentItem = source[gotoPosition];
 			Assert.True(countFired == 1);
 		}
@@ -101,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				countFired += 1;
 			};
-			Assert.AreSame(source, carouselView.ItemsSource);
+			Assert.Same(source, carouselView.ItemsSource);
 			carouselView.CurrentItem = source[gotoPosition];
 			Assert.True(countFired == 1);
 		}

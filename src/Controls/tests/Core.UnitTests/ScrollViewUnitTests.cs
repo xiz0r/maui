@@ -26,8 +26,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(ScrollOrientation.Horizontal)]
-		[TestCase(ScrollOrientation.Both)]
+		[InlineData(ScrollOrientation.Horizontal)]
+		[InlineData(ScrollOrientation.Both)]
 		public void GetsCorrectSizeRequestWithWrappingContent(ScrollOrientation orientation)
 		{
 			MockPlatformSizeService.Current.UseRealisticLabelMeasure = true;

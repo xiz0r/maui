@@ -7,12 +7,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class PathSegmentTests : BaseTestFixtureXUnit
 	{
 		PointCollectionConverter _pointCollectionConverter;
-
 		
-		public override void Setup()
+		public PathSegmentTests()
 		{
-			
-
 			_pointCollectionConverter = new PointCollectionConverter();
 		}
 
@@ -57,17 +54,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(50, lineSegment2.Point.Y);
 		}
 
-		[TestCase("", 0)]
-		[TestCase("0 48", 1)]
-		[TestCase("0 48, 0 144", 2)]
-		[TestCase("0 48, 0 144, 96 150", 3)]
-		[TestCase("0 48, 0 144, 96 150, 100 0", 4)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0", 5)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96", 6)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96", 7)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192", 8)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200", 9)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200 144 48", 10)]
+		[InlineData("", 0)]
+		[InlineData("0 48", 1)]
+		[InlineData("0 48, 0 144", 2)]
+		[InlineData("0 48, 0 144, 96 150", 3)]
+		[InlineData("0 48, 0 144, 96 150, 100 0", 4)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0", 5)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96", 6)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96", 7)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192", 8)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200", 9)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200 144 48", 10)]
 		public void TestPolyBezierSegmentConstructor(string points, int count)
 		{
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
@@ -77,17 +74,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(count, polyBezierSegment.Points.Count);
 		}
 
-		[TestCase("", 0)]
-		[TestCase("0 48", 1)]
-		[TestCase("0 48, 0 144", 2)]
-		[TestCase("0 48, 0 144, 96 150", 3)]
-		[TestCase("0 48, 0 144, 96 150, 100 0", 4)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0", 5)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96", 6)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96", 7)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192", 8)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200", 9)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200 144 48", 10)]
+		[InlineData("", 0)]
+		[InlineData("0 48", 1)]
+		[InlineData("0 48, 0 144", 2)]
+		[InlineData("0 48, 0 144, 96 150", 3)]
+		[InlineData("0 48, 0 144, 96 150, 100 0", 4)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0", 5)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96", 6)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96", 7)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192", 8)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200", 9)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200 144 48", 10)]
 		public void TestPolyLineSegmentConstructor(string points, int count)
 		{
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);
@@ -96,17 +93,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(count, polyLineSegment.Points.Count);
 		}
 
-		[TestCase("", 0)]
-		[TestCase("0 48", 1)]
-		[TestCase("0 48, 0 144", 2)]
-		[TestCase("0 48, 0 144, 96 150", 3)]
-		[TestCase("0 48, 0 144, 96 150, 100 0", 4)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0", 5)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96", 6)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96", 7)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192", 8)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200", 9)]
-		[TestCase("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200 144 48", 10)]
+		[InlineData("", 0)]
+		[InlineData("0 48", 1)]
+		[InlineData("0 48, 0 144", 2)]
+		[InlineData("0 48, 0 144, 96 150", 3)]
+		[InlineData("0 48, 0 144, 96 150, 100 0", 4)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0", 5)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96", 6)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96", 7)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192", 8)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200", 9)]
+		[InlineData("0 48, 0 144, 96 150, 100 0, 192 0, 192 96, 50 96, 48 192, 150 200 144 48", 10)]
 		public void TestPolyQuadraticBezierSegmentConstructor(string points, int count)
 		{
 			var pointCollection = (PointCollection)_pointCollectionConverter.ConvertFromInvariantString(points);

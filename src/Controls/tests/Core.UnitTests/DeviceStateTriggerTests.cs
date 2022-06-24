@@ -16,8 +16,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase("Android", true)]
-		[TestCase("iOS", false)]
+		[InlineData("Android", true)]
+		[InlineData("iOS", false)]
 		public void CorrectStateIsAppliedWhenAttached(string triggerDevice, bool isApplied)
 		{
 			DeviceInfo.SetCurrent(new MockDeviceInfo(platform: DevicePlatform.Android));

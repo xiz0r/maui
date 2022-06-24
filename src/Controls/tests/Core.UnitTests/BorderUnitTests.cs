@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var visualTreeChildren = ((IVisualTreeElement)border).GetVisualChildren();
 			Assert.IsNotEmpty(visualTreeChildren);
-			Assert.AreSame(visualTreeChildren[0], label);
+			Assert.Same(visualTreeChildren[0], label);
 		}
 
 		[Fact]
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label = new Label();
 			border.Content = label;
 
-			Assert.AreSame(border, label.Parent);
+			Assert.Same(border, label.Parent);
 
 			border.Content = null;
 			Assert.Null(label.Parent);

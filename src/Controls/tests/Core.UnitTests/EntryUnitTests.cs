@@ -26,9 +26,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(signaled, "ValueChanged did not fire");
 		}
 
-		[TestCase(null, "foo")]
-		[TestCase("foo", "bar")]
-		[TestCase("foo", null)]
+		[InlineData(null, "foo")]
+		[InlineData("foo", "bar")]
+		[InlineData("foo", null)]
 		public void ValueChangedArgs(string initial, string final)
 		{
 			var entry = new Entry
@@ -56,9 +56,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase(1)]
-		[TestCase(0)]
-		[TestCase(9999)]
+		[InlineData(1)]
+		[InlineData(0)]
+		[InlineData(9999)]
 		public void CursorPositionValid(int val)
 		{
 			var entry = new Entry
@@ -83,9 +83,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
-		[TestCase(1)]
-		[TestCase(0)]
-		[TestCase(9999)]
+		[InlineData(1)]
+		[InlineData(0)]
+		[InlineData(9999)]
 		public void SelectionLengthValid(int val)
 		{
 			var entry = new Entry
@@ -110,8 +110,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ReturnTypeCommand(bool isEnabled)
 		{
 			var entry = new Entry()
@@ -134,8 +134,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(result == isEnabled ? true : false);
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public void ReturnTypeCommandNullTestIsEnabled(bool isEnabled)
 		{
 			var entry = new Entry()
@@ -156,7 +156,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(result == isEnabled ? true : false);
 		}
 
-		[TestCase(true)]
+		[InlineData(true)]
 		public void IsReadOnlyTest(bool isReadOnly)
 		{
 			Entry entry = new Entry();

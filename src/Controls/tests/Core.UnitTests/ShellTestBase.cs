@@ -12,22 +12,21 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	
 	public class ShellTestBase : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
+		public ShellTestBase()
 		{
-			
 			AppInfo.SetCurrent(new MockAppInfo());
 		}
 
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			Routing.Clear();
+			if (disposing)
+			{
+				Routing.Clear();
+			}
 
+			base.Dispose(disposing);
 		}
 
 		protected T FindParentOfType<T>(Element element)

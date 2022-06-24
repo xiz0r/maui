@@ -5,9 +5,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class EditorTests : BaseTestFixtureXUnit
 	{
-		[TestCase("Hi", "My text has changed")]
-		[TestCase(null, "My text has changed")]
-		[TestCase("Hi", null)]
+		[InlineData("Hi", "My text has changed")]
+		[InlineData(null, "My text has changed")]
+		[InlineData("Hi", null)]
 		public void EditorTextChangedEventArgs(string initialText, string finalText)
 		{
 			var editor = new Editor
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(finalText, newText);
 		}
 
-		[TestCase(true)]
+		[InlineData(true)]
 		public void IsReadOnlyTest(bool isReadOnly)
 		{
 			Editor editor = new Editor();

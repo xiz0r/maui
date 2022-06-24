@@ -47,7 +47,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(size, font.Size);
 		}
 
-		[TestCase("en-US"), TestCase("tr-TR"), TestCase("fr-FR")]
+		[InlineData("en-US"), TestCase("tr-TR"), TestCase("fr-FR")]
 		public void CultureTestSystemFontOfSizeDouble(string culture)
 		{
 			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);

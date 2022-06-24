@@ -133,19 +133,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(0, 0, ExpectedResult = true)]
-		[TestCase(0, 5, ExpectedResult = true)]
-		[TestCase(5, 0, ExpectedResult = true)]
-		[TestCase(2, 3, ExpectedResult = false)]
+		[InlineData(0, 0, ExpectedResult = true)]
+		[InlineData(0, 5, ExpectedResult = true)]
+		[InlineData(5, 0, ExpectedResult = true)]
+		[InlineData(2, 3, ExpectedResult = false)]
 		public bool TestIsEmpty(int w, int h)
 		{
 			return new Rect(0, 0, w, h).IsEmpty;
 		}
 
 		[Fact]
-		[TestCase(0, 0, 8, 8, 0, 0, 5, 5, ExpectedResult = true)]
-		[TestCase(0, 0, 5, 5, 5, 5, 5, 5, ExpectedResult = false)]
-		[TestCase(0, 0, 2, 2, 3, 0, 5, 5, ExpectedResult = false)]
+		[InlineData(0, 0, 8, 8, 0, 0, 5, 5, ExpectedResult = true)]
+		[InlineData(0, 0, 5, 5, 5, 5, 5, 5, ExpectedResult = false)]
+		[InlineData(0, 0, 2, 2, 3, 0, 5, 5, ExpectedResult = false)]
 		public bool TestIntersectsWith(double x1, double y1, double w1, double h1, double x2, double y2, double w2, double h2)
 		{
 			return new Rect(x1, y1, w1, h1).IntersectsWith(new Rect(x2, y2, w2, h2));
@@ -176,8 +176,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[TestCase(0, 0, 2, 2, ExpectedResult = "{X=0 Y=0 Width=2 Height=2}")]
-		[TestCase(1, 0, 3, 2, ExpectedResult = "{X=1 Y=0 Width=3 Height=2}")]
+		[InlineData(0, 0, 2, 2, ExpectedResult = "{X=0 Y=0 Width=2 Height=2}")]
+		[InlineData(1, 0, 3, 2, ExpectedResult = "{X=1 Y=0 Width=3 Height=2}")]
 		public string TestRectToString(double x, double y, double w, double h)
 		{
 			return new Rect(x, y, w, h).ToString();

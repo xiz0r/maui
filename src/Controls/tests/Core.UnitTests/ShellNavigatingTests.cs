@@ -15,11 +15,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class ShellNavigatingTests : ShellTestBase
 	{
-		
-		public override void TearDown()
+
+		protected override void Dispose(bool disposing)
 		{
-			base.TearDown();
-			Routing.Clear();
+			if (disposing)
+			{
+				Routing.Clear();
+			}
+
+			base.Dispose(disposing);
 		}
 
 		[Fact]
@@ -152,8 +156,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 		}
 
-		[TestCase("PopToRoot")]
-		[TestCase("Pop")]
+		[InlineData("PopToRoot")]
+		[InlineData("Pop")]
 		public async Task DeferPopNavigation(string testCase)
 		{
 			TestShell shell = new TestShell()
@@ -193,10 +197,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[TestCase("PopToRoot")]
-		[TestCase("Pop")]
-		[TestCase("GoToAsync")]
-		[TestCase("Push")]
+		[InlineData("PopToRoot")]
+		[InlineData("Pop")]
+		[InlineData("GoToAsync")]
+		[InlineData("Push")]
 		public async Task NavigationTaskCompletesAfterDeferralHasFinished(string testCase)
 		{
 			Routing.RegisterRoute(nameof(NavigationTaskCompletesAfterDeferralHasFinished), typeof(ContentPage));
@@ -510,10 +514,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[TestCase(true, 2)]
-		[TestCase(false, 2)]
-		[TestCase(true, 3)]
-		[TestCase(false, 3)]
+		[InlineData(true, 2)]
+		[InlineData(false, 2)]
+		[InlineData(true, 3)]
+		[InlineData(false, 3)]
 		public async Task ShellItemContentRouteWithGlobalRouteRelative(bool modal, int depth)
 		{
 			var shell = new Shell();
@@ -537,8 +541,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//animals/monkeys/details"));
 		}
 
-		[TestCase(true)]
-		[TestCase(false)]
+		[InlineData(true)]
+		[InlineData(false)]
 		public async Task GotoSameGlobalRoutesCollapsesUriCorrectly(bool modal)
 		{
 			var shell = new Shell();
@@ -623,10 +627,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("//animals/domestic/cats/catdetails", shell.CurrentState.Location.ToString());
 		}
 
-		[TestCase(typeof(PageWithDependency))]
-		[TestCase(typeof(PageWithDependencyAndMultipleConstructors))]
-		[TestCase(typeof(PageWithDependency))]
-		[TestCase(typeof(PageWithUnregisteredDependencyAndParameterlessConstructor))]
+		[InlineData(typeof(PageWithDependency))]
+		[InlineData(typeof(PageWithDependencyAndMultipleConstructors))]
+		[InlineData(typeof(PageWithDependency))]
+		[InlineData(typeof(PageWithUnregisteredDependencyAndParameterlessConstructor))]
 		public async Task GlobalRouteWithDependencyResolution(Type pageType)
 		{
 			var serviceCollection = new ServiceCollection();

@@ -89,7 +89,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		
-		public override void Setup()
+		public TemplatedItemsListTests()
 		{
 			
 			bindable = new MockItemsView();
@@ -178,7 +178,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(0, args.NewStartingIndex);
 			Assert.NotNull(args.NewItems);
 			Assert.Equal(1, args.NewItems.Count);
-			Assert.AreSame(str, ((Cell)args.NewItems[0]).BindingContext);
+			Assert.Same(str, ((Cell)args.NewItems[0]).BindingContext);
 		}
 
 		[Fact]
@@ -191,8 +191,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(collection.Count, bindable.TemplatedItems.ListProxy.Count);
 		}
 
-		[Fact]
-		public void GetOrCreateContent([Values(0, 1, 2)] int index)
+		[Theory, InlineData(0), InlineData(1), InlineData(2)]
+		public void GetOrCreateContent(int index)
 		{
 			var collection = new List<string> { "foo", "bar", "baz" };
 			bindable.SetValue(ItemsView<BindableObject>.ItemsSourceProperty, collection);
@@ -207,11 +207,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			TextCell textCell = content as TextCell;
 			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
-			Assert.AreSame(collection[index], textCell.BindingContext);
-			Assert.AreSame(collection[index], textCell.Text);
+			Assert.Same(collection[index], textCell.BindingContext);
+			Assert.Same(collection[index], textCell.Text);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
-			Assert.AreSame(content, content2);
+			Assert.Same(content, content2);
 		}
 
 		[Fact]
@@ -229,11 +229,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			TextCell textCell = content as TextCell;
 			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
-			Assert.AreSame(collection[index], textCell.BindingContext);
-			Assert.AreSame(collection[index], textCell.Text);
+			Assert.Same(collection[index], textCell.BindingContext);
+			Assert.Same(collection[index], textCell.Text);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
-			Assert.AreSame(content, content2);
+			Assert.Same(content, content2);
 		}
 
 		[Fact]
@@ -261,7 +261,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(content2, Is.InstanceOf<SwitchCell>());
 
 			var switchCell = (SwitchCell)content2;
-			Assert.AreSame(collection[index], switchCell.BindingContext);
+			Assert.Same(collection[index], switchCell.BindingContext);
 		}
 
 		[Fact]
@@ -285,8 +285,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var content2 = (TextCell)bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
 
 			Assert.AreNotSame(content, content2);
-			Assert.AreSame(collection[index], content2.BindingContext);
-			Assert.AreSame(collection[index], content2.Text);
+			Assert.Same(collection[index], content2.BindingContext);
+			Assert.Same(collection[index], content2.Text);
 		}
 
 		/*[Fact]
@@ -327,14 +327,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			TextCell textCell = content as TextCell;
 			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
-			Assert.AreSame(collection[0], textCell.BindingContext);
-			Assert.AreSame(collection[0], textCell.Text);
+			Assert.Same(collection[0], textCell.BindingContext);
+			Assert.Same(collection[0], textCell.Text);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(1, collection[1]);
 			Assert.AreNotSame(content, content2);
 
-			Assert.AreSame(collection[1], textCell.BindingContext);
-			Assert.AreSame(collection[1], textCell.Text);
+			Assert.Same(collection[1], textCell.BindingContext);
+			Assert.Same(collection[1], textCell.Text);
 		}
 
 		[Fact("Make sure we're not duplicate cell instances for the same item if it's a different index")]
@@ -353,14 +353,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			TextCell textCell = content as TextCell;
 			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
 
-			Assert.AreSame(item, textCell.BindingContext);
-			Assert.AreSame(item, textCell.Text);
+			Assert.Same(item, textCell.BindingContext);
+			Assert.Same(item, textCell.Text);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(1, item);
 			Assert.AreNotSame(content, content2);
 
-			Assert.AreSame(item, textCell.BindingContext);
-			Assert.AreSame(item, textCell.Text);
+			Assert.Same(item, textCell.BindingContext);
+			Assert.Same(item, textCell.Text);
 		}
 
 		[Fact]
@@ -395,8 +395,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.TemplatedItems.GetOrCreateContent(2, collection[2]).BindingContext, Is.SameAs(collection[2]));
 		}
 
-		[TestCase(0, 0, 0)]
-		[TestCase(3, 1, 0)]
+		[InlineData(0, 0, 0)]
+		[InlineData(3, 1, 0)]
 		public void GetGroupIndexFromGlobalGroupIndex(int globalIndex, int expectedIndex, int expectedLeftOver)
 		{
 			var collection = new[] {
@@ -412,10 +412,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(leftOver, Is.EqualTo(expectedLeftOver));
 		}
 
-		[TestCase(1, 0, 1)]
-		[TestCase(2, 0, 2)]
-		[TestCase(4, 1, 1)]
-		[TestCase(5, 1, 2)]
+		[InlineData(1, 0, 1)]
+		[InlineData(2, 0, 2)]
+		[InlineData(4, 1, 1)]
+		[InlineData(5, 1, 2)]
 		public void GetGroupIndexFromGlobalItemIndex(int globalIndex, int expectedIndex, int expectedLeftOver)
 		{
 			var collection = new[] {

@@ -155,7 +155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			}
 		}
 
-		[Test, TestCaseSource(nameof(ExpansionYCases))]
+		[Fact, TestCaseSource(nameof(ExpansionYCases))]
 		public void AlignmentRespectedWithinVerticalSegment(LayoutOptions layoutOptions, double expectedY)
 		{
 			var view0 = new TestView
@@ -175,7 +175,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			Assert.Equal(expectedY, view0.Bounds.Y);
 		}
 
-		[Test, TestCaseSource(nameof(ExpansionYCases))]
+		[Fact, TestCaseSource(nameof(ExpansionYCases))]
 		public void AlignmentRespectedWithinHorizontalSegment(LayoutOptions layoutOptions, double expectedX)
 		{
 			var view0 = new TestView

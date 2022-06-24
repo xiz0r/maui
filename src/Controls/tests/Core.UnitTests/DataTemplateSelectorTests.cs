@@ -81,10 +81,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class DataTemplateRecycleTests : BaseTestFixtureXUnit
 	{
-		
-		public override void Setup()
+		public DataTemplateRecycleTests()
 		{
-			
 			DeviceInfo.SetCurrent(new MockDeviceInfo(platform: DevicePlatform.iOS));
 		}
 

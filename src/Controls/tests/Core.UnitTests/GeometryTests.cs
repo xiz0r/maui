@@ -8,14 +8,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class GeometryTests : BaseTestFixtureXUnit
 	{
-		[TestCase(0, true)]
-		[TestCase(0, false)]
-		[TestCase(45, true)]
-		[TestCase(45, false)]
-		[TestCase(180, true)]
-		[TestCase(180, false)]
-		[TestCase(270, true)]
-		[TestCase(270, false)]
+		[InlineData(0, true)]
+		[InlineData(0, false)]
+		[InlineData(45, true)]
+		[InlineData(45, false)]
+		[InlineData(180, true)]
+		[InlineData(180, false)]
+		[InlineData(270, true)]
+		[InlineData(270, false)]
 		public void FlattenArcTest(double angle, bool isLargeArc)
 		{
 			var path = new Path

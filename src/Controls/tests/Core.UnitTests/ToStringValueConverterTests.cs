@@ -11,7 +11,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		static readonly CultureInfo _skSkCulture = CultureInfo.GetCultureInfo("sk-SK");
 
 		
-		public override void Setup()
+		public ToStringValueConverterTests()
 		{
 			
 			System.Threading.Thread.CurrentThread.CurrentCulture = _enUsCulture;

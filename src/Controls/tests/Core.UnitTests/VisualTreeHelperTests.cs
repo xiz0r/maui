@@ -30,10 +30,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			VisualTreeChanged?.Invoke(sender as Element, e);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void LayoutChildren(Type TLayout)
 		{
 			var layout = CreateLayout(TLayout)!;
@@ -177,10 +177,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(VisualTreeChangeType.Remove, args.ChangeType);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void AddLayoutChildFiresVisualTreeChanged(Type TLayout)
 		{
 			if (!DebuggerHelper.DebuggerIsAttached)
@@ -213,10 +213,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void InsertLayoutChildFiresVisualTreeChanged(Type TLayout)
 		{
 			if (!DebuggerHelper.DebuggerIsAttached)
@@ -244,10 +244,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(VisualTreeChangeType.Add, args.ChangeType);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void RemoveLayoutChildFiresVisualTreeChanged(Type TLayout)
 		{
 			if (!DebuggerHelper.DebuggerIsAttached)
@@ -274,10 +274,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(VisualTreeChangeType.Remove, args.ChangeType);
 		}
 
-		[TestCase(typeof(VerticalStackLayout))]
-		[TestCase(typeof(HorizontalStackLayout))]
-		[TestCase(typeof(Grid))]
-		[TestCase(typeof(StackLayout))]
+		[InlineData(typeof(VerticalStackLayout))]
+		[InlineData(typeof(HorizontalStackLayout))]
+		[InlineData(typeof(Grid))]
+		[InlineData(typeof(StackLayout))]
 		public void ClearLayoutChildrenFiresVisualTreeChanged(Type TLayout)
 		{
 			if (!DebuggerHelper.DebuggerIsAttached)

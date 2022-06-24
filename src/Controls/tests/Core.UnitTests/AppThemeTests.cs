@@ -11,21 +11,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		MockAppInfo mockAppInfo;
 		Application app;
 
-		
-		public override void Setup()
+		public AppThemeTests()
 		{
-			
-
 			AppInfo.SetCurrent(mockAppInfo = new MockAppInfo() { RequestedTheme = AppTheme.Light });
 			Application.Current = app = new Application();
 		}
 
-		
-		public override void TearDown()
+		protected override void Dispose(bool disposing)
 		{
-			Application.Current = null;
+			if (disposing)
+			{
+				Application.Current = null;
+			}
 
-			base.TearDown();
+			base.Dispose(disposing);
 		}
 
 		[Fact]

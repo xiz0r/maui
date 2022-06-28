@@ -25,8 +25,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(executed);
 		}
 
-		[Fact]
-		public void CommandCanExecuteModifiesEnabled([Values(true, false)] bool initial)
+		[Theory, InlineData(true), InlineData(false)]
+		public void CommandCanExecuteModifiesEnabled(bool initial)
 		{
 			bool canExecute = initial;
 			Command command;

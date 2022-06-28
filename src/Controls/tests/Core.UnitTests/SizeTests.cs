@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Maui.Graphics;
 using Xunit;
 
@@ -41,8 +43,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(new Size(8, 8), result);
 		}
 
-		[Fact]
-		public void TestPointFromSize([Range(0, 2)] double x, [Range(0, 2)] double y)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 0, 2, MemberType = typeof(TestDataHelpers))]
+		public void TestPointFromSize(double x, double y)
 		{
 			var size = new Size(x, y);
 			var point = (Point)size;
@@ -51,8 +53,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(y, point.Y);
 		}
 
-		[Fact]
-		public void HashCode([Range(3, 5)] double w1, [Range(3, 5)] double h1, [Range(3, 5)] double w2, [Range(3, 5)] double h2)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 3, 5, 4, MemberType = typeof(TestDataHelpers))]
+		public void HashCodeTest( double w1,  double h1,  double w2, double h2)
 		{
 			bool result = new Size(w1, h1).GetHashCode() == new Size(w2, h2).GetHashCode();
 
@@ -73,16 +75,35 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(new Size(2, 3) != new Size(3, 2));
 		}
 
-		[Fact]
-		[InlineData(0, 0, ExpectedResult = "{Width=0 Height=0}")]
-		[InlineData(1, 5, ExpectedResult = "{Width=1 Height=5}")]
-		public string TestToString(double w, double h)
+		[Theory]
+		[InlineData(0, 0, "{Width=0 Height=0}")]
+		[InlineData(1, 5, "{Width=1 Height=5}")]
+		public void TestToString(double w, double h, string expectedResult)
 		{
-			return new Size(w, h).ToString();
+			var result = new Size(w, h).ToString();
+			Assert.Equal(expectedResult, result);
+
 		}
 
-		[Fact]
-		public void MultiplyByScalar([Range(12, 15)] int w, [Range(12, 15)] int h, [Values(0.0, 2.0, 7.0, 0.25)] double scalar)
+		public static IEnumerable<object[]> MultiplyByScalarData()
+		{
+			var range = Enumerable.Range(12, 3);
+			var values = new List<object> { 0.0, 2.0, 7.0, 0.25 };
+
+			foreach (var p1 in range)
+			{
+				foreach (var p2 in range)
+				{
+					foreach (var p3 in values)
+					{
+						yield return new object[] { p1, p2, p3 };
+					}
+				}
+			}
+		}
+
+		[Theory, MemberData(nameof(MultiplyByScalarData))]
+		public void MultiplyByScalar(int w, int h, double scalar)
 		{
 			var size = new Size(w, h);
 			var result = size * scalar;

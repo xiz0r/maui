@@ -215,7 +215,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(CreateShellItem());
 			shell.Items.Add(flyoutItem);
 
-			Assert.AreNotEqual(shell.CurrentItem.CurrentItem.CurrentItem, content);
+			Assert.NotEqual(shell.CurrentItem.CurrentItem.CurrentItem, content);
 			Assert.Null(page);
 
 			bool navigated = false;
@@ -278,7 +278,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 			Assert.Equal(newSection, item.CurrentItem);
-			Assert.AreNotEqual(section, item.CurrentItem);
+			Assert.NotEqual(section, item.CurrentItem);
 
 			item.CurrentItem = section;
 
@@ -303,7 +303,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			state.AllFalse();
 
 			Assert.Equal(shell.CurrentItem, item2);
-			Assert.AreNotEqual(shell.CurrentItem, item);
+			Assert.NotEqual(shell.CurrentItem, item);
 
 			shell.CurrentItem = item;
 

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 {
-	[TestFixture, Category("Layout")]
+	[Category("Layout")]
 	public class AndExpandTests : BaseTestFixtureXUnit
 	{
 		const double TestAreaWidth = 640;
@@ -155,7 +155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			}
 		}
 
-		[Fact, TestCaseSource(nameof(ExpansionYCases))]
+		[Fact, MemberData(nameof(ExpansionYCases))]
 		public void AlignmentRespectedWithinVerticalSegment(LayoutOptions layoutOptions, double expectedY)
 		{
 			var view0 = new TestView
@@ -175,7 +175,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			Assert.Equal(expectedY, view0.Bounds.Y);
 		}
 
-		[Fact, TestCaseSource(nameof(ExpansionYCases))]
+		[Fact, MemberData(nameof(ExpansionYCases))]
 		public void AlignmentRespectedWithinHorizontalSegment(LayoutOptions layoutOptions, double expectedX)
 		{
 			var view0 = new TestView

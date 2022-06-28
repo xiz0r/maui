@@ -75,8 +75,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(executed);
 		}
 
-		[Fact]
-		public void CanExecute([Values(true, false)] bool expected)
+		[Theory, InlineData(true), InlineData(false)]
+		public void CanExecute(bool expected)
 		{
 			bool canExecuteRan = false;
 			var cmd = new Command(() => { }, () =>
@@ -139,8 +139,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("Foo", result);
 		}
 
-		[Fact]
-		public void GenericCanExecute([Values(true, false)] bool expected)
+		[Theory, InlineData(true), InlineData(false)]
+		public void GenericCanExecute(bool expected)
 		{
 			string result = null;
 			var cmd = new Command<string>(s => { }, s =>

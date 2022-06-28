@@ -142,7 +142,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			args.Handled = true;
 			args.Data.Text = "Text Shouldn't change";
 			dragRec.SendDragStarting(element);
-			Assert.AreNotEqual(args.Data.Text, testString);
+			Assert.NotEqual(args.Data.Text, testString);
 		}
 	}
 }

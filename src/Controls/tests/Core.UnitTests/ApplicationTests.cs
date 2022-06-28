@@ -12,7 +12,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var app = new Application();
 
 			Assert.Null(app.MainPage);
-			Assert.IsEmpty(app.Windows);
+			Assert.Empty(app.Windows);
 		}
 
 		[Fact]
@@ -24,7 +24,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			app.MainPage = page;
 
 			Assert.Equal(page, app.MainPage);
-			Assert.IsEmpty(app.Windows);
+			Assert.Empty(app.Windows);
 		}
 
 		[Fact]
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var window = iapp.CreateWindow(null);
 
 			Assert.Equal(page, app.MainPage);
-			Assert.IsNotEmpty(app.Windows);
+			Assert.NotEmpty(app.Windows);
 			Assert.Equal(1, app.Windows.Count);
 			Assert.Equal(window, app.Windows[0]);
 			Assert.Equal(page, app.Windows[0].Page);
@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			app.MainPage = page2;
 
 			Assert.Equal(page2, app.MainPage);
-			Assert.IsNotEmpty(app.Windows);
+			Assert.NotEmpty(app.Windows);
 			Assert.Equal(1, app.Windows.Count);
 			Assert.Equal(window, app.Windows[0]);
 			Assert.Equal(page2, app.Windows[0].Page);

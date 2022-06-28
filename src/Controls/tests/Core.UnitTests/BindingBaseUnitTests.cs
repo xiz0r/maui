@@ -165,7 +165,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(() => binding.StringFormat = "{0}", Throws.InvalidOperationException);
 		}
 
-		[InlineData("en-US"), TestCase("tr-TR")]
+		[Theory, InlineData("en-US"), InlineData("tr-TR")]
 		public void StringFormatNonStringType(string culture)
 		{
 			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
@@ -200,7 +200,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.KeepAlive(bindable);
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Set Value")]
 		public void ValueSetOnOneWay(
 			bool setContextFirst,
@@ -244,7 +244,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Theory, Category("[Binding] Set Value")]
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		public void ValueSetOnOneWayToSource(
 			bool setContextFirst,
 			bool isDefault)
@@ -285,7 +285,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Theory, Category("[Binding] Set Value")]
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		public void ValueSetOnTwoWay(
 			bool setContextFirst,
 			bool isDefault)

@@ -133,22 +133,22 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[InlineData(0, 0, ExpectedResult = true)]
-		[InlineData(0, 5, ExpectedResult = true)]
-		[InlineData(5, 0, ExpectedResult = true)]
-		[InlineData(2, 3, ExpectedResult = false)]
-		public bool TestIsEmpty(int w, int h)
+		[InlineData(0, 0, true)]
+		[InlineData(0, 5, true)]
+		[InlineData(5, 0, true)]
+		[InlineData(2, 3, false)]
+		public void TestIsEmpty(int w, int h, bool isEmpty)
 		{
-			return new Rect(0, 0, w, h).IsEmpty;
+			Assert.Equal(isEmpty, new Rect(0, 0, w, h).IsEmpty);
 		}
 
 		[Fact]
-		[InlineData(0, 0, 8, 8, 0, 0, 5, 5, ExpectedResult = true)]
-		[InlineData(0, 0, 5, 5, 5, 5, 5, 5, ExpectedResult = false)]
-		[InlineData(0, 0, 2, 2, 3, 0, 5, 5, ExpectedResult = false)]
-		public bool TestIntersectsWith(double x1, double y1, double w1, double h1, double x2, double y2, double w2, double h2)
+		[InlineData(0, 0, 8, 8, 0, 0, 5, 5, true)]
+		[InlineData(0, 0, 5, 5, 5, 5, 5, 5, false)]
+		[InlineData(0, 0, 2, 2, 3, 0, 5, 5, false)]
+		public void TestIntersectsWith(double x1, double y1, double w1, double h1, double x2, double y2, double w2, double h2, bool expected)
 		{
-			return new Rect(x1, y1, w1, h1).IntersectsWith(new Rect(x2, y2, w2, h2));
+			Assert.Equal(expected, new Rect(x1, y1, w1, h1).IntersectsWith(new Rect(x2, y2, w2, h2)));
 		}
 
 		[Fact]
@@ -176,11 +176,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[InlineData(0, 0, 2, 2, ExpectedResult = "{X=0 Y=0 Width=2 Height=2}")]
-		[InlineData(1, 0, 3, 2, ExpectedResult = "{X=1 Y=0 Width=3 Height=2}")]
-		public string TestRectToString(double x, double y, double w, double h)
+		[InlineData(0, 0, 2, 2, "{X=0 Y=0 Width=2 Height=2}")]
+		[InlineData(1, 0, 3, 2, "{X=1 Y=0 Width=3 Height=2}")]
+		public void TestRectToString(double x, double y, double w, double h, string expected)
 		{
-			return new Rect(x, y, w, h).ToString();
+			Assert.Equal(expected, new Rect(x, y, w, h).ToString());
 		}
 
 		[Fact]
@@ -194,9 +194,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(new Rect(0, 0, 10, 10) != new Rect(0, 0, 10, 5));
 		}
 
-		[Fact]
-		public void TestRectGetHashCode([Range(3, 4)] double x1, [Range(3, 4)] double y1, [Range(3, 4)] double w1, [Range(3, 4)] double h1,
-											  [Range(3, 4)] double x2, [Range(3, 4)] double y2, [Range(3, 4)] double w2, [Range(3, 4)] double h2)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 3, 4, 8, MemberType = typeof(TestDataHelpers))]
+		public void TestRectGetHashCode( double x1,  double y1,  double w1,  double h1,
+											   double x2,  double y2,  double w2,  double h2)
 		{
 			bool result = new Rect(x1, y1, w1, h1).GetHashCode() == new Rect(x2, y2, w2, h2).GetHashCode();
 

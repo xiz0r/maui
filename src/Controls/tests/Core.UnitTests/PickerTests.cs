@@ -61,7 +61,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var picker = new Picker();
 
-			Assert.IsEmpty(picker.Items);
+			Assert.Empty(picker.Items);
 			Assert.Equal(-1, picker.SelectedIndex);
 
 			picker.SelectedIndex = 2;

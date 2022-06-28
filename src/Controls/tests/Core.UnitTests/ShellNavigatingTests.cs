@@ -130,7 +130,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await taskCompletionSource.Task;
 
 			Assert.True(executed);
-			Assert.AreNotEqual(contentActiveBeforeCompletingDeferral, navigatingToShellContent);
+			Assert.NotEqual(contentActiveBeforeCompletingDeferral, navigatingToShellContent);
 			Assert.Equal(flyoutItem.Items[0].Items[0], contentActiveBeforeCompletingDeferral, "Navigation to new Content was not deferred");
 			Assert.Equal(flyoutItem.Items[0].CurrentItem, navigatingToShellContent, "Navigation after completing the deferral failed");
 		}

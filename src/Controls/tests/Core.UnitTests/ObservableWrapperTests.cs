@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var observableCollection = new ObservableCollection<View>();
 			var wrapper = new ObservableWrapper<View, Button>(observableCollection);
 
-			Assert.IsEmpty(wrapper);
+			Assert.Empty(wrapper);
 
 			Assert.Throws<ArgumentNullException>(() => new ObservableWrapper<View, View>(null));
 		}
@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			observableCollection.Add(child);
 
-			Assert.IsEmpty(wrapper);
+			Assert.Empty(wrapper);
 		}
 
 		[Fact]
@@ -76,7 +76,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			observableCollection.Add(child);
 
-			Assert.IsEmpty(wrapper);
+			Assert.Empty(wrapper);
 		}
 
 		[Fact]
@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			observableCollection.Add(child);
 
-			Assert.IsEmpty(wrapper);
+			Assert.Empty(wrapper);
 
 			Assert.False(wrapper.Remove(child));
 

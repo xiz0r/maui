@@ -730,7 +730,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Same(defaultValue, bindableProperty.DefaultValue);
 			var newvalue = bindable.GetValue(bindableProperty);
-			Assert.AreNotSame(defaultValue, newvalue);
+			Assert.NotSame(defaultValue, newvalue);
 			Assert.NotNull(newvalue);
 			Assert.Equal(1, invoked);
 		}
@@ -768,7 +768,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value0 = bindable0.GetValue(bindableProperty);
 			var value1 = bindable1.GetValue(bindableProperty);
 
-			Assert.AreNotSame(value0, value1);
+			Assert.NotSame(value0, value1);
 			Assert.Equal(2, invoked);
 		}
 
@@ -793,7 +793,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value1 = bindable.GetValue(bindableProperty);
 			Assert.NotNull(value1);
 			Assert.Equal(2, invoked);
-			Assert.AreNotSame(value0, value1);
+			Assert.NotSame(value0, value1);
 		}
 
 		[Fact]
@@ -1310,7 +1310,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(42, bindable.GetValue(prop));
 
 			bindable.SetValue(prop, (object)(long)-42);
-			Assert.AreNotEqual(-42, bindable.GetValue(prop));
+			Assert.NotEqual(-42, bindable.GetValue(prop));
 		}
 
 		class CastFromString

@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var key1 = new AnimatableKey(animatable, "handle1");
 			var key2 = new AnimatableKey(animatable, "handle2");
 
-			Assert.AreNotEqual(key1, key2);
+			Assert.NotEqual(key1, key2);
 		}
 
 		[Fact]
@@ -40,7 +40,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var key1 = new AnimatableKey(animatable1, "handle");
 			var key2 = new AnimatableKey(animatable2, "handle");
 
-			Assert.AreNotEqual(key1, key2);
+			Assert.NotEqual(key1, key2);
 		}
 
 		[Fact]

@@ -95,7 +95,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var args = new DropEventArgs(new DataPackageView(new DataPackage() { Text = testString }));
 			args.Handled = true;
 			await dropTec.SendDrop(args);
-			Assert.AreNotEqual(element.Text, testString);
+			Assert.NotEqual(element.Text, testString);
 		}
 	}
 }

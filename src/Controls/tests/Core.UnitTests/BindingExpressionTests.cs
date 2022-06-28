@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
 
@@ -26,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var binding = new Binding(path);
 
 			Assert.Throws<ArgumentNullException>(() => new BindingExpression(binding, null),
-				"Allowed the path to eb null");
+				"Allowed the path to be null");
 
 			Assert.Throws<ArgumentNullException>(() => new BindingExpression(null, path),
 				"Allowed the binding to be null");
@@ -47,6 +48,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[InlineData("Foo[]")]
 		[InlineData("Foo.Bar[]")]
 		[InlineData("Foo[1")]
+		[Theory]
 		public void InvalidPaths(string path)
 		{
 			var fex = Assert.Throws<FormatException>(() =>
@@ -59,15 +61,26 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"FormatException did not contain an explanation");
 		}
 
-		[Fact]
-		public void ValidPaths(
-			[Values (
-				".", "[1]", "[1 ]", ".[1]", ". [1]",
+		public static IEnumerable<object[]> ValidPathsData() 
+		{
+			var paths = new List<string> { ".", "[1]", "[1 ]", ".[1]", ". [1]",
 				"Foo", "Foo.Bar", "Foo. Bar", "Foo.Bar[1]",
-				"Foo.Bar [1]")]
+				"Foo.Bar [1]" };
+
+			foreach (var path in paths)
+			{
+				yield return new object[] { path, true, true } ;
+				yield return new object[] { path, true, false};
+				yield return new object[] { path, false, true};
+				yield return new object[] { path, false, false };
+			}
+		}
+
+		[Theory, MemberData(nameof(ValidPathsData))]
+		public void ValidPaths(
 			string path,
-			[Values(true, false)] bool spaceBefore,
-			[Values(true, false)] bool spaceAfter)
+			bool spaceBefore,
+			bool spaceAfter)
 		{
 			if (spaceBefore)
 				path = " " + path;
@@ -116,7 +129,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			new object[]{ "-0", new CultureInfo("de"), "-0" },
 		};
 
-		[TestCaseSource(nameof(TryConvertWithNumbersAndCulturesCases))]
+		[Theory, MemberData(nameof(TryConvertWithNumbersAndCulturesCases))]
 		public void TryConvertWithNumbersAndCultures(object inputString, CultureInfo culture, object expected)
 		{
 			CultureInfo.CurrentCulture = culture;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Maui.Graphics;
 using Xunit;
 
@@ -8,9 +9,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	[Category("RadioButton")]
 	public class RadioButtonTemplateTests : BaseTestFixtureXUnit
 	{
-		class FrameStyleCases : IEnumerable
+		public class FrameStyleCases : IEnumerable<object[]>
 		{
-			public IEnumerator GetEnumerator()
+			public IEnumerator<object[]> GetEnumerator()
 			{
 				yield return new object[] { Frame.VerticalOptionsProperty, LayoutOptions.End };
 				yield return new object[] { Frame.HorizontalOptionsProperty, LayoutOptions.End };
@@ -25,10 +26,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				yield return new object[] { Frame.TranslationXProperty, 123 };
 				yield return new object[] { Frame.TranslationYProperty, 321 };
 			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
 		}
 
-		[TestCaseSource(typeof(FrameStyleCases))]
-		[Description("Frame Style properties should not affect RadioButton")]
+		[ClassData(typeof(FrameStyleCases))]
+		[Theory(DisplayName = "Frame Style properties should not affect RadioButton")]
 		public void RadioButtonIgnoresFrameStyleProperties(BindableProperty property, object value)
 		{
 			var implicitFrameStyle = new Style(typeof(Frame));
@@ -43,12 +49,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var root = (radioButton as IControlTemplated)?.TemplateRoot as Frame;
 
 			Assert.NotNull(root);
-			Assert.That(root.GetValue(property), Is.Not.EqualTo(value), $"{property.PropertyName} should be ignored.");
+			Assert.NotEqual(value, root.GetValue(property));
 		}
 
-		class RadioButtonStyleCases : IEnumerable
+		class RadioButtonStyleCases : IEnumerable<object[]>
 		{
-			public IEnumerator GetEnumerator()
+			public IEnumerator<object[]> GetEnumerator()
 			{
 				yield return new object[] { RadioButton.VerticalOptionsProperty, LayoutOptions.End };
 				yield return new object[] { RadioButton.HorizontalOptionsProperty, LayoutOptions.End };
@@ -62,10 +68,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				yield return new object[] { RadioButton.TranslationXProperty, 123 };
 				yield return new object[] { RadioButton.TranslationYProperty, 321 };
 			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
 		}
 
-		[TestCaseSource(typeof(RadioButtonStyleCases))]
-		[Description("RadioButton Style properties should affect RadioButton")]
+		[ClassData(typeof(RadioButtonStyleCases))]
+		[Theory(DisplayName = "RadioButton Style properties should affect RadioButton")]
 		public void RadioButtonStyleSetsPropertyOnTemplateRoot(BindableProperty property, object value)
 		{
 			var radioButtonStyle = new Style(typeof(RadioButton));
@@ -76,7 +87,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var root = (radioButton as IControlTemplated)?.TemplateRoot as Frame;
 
 			Assert.NotNull(root);
-			Assert.That(root.GetValue(property), Is.EqualTo(value), $"{property.PropertyName} should match.");
+			Assert.Equal(root.GetValue(property), value);
 		}
 	}
 }

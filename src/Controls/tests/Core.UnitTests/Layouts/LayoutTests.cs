@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 {
-	[TestFixture, Category("Layout")]
+	[Category("Layout")]
 	public class LayoutTests : BaseTestFixtureXUnit
 	{
 		[Fact]

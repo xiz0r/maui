@@ -205,7 +205,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(content);
 
 			TextCell textCell = content as TextCell;
-			Assert.NotNull(textCell, "Content was did not match the template type, expected {0} but got {1}", typeof(TextCell), content.GetType());
+			Assert.NotNull(textCell);
 
 			Assert.Same(collection[index], textCell.BindingContext);
 			Assert.Same(collection[index], textCell.Text);
@@ -284,7 +284,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var content2 = (TextCell)bindable.TemplatedItems.GetOrCreateContent(index, collection[index]);
 
-			Assert.AreNotSame(content, content2);
+			Assert.NotSame(content, content2);
 			Assert.Same(collection[index], content2.BindingContext);
 			Assert.Same(collection[index], content2.Text);
 		}
@@ -331,7 +331,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Same(collection[0], textCell.Text);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(1, collection[1]);
-			Assert.AreNotSame(content, content2);
+			Assert.NotSame(content, content2);
 
 			Assert.Same(collection[1], textCell.BindingContext);
 			Assert.Same(collection[1], textCell.Text);
@@ -357,7 +357,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Same(item, textCell.Text);
 
 			BindableObject content2 = bindable.TemplatedItems.GetOrCreateContent(1, item);
-			Assert.AreNotSame(content, content2);
+			Assert.NotSame(content, content2);
 
 			Assert.Same(item, textCell.BindingContext);
 			Assert.Same(item, textCell.Text);
@@ -395,6 +395,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.TemplatedItems.GetOrCreateContent(2, collection[2]).BindingContext, Is.SameAs(collection[2]));
 		}
 
+		[Theory]
 		[InlineData(0, 0, 0)]
 		[InlineData(3, 1, 0)]
 		public void GetGroupIndexFromGlobalGroupIndex(int globalIndex, int expectedIndex, int expectedLeftOver)
@@ -412,6 +413,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(leftOver, Is.EqualTo(expectedLeftOver));
 		}
 
+		[Theory]
 		[InlineData(1, 0, 1)]
 		[InlineData(2, 0, 2)]
 		[InlineData(4, 1, 1)]
@@ -431,8 +433,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(leftOver, Is.EqualTo(expectedLeftOver));
 		}
 
-		[Fact]
-		public void GetGroupAndIndexOfItem([Values(0, 1, 2)] int group, [Values(0, 1, 2)] int index)
+		public static IEnumerable<object[]> GetGroupAndIndexOfItemData()
+		{
+			return TestDataHelpers.Combinations(new List<int>() { 0, 1, 2 });
+		}
+
+		[Theory, MemberData(nameof(GetGroupAndIndexOfItemData))]
+		public void GetGroupAndIndexOfItem(int group, int index)
 		{
 			var collection = new[] {
 				new[] { "foo", "fad" },
@@ -455,8 +462,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 
 			var location = bindable.TemplatedItems.GetGroupAndIndexOfItem(item);
-			Assert.That(location.Item1, Is.EqualTo(group), "Group index was incorrect");
-			Assert.That(location.Item2, Is.EqualTo(index), "Item index was incorrect");
+			Assert.Equal(group, location.Item1);
+			Assert.Equal(index, location.Item2);
 		}
 
 		[Fact]

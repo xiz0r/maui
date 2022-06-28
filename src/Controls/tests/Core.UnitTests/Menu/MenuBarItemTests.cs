@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests.Menu
 {
-	[TestFixture, Category("MenuBarItem")]
+	[Category("MenuBarItem")]
 	public class MenuBarItemTests :
 		MenuBarTestBase<MenuBarItem, IMenuElement, MenuFlyoutItem, MenuBarItemHandlerUpdate>
 	{

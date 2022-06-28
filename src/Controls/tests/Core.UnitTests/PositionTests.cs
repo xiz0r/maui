@@ -85,7 +85,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var position = new Position(20, 25);
 			var position2 = new Position(25, 20);
-			Assert.AreNotEqual(position.GetHashCode(), position2.GetHashCode());
+			Assert.NotEqual(position.GetHashCode(), position2.GetHashCode());
 		}
 	}
 }

@@ -105,8 +105,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(changed);
 		}
 
-		[Fact]
-		public void ThrowsWhenFlyoutSetWithoutValidTitle([Values(null, "")] string title)
+		[Theory, InlineData(null), InlineData("")]
+		public void ThrowsWhenFlyoutSetWithoutValidTitle(string title)
 		{
 			var page = new FlyoutPage();
 			Assert.Throws<InvalidOperationException>(() => page.Flyout = new ContentPage { Title = title });

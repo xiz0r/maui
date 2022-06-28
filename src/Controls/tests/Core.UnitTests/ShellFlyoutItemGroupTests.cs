@@ -216,7 +216,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(CreateShellItem<FlyoutItem>());
 			flyoutItems2 = shell.Controller.GenerateFlyoutGrouping();
 
-			Assert.AreNotSame(flyoutItems, flyoutItems2);
+			Assert.NotSame(flyoutItems, flyoutItems2);
 		}
 
 		[Fact]

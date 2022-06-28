@@ -86,7 +86,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var groups1 = VisualStateManager.GetVisualStateGroups(label1);
 			var groups2 = VisualStateManager.GetVisualStateGroups(label2);
 
-			Assert.AreNotSame(groups1, groups2);
+			Assert.NotSame(groups1, groups2);
 
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
 			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
@@ -116,7 +116,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(groups1);
 			Assert.NotNull(groups2);
 
-			Assert.AreNotSame(groups1, groups2);
+			Assert.NotSame(groups1, groups2);
 
 			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
 			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
@@ -563,8 +563,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(label.TextColor, Is.EqualTo(Colors.HotPink)); //textcolor Style's VSM isn't applied
 		}
 
-		[Fact]
-		[Explicit("This test was created to check performance characteristics; leaving it in because it may be useful again.")]
+		[Theory(Skip = "This test was created to check performance characteristics; leaving it in because it may be useful again.")]
 		[InlineData(1, 10)]
 		[InlineData(1, 10000)]
 		[InlineData(10, 100)]

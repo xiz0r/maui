@@ -7,8 +7,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class EasingTests : BaseTestFixtureXUnit
 	{
-		[Fact]
-		public void Linear([Range(0, 10)] double input)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 0, 10, MemberType = typeof(TestDataHelpers))]
+		public void Linear(double input)
 		{
 			Assert.Equal(input, Easing.Linear.Ease(input));
 		}

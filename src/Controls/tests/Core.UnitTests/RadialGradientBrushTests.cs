@@ -26,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			RadialGradientBrush radialGradientBrush = new RadialGradientBrush(gradientStops, new Point(0, 0), 10);
 
-			Assert.AreNotEqual(0, radialGradientBrush.GradientStops.Count, "GradientStops");
+			Assert.NotEqual(0, radialGradientBrush.GradientStops.Count, "GradientStops");
 			Assert.Equal(0, radialGradientBrush.Center.X, "Center.X");
 			Assert.Equal(0, radialGradientBrush.Center.Y, "Center.Y");
 			Assert.Equal(10, radialGradientBrush.Radius, "Radius");

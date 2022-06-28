@@ -87,9 +87,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(new Thickness(4, 3, 2, 1) != new Thickness(1, 2, 3, 4));
 		}
 
-		[Fact]
-		public void HashCode([Range(3, 4)] double l1, [Range(3, 4)] double t1, [Range(3, 4)] double r1, [Range(3, 4)] double b1,
-							  [Range(3, 4)] double l2, [Range(3, 4)] double t2, [Range(3, 4)] double r2, [Range(3, 4)] double b2)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 3, 4, 8, MemberType = typeof(TestDataHelpers))]
+		public void HashCode(double l1, double t1,  double r1, double b1,
+							  double l2, double t2, double r2, double b2)
 		{
 			bool result = new Thickness(l1, t1, r1, b1).GetHashCode() == new Thickness(l2, t2, r2, b2).GetHashCode();
 			if (l1 == l2 && t1 == t2 && r1 == r2 && b1 == b2)

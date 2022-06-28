@@ -204,7 +204,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var toolbar = testShell.Toolbar;
 			Assert.Equal("Test Title", toolbar.Title);
 			Shell.SetTitleView(contentPage, titleView);
-			Assert.IsEmpty(toolbar.Title);
+			Assert.Empty(toolbar.Title);
 			Assert.Equal(titleView, toolbar.TitleView);
 			Shell.SetTitleView(contentPage, null);
 			Assert.Equal("Test Title", toolbar.Title);

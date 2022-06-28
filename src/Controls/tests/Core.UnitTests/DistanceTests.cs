@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Maui.Controls.Maps;
 using Xunit;
 
@@ -73,8 +74,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(Math.Abs(distance.Miles - 33.15828) < EPSILON);
 		}
 
-		[Fact]
-		public void EqualityOp([Range(5, 9)] double x, [Range(5, 9)] double y)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 5, 9, MemberType = typeof(TestDataHelpers))]
+		public void EqualityOp(double x, double y)
 		{
 			bool result = Distance.FromMeters(x) == Distance.FromMeters(y);
 
@@ -84,8 +85,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.False(result);
 		}
 
-		[Fact]
-		public void Equals([Range(3, 7)] double x, [Range(3, 7)] double y)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 3, 7, MemberType = typeof(TestDataHelpers))]
+		public void EqualsTest(double x, double y)
 		{
 			bool result = Distance.FromMiles(x).Equals(Distance.FromMiles(y));
 			if (x == y)
@@ -127,8 +128,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(Math.Abs(distance.Miles - 515) < EPSILON);
 		}
 
-		[Fact]
-		public void HashCode([Range(4, 5)] double x, [Range(4, 5)] double y)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 4, 5, MemberType = typeof(TestDataHelpers))]
+		public void HashCode(double x, double y)
 		{
 			Distance distance1 = Distance.FromMiles(x);
 			Distance distance2 = Distance.FromMiles(y);
@@ -141,8 +142,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.False(result);
 		}
 
-		[Fact]
-		public void InequalityOp([Range(5, 9)] double x, [Range(5, 9)] double y)
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 5, 9, MemberType = typeof(TestDataHelpers))]
+		public void InequalityOp(double x, double y)
 		{
 			bool result = Distance.FromMeters(x) != Distance.FromMeters(y);
 
@@ -204,7 +205,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		public void Equals()
+		public void EqualsTest2()
 		{
 			Assert.True(Distance.FromMiles(2).Equals((object)Distance.FromMiles(2)));
 		}

@@ -19,7 +19,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var shell = new Shell();
 
-			Assert.IsEmpty(shell.Items);
+			Assert.Empty(shell.Items);
 		}
 
 		[Fact]
@@ -444,7 +444,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			// If all routes on the shell are default we still need to make sure it appends something that represents where you are in the
 			// shell structure
-			Assert.AreNotEqual($"//{nameof(RoutePathDefaultRemovalWithGlobalRoutesKeepsOneDefaultRoute)}", shell.CurrentState.Location.ToString());
+			Assert.NotEqual($"//{nameof(RoutePathDefaultRemovalWithGlobalRoutesKeepsOneDefaultRoute)}", shell.CurrentState.Location.ToString());
 		}
 
 

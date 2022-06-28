@@ -7,7 +7,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 	
 	public class IStylableTest
 	{
-		[TestCase]
+		[Fact]
 		public void GetPropertyDefinedOnParent()
 		{
 			var label = new Label();
@@ -15,7 +15,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.Same(VisualElement.BackgroundColorProperty, bp);
 		}
 
-		[TestCase]
+		[Fact]
 		public void GetPropertyDefinedOnType()
 		{
 			var label = new Label();
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.Same(Label.TextColorProperty, bp);
 		}
 
-		[TestCase]
+		[Fact]
 		public void GetPropertyDefinedOnType2()
 		{
 			var entry = new Entry();
@@ -31,7 +31,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.Same(Entry.TextColorProperty, bp);
 		}
 
-		[TestCase]
+		[Fact]
 		public void GetPropertyDefinedOnType3()
 		{
 			var indicator = new ActivityIndicator();
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.Same(ActivityIndicator.ColorProperty, bp);
 		}
 
-		[TestCase]
+		[Fact]
 		public void GetInvalidPropertyForType()
 		{
 			var grid = new Grid();
@@ -47,7 +47,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.Null(bp);
 		}
 
-		[TestCase]
+		[Fact]
 		public void GetPropertyDefinedOnPropertyOwnerType()
 		{
 			var frame = new Frame();
@@ -55,7 +55,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			Assert.That(bp, Is.SameAs(PaddingElement.PaddingLeftProperty));
 		}
 
-		[TestCase]
+		[Fact]
 		public void GetNonPublicProperty()
 		{
 			var label = new Label();

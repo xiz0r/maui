@@ -158,7 +158,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		};
 #pragma warning restore 0414
 
-		[Fact, TestCaseSource("Properties")]
+		[Fact, MemberData("Properties")]
 		public void DefaultValues(PropertyTestCase property)
 		{
 			var view = property.CreateView();
@@ -168,7 +168,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(property.ExpectedDefaultValue, property.PropertyGetter(view), property.DebugName);
 		}
 
-		[Fact, TestCaseSource("Properties")]
+		[Fact, MemberData("Properties")]
 		public void Set(PropertyTestCase property)
 		{
 			var view = property.CreateView();
@@ -187,7 +187,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(testvalue, property.PropertyGetter(view), property.DebugName);
 		}
 
-		[Fact, TestCaseSource("Properties")]
+		[Fact, MemberData("Properties")]
 		public void DoubleSet(PropertyTestCase property)
 		{
 			var view = property.CreateView();

@@ -56,10 +56,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<ArgumentNullException>(() => new TypedBinding<MockViewModel, string>((Func<MockViewModel, (string, bool)>)null, (mvm, s) => mvm.Text = s, null), "Allowed null getter");
 		}
 
-		[Fact, NUnit.Framework.Category("[Binding] Set Value")]
+		[Theory, NUnit.Framework.Category("[Binding] Set Value")]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		public void ValueSetOnOneWayWithComplexPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+			bool setContextFirst,
+			bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -103,18 +104,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				bindable.BindingContext = viewmodel;
 			}
 
-			Assert.Equal(value, viewmodel.Model.Model.Text,
-				"BindingContext property changed");
-			Assert.Equal(value, bindable.GetValue(property),
-				"Target property did not change");
-			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0),
-				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
+			Assert.Equal(value, viewmodel.Model.Model.Text);
+			Assert.Equal(value, bindable.GetValue(property));
+			Assert.Empty(MockApplication.MockLogger.Messages);
 		}
 
 		[Fact, Category("[Binding] Complex paths")]
-		public void ValueSetOnOneWayToSourceWithComplexPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
+		public void ValueSetOnOneWayToSourceWithComplexPathBinding(bool setContextFirst, bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -166,10 +163,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Fact, Category("[Binding] Complex paths")]
-		public void ValueSetOnTwoWayWithComplexPathBinding(
-			[Values(true, false)] bool setContextFirst,
-			[Values(true, false)] bool isDefault)
+		[Theory, Category("[Binding] Complex paths")]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
+		public void ValueSetOnTwoWayWithComplexPathBinding(bool setContextFirst, bool isDefault)
 		{
 			const string value = "Foo";
 			var viewmodel = new ComplexMockViewModel
@@ -867,7 +863,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 #if !WINDOWS_PHONE
-		[InlineData("en-US"), TestCase("pt-PT")]
+		[Theory, InlineData("en-US"), InlineData("pt-PT")]
 		public void ValueConverterCulture(string culture)
 		{
 			System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
@@ -1337,6 +1333,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		[InlineData(true)]
 		[InlineData(false)]
+		[Theory]
 		public void NullPropertyUpdatesAllBindings(bool useStringEmpty)
 		{
 			var vm = new NullViewModel();
@@ -1357,7 +1354,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(bindable.Text2, Is.EqualTo("Bar"));
 		}
 
-		[TestCase]
+		[Fact]
 		public void BindingSourceOverContext()
 		{
 			var label = new Label();

@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(converter.CanConvertFrom(typeof(string)));
 			Assert.Equal(LayoutOptions.Center, converter.ConvertFromInvariantString("LayoutOptions.Center"));
 			Assert.Equal(LayoutOptions.Center, converter.ConvertFromInvariantString("Center"));
-			Assert.AreNotEqual(LayoutOptions.CenterAndExpand, converter.ConvertFromInvariantString("Center"));
+			Assert.NotEqual(LayoutOptions.CenterAndExpand, converter.ConvertFromInvariantString("Center"));
 			Assert.Throws<InvalidOperationException>(() => converter.ConvertFromInvariantString("foo"));
 			Assert.Throws<InvalidOperationException>(() => converter.ConvertFromInvariantString("foo.bar"));
 			Assert.Throws<InvalidOperationException>(() => converter.ConvertFromInvariantString("foo.bar.baz"));

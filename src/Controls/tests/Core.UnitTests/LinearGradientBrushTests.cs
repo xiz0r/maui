@@ -25,7 +25,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			LinearGradientBrush linearGradientBrush = new LinearGradientBrush(gradientStops, new Point(0, 0), new Point(0, 1));
 
-			Assert.AreNotEqual(0, linearGradientBrush.GradientStops.Count, "GradientStops");
+			Assert.NotEqual(0, linearGradientBrush.GradientStops.Count, "GradientStops");
 			Assert.Equal(0.0d, linearGradientBrush.EndPoint.X, "EndPoint.X");
 			Assert.Equal(1.0d, linearGradientBrush.EndPoint.Y, "EndPoint.Y");
 		}

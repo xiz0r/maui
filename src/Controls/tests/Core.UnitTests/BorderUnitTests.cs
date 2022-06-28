@@ -11,11 +11,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var border = new Border();
 
-			Assert.IsEmpty(((IVisualTreeElement)border).GetVisualChildren());
+			Assert.Empty(((IVisualTreeElement)border).GetVisualChildren());
 
 			border.Content = null;
 
-			Assert.IsEmpty(((IVisualTreeElement)border).GetVisualChildren());
+			Assert.Empty(((IVisualTreeElement)border).GetVisualChildren());
 		}
 
 		[Fact]
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			border.Content = label;
 
 			var visualTreeChildren = ((IVisualTreeElement)border).GetVisualChildren();
-			Assert.IsNotEmpty(visualTreeChildren);
+			Assert.NotEmpty(visualTreeChildren);
 			Assert.Same(visualTreeChildren[0], label);
 		}
 

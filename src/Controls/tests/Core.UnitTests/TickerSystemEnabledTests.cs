@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.UnitTests;
 using Xunit;
@@ -6,17 +7,16 @@ using Xunit;
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	
-	public class TickerSystemEnabledTests
+	public class TickerSystemEnabledTests : IDisposable
 	{
-		[OneTimeSetUp]
-		public void Init()
+		public TickerSystemEnabledTests()
 		{
 			DispatcherProvider.SetCurrent(new DispatcherProviderStub());
 		}
 
-		[OneTimeTearDown]
-		public void End()
+		public void Dispose() 
 		{
+			GC.SuppressFinalize(this);
 			DispatcherProvider.SetCurrent(null);
 		}
 
@@ -26,17 +26,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await view2.FadeTo(1, 1000);
 		}
 
-		[Fact, Timeout(3000), Ignore("https://github.com/dotnet/maui/pull/1511")]
+		[Fact(Skip = "https://github.com/dotnet/maui/pull/1511", Timeout = 3000)]
 		public async Task DisablingTickerFinishesAnimationInProgress()
 		{
 			var view = AnimationReadyHandlerAsync.Prepare(new View { Opacity = 1 }, out var handler);
 
 			await Task.WhenAll(view.FadeTo(0, 2000), handler.DisableTicker());
 
-			Assert.That(view.Opacity, Is.EqualTo(0));
+			Assert.Equal(0, view.Opacity);
 		}
 
-		[Fact, Timeout(3000), Ignore("https://github.com/dotnet/maui/pull/1511")]
+		[Fact(Timeout = 3000, Skip = "https://github.com/dotnet/maui/pull/1511")]
 		public async Task DisablingTickerFinishesAllAnimationsInChain()
 		{
 			var view1 = new View { Opacity = 1 };
@@ -46,7 +46,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await Task.WhenAll(SwapFadeViews(view1, view2), handler.DisableTicker());
 
-			Assert.That(view1.Opacity, Is.EqualTo(0));
+			Assert.Equal(0, view1.Opacity);
 		}
 
 		static Task<bool> RepeatFade(View view)
@@ -63,14 +63,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			return tcs.Task;
 		}
 
-		[Fact, Timeout(3000), Ignore("https://github.com/dotnet/maui/pull/1511")]
+		[Fact(Timeout = 3000, Skip = "https://github.com/dotnet/maui/pull/1511")]
 		public async Task DisablingTickerPreventsAnimationFromRepeating()
 		{
 			var view = AnimationReadyHandlerAsync.Prepare(new View { Opacity = 0 }, out var handler);
 
 			await Task.WhenAll(RepeatFade(view), handler.DisableTicker());
 
-			Assert.That(view.Opacity, Is.EqualTo(1));
+			Assert.Equal(1, view.Opacity);
 		}
 
 		[Fact]
@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateYTo(200);
 
-			Assert.That(view.RotationY, Is.EqualTo(200));
+			Assert.Equal(200, view.RotationY);
 		}
 
 		[Fact]
@@ -94,10 +94,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var result = await label.ScaleTo(2, 500);
 
-			Assert.That(result, Is.True);
+			Assert.True(result);
 		}
 
-		[Fact, Timeout(2000)]
+		[Fact(Timeout = 2000)]
 		public async Task CanExitAnimationLoopIfAnimationsDisabled()
 		{
 			var label = AnimationReadyHandlerAsync.Prepare(new Label { Text = "Foo" }, out var handler);

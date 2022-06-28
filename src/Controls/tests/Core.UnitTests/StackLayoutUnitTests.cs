@@ -610,8 +610,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(LayoutConstraint.VerticallyFixed, child2.Constraint);
 		}
 
-		[Ignore("This test intended to test bz38416 however I just for the life of me cant figure it out in simplified form. I am failure.")]
-		[Fact]
+		[Fact(Skip = "This test intended to test bz38416 however I just for the life of me cant figure it out in simplified form. I am failure.")]
 		public void TheWTFTest()
 		{
 			var child1 = new BoxView
@@ -672,7 +671,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerLayout.ForceLayout();
 
 			var afterSize = innerStack.Bounds.Size;
-			Assert.AreNotEqual(beforeSize, afterSize, "Padding was grow, so Size should be bigger");
+			Assert.NotEqual(beforeSize, afterSize, "Padding was grow, so Size should be bigger");
 		}
 
 		[Fact]
@@ -705,7 +704,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var before = child.Bounds;
 			innerStack.Padding = new Thickness(30);
 			var after = child.Bounds;
-			Assert.AreNotEqual(before, after, "child should be moved within padding size");
+			Assert.NotEqual(before, after, "child should be moved within padding size");
 		}
 
 		void AssertInvalidated(IViewHandler handler)

@@ -87,8 +87,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			nav.Popped += (sender, e) => fired = true;
 
 			Assert.Same(childRoot, nav.RootPage);
-			Assert.AreNotSame(childRoot2, nav.RootPage);
-			Assert.AreNotSame(nav.RootPage, nav.CurrentPage);
+			Assert.NotSame(childRoot2, nav.RootPage);
+			Assert.NotSame(nav.RootPage, nav.CurrentPage);
 
 			var popped = await nav.Navigation.PopAsync();
 
@@ -317,7 +317,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PushAsync(child1);
 			await nav.PushAsync(child2);
 
-			Assert.Equal(((INavigationPageController)nav).Peek(3), null);
+			Assert.Null(((INavigationPageController)nav).Peek(3));
 		}
 
 		[InlineData(true)]
@@ -338,18 +338,26 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await nav.PushAsync(child1);
 			await nav.PushAsync(child2);
 
-			Assert.Equal(((INavigationPageController)nav).Peek(-1), null);
+			Assert.Null(((INavigationPageController)nav).Peek(-1));
 		}
 
-		[Fact]
-		public async Task PeekEmpty([Values(true, false)] bool useMaui, [Range(0, 3)] int depth)
+		[Theory]
+		[InlineData(true, 0)]
+		[InlineData(true, 1)]
+		[InlineData(true, 2)]
+		[InlineData(true, 3)]
+		[InlineData(false, 0)]
+		[InlineData(false, 1)]
+		[InlineData(false, 2)]
+		[InlineData(false, 3)]
+		public async Task PeekEmpty(bool useMaui, int depth)
 		{
 			var nav = new TestNavigationPage(useMaui);
 
 			bool signaled = false;
 			nav.PoppedToRoot += (sender, args) => signaled = true;
 
-			Assert.Equal(((INavigationPageController)nav).Peek(depth), null);
+			Assert.Null(((INavigationPageController)nav).Peek(depth));
 		}
 
 
@@ -596,8 +604,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			navPage.Navigation.InsertPageBefore(newPage, navPage.RootPage);
 
 			Assert.Same(newPage, navPage.RootPage);
-			Assert.AreNotSame(newPage, navPage.CurrentPage);
-			Assert.AreNotSame(navPage.RootPage, navPage.CurrentPage);
+			Assert.NotSame(newPage, navPage.CurrentPage);
+			Assert.NotSame(navPage.RootPage, navPage.CurrentPage);
 			Assert.Same(root, navPage.CurrentPage);
 
 			Assert.Throws<ArgumentException>(() =>
@@ -636,7 +644,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Same(newPage, navPage.RootPage);
 			Assert.Same(newPage, navPage.CurrentPage);
 			Assert.Same(navPage.RootPage, navPage.CurrentPage);
-			Assert.AreNotSame(root, navPage.CurrentPage);
+			Assert.NotSame(root, navPage.CurrentPage);
 
 			Assert.Throws<ArgumentException>(() =>
 			{
@@ -666,22 +674,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(navPage.CurrentPage, root);
 		}
 
-		[InlineData(false, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
-		[InlineData(true, Description = "CurrentPage should not be set to null when you attempt to pop the last page")]
-		[Property("Bugzilla", 28335)]
+		[InlineData(false)]
+		[InlineData(true)]
+		[Theory(DisplayName = "CurrentPageNotNullPoppingRoot (Bugzilla 28335)")]
 		public async Task CurrentPageNotNullPoppingRoot(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };
 			var navPage = new TestNavigationPage(useMaui, root);
 			var popped = await navPage.PopAsync();
-			Assert.That(popped, Is.Null);
-			Assert.That(navPage.CurrentPage, Is.SameAs(root));
+			Assert.Null(popped);
+			Assert.Same(navPage.CurrentPage, root);
 		}
 
 		[InlineData(true)]
 		[InlineData(false)]
-		[Theory]
-		[Property("Bugzilla", 31171)]
+		[Theory(DisplayName = "CurrentPageNotNullPoppingRoot (Bugzilla 31171)")]
 		public async Task ReleasesPoppedPage(bool useMaui)
 		{
 			var root = new ContentPage { Title = "Root" };

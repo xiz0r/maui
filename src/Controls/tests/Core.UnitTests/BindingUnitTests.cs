@@ -122,7 +122,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayWithComplexPathBinding(
 			 bool setContextFirst,
@@ -171,7 +171,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayToSourceWithComplexPathBinding(
 			 bool setContextFirst,
@@ -219,7 +219,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Fact, Category("[Binding] Complex paths")]
 		public void ValueSetOnTwoWayWithComplexPathBinding(
 			 bool setContextFirst,
@@ -290,11 +290,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			public string GetSetProperty { get; set; }
 		}
 
-		[Fact, Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
+		[InlineData(true, BindingMode.OneWay, true)]
+		[InlineData(true, BindingMode.OneWay, false)]
+		[InlineData(true, BindingMode.TwoWay, true)]
+		[InlineData(true, BindingMode.TwoWay, false)]
+		[InlineData(false, BindingMode.OneWay, true)]
+		[InlineData(false, BindingMode.OneWay, false)]
+		[InlineData(false, BindingMode.TwoWay, true)]
+		[InlineData(false, BindingMode.TwoWay, false)]
 		public void BindingWithNoPublicSetterOnParent(
-			[Values(true, false)] bool setContextFirst,
-			[Values(BindingMode.OneWay, BindingMode.TwoWay)] BindingMode bindingmode,
-			[Values(true, false)] bool usePrivateSetter)
+			bool setContextFirst,
+			BindingMode bindingmode,
+			bool usePrivateSetter)
 		{
 			var value = "FooBar";
 			var property = BindableProperty.Create("Text", typeof(string), typeof(MockBindable), "default value", BindingMode.Default);
@@ -327,7 +335,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedPathBinding(
 			 bool setContextFirst,
@@ -375,7 +383,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithSelfIndexedPathBinding(
 			 bool setContextFirst,
@@ -417,7 +425,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedPathArrayBinding(
 			 bool setContextFirst,
@@ -464,7 +472,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayWithIndexedSelfPathArrayBinding(
 			 bool setContextFirst,
@@ -505,7 +513,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnOneWayToSourceWithIndexedPathBinding(
 			 bool setContextFirst,
@@ -552,7 +560,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedPathBinding(
 			 bool setContextFirst,
@@ -600,7 +608,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedArrayPathBinding(
 			bool setContextFirst,
@@ -648,7 +656,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Indexed paths")]
 		public void ValueSetOnTwoWayWithIndexedArraySelfPathBinding(
 			bool setContextFirst,
@@ -689,7 +697,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[MemberData(nameof(TestDataHelpers.TrueFalseData), MemberType = typeof(TestDataHelpers))]
+		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Theory, Category("[Binding] Self paths")]
 		public void ValueSetOnOneWayWithSelfPathBinding(
 			bool setContextFirst,

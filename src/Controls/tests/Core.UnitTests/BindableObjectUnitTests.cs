@@ -155,18 +155,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			child.BindingContextChanged += (sender, args) => { ++childCount; };
 
 			child.Parent = parent;
-			Assert.Equal(parentCount, 0, "Parent BindingContext was changed while parenting a child.");
-			Assert.Equal(childCount, 0, "Child" + changedWhenNoChange);
+			Assert.Equal(0, parentCount); // "Parent BindingContext was changed while parenting a child."
+			Assert.Equal(0, childCount); // "Child" + changedWhenNoChange
 
 			child.BindingContext = new object(); // set manually
 			Assert.GreaterOrEqual(childCount, 1, "Child" + didNotChange);
-			Assert.Equal(childCount, 1, "Child" + changedMoreThanOnce);
-			Assert.Equal(parentCount, 0, "Parent" + changedWhenNoChange);
+			Assert.Equal(1, childCount); // "Child" + changedMoreThanOnce
+			Assert.Equal(0, parentCount); // "Parent" + changedWhenNoChange
 
 			parent.BindingContext = new object();
 			Assert.GreaterOrEqual(parentCount, 1, "Parent" + didNotChange);
-			Assert.Equal(parentCount, 1, "Parent" + changedMoreThanOnce);
-			Assert.Equal(childCount, 1, "Child" + changedWhenNoChange);
+			Assert.Equal(1, parentCount); // "Parent" + changedMoreThanOnce
+			Assert.Equal(1, childCount); // "Child" + changedWhenNoChange
 
 			child.BindingContext = new object();
 			Assert.GreaterOrEqual(childCount, 2, "Child" + didNotChange);
@@ -199,16 +199,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			child.BindingContextChanged += (sender, args) => { ++count; };
 
 			child.BindingContext = new object(); // set manually
-			Assert.Equal(count, 1);
+			Assert.Equal(1, count);
 
 			child.Parent = parent; // this should not trigger binding context change because child binding was set manually
-			Assert.Equal(count, 1);
+			Assert.Equal(1, count);
 
 			parent.BindingContext = new object();
-			Assert.Equal(count, 2);
+			Assert.Equal(2, count);
 
 			child.BindingContext = new object();
-			Assert.Equal(count, 3);
+			Assert.Equal(3, count);
 		}
 
 		[Fact]
@@ -223,8 +223,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			mock.BindingContext = "Testing";
 
-			Assert.Equal("Testing", mock.GetValue(MockBindable.TextProperty),
-				"Bindings were not reapplied to the new binding context");
+			Assert.Equal("Testing", mock.GetValue(MockBindable.TextProperty)); // "Bindings were not reapplied to the new binding context"
 		}
 
 		[Fact]
@@ -241,8 +240,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			vm.Text = "test";
 
-			Assert.Equal("test", mock.GetValue(MockBindable.TextProperty),
-				"The new ViewModel was not being listened to after being set");
+			Assert.Equal("test", mock.GetValue(MockBindable.TextProperty)); // "The new ViewModel was not being listened to after being set"
 		}
 
 		[Fact]
@@ -259,7 +257,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			vm.Text = "test";
 
-			Assert.Null(mock.GetValue(Entry.TextProperty), "ViewModel was still being listened to after set to null");
+			Assert.Null(mock.GetValue(Entry.TextProperty)); // "ViewModel was still being listened to after set to null"
 		}
 
 		[Fact]
@@ -503,8 +501,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.RemoveBinding(MockBindable.TextProperty);
 
 			viewmodel.Text = newvalue;
-			Assert.Equal(original, bindable.GetValue(MockBindable.TextProperty),
-				"Property updated from a removed binding");
+			Assert.Equal(original, bindable.GetValue(MockBindable.TextProperty)); // "Property updated from a removed binding"
 		}
 
 		[Fact]
@@ -614,22 +611,22 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool changing = false;
 			mock.PropertyChanging += (o, e) =>
 			{
-				Assert.That(e.PropertyName, Is.EqualTo(MockBindable.TextProperty.PropertyName));
+				Assert.Equal(e.PropertyName, Is.EqualTo(MockBindable.TextProperty.PropertyName));
 				changing = true;
 			};
 
 			bool changed = true;
 			mock.PropertyChanged += (o, e) =>
 			{
-				Assert.That(e.PropertyName, Is.EqualTo(MockBindable.TextProperty.PropertyName));
+				Assert.Equal(e.PropertyName, Is.EqualTo(MockBindable.TextProperty.PropertyName));
 				changed = true;
 			};
 
 			mock.SetValueCore(MockBindable.TextProperty, foo,
 				SetValueFlags.ClearOneWayBindings | SetValueFlags.ClearDynamicResource | SetValueFlags.RaiseOnEqual);
 
-			Assert.That(changing, Is.True, "PropertyChanging event did not fire");
-			Assert.That(changed, Is.True, "PropertyChanged event did not fire");
+			Assert.True(changing); // "PropertyChanging event did not fire"
+			Assert.True(changed); // "PropertyChanged event did not fire"
 		}
 
 		[Fact]
@@ -887,7 +884,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(bindableProperty, newValue);
 			bindable.ClearValue(bindableProperty);
 
-			Assert.That(bindable.IsSet(bindableProperty), Is.False);
+			Assert.False(bindable.IsSet(bindableProperty));
 		}
 
 		[Fact]
@@ -1414,10 +1411,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bindable = new MockBindable();
 
 			object[] values = new object[] { bindable.GetValue(prop), bindable.GetValue(prop1), bindable.GetValue(prop2) };
-			Assert.That(values.Length == 3);
-			Assert.That(values[0], Is.EqualTo(0));
-			Assert.That(values[1], Is.EqualTo(1));
-			Assert.That(values[2], Is.EqualTo(2));
+			Assert.True(values.Length == 3);
+			Assert.Equal(0, values[0]);
+			Assert.Equal(1, values[1]);
+			Assert.Equal(2, values[2]);
 		}
 
 		[Fact]
@@ -1431,10 +1428,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetValue(prop2, 5);
 
 			object[] values = new object[] { bindable.GetValue(prop), bindable.GetValue(prop1), bindable.GetValue(prop2) };
-			Assert.That(values.Length == 3);
-			Assert.That(values[0], Is.EqualTo(3));
-			Assert.That(values[1], Is.EqualTo(1));
-			Assert.That(values[2], Is.EqualTo(5));
+			Assert.True(values.Length == 3);
+			Assert.Equal(3, values[0]);
+			Assert.Equal(1, values[1]);
+			Assert.Equal(5, values[2]);
 		}
 
 		class BindingContextConverter
@@ -1500,9 +1497,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bindable = new MockBindable();
 			var property = BindableProperty.Create("foo", typeof(string), typeof(MockBindable), null);
 			bindable.SetBinding(property, new Binding("BindingContext", source: source));
-			Assert.That((string)bindable.GetValue(property), Is.EqualTo(null));
+			Assert.Null((string)bindable.GetValue(property));
 			BindableObject.SetInheritedBindingContext(source, "bar"); //inherited BC, only trigger BCChanged
-			Assert.That((string)bindable.GetValue(property), Is.EqualTo("bar"));
+			Assert.Equal("bar", (string)bindable.GetValue(property));
 		}
 
 		[Fact]
@@ -1560,7 +1557,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bindable = new MockBindable();
 			bindable.SetValue(prop, new InfoToString());
 
-			Assert.That(bindable.GetValue(prop), Is.EqualTo("converted"));
+			Assert.Equal("converted", bindable.GetValue(prop));
 		}
 
 		[Fact]
@@ -1571,7 +1568,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bindable = new MockBindable() { BindingContext = new { info = new InfoToString() } };
 			bindable.SetBinding(prop, "info");
 
-			Assert.That(bindable.GetValue(prop), Is.EqualTo("converted"));
+			Assert.Equal("converted", bindable.GetValue(prop));
 		}
 
 	}

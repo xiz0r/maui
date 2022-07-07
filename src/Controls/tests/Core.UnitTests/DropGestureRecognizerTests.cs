@@ -60,6 +60,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(commandExecuted, parameter);
 		}
 
+		[Theory]
 		[InlineData(typeof(Entry), "EntryTest")]
 		[InlineData(typeof(Label), "LabelTest")]
 		[InlineData(typeof(Editor), "EditorTest")]
@@ -77,6 +78,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(element.GetStringValue(), result);
 		}
 
+		[Theory]
 		[InlineData(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
 		public void DateTextPackageCorrectlySetsOnCompatibleTarget(Type fieldType, string result)
 		{

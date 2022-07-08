@@ -345,7 +345,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			rd.MergedDictionaries.Add(new ResourceDictionary() { { "foo", "bar" } });
 
-			Assert.That(rd.Count, Is.EqualTo(2));
+			Assert.Equal(rd.Count, 2);
 		}
 
 		[Fact]
@@ -357,11 +357,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			rd.MergedDictionaries.Add(new ResourceDictionary() { { "foo", "bar" } });
 
-			Assert.That(rd.Count, Is.EqualTo(2));
+			Assert.Equal(rd.Count, 2);
 
 			rd.MergedDictionaries.Clear();
 
-			Assert.That(rd.MergedDictionaries.Count, Is.EqualTo(0));
+			Assert.Equal(rd.MergedDictionaries.Count, 0);
 		}
 
 		[Fact]
@@ -373,10 +373,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Resources = rd
 			};
 			label.SetDynamicResource(Label.TextProperty, "foo");
-			Assert.That(label.Text, Is.EqualTo(Label.TextProperty.DefaultValue));
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
 
 			rd.MergedDictionaries.Add(new ResourceDictionary { { "foo", "Foo" } });
-			Assert.That(label.Text, Is.EqualTo("Foo"));
+			Assert.Equal(label.Text, "Foo");
 		}
 
 		[Fact]
@@ -397,10 +397,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			label.SetDynamicResource(Label.TextProperty, "foo");
-			Assert.That(label.Text, Is.EqualTo("Foo"));
+			Assert.Equal(label.Text, "Foo");
 
 			rd.MergedDictionaries.Clear();
-			Assert.That(label.Text, Is.EqualTo("Foo"));
+			Assert.Equal(label.Text, "Foo");
 		}
 
 		[Fact]
@@ -419,10 +419,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Resources = rd,
 			};
 			label.SetDynamicResource(Label.TextProperty, "foo");
-			Assert.That(label.Text, Is.EqualTo(Label.TextProperty.DefaultValue));
+			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
 
 			rd0.Add("foo", "Foo");
-			Assert.That(label.Text, Is.EqualTo("Foo"));
+			Assert.Equal(label.Text, "Foo");
 		}
 	}
 }

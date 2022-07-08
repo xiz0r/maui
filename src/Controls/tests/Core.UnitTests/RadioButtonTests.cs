@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.SetValue(RadioButtonGroup.GroupNameProperty, groupName);
 			layout.Children.Add(radioButton);
 
-			Assert.That(radioButton.GroupName, Is.EqualTo(groupName));
+			Assert.Equal(radioButton.GroupName, groupName);
 		}
 
 		[Fact]
@@ -35,7 +35,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid.Children.Add(radioButton);
 			layout.Children.Add(grid);
 
-			Assert.That(radioButton.GroupName, Is.EqualTo(groupName));
+			Assert.Equal(radioButton.GroupName, groupName);
 		}
 
 		[Fact]
@@ -49,7 +49,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.SetValue(RadioButtonGroup.GroupNameProperty, groupName);
 			layout.Children.Add(radioButton);
 
-			Assert.That(radioButton.GroupName, Is.EqualTo(oldName));
+			Assert.Equal(radioButton.GroupName, oldName);
 		}
 
 		[Fact]
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(radioButton);
 			layout.SetValue(RadioButtonGroup.GroupNameProperty, groupName);
 
-			Assert.That(radioButton.GroupName, Is.EqualTo(groupName));
+			Assert.Equal(radioButton.GroupName, groupName);
 		}
 
 		[Fact]
@@ -81,8 +81,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.SetValue(RadioButtonGroup.GroupNameProperty, updatedGroupName);
 
-			Assert.That(radioButton1.GroupName, Is.EqualTo(updatedGroupName));
-			Assert.That(radioButton2.GroupName, Is.EqualTo("other"));
+			Assert.Equal(radioButton1.GroupName, updatedGroupName);
+			Assert.Equal(radioButton2.GroupName, "other");
 		}
 
 		[Fact]

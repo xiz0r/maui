@@ -26,11 +26,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			string path = "Foo.Bar";
 			var binding = new Binding(path);
 
-			Assert.Throws<ArgumentNullException>(() => new BindingExpression(binding, null),
-				"Allowed the path to be null");
+			Assert.Throws<ArgumentNullException>(() => new BindingExpression(binding, null));
 
-			Assert.Throws<ArgumentNullException>(() => new BindingExpression(null, path),
-				"Allowed the binding to be null");
+			Assert.Throws<ArgumentNullException>(() => new BindingExpression(null, path));
 		}
 
 		[Fact]
@@ -39,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			const string path = "Foo.Bar";
 			var binding = new Binding(path);
 			var be = new BindingExpression(binding, path);
-			Assert.DoesNotThrow(() => be.Apply(null, new MockBindable(), TextCell.TextProperty));
+			be.Apply(null, new MockBindable(), TextCell.TextProperty);
 		}
 
 		// We only throw on invalid path features, if they give an invalid property

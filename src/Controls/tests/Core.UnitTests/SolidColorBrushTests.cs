@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestConstructorUsingColor()
 		{
 			SolidColorBrush solidColorBrush = new SolidColorBrush(Colors.Red);
-			Assert.That(solidColorBrush.Color, Is.EqualTo(Colors.Red));
+			Assert.Equal(solidColorBrush.Color, Colors.Red);
 		}
 
 		[Fact]
@@ -47,11 +47,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			SolidColorBrush black = Brush.Black;
 			Assert.NotNull(black.Color);
-			Assert.That(black.Color, Is.EqualTo(Colors.Black));
+			Assert.Equal(black.Color, Colors.Black);
 
 			SolidColorBrush white = Brush.White;
 			Assert.NotNull(white.Color);
-			Assert.That(white.Color, Is.EqualTo(Colors.White));
+			Assert.Equal(white.Color, Colors.White);
 		}
 	}
 }

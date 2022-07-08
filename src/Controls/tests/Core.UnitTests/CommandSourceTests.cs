@@ -47,11 +47,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var source = CreateSource();
 			source.SetValue(CommandProperty, new Command(() => { }, () => false));
 
-			Assert.That(source.GetValue(IsEnabledProperty), Is.False);
+			Assert.False((bool)source.GetValue(IsEnabledProperty));
 
 			source.SetValue(CommandProperty, null);
 
-			Assert.That(source.GetValue(IsEnabledProperty), Is.True);
+			Assert.True((bool)source.GetValue(IsEnabledProperty));
 		}
 
 		[Fact]

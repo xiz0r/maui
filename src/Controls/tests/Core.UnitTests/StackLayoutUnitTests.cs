@@ -263,9 +263,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			stack.Layout(new Rect(0, 0, 100, 250));
 
-			Assert.That(stack.Children.ToArray()[0].Frame, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(stack.Children.ToArray()[1].Frame, Is.EqualTo(new Rect(0, 110, 100, 100)));
-			Assert.That(stack.Children.ToArray()[2].Frame, Is.EqualTo(new Rect(0, 220, 100, 30)));
+			Assert.Equal(stack.Children.ToArray()[0].Frame, new Rect(0, 0, 100, 100));
+			Assert.Equal(stack.Children.ToArray()[1].Frame, new Rect(0, 110, 100, 100));
+			Assert.Equal(stack.Children.ToArray()[2].Frame, new Rect(0, 220, 100, 30));
 		}
 
 		[Fact]
@@ -285,9 +285,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			stack.Layout(new Rect(0, 0, 250, 100));
 
-			Assert.That(stack.Children.ToArray()[0].Frame, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(stack.Children.ToArray()[1].Frame, Is.EqualTo(new Rect(110, 0, 100, 100)));
-			Assert.That(stack.Children.ToArray()[2].Frame, Is.EqualTo(new Rect(220, 0, 30, 100)));
+			Assert.Equal(stack.Children.ToArray()[0].Frame, new Rect(0, 0, 100, 100));
+			Assert.Equal(stack.Children.ToArray()[1].Frame, new Rect(110, 0, 100, 100));
+			Assert.Equal(stack.Children.ToArray()[2].Frame, new Rect(220, 0, 30, 100));
 		}
 
 		[Fact]
@@ -305,7 +305,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var result = stack.Measure(double.PositiveInfinity, double.PositiveInfinity);
-			Assert.That(result.Minimum, Is.EqualTo(new Size(100, 230)));
+			Assert.Equal(result.Minimum, new Size(100, 230));
 		}
 
 		[Fact]
@@ -324,7 +324,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var result = stack.Measure(double.PositiveInfinity, double.PositiveInfinity);
-			Assert.That(result.Minimum, Is.EqualTo(new Size(230, 100)));
+			Assert.Equal(result.Minimum, new Size(230, 100));
 		}
 
 		[Fact]

@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.That(sentMessage, Is.EqualTo("My Message"));
+			Assert.Equal(sentMessage, "My Message");
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, "SimpleTest");
 		}
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.That(sentMessage, Is.EqualTo("My Message"));
+			Assert.Equal(sentMessage, "My Message");
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, "SimpleTest");
 		}
@@ -50,8 +50,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.That(sentMessage1, Is.EqualTo("My Message"));
-			Assert.That(sentMessage2, Is.EqualTo("My Message"));
+			Assert.Equal(sentMessage1, "My Message");
+			Assert.Equal(sentMessage2, "My Message");
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(sub1, "SimpleTest");
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(sub2, "SimpleTest");
@@ -66,7 +66,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.That(sentMessage, Is.EqualTo(null));
+			Assert.Equal(sentMessage, null);
 		}
 
 		[Fact]
@@ -96,11 +96,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(new MessagingCenterTests(), "SimpleTest");
 
-			Assert.That(sentMessage, Is.False);
+			Assert.False(sentMessage);
 
 			MessagingCenter.Send(this, "SimpleTest");
 
-			Assert.That(sentMessage, Is.True);
+			Assert.True(sentMessage);
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(this, "SimpleTest");
 		}
@@ -133,7 +133,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.That(sentMessage, Is.False);
+			Assert.False(sentMessage);
 		}
 
 		[Fact]

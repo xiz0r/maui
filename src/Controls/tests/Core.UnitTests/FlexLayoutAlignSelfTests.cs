@@ -23,8 +23,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(view0);
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(45, 0, 10, 10)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(45, 0, 10, 10));
 		}
 
 		[Fact]
@@ -41,8 +41,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(view0);
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(90, 0, 10, 10)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(90, 0, 10, 10));
 		}
 
 		[Fact]
@@ -59,8 +59,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(view0);
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 0, 10, 10)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 0, 10, 10));
 		}
 
 		[Fact]
@@ -78,8 +78,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Children.Add(view0);
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(90, 0, 10, 10)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(90, 0, 10, 10));
 		}
 	}
 }

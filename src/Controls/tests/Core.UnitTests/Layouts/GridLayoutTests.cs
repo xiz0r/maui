@@ -150,11 +150,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 
 			grid.BindingContext = context;
 
-			Assert.That(def.BindingContext, Is.EqualTo(context));
+			Assert.Equal(def.BindingContext, context);
 
 			grid.RowDefinitions.Add(def2);
 
-			Assert.That(def2.BindingContext, Is.EqualTo(context));
+			Assert.Equal(def2.BindingContext, context);
 		}
 
 		[Fact]
@@ -178,11 +178,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 
 			grid.BindingContext = context;
 
-			Assert.That(def.BindingContext, Is.EqualTo(context));
+			Assert.Equal(def.BindingContext, context);
 
 			grid.ColumnDefinitions.Add(def2);
 
-			Assert.That(def2.BindingContext, Is.EqualTo(context));
+			Assert.Equal(def2.BindingContext, context);
 		}
 	}
 }

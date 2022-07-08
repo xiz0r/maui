@@ -45,7 +45,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			label.IsPlatformEnabled = true;
 
-			Assert.That(label.Background, Is.EqualTo(isApplied ? greenBrush : redBrush));
+			Assert.Equal(label.Background, isApplied ? greenBrush : redBrush);
 		}
 	}
 }

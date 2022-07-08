@@ -14,7 +14,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestFontAttributeConverter(string input, FontAttributes expected)
 		{
 			var conv = new FontAttributesConverter();
-			Assert.That(conv.ConvertFromInvariantString(input), Is.EqualTo(expected));
+			Assert.Equal(conv.ConvertFromInvariantString(input), expected);
 		}
 	}
 }

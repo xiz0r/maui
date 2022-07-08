@@ -24,7 +24,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bar.ProgressTo(0.8, 250, Easing.Linear);
 
-			Assert.That(bar.Progress, Is.EqualTo(0.8).Within(0.001));
+			Assert.Equal(bar.Progress, 0.8).Within(0.001);
 		}
 	}
 }

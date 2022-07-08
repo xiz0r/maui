@@ -37,19 +37,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			string shourtCutKeyBinding = "A";
 			var accelerator = Accelerator.FromString(shourtCutKeyBinding);
 
-			Assert.Equal(accelerator.Keys.Count(), 1);
+			Assert.Single(accelerator.Keys);
 			Assert.Equal(accelerator.Keys.ElementAt(0), shourtCutKeyBinding);
 		}
 
-		[Theory, MemberData(nameof(GenerateTests))]
+		[Theory, InlineData(nameof(GenerateTests))]
 		public void AcceleratorFromLetterAndModifier(TestShortcut shourtcut)
 		{
 			string modifier = shourtcut.Modifier;
 			string key = shourtcut.Key;
 			var accelerator = Accelerator.FromString(shourtcut.ToString());
 
-			Assert.Equal(accelerator.Keys.Count(), 1);
-			Assert.Equal(accelerator.Modifiers.Count(), 1);
+			Assert.Single(accelerator.Keys);
+			Assert.Single(accelerator.Modifiers);
 			Assert.Equal(accelerator.Keys.ElementAt(0), shourtcut.Key);
 			Assert.Equal(accelerator.Modifiers.ElementAt(0), shourtcut.Modifier);
 		}
@@ -64,8 +64,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			string shourtCutKeyBinding = $"{modifier}+{modifier1Alt}+{key}";
 			var accelerator = Accelerator.FromString(shourtCutKeyBinding);
 
-			Assert.Equal(accelerator.Keys.Count(), 1);
-			Assert.Equal(accelerator.Modifiers.Count(), 2);
+			Assert.Single(accelerator.Keys);
+			Assert.Equal(2, accelerator.Modifiers.Count());
 			Assert.Equal(accelerator.Keys.ElementAt(0), key);
 			Assert.Equal(accelerator.Modifiers.ElementAt(0), modifier);
 			Assert.Equal(accelerator.Modifiers.ElementAt(1), modifier1Alt);

@@ -538,7 +538,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item1);
 
 			await shell.GoToAsync("details");
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//animals/monkeys/details"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//animals/monkeys/details");
 		}
 
 		[InlineData(true)]
@@ -557,7 +557,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("details");
 			await shell.GoToAsync("details");
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//animals/monkeys/details/details"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//animals/monkeys/details/details");
 		}
 
 		[Fact]

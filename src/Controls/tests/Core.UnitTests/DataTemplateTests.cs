@@ -24,7 +24,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			object obj = template.CreateContent();
 
 			Assert.NotNull(obj);
-			Assert.That(obj, Is.InstanceOf<MockBindable>());
+			Assert.IsType<MockBindable>(obj);
 		}
 
 		[Fact]
@@ -34,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			object obj = template.CreateContent();
 
 			Assert.NotNull(obj);
-			Assert.That(obj, Is.InstanceOf<MockBindable>());
+			Assert.IsType<MockBindable>(obj);
 		}
 
 		[Fact]
@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MockBindable bindable = (MockBindable)template.CreateContent();
 			bindable.BindingContext = "text";
-			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("text"));
+			Assert.Equal("text", bindable.GetValue(MockBindable.TextProperty));
 		}
 
 		[Fact]
@@ -81,7 +81,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assume.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo(bindable.BindingContext));
 
 			bindable.BindingContext = "binding";
-			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("binding"));
+			Assert.Equal("binding", bindable.GetValue(MockBindable.TextProperty));
 		}
 
 		[Fact]
@@ -92,16 +92,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(MockBindable.TextProperty, "value");
 
 			MockBindable bindable = (MockBindable)template.CreateContent();
-			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("value"));
+			Assert.Equal("value", bindable.GetValue(MockBindable.TextProperty));
 			bindable.BindingContext = "binding";
-			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("value"));
+			Assert.Equal("value", bindable.GetValue(MockBindable.TextProperty));
 		}
 
 		[Fact]
 		public void SetValueInvalid()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
-			Assert.That(() => template.SetValue(null, "string"), Throws.InstanceOf<ArgumentNullException>());
+			Assert.Throws<ArgumentNullException>(() => template.SetValue(null, "string"));
 		}
 
 		[Fact]
@@ -116,7 +116,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					{TextCell.TextProperty, "Text"}
 				}
 			};
-			Assert.That(() => template.CreateContent(), Throws.InstanceOf<InvalidOperationException>());
+			Assert.Throws<InvalidOperationException>(() => template.CreateContent());
 		}
 
 		[Fact]
@@ -125,7 +125,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Hot Reload may need to create a template while the content portion isn't ready yet
 			// We need to make sure that a call to CreateContent during that time doesn't crash
 			var template = new DataTemplate();
-			Assert.DoesNotThrow(() => template.CreateContent());
+			template.CreateContent();
 		}
 	}
 }

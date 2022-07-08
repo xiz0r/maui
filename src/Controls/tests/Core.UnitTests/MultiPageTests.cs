@@ -145,11 +145,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(2));
+			Assert.Equal(pages.Length, 2);
 			assertPage((Page)pages[0], "Foo");
 			assertPage((Page)pages[1], "Bar");
 		}
@@ -277,9 +277,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.ItemsSource = new[] { "Foo", "Bar" };
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(2));
-			Assert.That(((Page)pages[0]).Title, Is.EqualTo("Foo"));
-			Assert.That(((Page)pages[1]).Title, Is.EqualTo("Bar"));
+			Assert.Equal(pages.Length, 2);
+			Assert.Equal(((Page)pages[0]).Title, "Foo");
+			Assert.Equal(((Page)pages[1]).Title, "Bar");
 		}
 
 		[Fact]
@@ -302,11 +302,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Add("Baz");
@@ -338,11 +338,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			int addedCount = 0;
@@ -352,15 +352,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					return;
 
 				addedCount++;
-				Assert.That(e.NewItems.Count, Is.EqualTo(2));
+				Assert.Equal(e.NewItems.Count, 2);
 			};
 
 			items.AddRange(new[] { "Baz", "Bam" });
 
-			Assert.That(addedCount, Is.EqualTo(1));
+			Assert.Equal(addedCount, 1);
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(4));
+			Assert.Equal(pages.Length, 4);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bar");
 			assertPage(pages, 2, "Baz");
@@ -387,17 +387,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Insert(1, "Baz");
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(3));
+			Assert.Equal(pages.Length, 3);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Baz");
 			assertPage(pages, 2, "Bar");
@@ -423,17 +423,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.InsertRange(1, new[] { "Baz", "Bam" });
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(4));
+			Assert.Equal(pages.Length, 4);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Baz");
 			assertPage(pages, 2, "Bam");
@@ -460,17 +460,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Remove("Foo");
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(1));
+			Assert.Equal(pages.Length, 1);
 			assertPage(pages, 0, "Bar");
 		}
 
@@ -494,17 +494,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.RemoveAt(1, 2);
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(3));
+			Assert.Equal(pages.Length, 3);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bam");
 			assertPage(pages, 2, "Who");
@@ -530,17 +530,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Move(0, 1);
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(2));
+			Assert.Equal(pages.Length, 2);
 			assertPage(pages, 0, "Bar");
 			assertPage(pages, 1, "Foo");
 		}
@@ -565,17 +565,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Move(1, 4, 2);
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(6));
+			Assert.Equal(pages.Length, 6);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bam");
 			assertPage(pages, 2, "Who");
@@ -604,17 +604,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Move(4, 1, 2);
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(7));
+			Assert.Equal(pages.Length, 7);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Who");
 			assertPage(pages, 2, "Where");
@@ -644,17 +644,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Page p = (Page)ps[index];
 				Assert.That(p, Is.InstanceOf<ContentPage>());
-				Assert.That(GetIndex((T)p), Is.EqualTo(index));
+				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items[0] = "Baz";
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(2));
+			Assert.Equal(pages.Length, 2);
 			assertPage(pages, 0, "Baz");
 			assertPage(pages, 1, "Bar");
 		}
@@ -680,13 +680,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 				var cp = (ContentPage)p;
 				Assert.That(cp.Content, Is.InstanceOf<Label>());
-				Assert.That(((Label)cp.Content).Text, Is.EqualTo(s));
+				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			page.ItemsSource = new ObservableCollection<string> { "Baz", "Bar" };
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(2));
+			Assert.Equal(pages.Length, 2);
 			assertPage((Page)pages[0], "Baz");
 			assertPage((Page)pages[1], "Bar");
 		}
@@ -817,11 +817,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.CurrentPage = page.Children[0];
 
-			Assert.That(raised, Is.False);
+			Assert.False(raised);
 
 			page.CurrentPage = page.Children[1];
 
-			Assert.That(raised, Is.True);
+			Assert.True(raised);
 		}
 	}
 }

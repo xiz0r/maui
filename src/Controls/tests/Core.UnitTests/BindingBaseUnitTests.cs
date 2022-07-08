@@ -102,7 +102,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bo = new MockBindable { BindingContext = vm };
 			bo.SetBinding(property, binding);
 
-			Assert.That(bo.GetValue(property), Is.EqualTo("Foo Bar"));
+			Assert.Equal("Foo Bar", bo.GetValue(property));
 		}
 
 		[Fact]
@@ -117,7 +117,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			vm.Text = "Baz";
 
-			Assert.That(bo.GetValue(property), Is.EqualTo("Foo Baz"));
+			Assert.Equal("Foo Baz", bo.GetValue(property));
 		}
 
 		[Fact("StringFormat should not be applied to OneWayToSource bindings")]
@@ -132,7 +132,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bo.SetValue(property, "Bar");
 
-			Assert.That(vm.Text, Is.EqualTo("Bar"));
+			Assert.Equal("Bar", vm.Text);
 		}
 
 		[Fact("StringFormat should only be applied from from source in TwoWay bindings")]
@@ -147,8 +147,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bo.SetValue(property, "Baz");
 
-			Assert.That(vm.Text, Is.EqualTo("Baz"));
-			Assert.That(bo.GetValue(property), Is.EqualTo("Foo Baz"));
+			Assert.Equal("Baz", vm.Text);
+			Assert.Equal("Foo Baz", bo.GetValue(property));
 		}
 
 		[Fact("You should get an exception when trying to change a binding after it's been applied")]
@@ -161,8 +161,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bo = new MockBindable { BindingContext = vm };
 			bo.SetBinding(property, binding);
 
-			Assert.That(() => binding.Mode = BindingMode.OneWayToSource, Throws.InvalidOperationException);
-			Assert.That(() => binding.StringFormat = "{0}", Throws.InvalidOperationException);
+			Assert.Throws<InvalidOperationException>(() => binding.Mode = BindingMode.OneWayToSource);
+			Assert.Throws<InvalidOperationException>(() => binding.StringFormat = "{0}");
 		}
 
 		[Theory, InlineData("en-US"), InlineData("tr-TR")]
@@ -610,7 +610,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			bindable.SetBinding(MockBindable.TextProperty, binding);
 
-			Assert.That(() => bindable.BindingContext = null, Throws.Nothing);
+			bindable.BindingContext = null;
 		}
 
 		[Theory, Category("[Binding] Simple paths")]
@@ -643,7 +643,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				bindable.BindingContext = viewmodel;
 				bindable.SetBinding(property, binding);
 
-				Assume.That(() => bindable.BindingContext = null, Throws.Nothing);
+				bindable.BindingContext = null;
 			};
 
 			create();
@@ -695,12 +695,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void EnableCollectionSynchronizationInvalid()
 		{
-			Assert.That(() => BindingBase.EnableCollectionSynchronization(null, new object(),
-			   (collection, context, method, access) => { }), Throws.InstanceOf<ArgumentNullException>());
-			Assert.That(() => BindingBase.EnableCollectionSynchronization(new string[0], new object(),
-			   null), Throws.InstanceOf<ArgumentNullException>());
-			Assert.That(() => BindingBase.EnableCollectionSynchronization(new string[0], null,
-			   (collection, context, method, access) => { }), Throws.Nothing);
+			Assert.Throws<ArgumentNullException>(() => BindingBase.EnableCollectionSynchronization(null, new object(),
+			   (collection, context, method, access) => { }));
+			Assert.Throws<ArgumentNullException>(() => BindingBase.EnableCollectionSynchronization(new string[0], new object(), null));
+			
+			BindingBase.EnableCollectionSynchronization(new string[0], null, (collection, context, method, access) => { });
 		}
 
 		[Fact]
@@ -714,10 +713,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			CollectionSynchronizationContext syncContext;
 			Assert.True(BindingBase.TryGetSynchronizedCollection(stuff, out syncContext));
-			Assert.That(syncContext, Is.Not.Null);
+			Assert.NotNull(syncContext);
 			Assert.Same(syncContext.Callback, callback);
-			Assert.That(syncContext.ContextReference, Is.Not.Null);
-			Assert.That(syncContext.ContextReference.Target, Is.SameAs(context));
+			Assert.NotNull(syncContext.ContextReference);
+			Assert.Same(syncContext.ContextReference.Target, context);
 		}
 
 		[Fact]

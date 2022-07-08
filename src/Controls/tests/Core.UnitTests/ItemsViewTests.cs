@@ -22,8 +22,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var sizeRequest = itemsView.Measure(double.PositiveInfinity, double.PositiveInfinity);
 
 			var scaled = DeviceDisplay.MainDisplayInfo.GetScaledScreenSize();
-			Assert.That(sizeRequest.Request.Height, Is.EqualTo(scaled.Height));
-			Assert.That(sizeRequest.Request.Width, Is.EqualTo(scaled.Width));
+			Assert.Equal(sizeRequest.Request.Height, scaled.Height);
+			Assert.Equal(sizeRequest.Request.Width, scaled.Width);
 		}
 
 		[Fact]
@@ -36,8 +36,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var sizeRequest = itemsView.Measure(double.PositiveInfinity, double.PositiveInfinity);
 
 			var scaled = DeviceDisplay.MainDisplayInfo.GetScaledScreenSize();
-			Assert.That(sizeRequest.Request.Height, Is.EqualTo(scaled.Height));
-			Assert.That(sizeRequest.Request.Width, Is.EqualTo(scaled.Width));
+			Assert.Equal(sizeRequest.Request.Height, scaled.Height);
+			Assert.Equal(sizeRequest.Request.Width, scaled.Width);
 		}
 
 		[Fact]

@@ -95,7 +95,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var proxy = new ListProxy(numbers, 10);
 
 			int i = (int)proxy[5];
-			Assert.That(i, Is.EqualTo(5));
+			Assert.Equal(5, i);
 		}
 
 		[Fact]
@@ -105,7 +105,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var proxy = new ListProxy(numbers, 10);
 
 			int i = (int)proxy[50];
-			Assert.That(i, Is.EqualTo(50));
+			Assert.Equal(50, i);
 		}
 
 		[Fact]
@@ -115,10 +115,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var proxy = new ListProxy(numbers, 10);
 
 			int i = (int)proxy[5];
-			Assert.That(i, Is.EqualTo(5));
+			Assert.Equal(5, i);
 
 			i = (int)proxy[50];
-			Assert.That(i, Is.EqualTo(50));
+			Assert.Equal(50, i);
 		}
 
 		[Fact]
@@ -128,10 +128,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var proxy = new ListProxy(numbers, 10);
 
 			int i = (int)proxy[50];
-			Assert.That(i, Is.EqualTo(50));
+			Assert.Equal(50, i);
 
 			i = (int)proxy[5];
-			Assert.That(i, Is.EqualTo(5));
+			Assert.Equal(5, i);
 		}
 
 		[Fact]
@@ -140,7 +140,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var numbers = Enumerable.Range(0, 100);
 			var proxy = new ListProxy(numbers);
 
-			Assert.That(() => proxy[100], Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.Throws<ArgumentOutOfRangeException>(() => proxy[100]);
 		}
 
 		class IntCollection
@@ -352,12 +352,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var proxy = new ListProxy(Enumerable.Range(0, 2));
 
 			var enumerator = proxy.GetEnumerator();
-			Assert.That(enumerator.Current, Is.Null);
-			Assert.That(enumerator.MoveNext(), Is.True);
-			Assert.That(enumerator.Current, Is.EqualTo(0));
-			Assert.That(enumerator.MoveNext(), Is.True);
-			Assert.That(enumerator.Current, Is.EqualTo(1));
-			Assert.That(enumerator.MoveNext(), Is.False);
+			Assert.Null(enumerator.Current);
+			Assert.True(enumerator.MoveNext());
+			Assert.Equal(0, enumerator.Current);
+			Assert.True(enumerator.MoveNext());
+			Assert.Equal(1, enumerator.Current);
+			Assert.False(enumerator.MoveNext());
 		}
 
 		[Fact]
@@ -387,7 +387,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.WaitForPendingFinalizers();
 			GC.Collect();
 
-			Assert.That(weakProxy.IsAlive, Is.False);
+			Assert.False(weakProxy.IsAlive);
 		}
 
 		[Fact]
@@ -398,10 +398,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			custom.Add("test2");
 
 			var proxy = new ListProxy(custom);
-			Assert.That(proxy.Count, Is.EqualTo(2));
+			Assert.Equal(2, proxy.Count);
 
 			custom.Add("testing");
-			Assert.That(proxy.Count, Is.EqualTo(3));
+			Assert.Equal(3, proxy.Count);
 		}
 
 		class CustomINCC : IEnumerable<string>, INotifyCollectionChanged

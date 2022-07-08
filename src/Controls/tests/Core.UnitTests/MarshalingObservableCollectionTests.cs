@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var moc = new MarshalingObservableCollection(source);
 
-			Assert.That(source.Count, Is.EqualTo(moc.Count));
+			Assert.Equal(source.Count, moc.Count);
 		});
 
 		[Fact("Clears don't show up until they've been processed on the UI thread")]

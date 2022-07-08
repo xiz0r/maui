@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shellItem.Items.Add(shellSection);
 			shell.Items.Add(shellItem);
 
-			Assert.That(shell.CurrentItem, Is.EqualTo(shellItem));
+			Assert.Equal(shell.CurrentItem, shellItem);
 		}
 
 
@@ -277,11 +277,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(one);
 			shell.Items.Add(two);
 
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//one/tabone/content");
 
 			shell.GoToAsync(new ShellNavigationState("//two/tabfour/"));
 
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tabfour/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tabfour/content");
 		}
 
 		[Fact]
@@ -364,22 +364,22 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("//two/tab21/");
 
 			await shell.NavigationManager.GoToAsync("/tab22", false, true);
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tab22/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab22/content");
 
 			await shell.NavigationManager.GoToAsync("tab21", false, true);
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tab21/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab21/content");
 
 			await shell.NavigationManager.GoToAsync("/tab23", false, true);
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tab23/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content");
 
 			await shell.GoToAsync("RelativeGoTo_Page1", false);
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tab23/content/RelativeGoTo_Page1"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content/RelativeGoTo_Page1");
 
 			await shell.GoToAsync("../RelativeGoTo_Page2", false);
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tab23/content/RelativeGoTo_Page2"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content/RelativeGoTo_Page2");
 
 			await shell.GoToAsync("..", false);
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//two/tab23/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content");
 
 			/*
 			 * removing support for .. notation for now

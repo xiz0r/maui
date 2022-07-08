@@ -27,8 +27,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(10, 0, 10, 100)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(10, 0, 10, 100));
 		}
 
 		[Fact]
@@ -46,8 +46,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 10, 100, 10)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 10, 100, 10));
 		}
 
 		[Fact]
@@ -66,8 +66,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(80, 0, 10, 100)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(80, 0, 10, 100));
 		}
 
 		[Fact]
@@ -86,8 +86,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 80, 100, 10)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 80, 100, 10));
 		}
 
 		[Fact]
@@ -105,8 +105,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Direction = FlexDirection.Row,
 			};
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(10, 0, 80, 100)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(10, 0, 80, 100));
 		}
 
 		[Fact]
@@ -124,8 +124,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Direction = FlexDirection.Column,
 			};
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 10, 100, 80)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 10, 100, 80));
 		}
 
 		[Fact]
@@ -144,8 +144,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 10, 100, 80)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 10, 100, 80));
 		}
 
 		[Fact]
@@ -164,8 +164,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(10, 0, 80, 100)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(10, 0, 80, 100));
 		}
 
 		[Fact]
@@ -189,9 +189,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 0, 45, 100)));
-			Assert.That(view1.Bounds, Is.EqualTo(new Rect(55, 0, 45, 100)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 0, 45, 100));
+			Assert.Equal(view1.Bounds, new Rect(55, 0, 45, 100));
 		}
 
 		[Fact]
@@ -214,9 +214,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 100, 100)));
-			Assert.That(view0.Bounds, Is.EqualTo(new Rect(0, 0, 100, 45)));
-			Assert.That(view1.Bounds, Is.EqualTo(new Rect(0, 55, 100, 45)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 100, 100));
+			Assert.Equal(view0.Bounds, new Rect(0, 0, 100, 45));
+			Assert.Equal(view1.Bounds, new Rect(0, 55, 100, 45));
 		}
 	}
 }

@@ -357,7 +357,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.DoesNotThrow(() => bindable.SetBinding(property, multibinding));
 			Assert.DoesNotThrow(() => bindable.BindingContext = new { foo = "FOO", bar = 42, baz = "BAZ" });
-			Assert.That(bindable.GetValue(property), Is.EqualTo("FOO - 42 - BAZ"));
+			Assert.Equal(bindable.GetValue(property), "FOO - 42 - BAZ");
 		}
 
 		[Fact]
@@ -377,7 +377,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.DoesNotThrow(() => bindable.SetBinding(property, multibinding));
 			Assert.DoesNotThrow(() => bindable.BindingContext = new { foo = "FOO", bar = 42, baz = "BAZ" });
-			Assert.That(bindable.GetValue(property), Is.EqualTo("Hello FOO 042 BAZ"));
+			Assert.Equal(bindable.GetValue(property), "Hello FOO 042 BAZ");
 		}
 
 		private Label GenerateNameLabel(string person, BindingMode mode)

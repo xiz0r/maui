@@ -11,7 +11,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public async Task AnimationRepeats()
 		{
 			var box = AnimationReadyHandler.Prepare(new BoxView());
-			Assume.That(box.Rotation, Is.EqualTo(0d));
+			Assert.Equal(0d, box.Rotation);
 			var sb = new Animation();
 			var animcount = 0;
 			var rot45 = new Animation(d =>
@@ -21,13 +21,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					animcount++;
 			}, box.Rotation, box.Rotation + 45);
 			sb.Add(0, .5, rot45);
-			Assume.That(box.Rotation, Is.EqualTo(0d));
+			Assert.Equal(0d, box.Rotation);
 
 			var i = 0;
 			sb.Commit(box, "foo", length: 100, repeat: () => ++i < 2);
 
 			await Task.Delay(1000);
-			Assert.That(animcount, Is.EqualTo(2));
+			Assert.Equal(2, animcount);
 		}
 	}
 }

@@ -112,18 +112,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var font2 = FontFile.FromString(input2);
 			var font3 = FontFile.FromString(input3);
 
-			Assert.Equal(font1.FileName, "PTM55FT");
-			Assert.Equal(font1.PostScriptName, "PTMono-Regular");
+			Assert.Equal("PTM55FT", font1.FileName);
+			Assert.Equal("PTMono-Regular", font1.PostScriptName);
 			Assert.Null(font1.Extension);
 
 
-			Assert.Equal(font2.FileName, "PTM55FT");
-			Assert.Equal(font2.PostScriptName, "PTMono-Regular");
-			Assert.Equal(font2.Extension, ".ttf");
+			Assert.Equal("PTM55FT", font2.FileName);
+			Assert.Equal("PTMono-Regular", font2.PostScriptName);
+			Assert.Equal(".ttf", font2.Extension);
 
 
-			Assert.Equal(font3.FileName, "CuteFont-Regular");
-			Assert.Equal(font3.PostScriptName, "CuteFont-Regular");
+			Assert.Equal("CuteFont-Regular", font3.FileName);
+			Assert.Equal("CuteFont-Regular", font3.PostScriptName);
 			Assert.Null(font3.Extension);
 
 		}

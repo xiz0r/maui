@@ -58,7 +58,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			span.Text = "New text";
 
-			Assert.That(spansChanged, Is.False);
+			Assert.False(spansChanged);
 		}
 
 		[Fact]
@@ -84,10 +84,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			string original = "fubar";
 			FormattedString fs = original;
-			Assert.That(fs, Is.Not.Null);
-			Assert.That(fs.Spans.Count, Is.EqualTo(1));
-			Assert.That(fs.Spans[0], Is.Not.Null);
-			Assert.That(fs.Spans[0].Text, Is.EqualTo(original));
+			Assert.NotNull(fs);
+			Assert.Equal(1, fs.Spans.Count);
+			Assert.NotNull(fs.Spans[0]);
+			Assert.Equal(fs.Spans[0].Text, original);
 		}
 
 		[Fact]
@@ -95,10 +95,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			string original = null;
 			FormattedString fs = original;
-			Assert.That(fs, Is.Not.Null);
-			Assert.That(fs.Spans.Count, Is.EqualTo(1));
-			Assert.That(fs.Spans[0], Is.Not.Null);
-			Assert.That(fs.Spans[0].Text, Is.EqualTo(original));
+			Assert.NotNull(fs);
+			Assert.Equal(1, fs.Spans.Count);
+			Assert.NotNull(fs.Spans[0]);
+			Assert.Equal(fs.Spans[0].Text, original);
 		}
 	}
 }

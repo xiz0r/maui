@@ -44,7 +44,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void IsReadOnlyDefaultValueTest()
 		{
 			Editor editor = new Editor();
-			Assert.Equal(editor.IsReadOnly, false);
+			Assert.False(editor.IsReadOnly);
 		}
 	}
 }

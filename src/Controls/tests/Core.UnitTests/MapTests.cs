@@ -53,7 +53,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var exception = Assert.Throws<ArgumentException>(() => map.Pins.Add(noNamePin));
-			Assert.That(exception.Message, Is.EqualTo("Pin must have a Label to be added to a map"));
+			Assert.Equal(exception.Message, "Pin must have a Label to be added to a map");
 		}
 
 		[Fact]

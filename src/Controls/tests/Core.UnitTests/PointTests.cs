@@ -19,7 +19,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void TestPointDistance()
 		{
-			Assert.That(new Point(2, 2).Distance(new Point(5, 6)), Is.EqualTo(5).Within(0.001));
+			Assert.Equal(new Point(2, 2).Distance(new Point(5, 6)), 5).Within(0.001);
 		}
 
 		[Fact]

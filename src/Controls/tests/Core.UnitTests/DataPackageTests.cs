@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal("text", dataPackage.Text);
 			Assert.Equal(imageSource, dataPackage.Image);
-			Assert.Equal(dataPackage.Properties["key"], "value");
+			Assert.Equal("value", dataPackage.Properties["key"]);
 		}
 
 		[Fact]
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal("text", await dataView.GetTextAsync());
 			Assert.Equal(imageSource, await dataView.GetImageAsync());
-			Assert.Equal(dataView.Properties["key"], "value");
+			Assert.Equal("value", dataView.Properties["key"]);
 		}
 
 
@@ -62,7 +62,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal("text", await dataView.GetTextAsync());
 			Assert.Equal(imageSource, await dataView.GetImageAsync());
-			Assert.Equal(dataView.Properties["key"], "value");
+			Assert.Equal("value", dataView.Properties["key"]);
 		}
 	}
 }

@@ -121,14 +121,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(typeof(DateTime?), prop.ReturnType);
 
 			var bindable = new MockBindable();
-			Assert.Equal(null, bindable.GetValue(prop));
+			Assert.Null(bindable.GetValue(prop));
 
 			var now = DateTime.Now;
 			bindable.SetValue(prop, now);
 			Assert.Equal(now, bindable.GetValue(prop));
 
 			bindable.SetValue(prop, null);
-			Assert.Equal(null, bindable.GetValue(prop));
+			Assert.Null(bindable.GetValue(prop));
 		}
 
 		[Fact]
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var prop = BindableProperty.Create("foo", typeof(int), typeof(MockBindable));
 			Assert.Equal(typeof(int), prop.ReturnType);
 
-			Assert.Equal(prop.DefaultValue, 0);
+			Assert.Equal(0, prop.DefaultValue);
 
 			var bindable = new MockBindable();
 			Assert.Equal(0, bindable.GetValue(prop));
@@ -159,7 +159,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var prop = BindableProperty.Create("foo", typeof(TestEnum), typeof(MockBindable));
 			Assert.Equal(typeof(TestEnum), prop.ReturnType);
 
-			Assert.Equal(prop.DefaultValue, default(TestEnum));
+			Assert.Equal(default(TestEnum), prop.DefaultValue);
 
 			var bindable = new MockBindable();
 			Assert.Equal(default(TestEnum), bindable.GetValue(prop));
@@ -180,7 +180,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var prop = BindableProperty.Create("foo", typeof(TestStruct), typeof(MockBindable));
 			Assert.Equal(typeof(TestStruct), prop.ReturnType);
 
-			Assert.Equal(((TestStruct)prop.DefaultValue).IntValue, default(int));
+			Assert.Equal(default(int), ((TestStruct)prop.DefaultValue).IntValue);
 
 			var bindable = new MockBindable();
 			Assert.Equal(default(int), ((TestStruct)bindable.GetValue(prop)).IntValue);

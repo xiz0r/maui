@@ -30,9 +30,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 912, 912));
 
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 912, 912)));
-			Assert.That(label1.Bounds, Is.EqualTo(new Rect(0, 0, 100, 912)));
-			Assert.That(label2.Bounds, Is.EqualTo(new Rect(100, 0, 100, 912)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 912, 912));
+			Assert.Equal(label1.Bounds, new Rect(0, 0, 100, 912));
+			Assert.Equal(label2.Bounds, new Rect(100, 0, 100, 912));
 		}
 
 		[Fact]
@@ -52,9 +52,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Layout(new Rect(0, 0, 912, 912));
 
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 912, 912)));
-			Assert.That(label1.Bounds, Is.EqualTo(new Rect(0, 0, 120, 912)));
-			Assert.That(label2.Bounds, Is.EqualTo(new Rect(120, 0, 120, 912)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 912, 912));
+			Assert.Equal(label1.Bounds, new Rect(0, 0, 120, 912));
+			Assert.Equal(label2.Bounds, new Rect(120, 0, 120, 912));
 
 		}
 
@@ -146,13 +146,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Layout(new Rect(0, 0, layoutSize.Width, layoutSize.Height));
 
 			foreach (var view in layout.Children)
-				Assert.That(view.Frame.Width, Is.EqualTo(100));
+				Assert.Equal(100, view.Frame.Width);
 
 			layout.Children.Remove(label3);
 
-			Assert.That(label1.Bounds.Width, Is.EqualTo(150));
-			Assert.That(label2.Bounds.Width, Is.EqualTo(150));
-			Assert.That(label3.Bounds.Width, Is.EqualTo(100));
+			Assert.Equal(150, label1.Bounds.Width);
+			Assert.Equal(150, label2.Bounds.Width);
+			Assert.Equal(100, label3.Bounds.Width);
 		}
 
 		[Fact]
@@ -310,16 +310,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			FlexLayout.SetGrow(inner, 1);
 
 			layout.Layout(new Rect(0, 0, 300, 600));
-			Assert.That(layout.Bounds, Is.EqualTo(new Rect(0, 0, 300, 600)));
-			Assert.That(header.Bounds, Is.EqualTo(new Rect(0, 0, 300, 50)));
-			Assert.That(inner.Bounds, Is.EqualTo(new Rect(0, 50, 300, 500)));
-			Assert.That(inner.Children[0].Frame, Is.EqualTo(new Rect(5, 5, 50, 490)));
-			Assert.That(inner.Children[1].Frame, Is.EqualTo(new Rect(65, 5, 50, 490)));
-			Assert.That(inner.Children[2].Frame, Is.EqualTo(new Rect(125, 5, 50, 490)));
-			Assert.That(inner.Children[3].Frame, Is.EqualTo(new Rect(185, 5, 50, 490)));
-			Assert.That(inner.Children[4].Frame, Is.EqualTo(new Rect(245, 5, 50, 490)));
+			Assert.Equal(layout.Bounds, new Rect(0, 0, 300, 600));
+			Assert.Equal(header.Bounds, new Rect(0, 0, 300, 50));
+			Assert.Equal(inner.Bounds, new Rect(0, 50, 300, 500));
+			Assert.Equal(inner.Children[0].Frame, new Rect(5, 5, 50, 490));
+			Assert.Equal(inner.Children[1].Frame, new Rect(65, 5, 50, 490));
+			Assert.Equal(inner.Children[2].Frame, new Rect(125, 5, 50, 490));
+			Assert.Equal(inner.Children[3].Frame, new Rect(185, 5, 50, 490));
+			Assert.Equal(inner.Children[4].Frame, new Rect(245, 5, 50, 490));
 
-			Assert.That(footer.Bounds, Is.EqualTo(new Rect(0, 550, 300, 50)));
+			Assert.Equal(footer.Bounds, new Rect(0, 550, 300, 50));
 		}
 
 		[Fact]
@@ -341,15 +341,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			//measure sith +inf as main-axis
 			var measure = Layout.Measure(double.PositiveInfinity, 40);
-			Assert.That(measure.Request, Is.EqualTo(new Size(100, 40)));
+			Assert.Equal(measure.Request, new Size(100, 40));
 
 			//measure sith +inf as cross-axis
 			measure = Layout.Measure(200, double.PositiveInfinity);
-			Assert.That(measure.Request, Is.EqualTo(new Size(200, 20)));
+			Assert.Equal(measure.Request, new Size(200, 20));
 
 			//measure with +inf as both axis
 			measure = Layout.Measure(double.PositiveInfinity, double.PositiveInfinity);
-			Assert.That(measure.Request, Is.EqualTo(new Size(100, 20)));
+			Assert.Equal(measure.Request, new Size(100, 20));
 
 		}
 
@@ -391,11 +391,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var measure = layout.Measure(300, double.PositiveInfinity);
-			Assert.That(measure.Request, Is.EqualTo(new Size(300, 52)));
+			Assert.Equal(measure.Request, new Size(300, 52));
 			layout.Layout(new Rect(0, 0, 300, 300));
-			Assert.That(label0.Bounds, Is.EqualTo(new Rect(6, 6, 138, 20)));
-			Assert.That(label1.Bounds, Is.EqualTo(new Rect(156, 6, 138, 20)));
-			Assert.That(label2.Bounds, Is.EqualTo(new Rect(0, 32, 300, 20)));
+			Assert.Equal(label0.Bounds, new Rect(6, 6, 138, 20));
+			Assert.Equal(label1.Bounds, new Rect(156, 6, 138, 20));
+			Assert.Equal(label2.Bounds, new Rect(0, 32, 300, 20));
 		}
 
 		[Fact]
@@ -417,7 +417,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 300, 300));
-			Assert.That(label0.Bounds, Is.EqualTo(new Rect(0, 0, 300, 300)));
+			Assert.Equal(label0.Bounds, new Rect(0, 0, 300, 300));
 		}
 
 		[Fact]
@@ -451,9 +451,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.Handler = handler;
 
 			layout.Layout(new Rect(0, 0, 300, 300));
-			Assert.That(label0.Bounds, Is.EqualTo(new Rect(0, 0, 300, 20)));
-			Assert.That(label1.Bounds, Is.EqualTo(new Rect(0, 20, 300, 20)));
-			Assert.That(label2.Bounds, Is.EqualTo(new Rect(0, 40, 300, 20)));
+			Assert.Equal(label0.Bounds, new Rect(0, 0, 300, 20));
+			Assert.Equal(label1.Bounds, new Rect(0, 20, 300, 20));
+			Assert.Equal(label2.Bounds, new Rect(0, 40, 300, 20));
 
 			label1.IsVisible = false;
 
@@ -463,8 +463,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Fake a native invalidation
 			layout.ForceLayout();
 
-			Assert.That(label0.Bounds, Is.EqualTo(new Rect(0, 0, 300, 20)));
-			Assert.That(label2.Bounds, Is.EqualTo(new Rect(0, 20, 300, 20)));
+			Assert.Equal(label0.Bounds, new Rect(0, 0, 300, 20));
+			Assert.Equal(label2.Bounds, new Rect(0, 20, 300, 20));
 
 			label0.IsVisible = false;
 			label1.IsVisible = true;
@@ -475,8 +475,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Fake a native invalidation
 			layout.ForceLayout();
 
-			Assert.That(label1.Bounds, Is.EqualTo(new Rect(0, 0, 300, 20)));
-			Assert.That(label2.Bounds, Is.EqualTo(new Rect(0, 20, 300, 20)));
+			Assert.Equal(label1.Bounds, new Rect(0, 0, 300, 20));
+			Assert.Equal(label2.Bounds, new Rect(0, 20, 300, 20));
 		}
 
 		[Fact]
@@ -509,7 +509,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Fake a native invalidation
 			layout.ForceLayout();
 
-			Assert.That(layout.Children[2].Frame, Is.EqualTo(new Rect(0, 200, 300, 100)));
+			Assert.Equal(layout.Children[2].Frame, new Rect(0, 200, 300, 100));
 		}
 
 		[Fact]
@@ -543,8 +543,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Layout(new Rect(0, 0, 500, 300));
-			Assert.That(layout.Children[0].Frame, Is.EqualTo(new Rect(20, 10, 100, 20)));
-			Assert.That(layout.Children[2].Frame, Is.EqualTo(new Rect(380, 10, 100, 20)));
+			Assert.Equal(layout.Children[0].Frame, new Rect(20, 10, 100, 20));
+			Assert.Equal(layout.Children[2].Frame, new Rect(380, 10, 100, 20));
 		}
 
 		void AssertInvalidated(IViewHandler handler)

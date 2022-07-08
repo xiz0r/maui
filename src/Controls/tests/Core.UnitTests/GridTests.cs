@@ -73,7 +73,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column0Width = grid.ColumnDefinitions[0].ActualWidth;
 			var column1Width = grid.ColumnDefinitions[1].ActualWidth;
 
-			Assert.That(column0Width, Is.EqualTo(column1Width));
+			Assert.Equal(column0Width, column1Width);
 			Assert.That(column0Width, Is.LessThan(gridWidth));
 		}
 
@@ -107,7 +107,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column0Height = grid.RowDefinitions[0].ActualHeight;
 			var column1Height = grid.RowDefinitions[1].ActualHeight;
 
-			Assert.That(column0Height, Is.EqualTo(column1Height));
+			Assert.Equal(column0Height, column1Height);
 			Assert.That(column0Height, Is.LessThan(gridHeight));
 		}
 
@@ -121,7 +121,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bottomOfLastLabelInRowB = rowBControl.Y + lastLabel.Y + lastLabel.Height;
 			var topOfRowA = rowAControl.Y;
 
-			Assert.That(bottomOfRowB, Is.EqualTo(bottomOfLastLabelInRowB));
+			Assert.Equal(bottomOfRowB, bottomOfLastLabelInRowB);
 
 			Assert.That(topOfRowA, Is.EqualTo(bottomOfRowB),
 				"B is on top of A, so the top of A should be the bottom of B");
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bottomOfLastLabelInRowB = rowBControl.Y + lastLabel.Y + lastLabel.Height;
 			var bottomOfRowA = rowAControl.Y + rowAControl.Height;
 
-			Assert.That(bottomOfRowB, Is.EqualTo(bottomOfLastLabelInRowB));
+			Assert.Equal(bottomOfRowB, bottomOfLastLabelInRowB);
 
 			Assert.That(topOfRowB, Is.EqualTo(bottomOfRowA),
 				"A is on top of B, so the top of B should be the bottom of A");
@@ -154,7 +154,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var endOfLastLabelInColB = colBControl.X + lastLabel.X + lastLabel.Width;
 			var startOfColA = colAControl.X;
 
-			Assert.That(endOfColB, Is.EqualTo(endOfLastLabelInColB));
+			Assert.Equal(endOfColB, endOfLastLabelInColB);
 
 			Assert.That(startOfColA, Is.EqualTo(endOfColB),
 				"B is before A, so the start of A should be the end of B");
@@ -171,7 +171,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var endOfLastLabelInColB = colBControl.X + lastLabel.X + lastLabel.Width;
 			var endOfColA = colAControl.X + colAControl.Width;
 
-			Assert.That(endOfColB, Is.EqualTo(endOfLastLabelInColB));
+			Assert.Equal(endOfColB, endOfLastLabelInColB);
 
 			Assert.That(endOfColA, Is.EqualTo(startOfColB),
 				"A is before B, so the end of A should be the start of B");
@@ -385,7 +385,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var grid1Height = grid1.Height;
 
 			var expectedHeight = label1.Height + label2.Height + grid1.RowSpacing;
-			Assert.That(grid1Height, Is.EqualTo(expectedHeight));
+			Assert.Equal(grid1Height, expectedHeight);
 		}
 
 		[Fact]
@@ -423,7 +423,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerGrid.Layout(new Rect(0, 0, firstMeasure.Width, firstMeasure.Height));
 
 			// Verify that the actual height of the label is what we would expect (within a tolerance)
-			Assert.That(label1.Height, Is.EqualTo(label1.DesiredHeight(expectedColumnWidth)).Within(2));
+			Assert.Equal(label1.Height, label1.DesiredHeight(expectedColumnWidth)).Within(2);
 
 			var label1OriginalHeight = label1.Height;
 
@@ -435,7 +435,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerGrid.Layout(new Rect(0, 0, secondMeasure.Width, secondMeasure.Height));
 
 			// Verify that the actual height of the label is what we would expect (within a tolerance)
-			Assert.That(label1.Height, Is.EqualTo(label1.DesiredHeight(expectedColumnWidth)).Within(2));
+			Assert.Equal(label1.Height, label1.DesiredHeight(expectedColumnWidth)).Within(2);
 
 			// And that the new height is taller than the old one (since there's more text, and the column width did not change)
 			Assert.That(label1.Height, Is.GreaterThan(label1OriginalHeight));
@@ -487,7 +487,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// The containing ScrollView should measure a width of about 411; the absolute column at the end of the grid
 			// shouldn't expand the ScrollView's measure to 447-ish. It's this expansion of the ScrollView that causes
 			// all subsequent parts of layout to go pear-shaped.
-			Assert.That(layoutSize.Request.Width, Is.EqualTo(411).Within(2));
+			Assert.Equal(layoutSize.Request.Width, 411).Within(2);
 		}
 
 		[Fact]
@@ -522,7 +522,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column0Width = grid.ColumnDefinitions[0].ActualWidth;
 			var column1Width = grid.ColumnDefinitions[1].ActualWidth;
 
-			Assert.That(column0Width, Is.EqualTo(column1Width / 2));
+			Assert.Equal(column0Width, column1Width / 2);
 		}
 
 		[Fact]
@@ -558,7 +558,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column0Width = grid.ColumnDefinitions[0].ActualWidth;
 			var column1Width = grid.ColumnDefinitions[1].ActualWidth;
 
-			Assert.That(column0Width, Is.EqualTo(column1Width));
+			Assert.Equal(column0Width, column1Width);
 		}
 
 		[Fact]
@@ -591,7 +591,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column0Height = grid.RowDefinitions[0].ActualHeight;
 			var column1Height = grid.RowDefinitions[1].ActualHeight;
 
-			Assert.That(column0Height, Is.EqualTo(column1Height / 2));
+			Assert.Equal(column0Height, column1Height / 2);
 		}
 
 		[Fact]
@@ -627,10 +627,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var sizeRequest = outerGrid.Measure(500, 1000);
 			outerGrid.Layout(new Rect(0, 0, sizeRequest.Request.Width, 1000));
 
-			Assert.That(innerGrid.Height, Is.EqualTo(foreground.Height));
-			Assert.That(background.Height, Is.EqualTo(foreground.Height * 0.6).Within(0.01));
+			Assert.Equal(innerGrid.Height, foreground.Height);
+			Assert.Equal(background.Height, foreground.Height * 0.6).Within(0.01);
 
-			Assert.That(background.Height, Is.EqualTo(165));
+			Assert.Equal(165, background.Height);
 		}
 
 		abstract class TestLabel : Label

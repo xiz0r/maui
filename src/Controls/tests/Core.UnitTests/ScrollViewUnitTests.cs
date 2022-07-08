@@ -172,7 +172,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Equal(args.ScrollY, 100);
 				Assert.Equal(args.ScrollX, 0);
 				Assert.Null(args.Item);
-				Assert.That(args.ShouldAnimate, Is.EqualTo(true));
+				Assert.Equal(args.ShouldAnimate, true);
 			};
 
 			scrollView.ScrollToAsync(0, 100, true);
@@ -197,7 +197,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			scrollView.ScrollToAsync(0, 100, true);
-			Assert.That(requested, Is.False);
+			Assert.False(requested);
 		}
 
 		[Fact]
@@ -215,7 +215,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Equal(args.ScrollY, 100);
 				Assert.Equal(args.ScrollX, 0);
 				Assert.Null(args.Item);
-				Assert.That(args.ShouldAnimate, Is.EqualTo(false));
+				Assert.Equal(args.ShouldAnimate, false);
 			};
 
 			scrollView.ScrollToAsync(0, 100, false);
@@ -236,8 +236,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				requested = true;
 
 				Assert.That(args.Element, Is.SameAs(item));
-				Assert.That(args.Position, Is.EqualTo(ScrollToPosition.Center));
-				Assert.That(args.ShouldAnimate, Is.EqualTo(true));
+				Assert.Equal(args.Position, ScrollToPosition.Center);
+				Assert.Equal(args.ShouldAnimate, true);
 			};
 
 			scrollView.ScrollToAsync(item, ScrollToPosition.Center, true);
@@ -258,8 +258,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				requested = true;
 
 				Assert.That(args.Element, Is.SameAs(item));
-				Assert.That(args.Position, Is.EqualTo(ScrollToPosition.Center));
-				Assert.That(args.ShouldAnimate, Is.EqualTo(false));
+				Assert.Equal(args.Position, ScrollToPosition.Center);
+				Assert.Equal(args.ShouldAnimate, false);
 			};
 
 			scrollView.ScrollToAsync(item, ScrollToPosition.Center, false);
@@ -282,8 +282,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IScrollViewController controller = scroll;
 			controller.SetScrolledPosition(100, 100);
 
-			Assert.That(scroll.ScrollX, Is.EqualTo(100));
-			Assert.That(scroll.ScrollY, Is.EqualTo(100));
+			Assert.Equal(scroll.ScrollX, 100);
+			Assert.Equal(scroll.ScrollY, 100);
 		}
 
 		[Fact]

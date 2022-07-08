@@ -297,7 +297,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			contentView.ControlTemplate = new ControlTemplate(typeof(SimpleTemplate));
 
-			Assert.That(((IElementController)contentView).LogicalChildren[0], Is.TypeOf<SimpleTemplate>());
+			Assert.IsType<SimpleTemplate>(((IElementController)contentView).LogicalChildren[0]);
 		}
 
 		[Fact]
@@ -309,8 +309,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			contentView.ControlTemplate = new ControlTemplate(typeof(SimpleTemplate));
 			contentView.Content = child;
 
-			Assume.That(((IElementController)contentView).LogicalChildren[0], Is.TypeOf<SimpleTemplate>());
-			Assert.That(contentView.Descendants(), Contains.Item(child));
+			Assert.IsType<SimpleTemplate>(((IElementController)contentView).LogicalChildren[0]);
+
+			Assert.Contains(child, contentView.Descendants());
 		}
 
 		[Fact]

@@ -60,7 +60,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			button.Handler = null;
 			Assert.Equal(button.LastHandlerChangingEventArgs.OldHandler, secondHandler);
-			Assert.Equal(button.LastHandlerChangingEventArgs.NewHandler, null);
+			Assert.Null(button.LastHandlerChangingEventArgs.NewHandler);
 
 			Assert.Equal(3, button.changing);
 			Assert.Equal(3, button.changed);

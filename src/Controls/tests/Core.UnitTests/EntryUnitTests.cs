@@ -156,7 +156,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(result == isEnabled ? true : false);
 		}
 
+		[Theory]
 		[InlineData(true)]
+		[InlineData(false)]
 		public void IsReadOnlyTest(bool isReadOnly)
 		{
 			Entry entry = new Entry();
@@ -168,7 +170,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void IsReadOnlyDefaultValueTest()
 		{
 			Entry entry = new Entry();
-			Assert.Equal(entry.IsReadOnly, false);
+			Assert.False(entry.IsReadOnly);
 		}
 	}
 }

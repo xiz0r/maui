@@ -35,17 +35,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void InvalidCtor()
 		{
-			Assert.Throws<ArgumentNullException>(() => new Binding(null),
-				"Allowed null Path");
+			Assert.Throws<ArgumentNullException>(() => new Binding(null));
 
-			Assert.Throws<ArgumentException>(() => new Binding(String.Empty),
-				"Allowed empty path");
+			Assert.Throws<ArgumentException>(() => new Binding(String.Empty));
 
-			Assert.Throws<ArgumentException>(() => new Binding("   "),
-				"Allowed whitespace path");
+			Assert.Throws<ArgumentException>(() => new Binding("   "));
 
-			Assert.Throws<ArgumentException>(() => new Binding("Path", (BindingMode)Int32.MaxValue),
-				"Allowed invalid value for BindingMode");
+			Assert.Throws<ArgumentException>(() => new Binding("Path", (BindingMode)Int32.MaxValue));
 		}
 
 		[Fact("You should get an exception when trying to change a binding after it's been applied")]
@@ -58,9 +54,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bo = new MockBindable { BindingContext = vm };
 			bo.SetBinding(property, binding);
 
-			Assert.That(() => binding.Path = "path", Throws.InvalidOperationException);
-			Assert.That(() => binding.Converter = null, Throws.InvalidOperationException);
-			Assert.That(() => binding.ConverterParameter = new object(), Throws.InvalidOperationException);
+			Assert.Throws<InvalidOperationException>(() => binding.Path = "path");
+			Assert.Throws<InvalidOperationException>(() => binding.Converter = null);
+			Assert.Throws<InvalidOperationException>(() => binding.ConverterParameter = new object());
 		}
 
 		[Fact]
@@ -72,7 +68,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bo = new MockBindable { BindingContext = "Foo" };
 			bo.SetBinding(property, binding);
 
-			Assert.That(bo.GetValue(property), Is.EqualTo("Foo"));
+			Assert.Equal("Foo", bo.GetValue(property));
 		}
 
 		class ComplexPropertyNamesViewModel
@@ -118,7 +114,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var bindable = new MockBindable { BindingContext = vm };
 			bindable.SetBinding(MockBindable.TextProperty, binding);
 
-			Assert.Equal(bindable.Text, "Value");
+			Assert.Equal("Value", bindable.Text);
 		}
 
 		[Fact]
@@ -163,11 +159,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				bindable.BindingContext = viewmodel;
 			}
 
-			Assert.Equal(value, viewmodel.Model.Model.Text,
-				"BindingContext property changed");
-			Assert.Equal(value, bindable.GetValue(property),
-				"Target property did not change");
-			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0),
+			Assert.Equal(value, viewmodel.Model.Model.Text);
+			Assert.Equal(value, bindable.GetValue(property));
+			Assert.True(MockApplication.MockLogger.Messages.Count == 0,
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
@@ -211,11 +205,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				bindable.BindingContext = viewmodel;
 			}
 
-			Assert.Equal(value, bindable.GetValue(property),
-				"Target property changed");
-			Assert.Equal(value, viewmodel.Model.Model.Text,
-				"BindingContext property did not change");
-			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0),
+			Assert.Equal(value, bindable.GetValue(property));
+			Assert.Equal(value, viewmodel.Model.Model.Text);
+			Assert.True(MockApplication.MockLogger.Messages.Count == 0, 
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
@@ -1667,7 +1659,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.That(() => bindable.SetBinding(MockBindable.TextProperty, new Binding("Monkeys", BindingMode.OneWay)), Throws.Nothing);
 			Assert.Equal(MockApplication.MockLogger.Messages.Count, Is.EqualTo(1), "An error was not logged");
-			Assert.That(bindable.Text, Is.EqualTo(MockBindable.TextProperty.DefaultValue));
+			Assert.Equal(bindable.Text, MockBindable.TextProperty.DefaultValue);
 		}
 
 		[Fact]
@@ -1700,7 +1692,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.Text = "foo";
 
 			Assert.That(() => bindable.SetBinding(MockBindable.TextProperty, new Binding("Text2")), Throws.Nothing);
-			Assert.That(bindable.Text, Is.EqualTo(MockBindable.TextProperty.DefaultValue));
+			Assert.Equal(bindable.Text, MockBindable.TextProperty.DefaultValue);
 			Assert.Equal(MockApplication.MockLogger.Messages.Count, Is.EqualTo(1), "An error was not logged");
 			Assert.That(MockApplication.MockLogger.Messages[0], Does.Contain(String.Format(BindingExpression.PropertyNotFoundErrorMessage,
 				"Text2",
@@ -1718,7 +1710,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetBinding(MockBindable.TextProperty, new Binding("Text"));
 
 			bindable.BindingContext = new MockViewModel { Text = "Foo" };
-			Assert.That(bindable.Text, Is.EqualTo("Foo"));
+			Assert.Equal("Foo", bindable.Text);
 
 			Assert.That(MockApplication.MockLogger.Messages.Count, Is.Not.GreaterThan(1), "Too many errors were logged");
 			Assert.That(MockApplication.MockLogger.Messages[0], Does.Contain(String.Format(BindingExpression.PropertyNotFoundErrorMessage,
@@ -1785,7 +1777,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void ChainedPartNull()
 		{
 			var bindable = new MockBindable { BindingContext = new ComplexMockViewModel() };
-			Assert.That(() => bindable.SetBinding(MockBindable.TextProperty, new Binding("Model.Text")), Throws.Nothing);
+			bindable.SetBinding(MockBindable.TextProperty, new Binding("Model.Text"));
 			Assert.Equal(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0), "An error was logged");
 		}
 
@@ -1800,7 +1792,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 
 			};
-			Assert.That(() => bindable.SetBinding(MockBindable.TextProperty, new Binding("Model.MissingProperty")), Throws.Nothing);
+			bindable.SetBinding(MockBindable.TextProperty, new Binding("Model.MissingProperty"));
 
 			Assert.Equal(MockApplication.MockLogger.Messages.Count, Is.EqualTo(1), "An error was not logged");
 			Assert.That(MockApplication.MockLogger.Messages[0], Does.Contain(String.Format(BindingExpression.PropertyNotFoundErrorMessage,
@@ -1960,7 +1952,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			vm.Foo = "Foo";
 			vm.Bar = "Bar";
-			Assert.That(() => vm.SignalAllPropertiesChanged(useNull: !useStringEmpty), Throws.Nothing);
+			vm.SignalAllPropertiesChanged(useNull: !useStringEmpty);
 
 			Assert.Equal(bindable.Text, Is.EqualTo("Foo"));
 			Assert.Equal(bindable.Text2, Is.EqualTo("Bar"));
@@ -2052,7 +2044,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				bindingRef = new WeakReference(binding);
 			}
 
-			Assume.That(viewModel.InvocationListSize(), Is.EqualTo(1));
+			Assert.Equal(1, viewModel.InvocationListSize());
 
 			//NOTE: this was the only way I could "for sure" get the binding to get GC'd
 			GC.Collect();
@@ -2261,7 +2253,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label.Text, Is.EqualTo("Foo"));
 
 			page.Title = "Bar";
-			Assert.Equal(label.Text, "Bar");
+			Assert.Equal("Bar", label.Text);
 		}
 
 		[Fact]

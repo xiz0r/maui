@@ -143,11 +143,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			relativeLayout.Children.Add(child, Constraint.Constant(30), Constraint.Constant(20));
 			relativeLayout.Layout(new Rect(0, 0, 100, 100));
-			Assert.That(child.Bounds, Is.EqualTo(new Rect(30, 20, 100, 20)));
+			Assert.Equal(child.Bounds, new Rect(30, 20, 100, 20));
 
 			relativeLayout.Children.Remove(child);
 			relativeLayout.Children.Add(child, Constraint.Constant(50), Constraint.Constant(40));
-			Assert.That(child.Bounds, Is.EqualTo(new Rect(50, 40, 100, 20)));
+			Assert.Equal(child.Bounds, new Rect(50, 40, 100, 20));
 
 
 		}

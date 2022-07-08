@@ -203,7 +203,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.SetBinding(Label.TextProperty, "Text", BindingMode.TwoWay);
 			label.SetDynamicResource(Label.TextProperty, "foo");
 
-			Assert.That(label.Text, Is.EqualTo("FOO"));
+			Assert.Equal("FOO", label.Text);
 		}
 	}
 }

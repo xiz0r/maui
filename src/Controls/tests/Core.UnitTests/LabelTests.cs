@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label = new Label();
 
 			label.FontSize = 10.7;
-			Assert.Equal(label.FontSize, 10.7);
+			Assert.Equal(10.7, label.FontSize);
 		}
 
 		[Fact]

@@ -14,7 +14,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			entry.KeyValues.Add("contentType", "GalleryPage");
 			entry.KeyValues.Add("companyName", "Microsoft.Maui.Controls");
-			Assert.Equal(entry.KeyValues.Count, 2);
+			Assert.Equal(2, entry.KeyValues.Count);
 		}
 
 

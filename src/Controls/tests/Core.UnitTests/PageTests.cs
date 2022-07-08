@@ -353,7 +353,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var sent = false;
 			MessagingCenter.Subscribe<Page, bool>(this, Page.BusySetSignalName, (p, b) =>
 			{
-				Assert.That(b, Is.False);
+				Assert.False(b);
 				sent = true;
 			});
 
@@ -500,7 +500,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			_ = new Window(page);
 			((IPageController)page).SendAppearing();
 
-			Assert.That(countAppearing, Is.EqualTo(1));
+			Assert.Equal(countAppearing, 1);
 		}
 
 		[Fact]

@@ -283,7 +283,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var itemsSource = new ObservableCollection<int>(Enumerable.Range(0, 10));
 			BindableLayout.SetItemsSource(layout, itemsSource);
 
-			Assert.Throws(typeof(NotSupportedException), () => BindableLayout.SetItemTemplate(layout, new DataTemplateSelectorFrame()));
+			Assert.Throws<NotSupportedException>(() => BindableLayout.SetItemTemplate(layout, new DataTemplateSelectorFrame()));
 		}
 
 		[Fact]

@@ -94,13 +94,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					changed = true;
 			};
 
-			Assert.That(cell.HasContextActions, Is.False);
-			Assert.That(changed, Is.False);
+			Assert.False(cell.HasContextActions);
+			Assert.False(changed);
 
 			var collection = cell.ContextActions;
 
-			Assert.That(cell.HasContextActions, Is.False);
-			Assert.That(changed, Is.False);
+			Assert.False(cell.HasContextActions);
+			Assert.False(changed);
 
 			collection.Add(new MenuItem());
 
@@ -153,8 +153,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assume.That(cell.RenderHeight, Is.EqualTo(5));
 
-			Assert.That(changing, Is.EqualTo(1));
-			Assert.That(changed, Is.EqualTo(1));
+			Assert.Equal(1, changing);
+			Assert.Equal(1, changed);
 		}
 
 		[Fact]

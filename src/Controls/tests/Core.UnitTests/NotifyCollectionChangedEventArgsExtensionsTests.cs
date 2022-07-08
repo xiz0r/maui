@@ -60,7 +60,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action reset = () => Assert.Fail("Reset should not be called");
 			Action<object, int, bool> insert = (o, i, create) =>
 			{
-				Assert.That(create, Is.False);
+				Assert.False(create);
 				applied.Insert(i, (string)o);
 			};
 

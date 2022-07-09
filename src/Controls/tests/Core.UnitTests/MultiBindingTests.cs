@@ -355,9 +355,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				},
 				StringFormat = "{0} - {1} - {2}"
 			};
-			Assert.DoesNotThrow(() => bindable.SetBinding(property, multibinding));
-			Assert.DoesNotThrow(() => bindable.BindingContext = new { foo = "FOO", bar = 42, baz = "BAZ" });
-			Assert.Equal(bindable.GetValue(property), "FOO - 42 - BAZ");
+			bindable.SetBinding(property, multibinding);
+			bindable.BindingContext = new { foo = "FOO", bar = 42, baz = "BAZ" };
+			Assert.Equal("FOO - 42 - BAZ", bindable.GetValue(property));
 		}
 
 		[Fact]
@@ -375,9 +375,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Converter = new StringConcatenationConverter(),
 				StringFormat = "Hello {0}"
 			};
-			Assert.DoesNotThrow(() => bindable.SetBinding(property, multibinding));
-			Assert.DoesNotThrow(() => bindable.BindingContext = new { foo = "FOO", bar = 42, baz = "BAZ" });
-			Assert.Equal(bindable.GetValue(property), "Hello FOO 042 BAZ");
+			bindable.SetBinding(property, multibinding);
+			bindable.BindingContext = new { foo = "FOO", bar = 42, baz = "BAZ" };
+			Assert.Equal("Hello FOO 042 BAZ", bindable.GetValue(property));
 		}
 
 		private Label GenerateNameLabel(string person, BindingMode mode)

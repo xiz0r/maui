@@ -7,6 +7,7 @@ using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.UnitTests;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -191,10 +192,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	}
 
 	
-	public class PlatformBindingTests
+	public class PlatformBindingTests : IDisposable
 	{
 		
-		public void SetUp()
+		public PlatformBindingTests()
 		{
 			DispatcherProvider.SetCurrent(new DispatcherProviderStub());
 
@@ -203,7 +204,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			GC.WaitForPendingFinalizers();
 		}
 
-		 public void TearDown() => DispatcherProvider.SetCurrent(null);
+		public void Dispose() => DispatcherProvider.SetCurrent(null);
 
 		[Fact]
 		public void SetOneWayBinding()
@@ -369,7 +370,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 				PlatformBindingHelpers.BindableObjectProxy<MockPlatformView> proxy;
 				if (!PlatformBindingHelpers.BindableObjectProxy<MockPlatformView>.BindableObjectProxies.TryGetValue(platformView, out proxy))
-					Assert.Fail();
+					throw new XunitException();
 
 				wr = new WeakReference(proxy);
 				platformView = null;
@@ -410,19 +411,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestConverterDoesNotThrow()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
 			var vm = new MockVMForPlatformBinding();
 			var converter = new MockCustomColorConverter();
 			platformView.SetBinding("SelectedColor", new Binding("CColor", converter: converter));
-			Assert.DoesNotThrow(() => platformView.SetBindingContext(vm));
+			platformView.SetBindingContext(vm);
 		}
 
 		[Fact]
 		public void TestConverterWorks()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
 			var vm = new MockVMForPlatformBinding();
 			vm.CColor = Colors.Red;
@@ -464,7 +465,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			platformView.SelectedColorChanged += (o, e) =>
 			{
 				if (++count > 5)
-					Assert.Fail("Probable loop detected");
+					throw new XunitException("Probable loop detected");
 			};
 
 			var vm = new MockVMForPlatformBinding { CColor = Colors.Red };
@@ -472,7 +473,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			platformView.SetBinding("SelectedColor", new Binding("CColor", BindingMode.TwoWay, new MockCustomColorConverter()), "SelectedColorChanged");
 			platformView.SetBindingContext(vm);
 
-			Assert.Equal(count, 1);
+			Assert.Equal(1, count);
 		}
 
 		[Fact]

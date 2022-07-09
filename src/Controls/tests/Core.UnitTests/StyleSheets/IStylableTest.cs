@@ -52,7 +52,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var frame = new Frame();
 			var bp = ((IStylable)frame).GetProperty("padding-left", false);
-			Assert.That(bp, Is.SameAs(PaddingElement.PaddingLeftProperty));
+			Assert.Same(bp, PaddingElement.PaddingLeftProperty);
 		}
 
 		[Fact]
@@ -60,7 +60,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var label = new Label();
 			var bp = ((IStylable)label).GetProperty("margin-right", false);
-			Assert.That(bp, Is.SameAs(View.MarginRightProperty));
+			Assert.Same(bp, View.MarginRightProperty);
 		}
 	}
 }

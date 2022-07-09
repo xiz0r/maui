@@ -190,11 +190,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//section1/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
 
 			Assert.Equal(1, builders.Length);
-			Assert.True(builders.Contains("//section1/rootlevelcontent"));
+			Assert.Contains("//section1/rootlevelcontent", builders);
 
 			builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//section2/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
 			Assert.Equal(1, builders.Length);
-			Assert.True(builders.Contains("//section2/rootlevelcontent"));
+			Assert.Contains("//section2/rootlevelcontent", builders);
 		}
 
 		[Fact]
@@ -211,11 +211,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//item1/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
 
 			Assert.Equal(1, builders.Length);
-			Assert.True(builders.Contains("//item1/rootlevelcontent"));
+			Assert.Contains("//item1/rootlevelcontent", builders);
 
 			builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//item2/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
 			Assert.Equal(1, builders.Length);
-			Assert.True(builders.Contains("//item2/rootlevelcontent"));
+			Assert.Contains("//item2/rootlevelcontent", builders);
 		}
 
 

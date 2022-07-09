@@ -7,7 +7,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		DoubleCollectionConverter _doubleCollectionConverter;
 
 		
-		public void SetUp()
+		public DoubleCollectionTests()
 		{
 			_doubleCollectionConverter = new DoubleCollectionConverter();
 		}

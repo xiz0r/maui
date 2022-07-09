@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var picker = new TimePicker();
 
-			Assert.That(() => picker.Time = new TimeSpan(0, 0, 0), Throws.Nothing);
+			picker.Time = new TimeSpan(0, 0, 0);
 		}
 	}
 }

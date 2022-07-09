@@ -20,7 +20,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void UnknownIdReturnsNullEffect()
 		{
 			var effect = Effect.Resolve("Foo");
-			Assert.IsInstanceOf<NullEffect>(effect);
+			Assert.IsType<NullEffect>(effect);
 		}
 
 		[Fact]

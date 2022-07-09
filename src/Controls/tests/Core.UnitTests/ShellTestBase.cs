@@ -396,7 +396,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Equal(source, this.LastShellNavigatedEventArgs.Source);
 
 				if (from == null)
-					Assert.Equal(LastShellNavigatedEventArgs.Previous, null);
+					Assert.Null(LastShellNavigatedEventArgs.Previous);
 				else
 					Assert.Equal(from, this.LastShellNavigatedEventArgs.Previous.Location.ToString());
 
@@ -409,7 +409,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Equal(source, this.LastShellNavigatingEventArgs.Source);
 
 				if (from == null)
-					Assert.Equal(LastShellNavigatingEventArgs.Current, null);
+					Assert.Null(LastShellNavigatingEventArgs.Current);
 				else
 					Assert.Equal(from, this.LastShellNavigatingEventArgs.Current.Location.ToString());
 

@@ -5,6 +5,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class FontAttributeConverterUnitTests : BaseTestFixtureXUnit
 	{
+		[Theory]
 		[InlineData("None", FontAttributes.None)]
 		[InlineData("Bold", FontAttributes.Bold)]
 		[InlineData("italic", FontAttributes.Italic)]

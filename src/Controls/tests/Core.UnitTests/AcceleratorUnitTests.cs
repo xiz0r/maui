@@ -41,7 +41,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(accelerator.Keys.ElementAt(0), shourtCutKeyBinding);
 		}
 
-		[Theory, InlineData(nameof(GenerateTests))]
+		[Theory, MemberData(nameof(ShortcutTestData))]
 		public void AcceleratorFromLetterAndModifier(TestShortcut shourtcut)
 		{
 			string modifier = shourtcut.Modifier;
@@ -93,6 +93,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		static IEnumerable<TestShortcut> GenerateTests
 		{
 			get { return new string[] { "ctrl", "cmd", "alt", "shift", "fn", "win" }.Select(str => new TestShortcut(str)); }
+		}
+
+		public static IEnumerable<object[]> ShortcutTestData() 
+		{
+			foreach (var sc in GenerateTests)
+			{
+				yield return new object[] { sc };
+			}
 		}
 	}
 }

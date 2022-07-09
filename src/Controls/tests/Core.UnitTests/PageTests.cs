@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(root, child.Parent);
 
-			Assert.Equal(((IElementController)root).LogicalChildren.Count, 1);
+			Assert.Equal(1, ((IElementController)root).LogicalChildren.Count);
 			Assert.Same(((IElementController)root).LogicalChildren.First(), child);
 
 			((ContentPage)root).Content = null;
@@ -45,8 +45,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			root.Layout(new Rect(0, 0, 200, 500));
 
 
-			Assert.Equal(child.Width, 200);
-			Assert.Equal(child.Height, 500);
+			Assert.Equal(200, child.Width);
+			Assert.Equal(500, child.Height);
 		}
 
 		[Fact]
@@ -330,7 +330,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var sent = false;
 			MessagingCenter.Subscribe<Page, bool>(this, Page.BusySetSignalName, (p, b) =>
 			{
-				Assert.That(b, Is.True);
+				Assert.True(b);
 				sent = true;
 			});
 
@@ -500,7 +500,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			_ = new Window(page);
 			((IPageController)page).SendAppearing();
 
-			Assert.Equal(countAppearing, 1);
+			Assert.Equal(1, countAppearing);
 		}
 
 		[Fact]

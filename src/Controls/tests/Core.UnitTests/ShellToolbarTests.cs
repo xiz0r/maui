@@ -36,13 +36,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var toolbar = shell.Toolbar;
-			Assert.True(toolbar.ToolbarItems.Contains(toolbarItem1));
-			Assert.True(toolbar.ToolbarItems.Contains(toolbarItem2));
+			Assert.Contains(toolbarItem1, toolbar.ToolbarItems);
+			Assert.Contains(toolbarItem2, toolbar.ToolbarItems);
 			Assert.Equal(2, toolbar.ToolbarItems.Count());
 
 			await shell.Navigation.PushAsync(secondPage);
-			Assert.True(toolbar.ToolbarItems.Contains(toolbarItem1));
-			Assert.True(toolbar.ToolbarItems.Contains(toolbarItem3));
+			Assert.Contains(toolbarItem1, toolbar.ToolbarItems);
+			Assert.Contains(toolbarItem3, toolbar.ToolbarItems);
 			Assert.Equal(2, toolbar.ToolbarItems.Count());
 		}
 

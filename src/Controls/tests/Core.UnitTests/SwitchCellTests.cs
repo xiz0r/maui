@@ -36,6 +36,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(cell.On, Is.EqualTo(true));
 		}
 
+		[Theory]
 		[InlineData(false, true)]
 		[InlineData(true, false)]
 		public void SwitchCellSwitchChangedArgs(bool initialValue, bool finalValue)

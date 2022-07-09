@@ -9,8 +9,8 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	
-	public class VisualStateManagerTests
+	 
+	public class VisualStateManagerTests : IDisposable
 	{
 		const string NormalStateName = "Normal";
 		const string InvalidStateName = "Invalid";
@@ -372,14 +372,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		
-		public void Setup()
+		public VisualStateManagerTests()
 		{
 			AppInfo.SetCurrent(new MockAppInfo() { RequestedTheme = AppTheme.Light });
 			Application.Current = new Application();
 		}
 
 		
-		public void TearDown()
+		public void Dispose()
 		{
 			Application.Current = null;
 		}

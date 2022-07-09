@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void TestDoesNotThrowOnSetNullChild()
 		{
-			Assert.DoesNotThrow(() => new Frame { Content = null });
+			_ = new Frame { Content = null };
 		}
 
 		[Fact]

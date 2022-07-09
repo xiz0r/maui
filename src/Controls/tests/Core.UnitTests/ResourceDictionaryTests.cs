@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Maui.Controls.Internals;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -38,7 +39,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Pass();
 			};
 			rd.Add("foo", "FOO");
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -55,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Pass();
 			};
 			rd["foo"] = "BAR";
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -147,7 +148,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			parent.Resources["baz"] = "BAZ";
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -169,7 +170,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			elt.Parent = parent;
 
-			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) => Assert.Fail());
+			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) => throw new XunitException());
 			parent.Resources["bar"] = "BAZ";
 			Assert.Pass();
 		}
@@ -201,7 +202,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Pass();
 			});
 			elt.Parent = parent;
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -228,7 +229,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				{"baz", "BAZ"},
 				{"bar", "NEWBAR"}
 			};
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -238,7 +239,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var parent = new StackLayout();
 
 			parent.Children.Add(elt);
-			Assert.DoesNotThrow(() => parent.Children.Remove(elt));
+			parent.Children.Remove(elt);
 		}
 
 		[Fact]
@@ -271,7 +272,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			elt.Parent = parent;
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -309,7 +310,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Equal("A resource with the key 'foo' is already present in the ResourceDictionary.", ae.Message);
 				Assert.Pass();
 			}
-			Assert.Fail();
+			throw new XunitException();
 		}
 
 		[Fact]
@@ -345,7 +346,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			rd.MergedDictionaries.Add(new ResourceDictionary() { { "foo", "bar" } });
 
-			Assert.Equal(rd.Count, 2);
+			Assert.Equal(2, rd.Count);
 		}
 
 		[Fact]
@@ -357,11 +358,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			rd.MergedDictionaries.Add(new ResourceDictionary() { { "foo", "bar" } });
 
-			Assert.Equal(rd.Count, 2);
+			Assert.Equal(2, rd.Count);
 
 			rd.MergedDictionaries.Clear();
 
-			Assert.Equal(rd.MergedDictionaries.Count, 0);
+			Assert.Equal(0, rd.MergedDictionaries.Count);
 		}
 
 		[Fact]
@@ -376,7 +377,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
 
 			rd.MergedDictionaries.Add(new ResourceDictionary { { "foo", "Foo" } });
-			Assert.Equal(label.Text, "Foo");
+			Assert.Equal("Foo", label.Text);
 		}
 
 		[Fact]
@@ -397,10 +398,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			label.SetDynamicResource(Label.TextProperty, "foo");
-			Assert.Equal(label.Text, "Foo");
+			Assert.Equal("Foo", label.Text);
 
 			rd.MergedDictionaries.Clear();
-			Assert.Equal(label.Text, "Foo");
+			Assert.Equal("Foo", label.Text);
 		}
 
 		[Fact]
@@ -422,7 +423,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label.Text, Label.TextProperty.DefaultValue);
 
 			rd0.Add("foo", "Foo");
-			Assert.Equal(label.Text, "Foo");
+			Assert.Equal("Foo", label.Text);
 		}
 	}
 }

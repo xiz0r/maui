@@ -8,6 +8,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class GeometryTests : BaseTestFixtureXUnit
 	{
+		[Theory]
 		[InlineData(0, true)]
 		[InlineData(0, false)]
 		[InlineData(45, true)]

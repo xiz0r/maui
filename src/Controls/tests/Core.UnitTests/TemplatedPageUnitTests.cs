@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			sut.ControlTemplate = new ControlTemplate(typeof(ExpectedView));
 
 			Assert.Equal(1, internalChildren.Count);
-			Assert.IsInstanceOf<ExpectedView>(internalChildren[0]);
+			Assert.IsType<ExpectedView>(internalChildren[0]);
 		}
 
 		private class ExpectedView : View

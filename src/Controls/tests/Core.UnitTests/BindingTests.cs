@@ -5,7 +5,7 @@ using Xunit;
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	
-	internal class BindingSystemTests : BaseTestFixtureXUnit
+	public class BindingSystemTests : BaseTestFixtureXUnit
 	{
 		class BindableViewCell : ViewCell
 		{

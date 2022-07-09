@@ -60,6 +60,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(param, result);
 		}
 
+		[Theory]
 		[InlineData(null, "Text Changed")]
 		[InlineData("Initial Text", null)]
 		[InlineData("Initial Text", "Text Changed")]
@@ -130,7 +131,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void DoesNotCrashWithNonCommandICommand()
 		{
 			var searchBar = new SearchBar();
-			Assert.DoesNotThrow(() => searchBar.SearchCommand = new MyCommand());
+			searchBar.SearchCommand = new MyCommand();
 		}
 	}
 }

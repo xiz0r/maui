@@ -104,10 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void NullUriDoesNotCrash()
 		{
 			var loader = new UriImageSource();
-			Assert.DoesNotThrow(() =>
-			{
-				loader.Uri = null;
-			});
+			loader.Uri = null;
 		}
 
 		[Fact]

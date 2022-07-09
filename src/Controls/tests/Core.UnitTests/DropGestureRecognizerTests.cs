@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dropRec.DropCommand = cmd;
 			dropRec.DropCommandParameter = parameter;
 
-			Assert.Equal(true, dropRec.AllowDrop);
+			Assert.True(dropRec.AllowDrop);
 			Assert.Equal(cmd, dropRec.DragOverCommand);
 			Assert.Equal(parameter, dropRec.DragOverCommandParameter);
 			Assert.Equal(cmd, dropRec.DropCommand);

@@ -204,8 +204,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Visual = Maui.Controls.VisualMarker.Material;
 
-			Assume.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsMaterial());
 
 			var target = view.EffectiveVisual;
 
@@ -229,11 +229,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Visual = Maui.Controls.VisualMarker.Default;
 
-			Assume.That(((IVisualController)layout).EffectiveVisual.IsDefault());
+			Assert.That(((IVisualController)layout).EffectiveVisual.IsDefault());
 
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsMaterial());
 
-			Assume.That(view.EffectiveVisual.IsMaterial());
+			Assert.That(view.EffectiveVisual.IsMaterial());
 
 			var target = ((View)view).Visual;
 
@@ -252,11 +252,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			AddImplicitToMaterial(layout2, (View)view);
 
 			layout2.Visual = Maui.Controls.VisualMarker.Material;
-			Assume.That(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
+			Assert.That(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
 
 			layout.Visual = Maui.Controls.VisualMarker.Default;
-			Assume.That(layout2.Visual == Maui.Controls.VisualMarker.Material, "Explicit Visual not respected on inner layout");
-			Assume.That(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
+			Assert.That(layout2.Visual == Maui.Controls.VisualMarker.Material, "Explicit Visual not respected on inner layout");
+			Assert.That(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
 
 			var target = ((PropertyWatchingView)view).VisualPropertyChangedCount;
 
@@ -274,7 +274,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			((View)view).Parent = layout2;
 
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
 			var target = view.EffectiveVisual;
 
@@ -297,9 +297,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout2.Parent = layout3;
 
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
-			Assume.That(view.EffectiveVisual.IsDefault());
+			Assert.That(view.EffectiveVisual.IsDefault());
 
 			var target = ((View)view).Visual;
 
@@ -337,9 +337,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assume.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
 
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
 			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
 			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
@@ -364,9 +364,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assume.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
 
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
 			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
 			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
@@ -381,9 +381,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveVisual;
 
-			Assume.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
 
-			Assume.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
+			Assert.That(((IVisualController)layout2).EffectiveVisual.IsDefault());
 
 			Assert.True(!target.IsMaterial(), "EffectiveVisual should be Default");
 			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
@@ -459,9 +459,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IVisualController view = ImplicitDefaultView();
 			var layout = new StackLayout { Visual = Maui.Controls.VisualMarker.Material, Children = { (View)view } };
 
-			Assume.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
+			Assert.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
 
-			Assume.That(((View)view).Visual == Maui.Controls.VisualMarker.MatchParent);
+			Assert.That(((View)view).Visual == Maui.Controls.VisualMarker.MatchParent);
 
 			var target = view.EffectiveVisual;
 
@@ -476,8 +476,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = child;
 
-			Assume.That(controller.EffectiveVisual.IsDefault(), "child view Visual should be Default");
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.Default, "child view Visual should be Default");
+			Assert.That(controller.EffectiveVisual.IsDefault(), "child view Visual should be Default");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.Default, "child view Visual should be Default");
 		}
 
 		static void AddExplicitDefaultToLayout(StackLayout parent, View child)
@@ -486,8 +486,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = child;
 
-			Assume.That(controller.EffectiveVisual.IsDefault(), "child view Visual should be Default");
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.Default, "child view Visual should be Default");
+			Assert.That(controller.EffectiveVisual.IsDefault(), "child view Visual should be Default");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.Default, "child view Visual should be Default");
 		}
 
 		static void AddExplicitMaterialToScrollView(ScrollView parent, View child)
@@ -496,7 +496,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = child;
 
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.Material, "child view Visual should be Material");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.Material, "child view Visual should be Material");
 		}
 
 		static void AddExplicitMaterialToLayout(StackLayout parent, View child)
@@ -505,8 +505,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = child;
 
-			Assume.That(controller.EffectiveVisual.IsMaterial(), "child view EffectiveVisual should be Material");
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.Material, "child view Visual should be Material");
+			Assert.That(controller.EffectiveVisual.IsMaterial(), "child view EffectiveVisual should be Material");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.Material, "child view Visual should be Material");
 		}
 
 		static void AddImplicitToDefault(StackLayout parent, View child)
@@ -515,7 +515,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = child;
 
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.MatchParent, "child view Visual should be MatchParent");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.MatchParent, "child view Visual should be MatchParent");
 		}
 
 		static void AddImplicitToMaterial(StackLayout parent, View child)
@@ -525,8 +525,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IVisualController controller = child;
 
 
-			Assume.That(controller.EffectiveVisual.IsMaterial(), "child view EffectiveVisual should be Material");
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.MatchParent, "child view Visual should be MatchParent");
+			Assert.That(controller.EffectiveVisual.IsMaterial(), "child view EffectiveVisual should be Material");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.MatchParent, "child view Visual should be MatchParent");
 		}
 
 		static void AddImplicitToMaterialScrollView(ScrollView parent, View child)
@@ -535,8 +535,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = child;
 
-			Assume.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Material, "child view EffectiveVisual should be Material");
-			Assume.That(child.Visual == Maui.Controls.VisualMarker.MatchParent, "child view Visual should be MatchParent");
+			Assert.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Material, "child view EffectiveVisual should be Material");
+			Assert.That(child.Visual == Maui.Controls.VisualMarker.MatchParent, "child view Visual should be MatchParent");
 		}
 
 		static StackLayout ExplicitDefaultLayout()
@@ -545,8 +545,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = layout;
 
-			Assume.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Default, "Explicit Default view EffectiveVisual should be Default");
-			Assume.That(layout.Visual == Maui.Controls.VisualMarker.Default, "Explicit Default view Visual should be Default");
+			Assert.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Default, "Explicit Default view EffectiveVisual should be Default");
+			Assert.That(layout.Visual == Maui.Controls.VisualMarker.Default, "Explicit Default view Visual should be Default");
 			return layout;
 		}
 
@@ -556,8 +556,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = view;
 
-			Assume.That(controller.EffectiveVisual.IsDefault(), "Explicit Default view EffectiveVisual should be Default");
-			Assume.That(((View)view).Visual == Maui.Controls.VisualMarker.Default, "Explicit Default view Visual should be Default");
+			Assert.That(controller.EffectiveVisual.IsDefault(), "Explicit Default view EffectiveVisual should be Default");
+			Assert.That(((View)view).Visual == Maui.Controls.VisualMarker.Default, "Explicit Default view Visual should be Default");
 
 			return view;
 		}
@@ -568,8 +568,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = layout;
 
-			Assume.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Material, "Explicit RTL view EffectiveVisual should be Material");
-			Assume.That(layout.Visual == Maui.Controls.VisualMarker.Material, "Explicit RTL view Visual should be Material");
+			Assert.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Material, "Explicit RTL view EffectiveVisual should be Material");
+			Assert.That(layout.Visual == Maui.Controls.VisualMarker.Material, "Explicit RTL view Visual should be Material");
 
 			return layout;
 		}
@@ -580,8 +580,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = layout;
 
-			Assume.That(controller.EffectiveVisual.IsMaterial(), "Explicit RTL view EffectiveVisual should be Material");
-			Assume.That(layout.Visual == Maui.Controls.VisualMarker.Material, "Explicit RTL view Visual should be Material");
+			Assert.That(controller.EffectiveVisual.IsMaterial(), "Explicit RTL view EffectiveVisual should be Material");
+			Assert.That(layout.Visual == Maui.Controls.VisualMarker.Material, "Explicit RTL view Visual should be Material");
 
 			return layout;
 		}
@@ -592,8 +592,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = layout;
 
-			Assume.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Default, "New view EffectiveVisual should be Default");
-			Assume.That(layout.Visual == Maui.Controls.VisualMarker.MatchParent, "New view Visual should be MatchParent");
+			Assert.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Default, "New view EffectiveVisual should be Default");
+			Assert.That(layout.Visual == Maui.Controls.VisualMarker.MatchParent, "New view Visual should be MatchParent");
 
 			return layout;
 		}
@@ -605,8 +605,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IVisualController controller = layout;
 
 
-			Assume.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Default, "New view EffectiveVisual should be Default");
-			Assume.That(layout.Visual == Maui.Controls.VisualMarker.MatchParent, "New view Visual should be MatchParent");
+			Assert.That(controller.EffectiveVisual == Maui.Controls.VisualMarker.Default, "New view EffectiveVisual should be Default");
+			Assert.That(layout.Visual == Maui.Controls.VisualMarker.MatchParent, "New view Visual should be MatchParent");
 
 			return layout;
 		}
@@ -617,7 +617,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IVisualController controller = view;
 
-			Assume.That(((View)view).Visual == Maui.Controls.VisualMarker.MatchParent, "New view Visual should be MatchParent");
+			Assert.That(((View)view).Visual == Maui.Controls.VisualMarker.MatchParent, "New view Visual should be MatchParent");
 
 			return view;
 		}

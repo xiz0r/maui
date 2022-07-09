@@ -222,8 +222,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.Equal(2, ((IElementController)group).LogicalChildren.Count);
-			Assert.True(((IElementController)group).LogicalChildren.Contains(view1));
-			Assert.True(((IElementController)group).LogicalChildren.Contains(view2));
+			Assert.Contains(view1, ((IElementController)group).LogicalChildren);
+			Assert.Contains(view2, ((IElementController)group).LogicalChildren);
 			Assert.Equal(view1, ((IElementController)group).LogicalChildren[0]);
 		}
 

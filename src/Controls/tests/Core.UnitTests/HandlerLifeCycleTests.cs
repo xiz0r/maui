@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 using Xunit;
 using NUnit.Framework.Constraints;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -23,7 +24,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			button.HandlerChanged += (_, __) =>
 			{
 				if (!changing)
-					Assert.Fail("Attached fired before changing");
+					throw new XunitException("Attached fired before changing");
 
 				changed = true;
 			};
@@ -85,7 +86,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				base.OnHandlerChanged();
 
 				if (changed != changing)
-					Assert.Fail("Attaching/Attached fire mismatch");
+					throw new XunitException("Attaching/Attached fire mismatch");
 			}
 		}
 	}

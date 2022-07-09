@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -16,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.Equal(sentMessage, "My Message");
+			Assert.Equal("My Message", sentMessage);
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, "SimpleTest");
 		}
@@ -33,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.Equal(sentMessage, "My Message");
+			Assert.Equal("My Message", sentMessage);
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(this, "SimpleTest");
 		}
@@ -50,8 +51,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.Equal(sentMessage1, "My Message");
-			Assert.Equal(sentMessage2, "My Message");
+			Assert.Equal("My Message", sentMessage1);
+			Assert.Equal("My Message", sentMessage2);
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(sub1, "SimpleTest");
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(sub2, "SimpleTest");
@@ -66,13 +67,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
-			Assert.Equal(sentMessage, null);
+			Assert.Null(sentMessage);
 		}
 
 		[Fact]
 		public void SendWithoutSubscribers()
 		{
-			Assert.DoesNotThrow(() => MessagingCenter.Send(this, "SimpleTest", "My Message"));
+			MessagingCenter.Send(this, "SimpleTest", "My Message");
 		}
 
 		[Fact]
@@ -83,7 +84,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest");
 
-			Assert.That(sentMessage, Is.True);
+			Assert.True(sentMessage);
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(this, "SimpleTest");
 		}
@@ -117,8 +118,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(this, "SimpleTest");
 
-			Assert.That(sentMessage1, Is.True);
-			Assert.That(sentMessage2, Is.True);
+			Assert.True(sentMessage1);
+			Assert.True(sentMessage2);
 
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(sub1, "SimpleTest");
 			MessagingCenter.Unsubscribe<MessagingCenterTests>(sub2, "SimpleTest");
@@ -139,7 +140,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void NoArgSendWithoutSubscribers()
 		{
-			Assert.DoesNotThrow(() => MessagingCenter.Send(this, "SimpleTest"));
+			MessagingCenter.Send(this, "SimpleTest");
 		}
 
 		[Fact]
@@ -197,7 +198,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			new Action(() =>
 			{
 				var subscriber = new TestSubcriber();
-				MessagingCenter.Subscribe<TestPublisher>(subscriber, "test", p => Assert.Fail());
+				MessagingCenter.Subscribe<TestPublisher>(subscriber, "test", p => throw new XunitException());
 			})();
 
 			GC.Collect();

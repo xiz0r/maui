@@ -38,7 +38,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			span.Text = "New text";
 
-			Assert.That(spansChanged, Is.True);
+			Assert.True(spansChanged);
 		}
 
 		[Fact]
@@ -76,7 +76,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			fs.Spans.Add(span);
 
-			Assert.That(spansChanged, Is.True);
+			Assert.True(spansChanged);
 		}
 
 		[Fact]

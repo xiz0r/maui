@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 using Xunit;
 using NUnit.Framework.Constraints;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -25,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			button.ParentChanged += (_, __) =>
 			{
 				if (!changing)
-					Assert.Fail("Attached fired before changing");
+					throw new XunitException("Attached fired before changing");
 
 				changed = true;
 			};
@@ -50,7 +51,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			button.ParentChanged += (_, __) =>
 			{
 				if (!changing)
-					Assert.Fail("Attached fired before changing");
+					throw new XunitException("Attached fired before changing");
 
 				changed = true;
 			};
@@ -109,7 +110,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			button.Parent = null;
 			Assert.Equal(button.LastParentChangingEventArgs.OldParent, secondParent);
-			Assert.Equal(button.LastParentChangingEventArgs.NewParent, null);
+			Assert.Null(button.LastParentChangingEventArgs.NewParent);
 
 			Assert.Equal(3, button.changing);
 			Assert.Equal(3, button.changed);

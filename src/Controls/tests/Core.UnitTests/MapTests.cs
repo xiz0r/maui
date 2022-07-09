@@ -25,8 +25,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			map.Pins.Add(home);
 
-			Assert.Equal(map.Pins.Count, 1);
-			Assert.Equal(map.Pins[0].Label, "Home");
+			Assert.Equal(1, map.Pins.Count);
+			Assert.Equal("Home", map.Pins[0].Label);
 			var mall = new Pin
 			{
 				Label = "Mall",
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			map.Pins.Add(mall);
 
-			Assert.Equal(map.Pins.Count, 2);
+			Assert.Equal(2, map.Pins.Count);
 			Assert.Equal(map.Pins[1].Position.Latitude, -12);
 		}
 
@@ -53,7 +53,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var exception = Assert.Throws<ArgumentException>(() => map.Pins.Add(noNamePin));
-			Assert.Equal(exception.Message, "Pin must have a Label to be added to a map");
+			Assert.Equal("Pin must have a Label to be added to a map", exception.Message);
 		}
 
 		[Fact]
@@ -68,9 +68,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			map.Pins.Add(noAddressPin);
-			Assert.Equal(map.Pins.Count, 1);
-			Assert.Equal(map.Pins[0].Label, "I have no address");
-			Assert.Equal(map.Pins[0].Address, null);
+			Assert.Equal(1, map.Pins.Count);
+			Assert.Equal("I have no address", map.Pins[0].Label);
+			Assert.Null(map.Pins[0].Address);
 		}
 
 		[Fact]
@@ -107,13 +107,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			map.Pins.Add(genericPlace);
-			Assert.Equal(map.Pins.Count, 1);
+			Assert.Equal(1, map.Pins.Count);
 
 			map.Pins.Add(mall);
-			Assert.Equal(map.Pins.Count, 2);
+			Assert.Equal(2, map.Pins.Count);
 
 			map.Pins.Remove(genericPlace);
-			Assert.Equal(map.Pins.Count, 1);
+			Assert.Equal(1, map.Pins.Count);
 
 			Assert.True(map.Pins.Contains(mall));
 			Assert.False(map.Pins.Contains(genericPlace));
@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var map = new Map(new MapSpan(new Position(), 0, 0));
 			map.MoveToRegion(new MapSpan(new Position(1, 2), 3, 4));
-			Assert.Equal(null, map.VisibleRegion);
+			Assert.Null(map.VisibleRegion);
 
 			bool signaled = false;
 			MessagingCenter.Subscribe<Map, MapSpan>(this, "MapMoveToRegion", (s, a) =>
@@ -335,7 +335,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(IsMapWithItemsSource(itemsSource, map));
 			foreach (Pin pin in map.Pins)
 			{
-				Assert.Equal(pin.Address, "Address 1");
+				Assert.Equal("Address 1", pin.Address);
 			}
 		}
 
@@ -395,7 +395,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var itemsSource = new ObservableCollection<int>(Enumerable.Range(0, 10));
 			map.ItemsSource = itemsSource;
 
-			Assert.Throws(typeof(NotSupportedException), () => map.ItemTemplate = GetDataTemplateSelector());
+			Assert.Throws<NotSupportedException>(() => map.ItemTemplate = GetDataTemplateSelector());
 		}
 
 		[Fact]

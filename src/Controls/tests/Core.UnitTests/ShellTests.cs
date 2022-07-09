@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(shell.CurrentItem, shellItem);
 		}
 
-
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void SetCurrentItemWithImplicitlyWrappedShellContent(bool useShellContent)
@@ -248,7 +248,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shellItem.Items.Add(shellSection);
 			shell.Items.Add(shellItem);
 
-			Assume.That(shell.CurrentItem, Is.EqualTo(shellItem));
+			Assert.Equal(shell.CurrentItem, shellItem);
 
 			shell.Items.Add(new ShellItem());
 
@@ -277,11 +277,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(one);
 			shell.Items.Add(two);
 
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//one/tabone/content");
+			Assert.Equal("//one/tabone/content", shell.CurrentState.Location.ToString());
 
 			shell.GoToAsync(new ShellNavigationState("//two/tabfour/"));
 
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tabfour/content");
+			Assert.Equal("//two/tabfour/content", shell.CurrentState.Location.ToString());
 		}
 
 		[Fact]
@@ -300,19 +300,19 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Assert.Equal(Routing.GetRoute(content1), formattedRoute);
 			}
 
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("app://IMPL_tab21", typeof(ShellItem)));
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute("app://IMPL_tab21", typeof(ShellItem)));
 
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute(@"app:\\IMPL_tab21", typeof(ShellItem)));
-
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute(string.Empty, typeof(ShellItem)));
-
-			Assert.Catch(typeof(ArgumentNullException), () => Routing.RegisterRoute(null, typeof(ShellItem)));
-
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("tab1/IMPL_tab11", typeof(ShellItem)));
-
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("IMPL_shell", typeof(ShellItem)));
-
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("app://tab2/IMPL_tab21", typeof(ShellItem)));
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute(@"app:\\IMPL_tab21", typeof(ShellItem)));
+							
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute(string.Empty, typeof(ShellItem)));
+							
+			Assert.ThrowsAny<ArgumentNullException>(() => Routing.RegisterRoute(null, typeof(ShellItem)));
+							
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute("tab1/IMPL_tab11", typeof(ShellItem)));
+							
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute("IMPL_shell", typeof(ShellItem)));
+							
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute("app://tab2/IMPL_tab21", typeof(ShellItem)));
 		}
 
 		[Fact]
@@ -321,7 +321,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var route = "dogs";
 			Routing.RegisterRoute(route, typeof(ShellItem));
 
-			Assert.Catch(typeof(ArgumentException), () => Routing.RegisterRoute("dogs", typeof(ContentPage)));
+			Assert.ThrowsAny<ArgumentException>(() => Routing.RegisterRoute("dogs", typeof(ContentPage)));
 		}
 
 		[Fact]
@@ -364,22 +364,22 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("//two/tab21/");
 
 			await shell.NavigationManager.GoToAsync("/tab22", false, true);
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab22/content");
+			Assert.Equal("//two/tab22/content", shell.CurrentState.Location.ToString());
 
 			await shell.NavigationManager.GoToAsync("tab21", false, true);
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab21/content");
+			Assert.Equal("//two/tab21/content", shell.CurrentState.Location.ToString());
 
 			await shell.NavigationManager.GoToAsync("/tab23", false, true);
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content");
+			Assert.Equal("//two/tab23/content", shell.CurrentState.Location.ToString());
 
 			await shell.GoToAsync("RelativeGoTo_Page1", false);
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content/RelativeGoTo_Page1");
+			Assert.Equal("//two/tab23/content/RelativeGoTo_Page1", shell.CurrentState.Location.ToString());
 
 			await shell.GoToAsync("../RelativeGoTo_Page2", false);
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content/RelativeGoTo_Page2");
+			Assert.Equal("//two/tab23/content/RelativeGoTo_Page2", shell.CurrentState.Location.ToString());
 
 			await shell.GoToAsync("..", false);
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//two/tab23/content");
+			Assert.Equal("//two/tab23/content", shell.CurrentState.Location.ToString());
 
 			/*
 			 * removing support for .. notation for now
@@ -429,7 +429,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(flyoutItem);
 
 			await shell.GoToAsync(nameof(DefaultRoutesMaintainedIfThatsAllThereIs));
-			Assume.That(shell.CurrentState.Location.ToString(), Is.EqualTo($"//{Routing.GetRoute(shellContent)}/{nameof(DefaultRoutesMaintainedIfThatsAllThereIs)}"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), $"//{Routing.GetRoute(shellContent)}/{nameof(DefaultRoutesMaintainedIfThatsAllThereIs)}");
 			await shell.GoToAsync("..");
 		}
 
@@ -697,7 +697,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.BindingContext = new { Text = "Binding Changed" };
 			Assert.Equal("Binding Changed", label.Text);
 			shell.SetValue(Shell.FlyoutHeaderProperty, new ContentView());
-			Assert.Equal(null, flyoutView.BindingContext);
+			Assert.Null(flyoutView.BindingContext);
 		}
 
 		[Fact]
@@ -740,7 +740,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Shell.SetTitleView(page, layout);
 
 
-			Assert.True(page.ChildrenNotDrawnByThisElement.Contains(layout));
+			Assert.Contains(layout, page.ChildrenNotDrawnByThisElement);
 		}
 
 
@@ -761,10 +761,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.FlyoutHeader = null;
 			shell.FlyoutHeader = layout;
 
-			Assert.True(shell.LogicalChildren.Contains(layout));
+			Assert.Contains(layout, shell.LogicalChildren);
 			shell.FlyoutHeader = null;
 
-			Assert.False(shell.LogicalChildren.Contains(layout));
+			Assert.DoesNotContain(layout, shell.LogicalChildren);
 		}
 
 
@@ -893,8 +893,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item1);
 			shell.Items.Add(item2);
 
-			Assert.False(GetItems(shell).Contains(item1));
-			Assert.True(GetItems(shell).Contains(item2));
+			Assert.DoesNotContain(item1, GetItems(shell));
+			Assert.Contains(item2, GetItems(shell));
 		}
 
 		[Fact]
@@ -908,21 +908,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item2);
 
 			item1.IsVisible = false;
-			Assert.False(GetItems(shell).Contains(item1));
-			Assert.True(GetItems(shell).Contains(item2));
+			Assert.DoesNotContain(item1, GetItems(shell));
+			Assert.Contains(item2, GetItems(shell));
 
 			item1.IsVisible = true;
-			Assert.True(GetItems(shell).Contains(item1));
+			Assert.Contains(item1, GetItems(shell));
 
 			item1.Items[0].IsVisible = false;
-			Assert.False(GetItems(shell).Contains(item1));
+			Assert.DoesNotContain(item1, GetItems(shell));
 			item1.Items[0].IsVisible = true;
-			Assert.True(GetItems(shell).Contains(item1));
+			Assert.Contains(item1, GetItems(shell));
 
 			item1.Items[0].Items[0].IsVisible = false;
-			Assert.False(GetItems(shell).Contains(item1));
+			Assert.DoesNotContain(item1, GetItems(shell));
 			item1.Items[0].Items[0].IsVisible = true;
-			Assert.True(GetItems(shell).Contains(item1));
+			Assert.Contains(item1, GetItems(shell));
 		}
 
 		[Fact]
@@ -937,7 +937,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			item1.IsVisible = false;
 
-			Assert.That(async () => await shell.GoToAsync($"//NotVisible"), Throws.Exception);
+			await Assert.ThrowsAnyAsync<Exception>(() => shell.GoToAsync($"//NotVisible"));
 
 			Assert.Equal(shell.CurrentItem, item2);
 		}
@@ -954,7 +954,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item2);
 
 			Shell.SetFlyoutItemIsVisible(item1, false);
-			Assert.True(GetItems(shell).Contains(item1));
+			Assert.Contains(item1, GetItems(shell));
 
 			bool hasFlyoutItem =
 				(shell as IShellController)
@@ -1183,7 +1183,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("cat");
 			Assert.NotNull(page);
-			Assert.Equal(page.GetType(), typeof(ContentPage));
+			Assert.IsType<ContentPage>(page);
 			Assert.Equal(shell.Navigation.NavigationStack[1], page);
 		}
 
@@ -1217,7 +1217,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.GoToAsync(new ShellNavigationState("//two/tabfour/"));
 			Assert.NotNull(page);
-			Assert.Equal(page.GetType(), typeof(ShellTestPage));
+			Assert.IsType<ShellTestPage>(page);
 			Assert.Equal((tabfour as IShellSectionController).PresentedPage, page);
 		}
 
@@ -1235,7 +1235,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(page);
 		}
 
-
+		[Fact]
 		public async Task HotReloadStaysOnActiveItem()
 		{
 			Shell shell = new Shell();
@@ -1259,6 +1259,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 		}
 
+		[Theory]
 		[InlineData("ContentPage")]
 		[InlineData("ShellItem")]
 		[InlineData("Shell")]
@@ -1297,15 +1298,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 			shell.Items.Add(CreateShellItem());
-			Assert.Greater(count, previousCount, "StructureChanged not fired when adding Shell Item");
+			Assert.True(count > previousCount, "StructureChanged not fired when adding Shell Item");
 
 			previousCount = count;
 			shell.CurrentItem.Items.Add(CreateShellSection());
-			Assert.Greater(count, previousCount, "StructureChanged not fired when adding Shell Section");
+			Assert.True(count > previousCount, "StructureChanged not fired when adding Shell Section");
 
 			previousCount = count;
 			shell.CurrentItem.CurrentItem.Items.Add(CreateShellContent());
-			Assert.Greater(count, previousCount, "StructureChanged not fired when adding Shell Content");
+			Assert.True(count > previousCount, "StructureChanged not fired when adding Shell Content");
 		}
 
 		[Fact]
@@ -1317,8 +1318,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.CurrentItem.CurrentItem.Items.Add(CreateShellContent());
 			var shellCount = (shell as IVisualTreeElement).GetVisualChildren();
 			var shellItemCount = (shell.CurrentItem as IVisualTreeElement).GetVisualChildren();
-			Assert.Equal(shellCount.Count, 1);
-			Assert.Equal(shellItemCount.Count, 2);
+			Assert.Equal(1, shellCount.Count);
+			Assert.Equal(2, shellItemCount.Count);
 		}
 
 		[Fact]
@@ -1496,6 +1497,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(testShell.FlyoutIsPresented);
 		}
 
+		[Fact]
 		public void ShellToolbarNotVisibleWithBasicContentPage()
 		{
 			TestShell testShell = new TestShell(new ContentPage());

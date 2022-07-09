@@ -19,7 +19,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			sut.ControlTemplate = new ControlTemplate(typeof(ExpectedView));
 
 			Assert.Equal(1, internalChildren.Count);
-			Assert.IsInstanceOf<ExpectedView>(internalChildren[0]);
+			Assert.IsType<ExpectedView>(internalChildren[0]);
 		}
 
 		[Fact]
@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var tv = new TemplatedView();
 			var ct = (IControlTemplated)tv;
-			Assert.Equal(ct.TemplateRoot, null);
+			Assert.Null(ct.TemplateRoot);
 
 			tv.ControlTemplate = new ControlTemplate(typeof(ExpectedView));
 
@@ -187,7 +187,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			cv.BindingContext = "Foo";
 
-			Assume.That(label.Text, Is.EqualTo("Foo"));
+			Assert.That(label.Text, Is.EqualTo("Foo"));
 			cv.ControlTemplate = template1;
 			Assert.That(label.Text, Is.EqualTo("Foo"));
 		}

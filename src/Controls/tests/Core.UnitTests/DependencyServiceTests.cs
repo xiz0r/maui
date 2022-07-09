@@ -99,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			DependencyService.Register<IDependencyTestRegister, DependencyTestRegisterImpl2>();
 			var global = DependencyService.Get<IDependencyTestRegister>();
-			Assert.IsInstanceOf<DependencyTestRegisterImpl2>(global);
+			Assert.IsType<DependencyTestRegisterImpl2>(global);
 		}
 
 		[Fact]
@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			DependencyService.Register<IDependencyTestRegister, DependencyTestRegisterImpl>();
 			DependencyService.Register<IDependencyTestRegister, DependencyTestRegisterImpl2>();
 			var global = DependencyService.Get<IDependencyTestRegister>();
-			Assert.IsInstanceOf<DependencyTestRegisterImpl2>(global);
+			Assert.IsType<DependencyTestRegisterImpl2>(global);
 		}
 
 		[Fact]

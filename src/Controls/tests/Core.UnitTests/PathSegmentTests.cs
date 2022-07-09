@@ -54,6 +54,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(50, lineSegment2.Point.Y);
 		}
 
+		[Theory]
 		[InlineData("", 0)]
 		[InlineData("0 48", 1)]
 		[InlineData("0 48, 0 144", 2)]
@@ -74,6 +75,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(count, polyBezierSegment.Points.Count);
 		}
 
+		[Theory]
 		[InlineData("", 0)]
 		[InlineData("0 48", 1)]
 		[InlineData("0 48, 0 144", 2)]
@@ -93,6 +95,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(count, polyLineSegment.Points.Count);
 		}
 
+		[Theory]
 		[InlineData("", 0)]
 		[InlineData("0 48", 1)]
 		[InlineData("0 48, 0 144", 2)]

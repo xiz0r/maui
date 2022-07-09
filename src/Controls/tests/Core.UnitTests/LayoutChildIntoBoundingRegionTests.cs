@@ -25,6 +25,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		int Expected_X_Center => Expected_Empty_Region_Width / 2 + Region_X;
 		int Expected_Y_Center => Expected_Empty_Region_Height / 2 + Region_Y;
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -43,9 +44,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -54,6 +55,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -73,9 +75,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_Region_Right, region.Right, "region.Right");
@@ -87,6 +89,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -105,11 +108,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
 					"view.HorizontalOptions.Alignment should be Center");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Center, target.X, "X");
@@ -118,6 +121,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -137,11 +141,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var thickness = margin * 2;
 			var center_margin = Math.Ceiling(margin / 2d);
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
 					"view.HorizontalOptions.Alignment should be Center");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Center_RTL_Plus_Margin(0), target.X, "X");
@@ -150,6 +154,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -167,11 +172,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
 					"view.HorizontalOptions.Alignment should be Center");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Center, target.X, "X");
@@ -180,6 +185,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -197,11 +203,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Center,
 					"view.HorizontalOptions.Alignment should be Center");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0.5,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Center_RTL_Plus_Margin(0), target.X, "X");
@@ -210,6 +216,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -227,11 +234,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
 					"view.HorizontalOptions.Alignment should be End");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_End_Less_Margin(margin), target.X, "X");
@@ -240,6 +247,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -257,11 +265,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
 					"view.HorizontalOptions.Alignment should be End");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_End_RTL_Plus_Margin(margin), target.X, "X");
@@ -270,6 +278,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -287,11 +296,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
 					"view.HorizontalOptions.Alignment should be End");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_End_Less_Margin(margin), target.X, "X");
@@ -300,6 +309,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -317,11 +327,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.End,
 					"view.HorizontalOptions.Alignment should be End");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 1,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_End_RTL_Plus_Margin(margin), target.X, "X");
@@ -330,6 +340,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -347,11 +358,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
 					"view.HorizontalOptions.Alignment should be Start");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -359,7 +370,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Width_Start_End, target.Width, "Width");
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
-
+		
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -377,11 +389,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
 					"view.HorizontalOptions.Alignment should be Start");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Start_Less_Margin(margin), target.X, "X");
@@ -390,6 +402,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -407,11 +420,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
 					"view.HorizontalOptions.Alignment should be Start");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -420,6 +433,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -437,11 +451,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Start,
 					"view.HorizontalOptions.Alignment should be Start");
-			Assume.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.HorizontalOptions.Alignment.ToDouble() == 0,
 					"view.HorizontalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Fill,
 					"view.VerticalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Start_Less_Margin(margin), target.X, "X");
@@ -450,6 +464,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Fill_Less_Thickness(thickness), target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -468,11 +483,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
 					"view.VerticalOptions.Alignment should be Center");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -481,6 +496,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -499,11 +515,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
 					"view.VerticalOptions.Alignment should be Center");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
@@ -512,6 +528,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Expected_Height_Start_End, target.Height, "Height");
 		}
 
+		[Theory]
 		[InlineData(Margin_None)]
 		[InlineData(Margin_Small)]
 		[InlineData(Margin_Large)]
@@ -529,11 +546,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
 					"view.VerticalOptions.Alignment should be Center");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -559,11 +576,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Center,
 					"view.VerticalOptions.Alignment should be Center");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0.5,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0.5");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
@@ -589,11 +606,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
 					"view.VerticalOptions.Alignment should be End");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 1,
 					"view.VerticalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -619,11 +636,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
 					"view.VerticalOptions.Alignment should be End");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 1,
 					"view.VerticalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
@@ -649,11 +666,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
 					"view.VerticalOptions.Alignment should be End");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 1,
 					"view.VerticalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -679,11 +696,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.End,
 					"view.VerticalOptions.Alignment should be End");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 1,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 1,
 					"view.VerticalOptions.Alignment.ToDouble() should be 1");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
@@ -709,11 +726,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
 					"view.VerticalOptions.Alignment should be Start");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -739,11 +756,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
 					"view.VerticalOptions.Alignment should be Start");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");
@@ -769,11 +786,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
 					"view.VerticalOptions.Alignment should be Start");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_Plus_Margin(margin), target.X, "X");
@@ -799,11 +816,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var target = view.Bounds;
 			var thickness = margin * 2;
 
-			Assume.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
+			Assert.That(view.VerticalOptions.Alignment == LayoutAlignment.Start,
 					"view.VerticalOptions.Alignment should be Start");
-			Assume.That(view.VerticalOptions.Alignment.ToDouble() == 0,
+			Assert.That(view.VerticalOptions.Alignment.ToDouble() == 0,
 					"view.VerticalOptions.Alignment.ToDouble() should be 0");
-			Assume.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
+			Assert.That(view.HorizontalOptions.Alignment == LayoutAlignment.Fill,
 					"view.HorizontalOptions.Alignment should be Fill");
 
 			Assert.Equal(Expected_X_Fill_RTL_Plus_Margin(margin), target.X, "X");

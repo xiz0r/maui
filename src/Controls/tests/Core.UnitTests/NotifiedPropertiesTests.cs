@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Maps;
@@ -156,19 +157,27 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			new PropertyTestCase<Entry, bool> ("IsReadOnly", v => v.IsReadOnly, (v, o) => v.IsReadOnly = o, () => false, true),
 			new PropertyTestCase<Editor, bool> ("IsReadOnly", v => v.IsReadOnly, (v, o) => v.IsReadOnly = o, () => false, true)
 		};
+
+		public static IEnumerable<object[]> PropertyTestCases() 
+		{
+			foreach (var ptc in Properties)
+			{
+				yield return new object[] { ptc };
+			}
+		}
 #pragma warning restore 0414
 
-		[Fact, MemberData("Properties")]
+		[Fact, MemberData(nameof(PropertyTestCases))]
 		public void DefaultValues(PropertyTestCase property)
 		{
 			var view = property.CreateView();
 			var expected = property.ExpectedDefaultValue;
 			var actual = property.PropertyGetter(view);
 
-			Assert.Equal(property.ExpectedDefaultValue, property.PropertyGetter(view), property.DebugName);
+			Assert.True(property.ExpectedDefaultValue == property.PropertyGetter(view), property.DebugName);
 		}
 
-		[Fact, MemberData("Properties")]
+		[Fact, MemberData(nameof(PropertyTestCases))]
 		public void Set(PropertyTestCase property)
 		{
 			var view = property.CreateView();
@@ -184,10 +193,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			property.PropertySetter(view, testvalue);
 
 			Assert.True(changed, property.DebugName);
-			Assert.Equal(testvalue, property.PropertyGetter(view), property.DebugName);
+			Assert.True(testvalue == property.PropertyGetter(view), property.DebugName);
 		}
 
-		[Fact, MemberData("Properties")]
+		[Fact, MemberData(nameof(PropertyTestCases))]
 		public void DoubleSet(PropertyTestCase property)
 		{
 			var view = property.CreateView();
@@ -205,7 +214,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			property.PropertySetter(view, testvalue);
 
 			Assert.False(changed, property.DebugName);
-			Assert.Equal(testvalue, property.PropertyGetter(view), property.DebugName);
+			Assert.True(testvalue == property.PropertyGetter(view), property.DebugName);
 		}
 	}
 }

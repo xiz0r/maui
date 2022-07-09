@@ -30,6 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			VisualTreeChanged?.Invoke(sender as Element, e);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -62,7 +63,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var windowChildren = (window as IVisualTreeElement).GetVisualChildren();
 			var modalParent = (modalPage as IVisualTreeElement).GetVisualParent();
 
-			Assert.Equal(windowChildren.Count, 2);
+			Assert.Equal(2, windowChildren.Count);
 			Assert.Equal(page, windowChildren[0]);
 			Assert.Equal(modalPage, windowChildren[1]);
 			Assert.Equal(window, modalParent);
@@ -80,7 +81,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await window.Navigation.PushModalAsync(modalPage);
 
-			Assert.Equal(1, _treeEvents.Count);
+			Assert.Single(_treeEvents);
 			var (parent, args) = _treeEvents[0];
 
 			Assert.Equal(window, parent);
@@ -93,7 +94,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await window.Navigation.PopModalAsync();
 
-			Assert.Equal(1, _treeEvents.Count);
+			Assert.Single(_treeEvents);
 			(parent, args) = _treeEvents[0];
 
 			Assert.Equal(window, parent);
@@ -177,6 +178,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(VisualTreeChangeType.Remove, args.ChangeType);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -213,6 +215,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -244,6 +247,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(VisualTreeChangeType.Add, args.ChangeType);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -274,6 +278,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(VisualTreeChangeType.Remove, args.ChangeType);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -332,10 +337,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var tableRootElement = (tableview as IVisualTreeElement).GetVisualChildren();
-			Assert.IsInstanceOf(typeof(TableRoot), tableRootElement[0]);
+			Assert.IsType<TableRoot>(tableRootElement[0]);
 			var tableRoot = (TableRoot)tableRootElement[0];
 			var tableSectionElement = (tableRoot[0] as IVisualTreeElement).GetVisualChildren();
-			Assert.Equal(tableSectionElement.Count, 2);
+			Assert.Equal(2, tableSectionElement.Count);
 		}
 
 		Layout CreateLayout(Type TLayout)

@@ -9,7 +9,7 @@ using Xunit;
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	
-	internal class KeyboardTests : BaseTestFixtureXUnit
+	public class KeyboardTests : BaseTestFixtureXUnit
 	{
 		[Fact]
 		public void KeyboardTypesAreCorrect()
@@ -24,7 +24,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	}
 
 	
-	internal class KeyboardTypeConverterTests : BaseTestFixtureXUnit
+	public class KeyboardTypeConverterTests : BaseTestFixtureXUnit
 	{
 		[Fact]
 		public void ConversionConvert()

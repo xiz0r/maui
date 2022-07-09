@@ -146,6 +146,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
+		[Theory]
 		[InlineData(100.0, 0.5)]
 		[InlineData(10.0, 25.0)]
 		[InlineData(0, 39.5)]
@@ -177,6 +178,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(finalValue, newValue);
 		}
 
+		[Theory]
 		[InlineData(10)]
 		public void TestReturnToZero(int steps)
 		{
@@ -191,6 +193,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(0.0, stepper.Value);
 		}
 
+		[Theory]
 		[InlineData(100, .5, 0, 100)]
 		[InlineData(100, .3, 0, 100)]
 		[InlineData(100, .03, 0, 100)]

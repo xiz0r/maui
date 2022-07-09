@@ -221,7 +221,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(new Rect(200, 0, 100, 50), label2.Bounds);
 
 			var lastItem = layout.Children[2];
-			Assert.That(lastItem, Is.SameAs(label2));
+			Assert.Same(lastItem, label2);
 
 			layout.Children.Remove(lastItem);
 			Assert.Equal(new Rect(0, 0, 150, 50), label0.Bounds);

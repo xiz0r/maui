@@ -135,11 +135,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			element.SetValue(setterbp, "default");
 			element.Triggers.Add(trigger);
-			Assume.That(element.GetValue(setterbp), Is.EqualTo("default"));
+			Assert.That(element.GetValue(setterbp), Is.EqualTo("default"));
 
 			//sets the condition to true
 			element.SetValue(conditionbp, "foobar");
-			Assume.That(element.GetValue(setterbp), Is.EqualTo("Qux"));
+			Assert.That(element.GetValue(setterbp), Is.EqualTo("Qux"));
 
 			//unsets the condition
 			element.SetValue(conditionbp, "baz");

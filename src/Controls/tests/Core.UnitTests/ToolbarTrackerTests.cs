@@ -6,7 +6,7 @@ using Xunit;
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	
-	internal class ToolbarTrackerTests : BaseTestFixtureXUnit
+	public class ToolbarTrackerTests : BaseTestFixtureXUnit
 	{
 		[Fact]
 		public void Constructor()
@@ -229,8 +229,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await page.Navigation.PushAsync(firstPage);
 
 			var toolbar = window.Toolbar;
-			Assert.True(toolbar.ToolbarItems.Contains(toolbarItem1));
-			Assert.True(toolbar.ToolbarItems.Contains(toolbarItem2));
+			Assert.Contains(toolbarItem1, toolbar.ToolbarItems);
+			Assert.Contains(toolbarItem2, toolbar.ToolbarItems);
 		}
 	}
 }

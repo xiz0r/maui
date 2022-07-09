@@ -94,7 +94,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			mock.BindingContext = new object();
 
-			Assert.Fail("The BindingContextChanged event was not fired.");
+			throw new XunitException("The BindingContextChanged event was not fired.");
 		}
 
 		[Fact]

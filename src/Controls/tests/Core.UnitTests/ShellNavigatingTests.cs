@@ -48,7 +48,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(one);
 			shell.Items.Add(two);
 
-			Assume.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
+			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
 
 			shell.Navigating += (s, e) =>
 			{
@@ -57,7 +57,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.GoToAsync(new ShellNavigationState("//two/tabfour/"));
 
-			Assume.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
+			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
 		}
 
 		[Fact]
@@ -156,6 +156,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(2, shell.Navigation.NavigationStack.Count);
 		}
 
+		[Theory]
 		[InlineData("PopToRoot")]
 		[InlineData("Pop")]
 		public async Task DeferPopNavigation(string testCase)
@@ -197,6 +198,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			}
 		}
 
+		[Theory]
 		[InlineData("PopToRoot")]
 		[InlineData("Pop")]
 		[InlineData("GoToAsync")]
@@ -513,7 +515,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"//item1/page1/page2", $"//item1/page1");
 		}
 
-
+		[Theory]
 		[InlineData(true, 2)]
 		[InlineData(false, 2)]
 		[InlineData(true, 3)]
@@ -538,9 +540,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(item1);
 
 			await shell.GoToAsync("details");
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//animals/monkeys/details");
+			Assert.Equal("//animals/monkeys/details", shell.CurrentState.Location.ToString());
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public async Task GotoSameGlobalRoutesCollapsesUriCorrectly(bool modal)
@@ -557,7 +560,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("details");
 			await shell.GoToAsync("details");
-			Assert.Equal(shell.CurrentState.Location.ToString(), "//animals/monkeys/details/details");
+			Assert.Equal("//animals/monkeys/details/details", shell.CurrentState.Location.ToString());
 		}
 
 		[Fact]
@@ -627,9 +630,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("//animals/domestic/cats/catdetails", shell.CurrentState.Location.ToString());
 		}
 
+		[Theory]
 		[InlineData(typeof(PageWithDependency))]
 		[InlineData(typeof(PageWithDependencyAndMultipleConstructors))]
-		[InlineData(typeof(PageWithDependency))]
 		[InlineData(typeof(PageWithUnregisteredDependencyAndParameterlessConstructor))]
 		public async Task GlobalRouteWithDependencyResolution(Type pageType)
 		{
@@ -660,13 +663,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(page, Is.Not.Null);
 			if (pageType == typeof(PageWithDependency) || pageType == typeof(Dependency))
 			{
-				Assert.IsInstanceOf<PageWithDependency>(page);
+				Assert.IsType<PageWithDependency>(page);
 				Assert.That((page as PageWithDependency).TestDependency, Is.Not.Null);
 			}
 
 			if (pageType == typeof(PageWithDependencyAndMultipleConstructors))
 			{
-				Assert.IsInstanceOf<PageWithDependencyAndMultipleConstructors>(page);
+				Assert.IsType<PageWithDependencyAndMultipleConstructors>(page);
 				var testPage = page as PageWithDependencyAndMultipleConstructors;
 				Assert.That(testPage.TestDependency, Is.Not.Null);
 				Assert.That(testPage.OtherTestDependency, Is.Null);
@@ -674,7 +677,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			if (pageType == typeof(PageWithUnregisteredDependencyAndParameterlessConstructor))
 			{
-				Assert.IsInstanceOf<PageWithUnregisteredDependencyAndParameterlessConstructor>(page);
+				Assert.IsType<PageWithUnregisteredDependencyAndParameterlessConstructor>(page);
 			}
 		}
 

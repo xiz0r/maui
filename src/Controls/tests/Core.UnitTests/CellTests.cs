@@ -104,8 +104,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			collection.Add(new MenuItem());
 
-			Assert.That(cell.HasContextActions, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(cell.HasContextActions);
+			Assert.True(changed);
 		}
 
 		[Fact]
@@ -121,12 +121,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			object bc = new object();
 
 			cell.BindingContext = bc;
-			Assert.That(cell.ContextActions[0].BindingContext, Is.SameAs(bc));
+			Assert.Same(cell.ContextActions[0].BindingContext, bc);
 
 			cell = new TextCell { BindingContext = new object() };
 			cell.ContextActions.Add(new MenuItem());
 
-			Assert.That(cell.ContextActions[0].BindingContext, Is.SameAs(cell.BindingContext));
+			Assert.Same(cell.ContextActions[0].BindingContext, cell.BindingContext);
 		}
 
 		[Fact]
@@ -151,7 +151,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.RowHeight = 5;
 
-			Assume.That(cell.RenderHeight, Is.EqualTo(5));
+			Assert.That(cell.RenderHeight, Is.EqualTo(5));
 
 			Assert.Equal(1, changing);
 			Assert.Equal(1, changed);

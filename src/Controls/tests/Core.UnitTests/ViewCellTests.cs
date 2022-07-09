@@ -15,7 +15,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var viewCell = new ViewCell();
 
 			Assert.Null(viewCell.View);
-			Assert.DoesNotThrow(() => viewCell.Parent = parent);
+			viewCell.Parent = parent;
 
 			viewCell.View = child;
 			Assert.Same(parent, viewCell.Parent);

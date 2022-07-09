@@ -149,7 +149,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 2);
+			Assert.Equal(2, pages.Length);
 			assertPage((Page)pages[0], "Foo");
 			assertPage((Page)pages[1], "Bar");
 		}
@@ -264,9 +264,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Move(1, 0);
 
-			Assert.That(page.SelectedItem, Is.SameAs(items[0]));
-			Assert.That(page.CurrentPage, Is.Not.Null);
-			Assert.That(page.CurrentPage.BindingContext, Is.SameAs(items[0]));
+			Assert.Same(page.SelectedItem, items[0]);
+			Assert.NotNull(page.CurrentPage);
+			Assert.Same(page.CurrentPage.BindingContext, items[0]);
 		}
 
 		[Fact]
@@ -277,9 +277,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.ItemsSource = new[] { "Foo", "Bar" };
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 2);
-			Assert.Equal(((Page)pages[0]).Title, "Foo");
-			Assert.Equal(((Page)pages[1]).Title, "Bar");
+			Assert.Equal(2, pages.Length);
+			Assert.Equal("Foo", pages[0].Title);
+			Assert.Equal("Bar", ((Page)pages[1]).Title);
 		}
 
 		[Fact]
@@ -301,18 +301,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Add("Baz");
 
 			var pages = page.Children.ToArray();
-			Assert.That(pages.Length, Is.EqualTo(3), "Children should have 3 pages");
+			Assert.Equal(3, pages.Length); // "Children should have 3 pages"
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bar");
 			assertPage(pages, 2, "Baz");
@@ -337,11 +337,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
@@ -352,15 +352,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					return;
 
 				addedCount++;
-				Assert.Equal(e.NewItems.Count, 2);
+				Assert.Equal(2, e.NewItems.Count);
 			};
 
 			items.AddRange(new[] { "Baz", "Bam" });
 
-			Assert.Equal(addedCount, 1);
+			Assert.Equal(1, addedCount);
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 4);
+			Assert.Equal(4, pages.Length);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bar");
 			assertPage(pages, 2, "Baz");
@@ -386,18 +386,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Insert(1, "Baz");
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 3);
+			Assert.Equal(3, pages.Length);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Baz");
 			assertPage(pages, 2, "Bar");
@@ -422,18 +422,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.InsertRange(1, new[] { "Baz", "Bam" });
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 4);
+			Assert.Equal(4, pages.Length);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Baz");
 			assertPage(pages, 2, "Bam");
@@ -459,18 +459,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Remove("Foo");
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 1);
+			Assert.Equal(1, pages.Length);
 			assertPage(pages, 0, "Bar");
 		}
 
@@ -493,18 +493,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.RemoveAt(1, 2);
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 3);
+			Assert.Equal(3, pages.Length);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bam");
 			assertPage(pages, 2, "Who");
@@ -529,18 +529,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Move(0, 1);
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 2);
+			Assert.Equal(2, pages.Length);
 			assertPage(pages, 0, "Bar");
 			assertPage(pages, 1, "Foo");
 		}
@@ -564,18 +564,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Move(1, 4, 2);
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 6);
+			Assert.Equal(6, pages.Length);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Bam");
 			assertPage(pages, 2, "Who");
@@ -603,18 +603,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items.Move(4, 1, 2);
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 7);
+			Assert.Equal(7, pages.Length);
 			assertPage(pages, 0, "Foo");
 			assertPage(pages, 1, "Who");
 			assertPage(pages, 2, "Where");
@@ -643,18 +643,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Action<IList<Element>, int, string> assertPage = (ps, index, s) =>
 			{
 				Page p = (Page)ps[index];
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 				Assert.Equal(GetIndex((T)p), index);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			items[0] = "Baz";
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 2);
+			Assert.Equal(2, pages.Length);
 			assertPage(pages, 0, "Baz");
 			assertPage(pages, 1, "Bar");
 		}
@@ -676,17 +676,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Action<Page, string> assertPage = (p, s) =>
 			{
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
 			page.ItemsSource = new ObservableCollection<string> { "Baz", "Bar" };
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(pages.Length, 2);
+			Assert.Equal(2, pages.Length);
 			assertPage((Page)pages[0], "Baz");
 			assertPage((Page)pages[1], "Bar");
 		}
@@ -700,12 +700,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.ItemsSource = items;
 
 			// If these aren't correct, the rest of the test is invalid
-			Assert.That(page.CurrentPage, Is.SameAs(page.Children[0]));
-			Assert.That(page.SelectedItem, Is.SameAs(items[0]));
+			Assert.Same(page.CurrentPage, page.Children[0]);
+			Assert.Same(page.SelectedItem, items[0]);
 
 			page.CurrentPage = (T)page.Children[1];
 
-			Assert.That(page.SelectedItem, Is.SameAs(items[1]));
+			Assert.Same(page.SelectedItem, items[1]);
 		}
 
 		[Fact]
@@ -727,8 +727,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.ItemsSource = new[] { "Foo", "Bar" };
 
-			Assert.That(reset, Is.EqualTo(1), "PagesChanged wasn't raised or was raised too many times for Reset");
-			Assert.That(fail, Is.EqualTo(0), "PagesChanged was raised with an unexpected action");
+			Assert.Equal(1, reset); // "PagesChanged wasn't raised or was raised too many times for Reset"
+			Assert.Equal(0, fail); // "PagesChanged was raised with an unexpected action"
 		}
 
 		[Fact]
@@ -753,8 +753,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Content = new Label { Text = "Content" }
 			});
 
-			Assert.That(reset, Is.EqualTo(1), "PagesChanged wasn't raised or was raised too many times for Reset");
-			Assert.That(fail, Is.EqualTo(0), "PagesChanged was raised with an unexpected action");
+			Assert.Equal(1, reset); // "PagesChanged wasn't raised or was raised too many times for Reset"
+			Assert.Equal(0, fail); // "PagesChanged was raised with an unexpected action"
 		}
 
 		[Fact]
@@ -770,7 +770,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetBinding(ContentPage.TitleProperty, ".");
 			page.ItemTemplate = template;
 
-			Assert.That(page.SelectedItem, Is.SameAs(items[1]));
+			Assert.Same(page.SelectedItem, items[1]);
 		}
 
 		[Fact]
@@ -798,8 +798,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.ItemTemplate = template;
 
-			Assert.That(raised, Is.True, "CurrentPage did not change with the template");
-			Assert.That(page.CurrentPage, Is.Not.SameAs(untemplated));
+			Assert.True(raised); // "CurrentPage did not change with the template"
+			Assert.NotSame(page.CurrentPage, untemplated);
 		}
 
 		[Fact]

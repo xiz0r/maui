@@ -108,8 +108,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var mixedContentWebView = new WebView();
 			mixedContentWebView.On<Android>().SetMixedContentMode(MixedContentHandling.AlwaysAllow);
 
-			Assert.Equal(defaultWebView.On<Android>().MixedContentMode(), MixedContentHandling.NeverAllow);
-			Assert.Equal(mixedContentWebView.On<Android>().MixedContentMode(), MixedContentHandling.AlwaysAllow);
+			Assert.Equal(MixedContentHandling.NeverAllow, defaultWebView.On<Android>().MixedContentMode());
+			Assert.Equal(MixedContentHandling.AlwaysAllow, mixedContentWebView.On<Android>().MixedContentMode());
 		}
 
 		[Fact]
@@ -120,8 +120,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var enableZoomControlsWebView = new WebView();
 			enableZoomControlsWebView.On<Android>().SetEnableZoomControls(true);
 
-			Assert.Equal(defaultWebView.On<Android>().ZoomControlsEnabled(), false);
-			Assert.Equal(enableZoomControlsWebView.On<Android>().ZoomControlsEnabled(), true);
+			Assert.False(defaultWebView.On<Android>().ZoomControlsEnabled());
+			Assert.True(enableZoomControlsWebView.On<Android>().ZoomControlsEnabled());
 		}
 
 		[Fact]
@@ -132,8 +132,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var displayZoomControlsWebView = new WebView();
 			displayZoomControlsWebView.On<Android>().SetDisplayZoomControls(false);
 
-			Assert.Equal(defaultWebView.On<Android>().ZoomControlsDisplayed(), true);
-			Assert.Equal(displayZoomControlsWebView.On<Android>().ZoomControlsDisplayed(), false);
+			Assert.True(defaultWebView.On<Android>().ZoomControlsDisplayed());
+			Assert.False(displayZoomControlsWebView.On<Android>().ZoomControlsDisplayed());
 		}
 
 		[Fact]
@@ -144,8 +144,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var jsAlertsAllowedWebView = new WebView();
 			jsAlertsAllowedWebView.On<WindowsOS>().SetIsJavaScriptAlertEnabled(true);
 
-			Assert.Equal(defaultWebView.On<WindowsOS>().IsJavaScriptAlertEnabled(), false);
-			Assert.Equal(jsAlertsAllowedWebView.On<WindowsOS>().IsJavaScriptAlertEnabled(), true);
+			Assert.False(defaultWebView.On<WindowsOS>().IsJavaScriptAlertEnabled());
+			Assert.True(jsAlertsAllowedWebView.On<WindowsOS>().IsJavaScriptAlertEnabled());
 		}
 
 		[Fact]

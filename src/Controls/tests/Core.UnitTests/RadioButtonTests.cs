@@ -82,7 +82,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			layout.SetValue(RadioButtonGroup.GroupNameProperty, updatedGroupName);
 
 			Assert.Equal(radioButton1.GroupName, updatedGroupName);
-			Assert.Equal(radioButton2.GroupName, "other");
+			Assert.Equal("other", radioButton2.GroupName);
 		}
 
 		[Fact]
@@ -208,9 +208,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			selected = layout.GetValue(RadioButtonGroup.SelectedValueProperty);
 
-			Assert.Equal(selected, 1);
+			Assert.Equal(1, selected);
 
-			Assert.Equal(radioButton1.GroupName, "foo");
+			Assert.Equal("foo", radioButton1.GroupName);
 			radioButton1.GroupName = "bar";
 
 			selected = layout.GetValue(RadioButtonGroup.SelectedValueProperty);

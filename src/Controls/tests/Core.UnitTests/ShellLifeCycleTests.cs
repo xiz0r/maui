@@ -107,7 +107,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(pageAppearing, "Page Appearing");
 		}
 
-
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void EnsureOnAppearingFiresAfterParentIsSet(bool templated)
@@ -523,6 +523,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.TestCount(1);
 		}
 
+		[Fact]
 		public async Task OnNavigatedFiresWhenPopToRoot()
 		{
 			Routing.RegisterRoute("AlarmPage", typeof(LifeCyclePage));

@@ -26,15 +26,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestHelpers()
 		{
 			var imagesource = ImageSource.FromFile("File.png");
-			Assert.That(imagesource, Is.TypeOf<FileImageSource>());
+			Assert.IsType<FileImageSource>(imagesource);
 			Assert.Equal("File.png", ((FileImageSource)imagesource).File);
 
 			Func<Stream> stream = () => new System.IO.FileStream("Foo", System.IO.FileMode.Open);
 			var streamsource = ImageSource.FromStream(stream);
-			Assert.That(streamsource, Is.TypeOf<StreamImageSource>());
+			Assert.IsType<StreamImageSource>(streamsource);
 
 			var urisource = ImageSource.FromUri(new Uri("http://xamarin.com/img.png"));
-			Assert.That(urisource, Is.TypeOf<UriImageSource>());
+			Assert.IsType<UriImageSource>(urisource);
 			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(urisource)).Uri.AbsoluteUri);
 		}
 
@@ -43,7 +43,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var image = new Image { Source = "File.png" };
 			Assert.True(image.Source != null);
-			Assert.That(image.Source, Is.InstanceOf<FileImageSource>());
+			Assert.IsType<FileImageSource>(image.Source);
 			Assert.Equal("File.png", ((FileImageSource)(image.Source)).File);
 		}
 
@@ -52,7 +52,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			string s = null;
 			var sut = (ImageSource)s;
-			Assert.That(sut, Is.InstanceOf<FileImageSource>());
+			Assert.IsType<FileImageSource>(sut);
 			Assert.Null(((FileImageSource)sut).File);
 		}
 
@@ -61,7 +61,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var image = new Image { Source = new Uri("http://xamarin.com/img.png") };
 			Assert.True(image.Source != null);
-			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
+			Assert.IsType<UriImageSource>(image.Source);
 			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
@@ -70,7 +70,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var image = new Image { Source = "http://xamarin.com/img.png" };
 			Assert.True(image.Source != null);
-			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
+			Assert.IsType<UriImageSource>(image.Source);
 			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var image = new Image();
 			image.SetValue(Image.SourceProperty, "foo.png");
 			Assert.NotNull(image.Source);
-			Assert.That(image.Source, Is.InstanceOf<FileImageSource>());
+			Assert.IsType<FileImageSource>(image.Source);
 			Assert.Equal("foo.png", ((FileImageSource)(image.Source)).File);
 		}
 
@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(image.Source);
 			image.BindingContext = "foo.png";
 			Assert.NotNull(image.Source);
-			Assert.That(image.Source, Is.InstanceOf<FileImageSource>());
+			Assert.IsType<FileImageSource>(image.Source);
 			Assert.Equal("foo.png", ((FileImageSource)(image.Source)).File);
 		}
 
@@ -112,7 +112,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(image.Source);
 			image.BindingContext = "http://xamarin.com/img.png";
 			Assert.NotNull(image.Source);
-			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
+			Assert.IsType<UriImageSource>(image.Source);
 			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Null(image.Source);
 			image.BindingContext = new Uri("http://xamarin.com/img.png");
 			Assert.NotNull(image.Source);
-			Assert.That(image.Source, Is.InstanceOf<UriImageSource>());
+			Assert.IsType<UriImageSource>(image.Source);
 			Assert.Equal("http://xamarin.com/img.png", ((UriImageSource)(image.Source)).Uri.AbsoluteUri);
 		}
 
@@ -154,7 +154,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var path = "/private/var/mobile/Containers/Data/Application/B1E5AB19-F815-4B4A-AB97-BD4571D53743/Documents/temp/IMG_20140603_150614_preview.jpg";
 			var image = new Image { Source = path };
-			Assert.That(image.Source, Is.TypeOf<FileImageSource>());
+			Assert.IsType<FileImageSource>(image.Source);
 		}
 	}
 }

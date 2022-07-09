@@ -22,10 +22,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			// for that View should fail
 			gl.Remove(view);
 
-			Assert.Throws(typeof(KeyNotFoundException), () => gl.GetRow(view));
-			Assert.Throws(typeof(KeyNotFoundException), () => gl.GetRowSpan(view));
-			Assert.Throws(typeof(KeyNotFoundException), () => gl.GetColumn(view));
-			Assert.Throws(typeof(KeyNotFoundException), () => gl.GetColumnSpan(view));
+			Assert.Throws<KeyNotFoundException>(() => gl.GetRow(view));
+			Assert.Throws<KeyNotFoundException>(() => gl.GetRowSpan(view));
+			Assert.Throws<KeyNotFoundException>(() => gl.GetColumn(view));
+			Assert.Throws<KeyNotFoundException>(() => gl.GetColumnSpan(view));
 		}
 
 		[Fact]
@@ -145,8 +145,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 
 			var context = new object();
 
-			Assert.That(def.BindingContext, Is.Null);
-			Assert.That(def2.BindingContext, Is.Null);
+			Assert.Null(def.BindingContext);
+			Assert.Null(def2.BindingContext);
 
 			grid.BindingContext = context;
 
@@ -173,8 +173,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 
 			var context = new object();
 
-			Assert.That(def.BindingContext, Is.Null);
-			Assert.That(def2.BindingContext, Is.Null);
+			Assert.Null(def.BindingContext);
+			Assert.Null(def2.BindingContext);
 
 			grid.BindingContext = context;
 

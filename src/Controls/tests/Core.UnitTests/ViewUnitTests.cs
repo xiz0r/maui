@@ -34,10 +34,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			View view = new View();
 			view.Layout(new Rect(50, 25, 100, 200));
 
-			Assert.Equal(view.X, 50);
-			Assert.Equal(view.Y, 25);
-			Assert.Equal(view.Width, 100);
-			Assert.Equal(view.Height, 200);
+			Assert.Equal(50, view.X);
+			Assert.Equal(25, view.Y);
+			Assert.Equal(100, view.Width);
+			Assert.Equal(200, view.Height);
 		}
 
 		[Fact]
@@ -578,7 +578,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			parent.Children.Add(child);
 
-			Assert.That(child.BindingContext, Is.SameAs(parent.BindingContext));
+			Assert.Same(child.BindingContext, parent.BindingContext);
 			Assert.That(child.Text, Is.EqualTo("test"));
 		}
 
@@ -740,7 +740,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void AssigningElementHandlerThrowsException()
 		{
 			Maui.IElement view = new View();
-			Assert.Throws(typeof(InvalidOperationException), () => view.Handler = new ElementHandlerStub());
+			Assert.Throws<InvalidOperationException>(() => view.Handler = new ElementHandlerStub());
 		}
 	}
 }

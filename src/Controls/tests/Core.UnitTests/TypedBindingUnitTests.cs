@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls.Internals;
 using Xunit;
+using Xunit.Sdk;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
 
@@ -217,7 +218,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnOneWayBinding(bool isDefault)
@@ -265,7 +266,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnOneWayToSourceBinding(bool isDefault)
@@ -318,7 +319,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithComplexPathOnTwoWayBinding(bool isDefault)
@@ -376,7 +377,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 
-		[Category("[Binding] Indexed paths")]
+		[Theory, Category("[Binding] Indexed paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnOneWayBinding(bool isDefault)
@@ -422,7 +423,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Indexed paths")]
+		[Theory, Category("[Binding] Indexed paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnOneWayToSourceBinding(bool isDefault)
@@ -474,7 +475,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Indexed paths")]
+		[Theory, Category("[Binding] Indexed paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithIndexedPathOnTwoWayBinding(bool isDefault)
@@ -528,7 +529,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Indexed paths")]
+		[Theory, Category("[Binding] Indexed paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithIndexedArrayPathOnTwoWayBinding(bool isDefault)
@@ -569,7 +570,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Self paths")]
+		[Theory, Category("[Binding] Self paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithSelfPathOnOneWayBinding(bool isDefault)
@@ -607,7 +608,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Self paths")]
+		[Theory, Category("[Binding] Self paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueDoesNotUpdateWithSelfPathOnOneWayToSourceBinding(bool isDefault)
@@ -645,7 +646,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Self paths")]
+		[Theory, Category("[Binding] Self paths")]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ValueUpdatedWithSelfPathOnTwoWayBinding(bool isDefault)
@@ -685,7 +686,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				"An error was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 
-		[Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		[InlineData(BindingMode.OneWay)]
 		[InlineData(BindingMode.OneWayToSource)]
 		[InlineData(BindingMode.TwoWay)]
@@ -1048,7 +1049,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetBinding(property, binding);
 			bindable.BindingContext = vm;
 
-			Assume.That(bindable.GetValue(property), Is.EqualTo(vm.Model.Text));
+			Assert.That(bindable.GetValue(property), Is.EqualTo(vm.Model.Text));
 
 			bindable.BindingContext = null;
 
@@ -1079,7 +1080,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.SetBinding(property, binding);
 			bindable.BindingContext = vm;
 
-			Assume.That(bindable.GetValue(property), Is.EqualTo(vm.Model.Text));
+			Assert.That(bindable.GetValue(property), Is.EqualTo(vm.Model.Text));
 
 			bindable.BindingContext = null;
 
@@ -1184,7 +1185,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 					new Tuple<Func<ComplexMockViewModel, object>, string>(cmvm=>cmvm.Model, "Text"),
 				});
 
-			Assert.That(() => bindable.SetBinding(MockBindable.TextProperty, binding), Throws.Nothing);
+			bindable.SetBinding(MockBindable.TextProperty, binding);
 			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0), "An error was logged");
 		}
 
@@ -1264,6 +1265,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 #if !WINDOWS_PHONE
+		[Theory]
 		[InlineData("en-US", "0.5", 0.5, 0.9, "0.9")]
 		[InlineData("pt-PT", "0,5", 0.5, 0.9, "0,9")]
 		public void ConvertIsCultureAware(string culture, string sliderSetStringValue, double sliderExpectedDoubleValue, double sliderSetDoubleValue, string sliderExpectedStringValue)
@@ -1290,10 +1292,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var slider = new Slider();
 			slider.BindingContext = new ComplexMockViewModel { Model = new ComplexMockViewModel() };
 
-			Assert.That(() =>
-			{
-				slider.SetBinding(Slider.ValueProperty, new TypedBinding<ComplexMockViewModel, ComplexMockViewModel>(mvm => (mvm.Model, true), null, null));
-			}, Throws.Nothing);
+			slider.SetBinding(Slider.ValueProperty, new TypedBinding<ComplexMockViewModel, ComplexMockViewModel>(mvm => (mvm.Model, true), null, null));
 
 			Assert.That(slider.Value, Is.EqualTo(Slider.ValueProperty.DefaultValue));
 			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(1), "No error logged");
@@ -1348,7 +1347,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			vm.Foo = "Foo";
 			vm.Bar = "Bar";
-			Assert.That(() => vm.SignalAllPropertiesChanged(useNull: !useStringEmpty), Throws.Nothing);
+			vm.SignalAllPropertiesChanged(useNull: !useStringEmpty);
 
 			Assert.That(bindable.Text, Is.EqualTo("Foo"));
 			Assert.That(bindable.Text2, Is.EqualTo("Bar"));
@@ -1416,7 +1415,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			create();
 
-			Assume.That(viewmodel.InvocationListSize(), Is.EqualTo(1));
+			Assert.That(viewmodel.InvocationListSize(), Is.EqualTo(1));
 
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
@@ -1456,7 +1455,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			create();
 
-			Assume.That(viewModel.InvocationListSize(), Is.EqualTo(1));
+			Assert.That(viewModel.InvocationListSize(), Is.EqualTo(1));
 
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
@@ -1654,7 +1653,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			swsv.Stop();
 			Assert.Equal("Bar", bindable.GetValue(property));
 
-			Assert.Fail($"Applying {it} Typedbindings\t\t\t: {swtb.ElapsedMilliseconds}ms.\nApplying {it} Typedbindings (without INPC)\t: {swtbh.ElapsedMilliseconds}ms.\nApplying {it} Bindings\t\t\t: {swb.ElapsedMilliseconds}ms.\nSetting  {it} values\t\t\t\t: {swsv.ElapsedMilliseconds}ms.");
+			throw new XunitException($"Applying {it} Typedbindings\t\t\t: {swtb.ElapsedMilliseconds}ms.\nApplying {it} Typedbindings (without INPC)\t: {swtbh.ElapsedMilliseconds}ms.\nApplying {it} Bindings\t\t\t: {swb.ElapsedMilliseconds}ms.\nSetting  {it} values\t\t\t\t: {swsv.ElapsedMilliseconds}ms.");
 		}
 
 		[Fact(Skip = "SpeedTestSetBC")]
@@ -1720,7 +1719,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			swsv.Stop();
 			Assert.Equal("Bar", bindable.GetValue(property));
 
-			Assert.Fail($"Setting BC for {it} Typedbindings\t\t\t: {swtb.ElapsedMilliseconds}ms.\nSetting BC for {it} Typedbindings (without INPC)\t: {swtbh.ElapsedMilliseconds}ms.\nSetting BC for {it} Bindings\t\t\t\t: {swb.ElapsedMilliseconds}ms.\nSetting  {it} values\t\t\t\t\t: {swsv.ElapsedMilliseconds}ms.");
+			throw new XunitException($"Setting BC for {it} Typedbindings\t\t\t: {swtb.ElapsedMilliseconds}ms.\nSetting BC for {it} Typedbindings (without INPC)\t: {swtbh.ElapsedMilliseconds}ms.\nSetting BC for {it} Bindings\t\t\t\t: {swb.ElapsedMilliseconds}ms.\nSetting  {it} values\t\t\t\t\t: {swsv.ElapsedMilliseconds}ms.");
 		}
 
 		class VM3650 : INotifyPropertyChanged

@@ -86,7 +86,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				path = path + " ";
 
 			var binding = new Binding(path);
-			Assert.DoesNotThrow(() => new BindingExpression(binding, path));
+			_ = new BindingExpression(binding, path);
 		}
 
 		static object[] TryConvertWithNumbersAndCulturesCases => new object[]
@@ -127,7 +127,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			new object[]{ "-0", new CultureInfo("de"), "-0" },
 		};
 
-		[Theory, MemberData(nameof(TryConvertWithNumbersAndCulturesCases))]
+		public static IEnumerable<object[]> TryConvertWithNumbersAndCulturesCasesData() 
+		{
+			foreach (var testCase in TryConvertWithNumbersAndCulturesCases)
+			{
+				yield return new object[] { testCase };
+			}
+		}
+
+		[Theory, MemberData(nameof(TryConvertWithNumbersAndCulturesCasesData))]
 		public void TryConvertWithNumbersAndCultures(object inputString, CultureInfo culture, object expected)
 		{
 			CultureInfo.CurrentCulture = culture;

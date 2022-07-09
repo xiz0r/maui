@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -133,10 +134,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 			initialPage.Appearing += (__, _)
-				=> Assert.Fail("Appearing Fired Incorrectly");
+				=> throw new XunitException("Appearing Fired Incorrectly");
 
 			pushedPage.Disappearing += (__, _)
-				=> Assert.Fail("Appearing Fired Incorrectly");
+				=> throw new XunitException("Appearing Fired Incorrectly");
 
 			nav.Navigation.RemovePage(pageToRemove);
 		}

@@ -26,6 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(signaled, "ValueChanged did not fire");
 		}
 
+		[Theory]
 		[InlineData(null, "foo")]
 		[InlineData("foo", "bar")]
 		[InlineData("foo", null)]
@@ -55,7 +56,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(final, newValue);
 		}
 
-
+		[Theory]
 		[InlineData(1)]
 		[InlineData(0)]
 		[InlineData(9999)]
@@ -83,6 +84,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
+		[Theory]
 		[InlineData(1)]
 		[InlineData(0)]
 		[InlineData(9999)]
@@ -110,6 +112,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ReturnTypeCommand(bool isEnabled)
@@ -134,6 +137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(result == isEnabled ? true : false);
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void ReturnTypeCommandNullTestIsEnabled(bool isEnabled)

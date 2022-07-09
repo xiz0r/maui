@@ -55,7 +55,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool added = false;
 			root.DescendantAdded += (sender, args) =>
 			{
-				Assert.That(args.Element, Is.SameAs(child));
+				Assert.Same(args.Element, child);
 				added = true;
 			};
 
@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool added = false;
 			root.DescendantAdded += (sender, args) =>
 			{
-				Assert.That(args.Element, Is.SameAs(child2));
+				Assert.Same(args.Element, child2);
 				added = true;
 			};
 
@@ -108,8 +108,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			root.Children.Add(child);
 
-			Assert.That(tier1added, Is.True);
-			Assert.That(tier2added, Is.True);
+			Assert.True(tier1added);
+			Assert.True(tier2added);
 		}
 
 		[Fact]
@@ -123,7 +123,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool removed = false;
 			root.DescendantRemoved += (sender, args) =>
 			{
-				Assert.That(args.Element, Is.SameAs(child));
+				Assert.Same(args.Element, child);
 				removed = true;
 			};
 
@@ -144,7 +144,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bool removed = false;
 			root.DescendantRemoved += (sender, args) =>
 			{
-				Assert.That(args.Element, Is.SameAs(child2));
+				Assert.Same(args.Element, child2);
 				removed = true;
 			};
 
@@ -179,8 +179,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			root.Children.Remove(child);
 
-			Assert.That(tier1removed, Is.True);
-			Assert.That(tier2removed, Is.True);
+			Assert.True(tier1removed);
+			Assert.True(tier2removed);
 		}
 	}
 }

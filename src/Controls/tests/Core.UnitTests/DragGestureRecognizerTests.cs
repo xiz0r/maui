@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			dragRec.DropCompletedCommand = cmd;
 			dragRec.DropCompletedCommandParameter = parameter;
 
-			Assert.Equal(true, dragRec.CanDrag);
+			Assert.True(dragRec.CanDrag);
 			Assert.Equal(cmd, dragRec.DragStartingCommand);
 			Assert.Equal(parameter, dragRec.DragStartingCommandParameter);
 			Assert.Equal(cmd, dragRec.DropCompletedCommand);
@@ -107,6 +107,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(1, counter);
 		}
 
+		[Theory]
 		[InlineData(typeof(Entry), "EntryTest")]
 		[InlineData(typeof(Label), "LabelTest")]
 		[InlineData(typeof(Editor), "EditorTest")]
@@ -123,6 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(result, args.Data.Text);
 		}
 
+		[Theory]
 		[InlineData(typeof(DatePicker), "12/12/2020 12:00:00 AM")]
 		public void DateTextPackageCorrectlyExtractedFromCompatibleElement(Type fieldType, string result)
 		{

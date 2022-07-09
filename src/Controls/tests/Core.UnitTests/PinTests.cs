@@ -17,14 +17,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Address = "123 Hello World Street"
 			};
 
-			Assert.Equal(pin.Type, PinType.SavedPin);
+			Assert.Equal(PinType.SavedPin, pin.Type);
 			Assert.Equal(pin.Position.Latitude, -90);
-			Assert.Equal(pin.Label, "My Desktop");
-			Assert.Equal(pin.Address, "123 Hello World Street");
+			Assert.Equal("My Desktop", pin.Label);
+			Assert.Equal("123 Hello World Street", pin.Address);
 		}
 
 		[Fact]
-		public void Equals()
+		public void EqualsTest()
 		{
 			Pin pin1 = new Pin();
 			Pin pin2 = new Pin();

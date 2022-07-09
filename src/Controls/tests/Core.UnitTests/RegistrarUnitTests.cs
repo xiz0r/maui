@@ -221,7 +221,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 		
-		public void Setup()
+		public SimpleRegistrarUnitTests()
 		{
 			VisualElement.SetDefaultVisual(VisualMarker.Default);
 		}

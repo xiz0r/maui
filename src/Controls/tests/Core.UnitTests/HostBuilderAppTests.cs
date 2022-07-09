@@ -131,6 +131,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.That(((IConfigurationRoot)app.Configuration).Providers.OfType<TrackingConfigurationProvider>(), Has.One.Items);
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void CompatibilityExtensionsWorkUseCompatibility(bool useCompatibility)

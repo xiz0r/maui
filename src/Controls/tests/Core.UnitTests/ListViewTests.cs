@@ -102,14 +102,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(2, listView.TemplatedItems.Count);
 
 			Cell cell = listView.TemplatedItems[0];
-			Assert.That(cell, Is.Not.Null);
+			Assert.NotNull(cell);
 			Assert.That(cell, Is.InstanceOf<TextCell>());
 			Assert.That(((TextCell)cell).Text, Is.EqualTo("Foo"));
 
 			cell = listView.TemplatedItems[1];
-			Assert.That(cell, Is.Not.Null);
+			Assert.NotNull(cell);
 			Assert.That(cell, Is.InstanceOf<TextCell>());
-			Assert.Equal(((TextCell)cell).Text, "Baz");
+			Assert.Equal("Baz", ((TextCell)cell).Text);
 		}
 
 		[Fact("Setting BindingContext should trickle down to Header and Footer.")]
@@ -125,8 +125,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				BindingContext = bc,
 			};
 
-			Assert.That(header.BindingContext, Is.SameAs(bc));
-			Assert.That(footer.BindingContext, Is.SameAs(bc));
+			Assert.Same(header.BindingContext, bc);
+			Assert.Same(footer.BindingContext, bc);
 		}
 
 		[Fact("Setting Header and Footer should pass BindingContext.")]
@@ -143,8 +143,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			listView.Footer = footer;
 			listView.Header = header;
 
-			Assert.That(header.BindingContext, Is.SameAs(bc));
-			Assert.That(footer.BindingContext, Is.SameAs(bc));
+			Assert.Same(header.BindingContext, bc);
+			Assert.Same(footer.BindingContext, bc);
 		}
 
 		[Fact("Setting GroupDisplayBinding or GroupHeaderTemplate when the other is set should set the other one to null.")]
@@ -157,7 +157,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			listView.GroupHeaderTemplate = new DataTemplate(typeof(TextCell));
 
-			Assert.That(listView.GroupDisplayBinding, Is.Null);
+			Assert.Null(listView.GroupDisplayBinding);
 		}
 
 		[Fact("Setting GroupDisplayBinding or GroupHeaderTemplate when the other is set should set the other one to null.")]
@@ -170,7 +170,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			listView.GroupDisplayBinding = new Binding("Path");
 
-			Assert.That(listView.GroupHeaderTemplate, Is.Null);
+			Assert.Null(listView.GroupHeaderTemplate);
 		}
 
 		[Fact("You should be able to set ItemsSource without having set the other properties first without issue")]
@@ -181,7 +181,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				IsGroupingEnabled = true
 			};
 
-			Assert.That(() => listView.ItemsSource = new[] { new[] { new object() } }, Throws.Nothing);
+			listView.ItemsSource = new[] { new[] { new object() } };
 		}
 
 		[Fact]
@@ -198,8 +198,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var til = (TemplatedItemsList<ItemsView<Cell>, Cell>)((IList)listView.TemplatedItems)[0];
 			Cell cell = til.HeaderContent;
 
-			Assert.That(cell, Is.Not.Null);
-			Assert.That(cell, Is.InstanceOf<TextCell>());
+			Assert.NotNull(cell);
+			Assert.IsType<TextCell>(cell);
 			Assert.Equal(((TextCell)cell).Text, items[0].ToString());
 		}
 
@@ -222,7 +222,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			listView.ItemSelected += (sender, arg) => raised = true;
 
 			listView.NotifyRowTapped(1);
-			Assert.That(raised, Is.True, "ItemSelected was not raised");
+			Assert.True(raised);
 		}
 
 		[Fact]
@@ -240,7 +240,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				ItemTemplate = new DataTemplate(typeof(TextCell))
 			};
 
-			Assert.DoesNotThrow(() => items.Add("Blah"));
+			items.Add("Blah");
 		}
 
 		[Fact]
@@ -258,7 +258,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				ItemTemplate = new DataTemplate(typeof(TextCell))
 			};
 
-			Assert.DoesNotThrow(() => items.Move(0, 1));
+			items.Move(0, 1);
 		}
 
 		[Fact("A cell being tapped from the UI should raise both tapped events, but not change ItemSelected")]
@@ -313,14 +313,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				requested = true;
 
-				Assert.That(args.Item, Is.SameAs(item));
-				Assert.That(args.Group, Is.Null);
-				Assert.Equal(args.Position, ScrollToPosition.Center);
-				Assert.Equal(args.ShouldAnimate, true);
+				Assert.Same(args.Item, item);
+				Assert.Null(args.Group);
+				Assert.Equal(ScrollToPosition.Center, args.Position);
+				Assert.True(args.ShouldAnimate);
 			};
 
 			listView.ScrollTo(item, ScrollToPosition.Center, animated: true);
-			Assert.That(requested, Is.True);
+			Assert.True(requested);
 		}
 
 		[Fact]
@@ -337,8 +337,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 				Assert.Same(args.Item, item);
 				Assert.Null(args.Group);
-				Assert.Equal(args.Position, ScrollToPosition.Center);
-				Assert.Equal(args.ShouldAnimate, true);
+				Assert.Equal(ScrollToPosition.Center, args.Position);
+				Assert.True(args.ShouldAnimate);
 			};
 
 			listView.ScrollTo(item, ScrollToPosition.Center, animated: true);
@@ -367,14 +367,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				requested = true;
 
-				Assert.That(args.Item, Is.SameAs(item));
-				Assert.That(args.Group, Is.SameAs(group));
-				Assert.Equal(args.Position, ScrollToPosition.Center);
-				Assert.Equal(args.ShouldAnimate, true);
+				Assert.Same(args.Item, item);
+				Assert.Same(args.Group, group);
+				Assert.Equal(ScrollToPosition.Center, args.Position);
+				Assert.True(args.ShouldAnimate);
 			};
 
 			listView.ScrollTo(item, group, ScrollToPosition.Center, animated: true);
-			Assert.That(requested, Is.True);
+			Assert.True(requested);
 		}
 
 		[Fact]
@@ -651,7 +651,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Not.Null);
+			Assert.NotNull(controller.HeaderElement);
 			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
 			Assert.Equal(((Label)controller.HeaderElement).Text, lv.Header);
 		}
@@ -736,7 +736,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.SameAs(label));
+			Assert.Same(controller.HeaderElement, label);
 		}
 
 
@@ -773,12 +773,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
-
+			Assert.True(changing);
+			Assert.True(changed);
+		   
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Not.Null);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Entry>());
+			Assert.NotNull(controller.HeaderElement);
+			Assert.IsType<Entry>(controller.HeaderElement);
 			Assert.Equal(((Entry)controller.HeaderElement).Text, lv.Header);
 		}
 
@@ -857,12 +857,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.Header = "bar";
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Not.Null);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.HeaderElement);
+			Assert.IsType<Label>(controller.HeaderElement);
 			Assert.Equal(((Label)controller.HeaderElement).Text, lv.Header);
 		}
 
@@ -881,8 +881,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Not.Null);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.HeaderElement);
+			Assert.IsType<Label>(controller.HeaderElement);
 			Assert.Equal(((Label)controller.HeaderElement).Text, ((Entry)lv.Header).Text);
 		}
 
@@ -914,12 +914,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.HeaderTemplate = null;
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Not.Null);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Entry>());
+			Assert.NotNull(controller.HeaderElement);
+			Assert.IsType<Entry>(controller.HeaderElement);
 			Assert.Equal(((Entry)controller.HeaderElement).Text, ((Entry)lv.Header).Text);
 		}
 
@@ -951,11 +951,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.Header = null;
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Null);
+			Assert.Null(controller.HeaderElement);
 		}
 
 		[Fact]
@@ -968,7 +968,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.SameAs(label));
+			Assert.Same(controller.FooterElement, label);
 		}
 
 		[Fact]
@@ -986,8 +986,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Label>(controller.FooterElement);
 			Assert.Equal(((Label)controller.FooterElement).Text, lv.Footer);
 		}
 
@@ -1023,8 +1023,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Label>(controller.FooterElement);
 			Assert.Equal(((Label)controller.FooterElement).Text, lv.Footer);
 		}
 
@@ -1051,11 +1051,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Label label = new Label { Text = "footer" };
 			lv.Footer = label;
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.SameAs(label));
+			Assert.Same(controller.FooterElement, label);
 		}
 
 
@@ -1092,12 +1092,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Entry>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Entry>(controller.FooterElement);
 			Assert.Equal(((Entry)controller.FooterElement).Text, lv.Footer);
 		}
 
@@ -1137,7 +1137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Null);
+			Assert.Null(controller.FooterElement);
 		}
 
 		[Fact]
@@ -1149,8 +1149,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Label>(controller.FooterElement);
 			Assert.Equal(((Label)controller.FooterElement).Text, lv.Footer);
 		}
 
@@ -1176,12 +1176,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.Footer = "bar";
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Label>(controller.FooterElement);
 			Assert.Equal(((Label)controller.FooterElement).Text, lv.Footer);
 		}
 
@@ -1200,8 +1200,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Label>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Label>(controller.FooterElement);
 			Assert.Equal(((Label)controller.FooterElement).Text, ((Entry)lv.Footer).Text);
 		}
 
@@ -1233,12 +1233,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.FooterTemplate = null;
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Not.Null);
-			Assert.That(controller.FooterElement, Is.InstanceOf<Entry>());
+			Assert.NotNull(controller.FooterElement);
+			Assert.IsType<Entry>(controller.FooterElement);
 			Assert.Equal(((Entry)controller.FooterElement).Text, ((Entry)lv.Footer).Text);
 		}
 
@@ -1270,11 +1270,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.Footer = null;
 
-			Assert.That(changing, Is.True);
-			Assert.That(changed, Is.True);
+			Assert.True(changing);
+			Assert.True(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.FooterElement, Is.Null);
+			Assert.Null(controller.FooterElement);
 		}
 
 		[Fact]
@@ -1290,8 +1290,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.BeginRefresh();
 
-			Assert.That(refreshing, Is.True);
-			Assert.That(lv.IsRefreshing, Is.True);
+			Assert.True(refreshing);
+			Assert.True(lv.IsRefreshing);
 		}
 
 		[Fact]
@@ -1308,8 +1308,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IListViewController controller = lv;
 			controller.SendRefreshing();
 
-			Assert.That(refreshing, Is.True);
-			Assert.That(lv.IsRefreshing, Is.True);
+			Assert.True(refreshing);
+			Assert.True(lv.IsRefreshing);
 		}
 
 		[Fact]
@@ -1326,9 +1326,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IListViewController controller = lv;
 			controller.SendRefreshing();
 
-			Assert.That(commandExecuted, Is.True);
+			Assert.True(commandExecuted);
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void RefreshCommandCanExecute(bool initial)
@@ -1345,6 +1346,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal((lv as IListViewController).RefreshAllowed, !initial);
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void RefreshCommandCanExecuteChanges(bool initial)
@@ -1472,7 +1474,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.RefreshCommand = null;
 
-			Assert.That(() => refresh.ChangeCanExecute(), Throws.Nothing);
+			refresh.ChangeCanExecute();
 			Assert.False(canExecuteRequested);
 
 			lv.BeginRefresh();
@@ -1493,7 +1495,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			listView.ItemSelected += (sender, arg) => raised = true;
 
 			listView.SelectedItem = source[0];
-			Assert.That(raised, Is.True, "ItemSelected was raised on ReadOnlySource");
+			Assert.True(raised);
 		}
 
 		internal class ReadOnlySource : IReadOnlyList<ListItem>
@@ -1549,10 +1551,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			list.ItemsSource = new[] { "Hi", "Bye" };
 
 			var cell = list.TemplatedItems[0];
-			Assume.That(cell.Parent, Is.SameAs(list));
+			Assert.Same(cell.Parent, list);
 
 			list.ItemsSource = null;
-			Assert.That(cell.Parent, Is.Null);
+			Assert.Null(cell.Parent);
 		}
 
 		[Fact]
@@ -1566,10 +1568,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			list.ItemsSource = collection;
 
 			var cell = list.TemplatedItems[0];
-			Assume.That(cell.Parent, Is.SameAs(list));
+			Assert.Same(cell.Parent, list);
 
 			collection.Remove(collection[0]);
-			Assert.That(cell.Parent, Is.Null);
+			Assert.Null(cell.Parent);
 		}
 
 		[Fact]
@@ -1583,12 +1585,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			list.ItemsSource = collection;
 
 			var cell = list.TemplatedItems[0];
-			Assume.That(cell.Parent, Is.SameAs(list));
+			Assert.Same(cell.Parent, list);
 
 			collection.Clear();
-			Assert.That(cell.Parent, Is.Null);
+			Assert.Null(cell.Parent);
 		}
 
+		[Theory]
 		[InlineData("Android", ListViewCachingStrategy.RecycleElement)]
 		[InlineData("iOS", ListViewCachingStrategy.RecycleElement)]
 		[InlineData("UWP", ListViewCachingStrategy.RetainElement)]

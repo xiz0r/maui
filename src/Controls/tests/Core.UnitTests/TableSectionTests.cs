@@ -64,8 +64,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.Add(first = new TextCell { Text = "Text" });
 			section.Add(second = new TextCell { Text = "Text" });
 
-			Assert.True(section.Contains(first));
-			Assert.True(section.Contains(second));
+			Assert.Contains(first, section);
+			Assert.Contains(second, section);
 		}
 
 		[Fact]

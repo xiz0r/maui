@@ -487,7 +487,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// The containing ScrollView should measure a width of about 411; the absolute column at the end of the grid
 			// shouldn't expand the ScrollView's measure to 447-ish. It's this expansion of the ScrollView that causes
 			// all subsequent parts of layout to go pear-shaped.
-			Assert.Equal(layoutSize.Request.Width, 411).Within(2);
+			Assert.Equal(411, layoutSize.Request.Width).Within(2);
 		}
 
 		[Fact]
@@ -1603,7 +1603,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			layout.Children.Remove(labela0);
-			Assert.False(((IElementController)layout).LogicalChildren.Contains(labela0));
+			Assert.DoesNotContain(labela0, ((IElementController)layout).LogicalChildren);
 		}
 
 		[Fact]

@@ -5,6 +5,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class EditorTests : BaseTestFixtureXUnit
 	{
+		[Theory]
 		[InlineData("Hi", "My text has changed")]
 		[InlineData(null, "My text has changed")]
 		[InlineData("Hi", null)]
@@ -33,6 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(finalText, newText);
 		}
 
+		[Theory]
 		[InlineData(true)]
 		public void IsReadOnlyTest(bool isReadOnly)
 		{
@@ -40,6 +42,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			editor.SetValue(InputView.IsReadOnlyProperty, isReadOnly);
 			Assert.Equal(isReadOnly, editor.IsReadOnly);
 		}
+
 		[Fact]
 		public void IsReadOnlyDefaultValueTest()
 		{

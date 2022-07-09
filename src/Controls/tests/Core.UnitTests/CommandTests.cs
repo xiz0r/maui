@@ -208,7 +208,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int executions = 0;
 			var command = new Command<FakeChildContext>(context => executions += 1);
 
-			Assert.DoesNotThrow(() => command.Execute(new FakeParentContext()), "the command should not execute, so no exception should be thrown");
+			command.Execute(new FakeParentContext()); // "the command should not execute, so no exception should be thrown"
 			Assert.True(executions == 0, "the command should not have executed");
 		}
 
@@ -218,7 +218,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int executions = 0;
 			var command = new Command<int>(context => executions += 1);
 
-			Assert.DoesNotThrow(() => command.Execute(10.5), "the command should not execute, so no exception should be thrown");
+			command.Execute(10.5); // "the command should not execute, so no exception should be thrown"
 			Assert.True(executions == 0, "the command should not have executed");
 		}
 
@@ -228,7 +228,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int executions = 0;
 			var command = new Command<FakeChildContext>(context => executions += 1);
 
-			Assert.DoesNotThrow(() => command.Execute(null), "null is a valid value for a reference type");
+			command.Execute(null); // "null is a valid value for a reference type"
 			Assert.True(executions == 1, "the command should have executed");
 		}
 
@@ -238,7 +238,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int executions = 0;
 			var command = new Command<int?>(context => executions += 1);
 
-			Assert.DoesNotThrow(() => command.Execute(null), "null is a valid value for a Nullable<int> type");
+			command.Execute(null); // "null is a valid value for a Nullable<int> type"
 			Assert.True(executions == 1, "the command should have executed");
 		}
 
@@ -248,7 +248,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int executions = 0;
 			var command = new Command<int>(context => executions += 1);
 
-			Assert.DoesNotThrow(() => command.Execute(null), "null is not a valid value for int");
+			command.Execute(null); // "null is not a valid value for int"
 			Assert.True(executions == 0, "the command should not have executed");
 		}
 	}

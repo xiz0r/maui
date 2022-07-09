@@ -27,7 +27,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			((IMenuItemController)item).Activate();
 
-			Assert.That(activated, Is.True);
+			Assert.True(activated);
 		}
 
 		[Fact]
@@ -45,7 +45,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var item = new MenuItem { Command = c, CommandParameter = param };
 			((IMenuItemController)item).Activate();
 
-			Assert.That(executed, Is.True);
+			Assert.True(executed);
 		}
 
 		[Fact]

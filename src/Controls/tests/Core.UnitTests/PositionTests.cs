@@ -12,8 +12,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void Construction()
 		{
 			Position position = new Position();
-			Assert.Equal(position.Latitude, 0);
-			Assert.Equal(position.Longitude, 0);
+			Assert.Equal(0, position.Latitude);
+			Assert.Equal(0, position.Longitude);
 		}
 
 		[Fact]
@@ -61,10 +61,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(position.Latitude, -90);
 
 			position = new Position(165, 0);
-			Assert.Equal(position.Latitude, 90);
+			Assert.Equal(90, position.Latitude);
 
 			position = new Position(15.0, 0);
-			Assert.Equal(position.Latitude, 15.0);
+			Assert.Equal(15.0, position.Latitude);
 		}
 
 		[Fact]
@@ -74,10 +74,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(position.Longitude, -180.0);
 
 			position = new Position(0, 1000);
-			Assert.Equal(position.Longitude, 180);
+			Assert.Equal(180, position.Longitude);
 
 			position = new Position(0, 0);
-			Assert.Equal(position.Longitude, 0);
+			Assert.Equal(0, position.Longitude);
 		}
 
 		[Fact]

@@ -102,10 +102,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void ImplicitConversionFromSize()
 		{
 			Thickness thickness = new Thickness();
-			Assert.DoesNotThrow(() => thickness = new Size(42, 84));
+			thickness = new Size(42, 84);
 			Assert.Equal(new Thickness(42, 84), thickness);
 
-			Assert.DoesNotThrow(() => thickness = 42);
+			thickness = 42;
 			Assert.Equal(new Thickness(42), thickness);
 		}
 

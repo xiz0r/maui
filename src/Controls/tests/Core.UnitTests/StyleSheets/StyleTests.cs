@@ -9,16 +9,14 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 	using StackLayout = Microsoft.Maui.Controls.Compatibility.StackLayout;
 
 	
-	public class StyleTests
+	public class StyleTests : IDisposable
 	{
-		
-		public void SetUp()
+		public StyleTests()
 		{
 			ApplicationExtensions.CreateAndSetMockApplication();
 		}
-
 		
-		public void TearDown()
+		public void Dispose()
 		{
 			Application.ClearCurrent();
 		}
@@ -28,10 +26,10 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var styleString = @"background-color: #ff0000;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assume.That(style, Is.Not.Null);
+			Assert.That(style, Is.Not.Null);
 
 			var ve = new VisualElement();
-			Assume.That(ve.BackgroundColor, Is.EqualTo(null));
+			Assert.That(ve.BackgroundColor, Is.EqualTo(null));
 			style.Apply(ve);
 			Assert.That(ve.BackgroundColor, Is.EqualTo(Colors.Red));
 		}
@@ -41,10 +39,10 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var styleString = @"background-color: #ff0000;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assume.That(style, Is.Not.Null);
+			Assert.That(style, Is.Not.Null);
 
 			var ve = new VisualElement() { BackgroundColor = Colors.Pink };
-			Assume.That(ve.BackgroundColor, Is.EqualTo(Colors.Pink));
+			Assert.That(ve.BackgroundColor, Is.EqualTo(Colors.Pink));
 
 			style.Apply(ve);
 			Assert.That(ve.BackgroundColor, Is.EqualTo(Colors.Pink));
@@ -56,7 +54,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			//color should cascade, background-color should not
 			var styleString = @"background-color: #ff0000; color: #00ff00;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assume.That(style, Is.Not.Null);
+			Assert.That(style, Is.Not.Null);
 
 			var label = new Label();
 			var layout = new StackLayout
@@ -66,9 +64,9 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 				}
 			};
 
-			Assume.That(layout.BackgroundColor, Is.EqualTo(null));
-			Assume.That(label.BackgroundColor, Is.EqualTo(null));
-			Assume.That(label.TextColor, Is.EqualTo(null));
+			Assert.That(layout.BackgroundColor, Is.EqualTo(null));
+			Assert.That(label.BackgroundColor, Is.EqualTo(null));
+			Assert.That(label.TextColor, Is.EqualTo(null));
 
 			style.Apply(layout);
 			Assert.That(layout.BackgroundColor, Is.EqualTo(Colors.Red));
@@ -81,7 +79,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var styleString = @"background-color: #ff0000; color: #00ff00;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assume.That(style, Is.Not.Null);
+			Assert.That(style, Is.Not.Null);
 
 			var layout = new StackLayout();
 			Assert.That(layout.GetValue(TextElement.TextColorProperty), Is.EqualTo(null));

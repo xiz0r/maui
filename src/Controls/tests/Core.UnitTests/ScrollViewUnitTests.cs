@@ -169,14 +169,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			((IScrollViewController)scrollView).ScrollToRequested += (sender, args) =>
 			{
 				requested = true;
-				Assert.Equal(args.ScrollY, 100);
-				Assert.Equal(args.ScrollX, 0);
+				Assert.Equal(100, args.ScrollY);
+				Assert.Equal(0, args.ScrollX);
 				Assert.Null(args.Item);
-				Assert.Equal(args.ShouldAnimate, true);
+				Assert.True(args.ShouldAnimate);
 			};
 
 			scrollView.ScrollToAsync(0, 100, true);
-			Assert.That(requested, Is.True);
+			Assert.True(requested);
 		}
 
 		[Fact]
@@ -212,14 +212,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			((IScrollViewController)scrollView).ScrollToRequested += (sender, args) =>
 			{
 				requested = true;
-				Assert.Equal(args.ScrollY, 100);
-				Assert.Equal(args.ScrollX, 0);
+				Assert.Equal(100, args.ScrollY);
+				Assert.Equal(0, args.ScrollX);
 				Assert.Null(args.Item);
-				Assert.Equal(args.ShouldAnimate, false);
+				Assert.False(args.ShouldAnimate);
 			};
 
 			scrollView.ScrollToAsync(0, 100, false);
-			Assert.That(requested, Is.True);
+			Assert.True(requested);
 		}
 
 		[Fact]
@@ -235,13 +235,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				requested = true;
 
-				Assert.That(args.Element, Is.SameAs(item));
-				Assert.Equal(args.Position, ScrollToPosition.Center);
-				Assert.Equal(args.ShouldAnimate, true);
+				Assert.Same(args.Element, item);
+				Assert.Equal(ScrollToPosition.Center, args.Position);
+				Assert.True(args.ShouldAnimate);
 			};
 
 			scrollView.ScrollToAsync(item, ScrollToPosition.Center, true);
-			Assert.That(requested, Is.True);
+			Assert.True(requested);
 		}
 
 		[Fact]
@@ -257,13 +257,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				requested = true;
 
-				Assert.That(args.Element, Is.SameAs(item));
-				Assert.Equal(args.Position, ScrollToPosition.Center);
-				Assert.Equal(args.ShouldAnimate, false);
+				Assert.Same(args.Element, item);
+				Assert.Equal(ScrollToPosition.Center, args.Position);
+				Assert.False(args.ShouldAnimate);
 			};
 
 			scrollView.ScrollToAsync(item, ScrollToPosition.Center, false);
-			Assert.That(requested, Is.True);
+			Assert.True(requested);
 		}
 
 		[Fact]
@@ -282,8 +282,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IScrollViewController controller = scroll;
 			controller.SetScrolledPosition(100, 100);
 
-			Assert.Equal(scroll.ScrollX, 100);
-			Assert.Equal(scroll.ScrollY, 100);
+			Assert.Equal(100, scroll.ScrollX);
+			Assert.Equal(100, scroll.ScrollY);
 		}
 
 		[Fact]
@@ -310,10 +310,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			scrollView.ScrollToAsync(100, 100, true);
-			Assert.Equal(y100Count, 1);
+			Assert.Equal(1, y100Count);
 
 			scrollView.ScrollToAsync(0, 100, true);
-			Assert.Equal(y100Count, 2);
+			Assert.Equal(2, y100Count);
 		}
 
 		void AssertInvalidated(IViewHandler handler)

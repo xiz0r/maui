@@ -7,9 +7,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public class BrushUnitTests : BaseTestFixtureXUnit
 	{
 		BrushTypeConverter _converter;
-
 		
-		public void SetUp()
+		public BrushUnitTests()
 		{
 			_converter = new BrushTypeConverter();
 		}

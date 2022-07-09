@@ -317,7 +317,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("1234", testPage.SomeQueryParameter);
 		}
 
-
+		[Theory]
 		[InlineData("..")]
 		[InlineData("../")]
 		public async Task PoppingWithQueryString(string input)
@@ -379,7 +379,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("ModalTestPage");
 			Assert.NotNull(page);
-			Assert.Equal(page.GetType(), typeof(ModalTestPage));
+			Assert.IsType<ModalTestPage>(page);
 		}
 
 		[Fact]

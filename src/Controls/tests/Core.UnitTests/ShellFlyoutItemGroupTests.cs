@@ -27,9 +27,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IShellController shellController = shell;
 			var groups = shellController.GenerateFlyoutGrouping();
 
-			Assert.Equal(groups.Count, 2);
-			Assert.Equal(groups[0].Count, 2);
-			Assert.Equal(groups[1].Count, 1);
+			Assert.Equal(2, groups.Count);
+			Assert.Equal(2, groups[0].Count);
+			Assert.Equal(1, groups[1].Count);
 		}
 
 		[Fact]
@@ -52,8 +52,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var groups = shellController.GenerateFlyoutGrouping();
 
 			Assert.Equal(2, groups.Count);
-			Assert.Equal(groups[0].Count, 2);
-			Assert.Equal(groups[1].Count, 2);
+			Assert.Equal(2, groups[0].Count);
+			Assert.Equal(2, groups[1].Count);
 		}
 
 		[Fact]
@@ -74,8 +74,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IShellController shellController = shell;
 			var groups = shellController.GenerateFlyoutGrouping();
 
-			Assert.Equal(groups.Count, 1);
-			Assert.Equal(groups[0].Count, 2);
+			Assert.Equal(1, groups.Count);
+			Assert.Equal(2, groups[0].Count);
 		}
 
 		[Fact]
@@ -89,7 +89,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IShellController shellController = (IShellController)shell;
 			var groups = shellController.GenerateFlyoutGrouping();
-			Assert.Equal(groups.SelectMany(x => x.OfType<IMenuItemController>()).Count(), 1);
+			Assert.Single(groups.SelectMany(x => x.OfType<IMenuItemController>()));
 		}
 
 
@@ -105,7 +105,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IShellController shellController = (IShellController)shell;
 			var groups = shellController.GenerateFlyoutGrouping();
-			Assert.Equal(1, groups.SelectMany(x => x.OfType<IMenuItemController>()).Count());
+			Assert.Single(groups.SelectMany(x => x.OfType<IMenuItemController>()));
 		}
 
 
@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var r = groups.SelectMany(x => x.OfType<IMenuItemController>());
 
-			Assert.Equal(r.Count(), 0);
+			Assert.Empty(r);
 		}
 
 		[Fact]
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IShellController shellController = (IShellController)shell;
 			var groups = shellController.GenerateFlyoutGrouping();
-			Assert.Equal(groups.SelectMany(x => x.OfType<IMenuItemController>()).Count(), 0);
+			Assert.Empty(groups.SelectMany(x => x.OfType<IMenuItemController>()));
 		}
 
 		[Fact]
@@ -152,7 +152,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IShellController shellController = (IShellController)shell;
 			var groups = shellController.GenerateFlyoutGrouping();
-			Assert.Equal(groups.SelectMany(x => x.OfType<IMenuItemController>()).Count(), 0);
+			Assert.Empty(groups.SelectMany(x => x.OfType<IMenuItemController>()));
 		}
 
 		[Fact]
@@ -166,7 +166,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(flyoutItem);
 
 			var groups = shell.Controller.GenerateFlyoutGrouping();
-			Assert.Equal(groups.SelectMany(x => x.OfType<IMenuItemController>()).Count(), 0);
+			Assert.Empty(groups.SelectMany(x => x.OfType<IMenuItemController>()));
 		}
 
 		[Fact]

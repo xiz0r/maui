@@ -18,6 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(tapped);
 		}
 
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void TappedHonorsCanExecute(bool canExecute)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls.Internals;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
@@ -14,10 +15,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
 
-			Action reset = () => Assert.Fail("Reset should not be called");
+			Action reset = () => throw new XunitException("Reset should not be called");
 			Action<object, int, bool> insert = (o, i, create) =>
 			{
-				Assert.That(create, Is.True);
+				Assert.True(create);
 				applied.Insert(i, (string)o);
 			};
 
@@ -36,10 +37,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
 
-			Action reset = () => Assert.Fail("Reset should not be called");
+			Action reset = () => throw new XunitException("Reset should not be called");
 			Action<object, int, bool> insert = (o, i, create) =>
 			{
-				Assert.That(create, Is.True);
+				Assert.True(create);
 				applied.Insert(i, (string)o);
 			};
 			Action<object, int> removeAt = (o, i) => applied.RemoveAt(i);
@@ -57,7 +58,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
 
-			Action reset = () => Assert.Fail("Reset should not be called");
+			Action reset = () => throw new XunitException("Reset should not be called");
 			Action<object, int, bool> insert = (o, i, create) =>
 			{
 				Assert.False(create);
@@ -79,10 +80,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			List<string> applied = new List<string> { "foo", "bar", "baz" };
 
-			Action reset = () => Assert.Fail("Reset should not be called");
+			Action reset = () => throw new XunitException("Reset should not be called");
 			Action<object, int, bool> insert = (o, i, create) =>
 			{
-				Assert.That(create, Is.True);
+				Assert.True(create);
 				applied.Insert(i, (string)o);
 			};
 

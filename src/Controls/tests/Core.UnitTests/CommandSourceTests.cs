@@ -165,11 +165,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			source.BindingContext = vm;
 			source.SetBinding(IsEnabledProperty, "Toggle");
 
-			Assert.That(source.GetValue(IsEnabledProperty), Is.True);
+			Assert.True((bool)source.GetValue(IsEnabledProperty));
 
 			source.SetValue(CommandProperty, new Command(() => { }));
 
-			Assert.That(source.GetIsBound(IsEnabledProperty), Is.True);
+			Assert.True(source.GetIsBound(IsEnabledProperty));
 		}
 
 		protected abstract T CreateSource();

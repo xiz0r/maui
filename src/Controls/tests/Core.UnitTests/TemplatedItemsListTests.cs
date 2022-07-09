@@ -536,7 +536,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.ItemsSource = items;
 			bindable.GroupShortNameBinding = new Binding(".");
 
-			Assert.That(() => items.Add("baz"), Throws.Nothing);
+			items.Add("baz");
 		}
 
 		[Fact]
@@ -552,7 +552,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.IsGroupingEnabled = true;
 			bindable.IsGroupingEnabled = false;
 
-			Assert.That(() => items.Add(new ObservableCollection<string>()), Throws.Nothing);
+			items.Add(new ObservableCollection<string>());
 		}
 
 		int GetIndex(BindableObject item)
@@ -750,7 +750,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.TemplatedItems.GetOrCreateContent(1, items[1]);
 
 			items.Move(0, 3);
-			Assert.That(() => items.Move(3, 2), Throws.Nothing);
+			items.Move(3, 2);
 
 			Assert.That(GetIndex(bindable.TemplatedItems[0]), Is.EqualTo(0));
 			Assert.That(GetIndex(bindable.TemplatedItems[1]), Is.EqualTo(1));
@@ -931,9 +931,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var til = bindable.TemplatedItems.GetGroup(0);
 			til.GetOrCreateContent(0, inner[0]);
 
-			Assume.That(til, Is.Not.Null);
-			Assume.That(til.HeaderContent, Is.Not.Null);
-			Assume.That(count, Is.EqualTo(0));
+			Assert.That(til, Is.Not.Null);
+			Assert.That(til.HeaderContent, Is.Not.Null);
+			Assert.That(count, Is.EqualTo(0));
 
 			items.RemoveAt(0);
 
@@ -963,8 +963,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var til = bindable.TemplatedItems.GetGroup(0);
 			til.GetOrCreateContent(0, items[0][0]);
 
-			Assume.That(til, Is.Not.Null);
-			Assume.That(til.HeaderContent, Is.Not.Null);
+			Assert.That(til, Is.Not.Null);
+			Assert.That(til.HeaderContent, Is.Not.Null);
 
 			int hcount = 0;
 			bindable.Hooked += obj =>
@@ -1017,7 +1017,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			bindable.TemplatedItems.GetOrCreateContent(0, items[0]);
 			bindable.TemplatedItems.GetOrCreateContent(1, items[1]);
 
-			Assume.That(count, Is.EqualTo(0));
+			Assert.That(count, Is.EqualTo(0));
 
 			items.RemoveAt(0);
 
@@ -1081,7 +1081,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var group1 = bindable.TemplatedItems.GetGroup(0);
 			var cell = group1[1];
 
-			Assume.That(group1.IndexOf(cell), Is.EqualTo(1));
+			Assert.That(group1.IndexOf(cell), Is.EqualTo(1));
 
 			var group2 = bindable.TemplatedItems.GetGroup(1);
 

@@ -16,7 +16,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(new DateTime(1950, 1, 1), picker.MinimumDate);
 
-			Assert.That(() => picker.MinimumDate = new DateTime(2200, 1, 1), Throws.ArgumentException);
+			Assert.Throws<ArgumentException>(() => picker.MinimumDate = new DateTime(2200, 1, 1));
 		}
 
 		[Fact]
@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(new DateTime(2050, 1, 1), picker.MaximumDate);
 
-			Assert.That(() => picker.MaximumDate = new DateTime(1800, 1, 1), Throws.ArgumentException);
+			Assert.Throws<ArgumentException>(() => picker.MaximumDate = new DateTime(1800, 1, 1));
 		}
 
 		[Fact]
@@ -166,7 +166,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void SetNullValueDoesNotThrow()
 		{
 			var datePicker = new DatePicker();
-			Assert.DoesNotThrow(() => datePicker.SetValue(DatePicker.DateProperty, null));
+			datePicker.SetValue(DatePicker.DateProperty, null);
 			Assert.Equal(DateTime.Today, datePicker.Date);
 		}
 
@@ -186,7 +186,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var datePicker = new DatePicker();
 			datePicker.SetValue(DatePicker.MaximumDateProperty, DateTime.Now);
-			Assert.DoesNotThrow(() => datePicker.SetValue(DatePicker.MinimumDateProperty, DateTime.Now));
+			datePicker.SetValue(DatePicker.MinimumDateProperty, DateTime.Now);
 		}
 	}
 }

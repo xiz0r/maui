@@ -28,7 +28,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("HorizontalGrid");
 
-			Assert.IsInstanceOf<GridItemsLayout>(result);
+			Assert.IsType<GridItemsLayout>(result);
 			var gridItemsLayout = (GridItemsLayout)result;
 			Assert.Equal(ItemsLayoutOrientation.Horizontal, gridItemsLayout.Orientation);
 			Assert.Equal(1, gridItemsLayout.Span);
@@ -40,7 +40,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("VerticalGrid");
 
-			Assert.IsInstanceOf<GridItemsLayout>(result);
+			Assert.IsType<GridItemsLayout>(result);
 			var gridItemsLayout = (GridItemsLayout)result;
 			Assert.Equal(ItemsLayoutOrientation.Vertical, gridItemsLayout.Orientation);
 			Assert.Equal(1, gridItemsLayout.Span);
@@ -52,7 +52,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("HorizontalGrid, 4");
 
-			Assert.IsInstanceOf<GridItemsLayout>(result);
+			Assert.IsType<GridItemsLayout>(result);
 			var gridItemsLayout = (GridItemsLayout)result;
 			Assert.Equal(ItemsLayoutOrientation.Horizontal, gridItemsLayout.Orientation);
 			Assert.Equal(4, gridItemsLayout.Span);
@@ -64,7 +64,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("VerticalGrid,\t\t2");
 
-			Assert.IsInstanceOf<GridItemsLayout>(result);
+			Assert.IsType<GridItemsLayout>(result);
 			var gridItemsLayout = (GridItemsLayout)result;
 			Assert.Equal(ItemsLayoutOrientation.Vertical, gridItemsLayout.Orientation);
 			Assert.Equal(2, gridItemsLayout.Span);
@@ -76,7 +76,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("HorizontalGrid,98654");
 
-			Assert.IsInstanceOf<GridItemsLayout>(result);
+			Assert.IsType<GridItemsLayout>(result);
 			var gridItemsLayout = (GridItemsLayout)result;
 			Assert.Equal(ItemsLayoutOrientation.Horizontal, gridItemsLayout.Orientation);
 			Assert.Equal(98654, gridItemsLayout.Span);
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var converter = new ItemsLayoutTypeConverter();
 			var result = converter.ConvertFromInvariantString("VerticalGrid, \t 1234");
 
-			Assert.IsInstanceOf<GridItemsLayout>(result);
+			Assert.IsType<GridItemsLayout>(result);
 			var gridItemsLayout = (GridItemsLayout)result;
 			Assert.Equal(ItemsLayoutOrientation.Vertical, gridItemsLayout.Orientation);
 			Assert.Equal(1234, gridItemsLayout.Span);

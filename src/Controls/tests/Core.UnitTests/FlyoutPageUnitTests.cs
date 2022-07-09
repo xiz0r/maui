@@ -127,7 +127,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Flyout = new ContentPage { Content = new View(), Title = "Foo" },
 				Detail = new ContentPage { Content = new View() }
 			};
-			Assert.DoesNotThrow(() => new TabbedPage { Children = { page } });
+			_ = new TabbedPage { Children = { page } };
 		}
 
 		[Fact]
@@ -135,7 +135,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var page = new FlyoutPage();
 
-			Assert.Equal(false, page.IsPresented);
+			Assert.False(page.IsPresented);
 
 			bool signaled = false;
 			page.PropertyChanged += (sender, args) =>
@@ -146,7 +146,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.IsPresented = true;
 
-			Assert.Equal(true, page.IsPresented);
+			Assert.True(page.IsPresented);
 			Assert.True(signaled);
 		}
 
@@ -310,7 +310,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			page.IsPresented = true;
 
-			Assert.Equal(true, page.IsPresented);
+			Assert.True(page.IsPresented);
 		}
 
 		[Fact]

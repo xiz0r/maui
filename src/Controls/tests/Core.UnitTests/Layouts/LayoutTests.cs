@@ -52,6 +52,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			Assert.Null(child1.Parent);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -71,6 +72,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			handler.Received().Invoke(command, args);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]
@@ -91,6 +93,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			handler.Received().Invoke(command, args);
 		}
 
+		[Theory]
 		[InlineData(typeof(VerticalStackLayout))]
 		[InlineData(typeof(HorizontalStackLayout))]
 		[InlineData(typeof(Grid))]

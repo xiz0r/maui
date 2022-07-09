@@ -55,8 +55,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void ReturnsCorrectType()
 		{
 			var dts = new TestDTS();
-			Assert.IsInstanceOf<TemplateOne>(dts.SelectTemplate(1d, null));
-			Assert.IsInstanceOf<TemplateTwo>(dts.SelectTemplate("test", null));
+			Assert.IsType<TemplateOne>(dts.SelectTemplate(1d, null));
+			Assert.IsType<TemplateTwo>(dts.SelectTemplate("test", null));
 		}
 
 		[Fact]
@@ -66,8 +66,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			listView.ItemsSource = new object[] { 0d, "test" };
 
 			listView.ItemTemplate = new TestDTS();
-			Assert.IsInstanceOf<ViewCell>(listView.TemplatedItems[0]);
-			Assert.IsInstanceOf<EntryCell>(listView.TemplatedItems[1]);
+			Assert.IsType<ViewCell>(listView.TemplatedItems[0]);
+			Assert.IsType<EntryCell>(listView.TemplatedItems[1]);
 		}
 
 		[Fact]
@@ -122,10 +122,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			listView.ItemTemplate = selector;
 			Assert.That(selector.Counter == 0);
 
-			Assert.IsInstanceOf<ViewCell>(listView.TemplatedItems[0]);
+			Assert.IsType<ViewCell>(listView.TemplatedItems[0]);
 			Assert.That(selector.Counter == 1);
 
-			Assert.IsInstanceOf<ViewCell>(listView.TemplatedItems[1]);
+			Assert.IsType<ViewCell>(listView.TemplatedItems[1]);
 			Assert.That(selector.Counter == 1);
 
 			Assert.Throws<NotSupportedException>(

@@ -104,6 +104,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(42, window.DisplayDensity);
 		}
 
+		[Fact]
 		public void ListViewWindowIsInheritedByViewCells()
 		{
 			var lv = new ListView { ItemTemplate = new DataTemplate(() => new ViewCell { View = new View() }) };
@@ -272,11 +273,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Validate all the parent hierarchies are correct
 			Assert.Equal(app, window.Parent);
 			Assert.Equal(window, window.Page.Parent);
-			Assert.Equal(app.Windows.Count, 1);
+			Assert.Equal(1, app.Windows.Count);
 			Assert.Equal(app.LogicalChildren[0], window);
 			Assert.Equal(window.LogicalChildren[0], page);
-			Assert.Equal(app.LogicalChildren.Count, 1);
-			Assert.Equal(window.LogicalChildren.Count, 1);
+			Assert.Single(app.LogicalChildren);
+			Assert.Single(window.LogicalChildren);
 			Assert.Equal(app.NavigationProxy, window.NavigationProxy.Inner);
 			Assert.Equal(window.NavigationProxy, page.NavigationProxy.Inner);
 		}

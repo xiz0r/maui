@@ -788,8 +788,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			var label1 = new Label();
 
-			Assume.That(label0.TextColor, Is.EqualTo(Colors.Pink));
-			Assume.That(label1.TextColor, Is.EqualTo(null));
+			Assert.That(label0.TextColor, Is.EqualTo(Colors.Pink));
+			Assert.That(label1.TextColor, Is.EqualTo(null));
 
 			var rd0 = new ResourceDictionary {
 				new Style (typeof(Label)) {
@@ -902,7 +902,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			t.Style = s;
 
-			Assert.Equal(MockApplication.MockLogger.Messages.Count, 1);
+			Assert.Equal(1, MockApplication.MockLogger.Messages.Count);
 			Assert.Equal(MockApplication.MockLogger.Messages.FirstOrDefault(), $"Style TargetType Microsoft.Maui.Controls.Button is not compatible with element target type Microsoft.Maui.Controls.View");
 		}
 
@@ -914,7 +914,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			t.Style = s;
 
-			Assert.Equal(MockApplication.MockLogger.Messages.Count, 1);
+			Assert.Equal(1, MockApplication.MockLogger.Messages.Count);
 			Assert.Equal(MockApplication.MockLogger.Messages.FirstOrDefault(), $"Style TargetType Microsoft.Maui.Controls.Button is not compatible with element target type Microsoft.Maui.Controls.Label");
 		}
 

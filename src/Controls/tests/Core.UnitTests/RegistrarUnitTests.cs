@@ -170,11 +170,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var sliderTarget = Internals.Registrar.Registered.GetHandler(typeof(Slider), typeof(VisualMarkerUnitTests));
 			Assert.NotNull(sliderTarget);
-			Assert.That(sliderTarget, Is.InstanceOf<VisualSliderTarget>());
+			Assert.IsType<VisualSliderTarget>(sliderTarget);
 
 			sliderTarget = Internals.Registrar.Registered.GetHandler<SliderTarget>(typeof(Slider));
 			Assert.NotNull(sliderTarget);
-			Assert.That(sliderTarget, Is.InstanceOf<SliderTarget>());
+			Assert.IsType<SliderTarget>(sliderTarget);
 		}
 	}
 
@@ -193,7 +193,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var buttonTarget = Internals.Registrar.Registered.GetHandler<ButtonTarget>(typeof(Button));
 			Assert.NotNull(buttonTarget);
-			Assert.That(buttonTarget, Is.InstanceOf<ButtonTarget>());
+			Assert.IsType<ButtonTarget>(buttonTarget);
 		}
 
 		[Fact]
@@ -201,7 +201,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var sliderTarget = Internals.Registrar.Registered.GetHandler<SliderTarget>(typeof(Slider));
 			Assert.NotNull(sliderTarget);
-			Assert.That(sliderTarget, Is.InstanceOf<SliderTarget>());
+			Assert.IsType<SliderTarget>(sliderTarget);
 		}
 	}
 
@@ -245,7 +245,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var renderer = registrar.GetHandler(typeof(View));
 
-			Assert.That(renderer, Is.InstanceOf<MockRenderer>());
+			Assert.IsType<MockRenderer>(renderer);
 		}
 
 		[Fact]
@@ -257,7 +257,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var renderer = registrar.GetHandler(typeof(Button));
 
-			Assert.That(renderer, Is.InstanceOf<MockRenderer>());
+			Assert.IsType<MockRenderer>(renderer);
 		}
 
 		[Fact]
@@ -271,9 +271,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var buttonRenderer = registrar.GetHandler(typeof(Button));
 			var viewRenderer = registrar.GetHandler(typeof(View));
 
-			Assert.That(buttonRenderer, Is.InstanceOf<ButtonMockRenderer>());
-			Assert.That(viewRenderer, Is.Not.InstanceOf<ButtonMockRenderer>());
-			Assert.That(viewRenderer, Is.InstanceOf<MockRenderer>());
+			Assert.IsType<ButtonMockRenderer>(buttonRenderer);
+			Assert.IsType<ButtonMockRenderer>(viewRenderer);
+			Assert.IsType<ButtonMockRenderer>(viewRenderer);
 		}
 
 		[Fact]

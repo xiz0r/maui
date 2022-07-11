@@ -46,7 +46,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			MockBindable bindable = (MockBindable)template.CreateContent();
-			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo("value"));
+			Assert.Equal(bindable.GetValue(MockBindable.TextProperty), "value");
 		}
 
 		[Fact]
@@ -78,7 +78,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetBinding(MockBindable.TextProperty, new Binding("."));
 
 			MockBindable bindable = (MockBindable)template.CreateContent();
-			Assert.That(bindable.GetValue(MockBindable.TextProperty), Is.EqualTo(bindable.BindingContext));
+			Assert.Equal(bindable.GetValue(MockBindable.TextProperty), bindable.BindingContext);
 
 			bindable.BindingContext = "binding";
 			Assert.Equal("binding", bindable.GetValue(MockBindable.TextProperty));

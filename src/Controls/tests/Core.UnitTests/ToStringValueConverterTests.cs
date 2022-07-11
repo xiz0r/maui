@@ -24,7 +24,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(null, null, null, null);
 
-			Assert.That(result, Is.Null);
+			Assert.Null(result);
 		}
 
 		[Fact]
@@ -34,7 +34,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(null, typeof(string), null, null);
 
-			Assert.That(result, Is.Null);
+			Assert.Null(result);
 		}
 
 		[Fact]
@@ -44,7 +44,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(new object(), typeof(string), null, null);
 
-			Assert.That(result, Is.EqualTo("System.Object"));
+			Assert.Equal("System.Object", result);
 		}
 
 		[Fact]
@@ -54,7 +54,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(string.Empty, typeof(string), null, null);
 
-			Assert.That(result, Is.EqualTo(string.Empty));
+			Assert.Equal(result, string.Empty);
 		}
 
 		[Fact]
@@ -64,7 +64,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert("Hello, World!", typeof(string), null, null);
 
-			Assert.That(result, Is.EqualTo("Hello, World!"));
+			Assert.Equal("Hello, World!", result);
 		}
 
 		private class ToStringObject
@@ -93,8 +93,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value = new ToStringObject(null);
 			object result = toStringValueConverter.Convert(value, typeof(string), null, null);
 
-			Assert.That(result, Is.Null);
-			Assert.That(value.ToStringCounter, Is.EqualTo(1));
+			Assert.Null(result);
+			Assert.Equal(value.ToStringCounter, 1);
 		}
 
 		[Fact]
@@ -105,8 +105,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value = new ToStringObject(string.Empty);
 			object result = toStringValueConverter.Convert(value, typeof(string), null, null);
 
-			Assert.That(result, Is.EqualTo(string.Empty));
-			Assert.That(value.ToStringCounter, Is.EqualTo(1));
+			Assert.Equal(result, string.Empty);
+			Assert.Equal(value.ToStringCounter, 1);
 		}
 
 		[Fact]
@@ -117,8 +117,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value = new ToStringObject("Test string");
 			object result = toStringValueConverter.Convert(value, typeof(string), null, null);
 
-			Assert.That(result, Is.EqualTo("Test string"));
-			Assert.That(value.ToStringCounter, Is.EqualTo(1));
+			Assert.Equal(result, "Test string");
+			Assert.Equal(value.ToStringCounter, 1);
 		}
 
 		[Fact]
@@ -129,13 +129,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var value = new ToStringObject("Test string");
 			object result = toStringValueConverter.Convert(value, typeof(string), null, _skSkCulture);
 
-			Assert.That(result, Is.EqualTo("Test string"));
+			Assert.Equal(result, "Test string");
 
 			value.Value = "Hello, World!";
 			result = toStringValueConverter.Convert(value, typeof(string), null, _skSkCulture);
 
-			Assert.That(result, Is.EqualTo("Hello, World!"));
-			Assert.That(value.ToStringCounter, Is.EqualTo(2));
+			Assert.Equal(result, "Hello, World!");
+			Assert.Equal(value.ToStringCounter, 2);
 		}
 
 		[Fact]
@@ -145,7 +145,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(99123.567, typeof(string), null, null);
 
-			Assert.That(result, Is.EqualTo("99123.567"));
+			Assert.Equal(result, "99123.567");
 		}
 
 		[Fact]
@@ -155,7 +155,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(99123.567, typeof(string), null, _skSkCulture);
 
-			Assert.That(result, Is.EqualTo("99123,567"));
+			Assert.Equal(result, "99123,567");
 		}
 
 		[Fact]
@@ -165,7 +165,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(99123.567, typeof(string), string.Empty, null);
 
-			Assert.That(result, Is.EqualTo("99123.567"));
+			Assert.Equal(result, "99123.567");
 		}
 
 		[Fact]
@@ -175,7 +175,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(99123.567, typeof(string), string.Empty, _skSkCulture);
 
-			Assert.That(result, Is.EqualTo("99123,567"));
+			Assert.Equal(result, "99123,567");
 		}
 
 		[Fact]
@@ -185,7 +185,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(99123.567, typeof(string), "N2", null);
 
-			Assert.That(result, Is.EqualTo("99,123.57"));
+			Assert.Equal(result, "99,123.57");
 		}
 
 		[Fact]
@@ -195,7 +195,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			object result = toStringValueConverter.Convert(99123.567, typeof(string), "N2", _skSkCulture);
 
-			Assert.That(result, Is.EqualTo("99 123,57"));
+			Assert.Equal(result, "99 123,57");
 		}
 
 		[Fact]
@@ -206,7 +206,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var format = new ToStringObject("#,##0.000");
 			object result = toStringValueConverter.Convert(99123.56, typeof(string), format, null);
 
-			Assert.That(result, Is.EqualTo("99,123.560"));
+			Assert.Equal(result, "99,123.560");
 		}
 
 		[Fact]
@@ -217,7 +217,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var format = new ToStringObject("#,##0.000");
 			object result = toStringValueConverter.Convert(99123.56, typeof(string), format, _skSkCulture);
 
-			Assert.That(result, Is.EqualTo("99 123,560"));
+			Assert.Equal(result, "99 123,560");
 		}
 
 		[Fact]

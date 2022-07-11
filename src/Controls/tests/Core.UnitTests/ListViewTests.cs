@@ -86,9 +86,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Cell cell = listView.TemplatedItems[0];
 
-			Assert.That(cell, Is.Not.Null);
-			Assert.That(cell, Is.InstanceOf<TextCell>());
-			Assert.That(((TextCell)cell).Text, Is.Null);
+			Assert.NotNull(cell);
+			Assert.IsType<TextCell>(cell);
+			Assert.Null(((TextCell)cell).Text);
 		}
 
 		[Fact]
@@ -103,12 +103,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Cell cell = listView.TemplatedItems[0];
 			Assert.NotNull(cell);
-			Assert.That(cell, Is.InstanceOf<TextCell>());
-			Assert.That(((TextCell)cell).Text, Is.EqualTo("Foo"));
+			Assert.IsType<TextCell>(cell);
+			Assert.Equal("Foo", ((TextCell)cell).Text);
 
 			cell = listView.TemplatedItems[1];
 			Assert.NotNull(cell);
-			Assert.That(cell, Is.InstanceOf<TextCell>());
+			Assert.IsType<TextCell>(cell);
 			Assert.Equal("Baz", ((TextCell)cell).Text);
 		}
 
@@ -287,15 +287,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			listView.NotifyRowTapped(0);
 
-			Assert.That(cellTapped, Is.EqualTo(1), "Cell.Tapped was not raised");
-			Assert.That(itemTapped, Is.EqualTo(1), "ListView.ItemTapped was not raised");
-			Assert.That(itemSelected, Is.EqualTo(1), "ListView.ItemSelected was not raised");
+			Assert.Equal(1, cellTapped); 
+			Assert.Equal(1, itemTapped); 
+			Assert.Equal(1, itemSelected); 
 
 			listView.NotifyRowTapped(0);
 
-			Assert.That(cellTapped, Is.EqualTo(2), "Cell.Tapped was not raised a second time");
-			Assert.That(itemTapped, Is.EqualTo(2), "ListView.ItemTapped was not raised a second time");
-			Assert.That(itemSelected, Is.EqualTo(1), "ListView.ItemSelected was raised a second time");
+			Assert.Equal(2, cellTapped); 
+			Assert.Equal(2, itemTapped);  
+			Assert.Equal(1, itemSelected); 
 		}
 
 		[Fact]
@@ -385,11 +385,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				IsPlatformEnabled = true,
 			};
 
-			Assert.That(() => listView.ScrollTo(new object(), (ScrollToPosition)500, true), Throws.ArgumentException);
-			Assert.That(() => listView.ScrollTo(new object(), new object(), ScrollToPosition.Start, true), Throws.InvalidOperationException);
+			Assert.Throws<ArgumentException>(() => listView.ScrollTo(new object(), (ScrollToPosition)500, true));
+			Assert.Throws<InvalidOperationException>(() => listView.ScrollTo(new object(), new object(), ScrollToPosition.Start, true));
 
 			listView.IsGroupingEnabled = true;
-			Assert.That(() => listView.ScrollTo(new object(), new object(), (ScrollToPosition)500, true), Throws.ArgumentException);
+			Assert.Throws<ArgumentException>(() => listView.ScrollTo(new object(), new object(), (ScrollToPosition)500, true));
 		}
 
 		[Fact]
@@ -633,7 +633,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.SameAs(label));
+			Assert.Same(controller.HeaderElement, label);
 		}
 
 		[Fact]
@@ -652,7 +652,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IListViewController controller = lv;
 			Assert.NotNull(controller.HeaderElement);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
+			Assert.IsType<Label>(controller.HeaderElement);
 			Assert.Equal(((Label)controller.HeaderElement).Text, lv.Header);
 		}
 
@@ -705,7 +705,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IListViewController controller = lv;
 			Assert.NotNull(controller.HeaderElement);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
+			Assert.IsType<Label>(controller.HeaderElement);
 			Assert.Equal(((Label)controller.HeaderElement).Text, lv.Header);
 		}
 
@@ -818,7 +818,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(changed);
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Null);
+			Assert.Null(controller.HeaderElement);
 		}
 
 		[Fact]
@@ -830,7 +830,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			IListViewController controller = lv;
-			Assert.That(controller.HeaderElement, Is.Not.Null);
+			Assert.NotNull(controller.HeaderElement);
 			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
 			Assert.Equal(((Label)controller.HeaderElement).Text, lv.Header);
 		}

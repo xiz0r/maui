@@ -161,7 +161,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			DependencyService.Register<MockServiceImpl>();
 			var result = DependencyService.Resolve<IMockService>();
 
-			Assert.That(result, Is.Not.Null);
+			Assert.NotNull(result);
 		}
 
 		[Fact]

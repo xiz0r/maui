@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(SwitchCell.TextProperty, "text");
 
 			SwitchCell cell = (SwitchCell)template.CreateContent();
-			Assert.That(cell.Text, Is.EqualTo("text"));
+			Assert.Equal(cell.Text, "text");
 		}
 
 		[Fact]
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(SwitchCell.OnProperty, true);
 
 			SwitchCell cell = (SwitchCell)template.CreateContent();
-			Assert.That(cell.On, Is.EqualTo(true));
+			Assert.Equal(cell.On, true);
 		}
 
 		[Theory]

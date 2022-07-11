@@ -132,7 +132,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			cmd.ChangeCanExecute();
 
-			Assert.That(fired, Is.True, "CanExecute was not called when the event was raised");
+			Assert.True(fired, "CanExecute was not called when the event was raised");
 
 			// Preserve source from GC during the test in Release mode
 			GC.KeepAlive(source);

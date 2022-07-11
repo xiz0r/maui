@@ -92,11 +92,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.FlowDirection = FlowDirection.RightToLeft;
 
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsImplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsImplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsRightToLeft());
 
 			var target = view.EffectiveFlowDirection;
 
@@ -122,14 +122,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.FlowDirection = FlowDirection.LeftToRight;
 
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsLeftToRight());
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsRightToLeft());
 
-			Assert.That(view.EffectiveFlowDirection.IsImplicit());
-			Assert.That(view.EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(view.EffectiveFlowDirection.IsImplicit());
+			Assert.True(view.EffectiveFlowDirection.IsRightToLeft());
 
 			var target = ((View)view).FlowDirection;
 
@@ -148,12 +148,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			AddImplicitToRTL(layout2, (View)view);
 
 			layout2.FlowDirection = FlowDirection.RightToLeft;
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsExplicit(), "Explicit EffectiveFlowDirection not set on inner layout");
-			Assert.That(view.EffectiveFlowDirection.IsRightToLeft(), "Implicit FlowDirection not set on view");
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsExplicit(), "Explicit EffectiveFlowDirection not set on inner layout");
+			Assert.True(view.EffectiveFlowDirection.IsRightToLeft(), "Implicit FlowDirection not set on view");
 
 			layout.FlowDirection = FlowDirection.LeftToRight;
-			Assert.That(layout2.FlowDirection == FlowDirection.RightToLeft, "Explicit FlowDirection not respected on inner layout");
-			Assert.That(view.EffectiveFlowDirection.IsRightToLeft(), "Implicit FlowDirection not set on view");
+			Assert.True(layout2.FlowDirection == FlowDirection.RightToLeft, "Explicit FlowDirection not respected on inner layout");
+			Assert.True(view.EffectiveFlowDirection.IsRightToLeft(), "Implicit FlowDirection not set on view");
 
 			var target = ((PropertyWatchingView)view).FlowDirectionPropertyChangedCount;
 
@@ -171,8 +171,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			((View)view).Parent = layout2;
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
 
 			var target = view.EffectiveFlowDirection;
 
@@ -197,11 +197,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout2.Parent = layout3;
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsImplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsImplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
 
-			Assert.That(view.EffectiveFlowDirection.IsImplicit());
-			Assert.That(view.EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(view.EffectiveFlowDirection.IsImplicit());
+			Assert.True(view.EffectiveFlowDirection.IsLeftToRight());
 
 			var target = ((View)view).FlowDirection;
 
@@ -241,11 +241,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveFlowDirection;
 
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
 
 			Assert.True(target.IsImplicit(), "EffectiveFlowDirection should be Implicit");
 			Assert.True(!target.IsExplicit(), "EffectiveFlowDirection should be Implicit");
@@ -272,11 +272,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveFlowDirection;
 
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
 
 			Assert.True(target.IsImplicit(), "EffectiveFlowDirection should be Implicit");
 			Assert.True(!target.IsExplicit(), "EffectiveFlowDirection should be Implicit");
@@ -293,11 +293,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var target = view.EffectiveFlowDirection;
 
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
 
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout2).EffectiveFlowDirection.IsLeftToRight());
 
 			Assert.True(target.IsImplicit(), "EffectiveFlowDirection should be Implicit");
 			Assert.True(!target.IsExplicit(), "EffectiveFlowDirection should be Implicit");
@@ -383,10 +383,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			IViewController view = ImplicitLeftToRightView();
 			var layout = new StackLayout { FlowDirection = FlowDirection.RightToLeft, Children = { (View)view } };
 
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
-			Assert.That(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsExplicit());
+			Assert.True(((IViewController)layout).EffectiveFlowDirection.IsRightToLeft());
 
-			Assert.That(((View)view).FlowDirection == FlowDirection.MatchParent);
+			Assert.True(((View)view).FlowDirection == FlowDirection.MatchParent);
 
 			var target = view.EffectiveFlowDirection;
 
@@ -533,9 +533,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "child view FlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "child view FlowDirection should be LeftToRight");
-			Assert.That(child.FlowDirection == FlowDirection.LeftToRight, "child view FlowDirection should be LeftToRight");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "child view FlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "child view FlowDirection should be LeftToRight");
+			Assert.True(child.FlowDirection == FlowDirection.LeftToRight, "child view FlowDirection should be LeftToRight");
 		}
 
 		static void AddExplicitLTRToLayout(StackLayout parent, View child)
@@ -544,9 +544,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "child view FlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "child view FlowDirection should be LeftToRight");
-			Assert.That(child.FlowDirection == FlowDirection.LeftToRight, "child view FlowDirection should be LeftToRight");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "child view FlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "child view FlowDirection should be LeftToRight");
+			Assert.True(child.FlowDirection == FlowDirection.LeftToRight, "child view FlowDirection should be LeftToRight");
 		}
 
 		static void AddExplicitRTLToScrollView(ScrollView parent, View child)
@@ -555,9 +555,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "child view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(child.FlowDirection == FlowDirection.RightToLeft, "child view FlowDirection should be RightToLeft");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "child view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(child.FlowDirection == FlowDirection.RightToLeft, "child view FlowDirection should be RightToLeft");
 		}
 
 		static void AddExplicitRTLToLayout(StackLayout parent, View child)
@@ -566,9 +566,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "child view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(child.FlowDirection == FlowDirection.RightToLeft, "child view FlowDirection should be RightToLeft");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "child view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(child.FlowDirection == FlowDirection.RightToLeft, "child view FlowDirection should be RightToLeft");
 		}
 
 		static void AddImplicitToLTR(StackLayout parent, View child)
@@ -577,9 +577,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "child view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "child view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
 		}
 
 		static void AddImplicitToLTRScrollView(ScrollView parent, View child)
@@ -588,9 +588,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "child view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "child view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
 		}
 
 		static void AddImplicitToRTL(StackLayout parent, View child)
@@ -599,9 +599,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
 		}
 
 		static void AddImplicitToRTLScrollView(ScrollView parent, View child)
@@ -610,9 +610,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = child;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "child view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "child view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(child.FlowDirection == FlowDirection.MatchParent, "child view FlowDirection should be MatchParent");
 		}
 
 		static ScrollView ExplicitLeftToRightScrollView()
@@ -621,9 +621,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = layout;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "Explicit LTR view EffectiveFlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "Explicit LTR view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(layout.FlowDirection == FlowDirection.LeftToRight, "Explicit LTR view FlowDirection should be LeftToRight");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "Explicit LTR view EffectiveFlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "Explicit LTR view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(layout.FlowDirection == FlowDirection.LeftToRight, "Explicit LTR view FlowDirection should be LeftToRight");
 			return layout;
 		}
 
@@ -633,9 +633,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = layout;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "Explicit LTR view EffectiveFlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "Explicit LTR view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(layout.FlowDirection == FlowDirection.LeftToRight, "Explicit LTR view FlowDirection should be LeftToRight");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "Explicit LTR view EffectiveFlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "Explicit LTR view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(layout.FlowDirection == FlowDirection.LeftToRight, "Explicit LTR view FlowDirection should be LeftToRight");
 			return layout;
 		}
 
@@ -645,9 +645,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = view;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "Explicit LTR view EffectiveFlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "Explicit LTR view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(((View)view).FlowDirection == FlowDirection.LeftToRight, "Explicit LTR view FlowDirection should be LeftToRight");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "Explicit LTR view EffectiveFlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "Explicit LTR view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(((View)view).FlowDirection == FlowDirection.LeftToRight, "Explicit LTR view FlowDirection should be LeftToRight");
 
 			return view;
 		}
@@ -658,9 +658,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = layout;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "Explicit RTL view EffectiveFlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "Explicit RTL view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(layout.FlowDirection == FlowDirection.RightToLeft, "Explicit RTL view FlowDirection should be RightToLeft");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "Explicit RTL view EffectiveFlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "Explicit RTL view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(layout.FlowDirection == FlowDirection.RightToLeft, "Explicit RTL view FlowDirection should be RightToLeft");
 
 			return layout;
 		}
@@ -671,9 +671,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = layout;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "Explicit RTL view EffectiveFlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "Explicit RTL view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(layout.FlowDirection == FlowDirection.RightToLeft, "Explicit RTL view FlowDirection should be RightToLeft");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "Explicit RTL view EffectiveFlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "Explicit RTL view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(layout.FlowDirection == FlowDirection.RightToLeft, "Explicit RTL view FlowDirection should be RightToLeft");
 
 			return layout;
 		}
@@ -684,9 +684,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = view;
 
-			Assert.That(controller.EffectiveFlowDirection.IsExplicit(), "Explicit RTL view EffectiveFlowDirection should be Explicit");
-			Assert.That(controller.EffectiveFlowDirection.IsRightToLeft(), "Explicit RTL view EffectiveFlowDirection should be RightToLeft");
-			Assert.That(((View)view).FlowDirection == FlowDirection.RightToLeft, "Explicit RTL view FlowDirection should be RightToLeft");
+			Assert.True(controller.EffectiveFlowDirection.IsExplicit(), "Explicit RTL view EffectiveFlowDirection should be Explicit");
+			Assert.True(controller.EffectiveFlowDirection.IsRightToLeft(), "Explicit RTL view EffectiveFlowDirection should be RightToLeft");
+			Assert.True(((View)view).FlowDirection == FlowDirection.RightToLeft, "Explicit RTL view FlowDirection should be RightToLeft");
 
 			return view;
 		}
@@ -697,9 +697,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = layout;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "New view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "New view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(layout.FlowDirection == FlowDirection.MatchParent, "New view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "New view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "New view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(layout.FlowDirection == FlowDirection.MatchParent, "New view FlowDirection should be MatchParent");
 
 			return layout;
 		}
@@ -710,9 +710,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = layout;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "New view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "New view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(layout.FlowDirection == FlowDirection.MatchParent, "New view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "New view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "New view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(layout.FlowDirection == FlowDirection.MatchParent, "New view FlowDirection should be MatchParent");
 
 			return layout;
 		}
@@ -723,9 +723,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IViewController controller = view;
 
-			Assert.That(controller.EffectiveFlowDirection.IsImplicit(), "New view EffectiveFlowDirection should be Implicit");
-			Assert.That(controller.EffectiveFlowDirection.IsLeftToRight(), "New view EffectiveFlowDirection should be LeftToRight");
-			Assert.That(((View)view).FlowDirection == FlowDirection.MatchParent, "New view FlowDirection should be MatchParent");
+			Assert.True(controller.EffectiveFlowDirection.IsImplicit(), "New view EffectiveFlowDirection should be Implicit");
+			Assert.True(controller.EffectiveFlowDirection.IsLeftToRight(), "New view EffectiveFlowDirection should be LeftToRight");
+			Assert.True(((View)view).FlowDirection == FlowDirection.MatchParent, "New view FlowDirection should be MatchParent");
 
 			return view;
 		}

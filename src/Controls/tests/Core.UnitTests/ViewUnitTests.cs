@@ -176,7 +176,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateTo(25);
 
-			Assert.That(view.Rotation, Is.EqualTo(25).Within(0.001));
+			Assert.Equal(view.Rotation, 25).Within(0.001);
 		}
 
 		[Fact]
@@ -186,7 +186,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateYTo(25);
 
-			Assert.That(view.RotationY, Is.EqualTo(25).Within(0.001));
+			Assert.Equal(view.RotationY, 25).Within(0.001);
 		}
 
 		[Fact]
@@ -196,7 +196,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateXTo(25);
 
-			Assert.That(view.RotationX, Is.EqualTo(25).Within(0.001));
+			Assert.Equal(view.RotationX, 25).Within(0.001);
 		}
 
 		[Fact]
@@ -206,7 +206,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RelRotateTo(20);
 
-			Assert.That(view.Rotation, Is.EqualTo(50).Within(0.001));
+			Assert.Equal(view.Rotation, 50).Within(0.001);
 		}
 
 		[Fact]
@@ -216,7 +216,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RelScaleTo(1);
 
-			Assert.That(view.Scale, Is.EqualTo(2).Within(0.001));
+			Assert.Equal(view.Scale, 2).Within(0.001);
 		}
 
 		class ParentSignalView : View
@@ -274,9 +274,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestOnIdiomDefault()
 		{
 			mockDeviceInfo.Idiom = DeviceIdiom.Tablet;
-			Assert.That((int)(new OnIdiom<int> { Tablet = 12, Default = 42 }), Is.EqualTo(12));
+			Assert.Equal((int)(new OnIdiom<int> { Tablet = 12, Default = 42 }), 12);
 			mockDeviceInfo.Idiom = DeviceIdiom.Watch;
-			Assert.That((int)(new OnIdiom<int> { Tablet = 12, Default = 42 }), Is.EqualTo(42));
+			Assert.Equal((int)(new OnIdiom<int> { Tablet = 12, Default = 42 }), 42);
 		}
 
 		[Fact]
@@ -579,7 +579,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			parent.Children.Add(child);
 
 			Assert.Same(child.BindingContext, parent.BindingContext);
-			Assert.That(child.Text, Is.EqualTo("test"));
+			Assert.Equal(child.Text, "test");
 		}
 
 		[Fact]

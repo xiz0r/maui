@@ -29,7 +29,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var cell = new TextCell { Command = cmd };
 			cell.OnTapped();
 
-			Assert.That(executed, Is.EqualTo(canExecute));
+			Assert.Equal(executed, canExecute);
 		}
 
 		[Fact]
@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(TextCell.DetailProperty, "detail");
 
 			TextCell cell = (TextCell)template.CreateContent();
-			Assert.That(cell.Detail, Is.EqualTo("detail"));
+			Assert.Equal(cell.Detail, "detail");
 		}
 
 		[Fact]
@@ -144,7 +144,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(TextCell.TextProperty, "text");
 
 			TextCell cell = (TextCell)template.CreateContent();
-			Assert.That(cell.Text, Is.EqualTo("text"));
+			Assert.Equal(cell.Text, "text");
 		}
 	}
 }

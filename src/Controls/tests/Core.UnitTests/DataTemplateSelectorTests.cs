@@ -120,13 +120,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var selector = new TestDataTemplateSelector();
 			listView.ItemTemplate = selector;
-			Assert.That(selector.Counter == 0);
+			Assert.True(selector.Counter == 0);
 
 			Assert.IsType<ViewCell>(listView.TemplatedItems[0]);
-			Assert.That(selector.Counter == 1);
+			Assert.True(selector.Counter == 1);
 
 			Assert.IsType<ViewCell>(listView.TemplatedItems[1]);
-			Assert.That(selector.Counter == 1);
+			Assert.True(selector.Counter == 1);
 
 			Assert.Throws<NotSupportedException>(
 				() => { var o = listView.TemplatedItems[2]; });

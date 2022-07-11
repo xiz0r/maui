@@ -384,20 +384,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			/*
 			 * removing support for .. notation for now
 			await shell.GoToAsync("../one/tab11");
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/one/tab11/content/"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "app:///s/one/tab11/content/");
 
 			await shell.GoToAsync("/eee/hm../../../../two/../one/../two/tab21");
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/two/tab21/content/"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "app:///s/two/tab21/content/");
 
 			await shell.GoToAsync(new ShellNavigationState("../one/tab11"));
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/one/tab11/content/"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "app:///s/one/tab11/content/");
 
 			await shell.GoToAsync(new ShellNavigationState($"../two/tab23/content?{nameof(ShellTestPage.SomeQueryParameter)}=1234"));
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/two/tab23/content/"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "app:///s/two/tab23/content/");
 			Assert.Equal("1234", (two.CurrentItem.CurrentItem.Content as ShellTestPage).SomeQueryParameter);
 
 			await shell.GoToAsync(new ShellNavigationState($"../one/tab11#fragment"));
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("app:///s/one/tab11/content/"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "app:///s/one/tab11/content/");
 			*/
 		}
 

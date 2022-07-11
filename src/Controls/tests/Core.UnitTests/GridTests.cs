@@ -156,7 +156,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(endOfColB, endOfLastLabelInColB);
 
-			Assert.That(startOfColA, Is.EqualTo(endOfColB),
+			Assert.True(startOfColA == endOfColB,
 				"B is before A, so the start of A should be the end of B");
 		}
 
@@ -173,7 +173,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(endOfColB, endOfLastLabelInColB);
 
-			Assert.That(endOfColA, Is.EqualTo(startOfColB),
+			Assert.True(endOfColA == startOfColB,
 				"A is before B, so the end of A should be the start of B");
 		}
 
@@ -309,13 +309,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column0Width = grid.ColumnDefinitions[0].ActualWidth;
 			var column1Width = grid.ColumnDefinitions[1].ActualWidth;
 
-			Assert.That(column0Width, Is.LessThan(column1Width));
+			Assert.True(column0Width < column1Width);
 
 			// Having a first column which is a fraction of a Star width should not cause the grid
 			// to contract below the target width
 			var totalColumnSpacing = (grid.ColumnDefinitions.Count - 1) * grid.ColumnSpacing;
 
-			Assert.That(column0Width + column1Width + totalColumnSpacing, Is.GreaterThanOrEqualTo(gridWidth));
+			Assert.True(column0Width + column1Width + totalColumnSpacing >= gridWidth);
 		}
 
 		[Fact]
@@ -358,7 +358,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			grid2.Measure(gridWidth, double.PositiveInfinity);
 			var grid2Height = grid2.RowDefinitions[0].ActualHeight;
 
-			Assert.That(grid2Height, Is.GreaterThan(grid1Height));
+			Assert.True(grid2Height >= (grid1Height));
 		}
 
 
@@ -438,7 +438,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(label1.Height, label1.DesiredHeight(expectedColumnWidth)).Within(2);
 
 			// And that the new height is taller than the old one (since there's more text, and the column width did not change)
-			Assert.That(label1.Height, Is.GreaterThan(label1OriginalHeight));
+			Assert.True(label1.Height >= (label1OriginalHeight));
 		}
 
 		[Theory]

@@ -59,9 +59,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				return moc.Count;
 			});
 
-			Assert.That(countFromThreadPool, Is.EqualTo(0), "Count should be zero because the update on the UI thread hasn't run yet");
-			Assert.That(onMainThreadCount, Is.EqualTo(1), "Count should be 1 because the UI thread has updated");
-			Assert.That(insertCount, Is.EqualTo(1), "The CollectionChanged event should have fired with an Add exactly 1 time");
+			Assert.True(countFromThreadPool == 0, "Count should be zero because the update on the UI thread hasn't run yet");
+			Assert.True(onMainThreadCount == 1, "Count should be 1 because the UI thread has updated");
+			Assert.True(insertCount == 1, "The CollectionChanged event should have fired with an Add exactly 1 time");
 		});
 
 		[Fact("Intial item count should match wrapped collection.")]
@@ -101,8 +101,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Check the result on the main thread
 			var onMainThreadCount = await _dispatcher.DispatchAsync<int>(() => moc.Count);
 
-			Assert.That(countFromThreadPool, Is.EqualTo(2), "Count should be pre-clear");
-			Assert.That(onMainThreadCount, Is.EqualTo(0), "Count should be zero because the Clear has been processed");
+			Assert.True(countFromThreadPool == 2, "Count should be pre-clear");
+			Assert.True(onMainThreadCount == 0, "Count should be zero because the Clear has been processed");
 		});
 
 		[Fact("A Reset should reflect the state at the time of the Reset")]
@@ -131,8 +131,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Check the result on the main thread
 			var onMainThreadCount = await _dispatcher.DispatchAsync<int>(() => moc.Count);
 
-			Assert.That(countFromThreadPool, Is.EqualTo(2), "Count should be pre-clear");
-			Assert.That(onMainThreadCount, Is.EqualTo(1), "Should have processed a Clear and an Add");
+			Assert.True(countFromThreadPool == 2, "Count should be pre-clear");
+			Assert.True(onMainThreadCount == 1, "Should have processed a Clear and an Add");
 		});
 
 		[Fact("Removed items are still there until they're removed on the UI thread")]
@@ -156,8 +156,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Check the result on the main thread
 			var onMainThreadCount = await _dispatcher.DispatchAsync<int>(() => moc.Count);
 
-			Assert.That(countFromThreadPool, Is.EqualTo(2), "Count should be pre-remove");
-			Assert.That(onMainThreadCount, Is.EqualTo(1), "Remove has now processed");
+			Assert.True(countFromThreadPool == 2, "Count should be pre-remove");
+			Assert.True(onMainThreadCount == 1, "Remove has now processed");
 		});
 
 		[Fact("Until the UI thread processes a change, the indexer should remain consistent")]
@@ -178,7 +178,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				itemFromThreadPool = (int)moc[1];
 			});
 
-			Assert.That(itemFromThreadPool, Is.EqualTo(2), "Should have indexer value from before remove");
+			Assert.True(itemFromThreadPool == 2, "Should have indexer value from before remove");
 		});
 
 		[Fact("Don't show replacements until the UI thread has processed them")]
@@ -202,8 +202,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Check the result on the main thread
 			var onMainThreadValue = await _dispatcher.DispatchAsync(() => moc[0]);
 
-			Assert.That(itemFromThreadPool, Is.EqualTo(1), "Should have value from before replace");
-			Assert.That(onMainThreadValue, Is.EqualTo(42), "Should have value from after replace");
+			Assert.True(itemFromThreadPool == 1, "Should have value from before replace");
+			Assert.True((int)onMainThreadValue == 42, "Should have value from after replace");
 		});
 
 		[Fact("Don't show moves until the UI thread has processed them")]
@@ -227,8 +227,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// Check the result on the main thread
 			var onMainThreadValue = await _dispatcher.DispatchAsync(() => moc[0]);
 
-			Assert.That(itemFromThreadPool, Is.EqualTo(1), "Should have value from before move");
-			Assert.That(onMainThreadValue, Is.EqualTo(2), "Should have value from after move");
+			Assert.True(itemFromThreadPool == 1, "Should have value from before move");
+			Assert.True((int)onMainThreadValue == 2, "Should have value from after move");
 		});
 
 		

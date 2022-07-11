@@ -30,7 +30,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			MessagingCenter.Send(new MessagingCenterTests(), "SimpleTest", "My Message");
 
-			Assert.That(sentMessage, Is.Null);
+			Assert.Null(sentMessage);
 
 			MessagingCenter.Send(this, "SimpleTest", "My Message");
 
@@ -337,7 +337,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			MessagingCenter.Unsubscribe<MessagingCenterTests, string>(sub1, message);
 
 			MessagingCenter.Send(this, message, "Testing");
-			Assert.That(args2, Is.EqualTo("Testing"), "unsubscribing sub1 should not unsubscribe sub2");
+			Assert.True(args2 == "Testing", "unsubscribing sub1 should not unsubscribe sub2");
 		}
 
 		class TestSubcriber

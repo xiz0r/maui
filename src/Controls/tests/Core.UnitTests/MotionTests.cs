@@ -17,13 +17,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int updates = 0;
 			tweener.ValueUpdated += (sender, args) =>
 			{
-				Assert.That(tweener.Value, Is.GreaterThanOrEqualTo(value));
+				Assert.True(tweener.Value >= (value));
 				value = tweener.Value;
 				updates++;
 			};
 			tweener.Start();
 
-			Assert.That(updates, Is.GreaterThanOrEqualTo(10));
+			Assert.True(updates >= (10));
 		}
 
 		[Fact]

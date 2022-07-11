@@ -151,7 +151,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			lv.RowHeight = 5;
 
-			Assert.That(cell.RenderHeight, Is.EqualTo(5));
+			Assert.Equal(cell.RenderHeight, 5);
 
 			Assert.Equal(1, changing);
 			Assert.Equal(1, changed);

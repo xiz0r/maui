@@ -189,7 +189,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var numbers = new IntCollection(Enumerable.Range(0, 100));
 			var proxy = new ListProxy(numbers);
 
-			Assert.That(() => proxy[100], Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.Throws<ArgumentOutOfRangeException>(() => proxy[100]);
 		}
 
 		[Fact]
@@ -198,7 +198,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var numbers = Enumerable.Range(0, 100).ToList();
 			var proxy = new ListProxy(numbers);
 
-			Assert.That(() => proxy[100], Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.Throws<ArgumentOutOfRangeException>(() => proxy[100]);
 		}
 
 		[Fact]
@@ -212,8 +212,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			c.Add("baz");
 
-			Assert.That(() => e.MoveNext(), Throws.InvalidOperationException,
-				"MoveNext did not throw an exception when the underlying collection had changed");
+			Assert.Throws<InvalidOperationException>(() => e.MoveNext());
 		}
 
 		[Fact]
@@ -308,7 +307,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			proxy.Clear();
 
 			Assert.Equal(100, proxy.Count);
-			Assert.That(() => enumerator.MoveNext(), Throws.InvalidOperationException);
+			Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
 		}
 
 		[Fact]
@@ -322,7 +321,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			proxy.Clear();
 
 			Assert.Equal(100, proxy.Count);
-			Assert.That(() => enumerator.MoveNext(), Throws.InvalidOperationException);
+			Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
 		}
 
 		[Fact]
@@ -336,7 +335,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			proxy.Clear();
 
 			Assert.Equal(100, proxy.Count);
-			Assert.That(() => enumerator.MoveNext(), Throws.InvalidOperationException);
+			Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
 		}
 
 		[Fact]

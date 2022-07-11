@@ -65,7 +65,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void CurrentPageSetAfterAdd()
 		{
 			var page = CreateMultiPage();
-			Assert.That(page.CurrentPage, Is.Null);
+			Assert.Null(page.CurrentPage);
 
 			var child = CreateContainedPage();
 
@@ -78,8 +78,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.Children.Add(child);
 
-			Assert.That(page.CurrentPage, Is.SameAs(child));
-			Assert.That(property, Is.True, "CurrentPage property change did not fire");
+			Assert.Same(page.CurrentPage, child);
+			Assert.True(property, "CurrentPage property change did not fire");
 		}
 
 		[Fact]
@@ -101,7 +101,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.Children.Remove(child);
 
 			Assert.That(page.CurrentPage, Is.SameAs(child2), "MultiPage.CurrentPage is not set to a new page after current was removed");
-			Assert.That(property, Is.True, "CurrentPage property change did not fire");
+			Assert.True(property, "CurrentPage property change did not fire");
 		}
 
 		[Fact]
@@ -120,8 +120,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.Children.Remove(child);
 
-			Assert.That(page.CurrentPage, Is.Null, "MultiPage.CurrentPage is still set after that page was removed");
-			Assert.That(property, Is.True, "CurrentPage property change did not fire");
+			Assert.Null(page.CurrentPage);
+			Assert.True(property, "CurrentPage property change did not fire");
 		}
 
 		[Fact]
@@ -158,7 +158,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void SelectedItemSetAfterAdd()
 		{
 			var page = CreateMultiPage();
-			Assert.That(page.CurrentPage, Is.Null);
+			Assert.Null(page.CurrentPage);
 
 			var items = new ObservableCollection<string>();
 
@@ -176,17 +176,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Add("foo");
 
-			Assert.That(page.SelectedItem, Is.SameAs(items.First()));
-			Assert.That(page.CurrentPage.BindingContext, Is.SameAs(page.SelectedItem));
-			Assert.That(current, Is.True, "CurrentPage property change did not fire");
-			Assert.That(selected, Is.True, "SelectedItem property change did not fire");
+			Assert.Same(page.SelectedItem, items.First());
+			Assert.Same(page.CurrentPage.BindingContext, page.SelectedItem);
+			Assert.True(current, "CurrentPage property change did not fire");
+			Assert.True(selected, "SelectedItem property change did not fire");
 		}
 
 		[Fact]
 		public void SelectedItemNullAfterRemove()
 		{
 			var page = CreateMultiPage();
-			Assert.That(page.CurrentPage, Is.Null);
+			Assert.Null(page.CurrentPage);
 
 			var items = new ObservableCollection<string> { "foo" };
 			page.ItemsSource = items;
@@ -203,10 +203,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Remove("foo");
 
-			Assert.That(page.SelectedItem, Is.Null, "MultiPage.SelectedItem is still set after that page was removed");
-			Assert.That(page.CurrentPage, Is.Null, "MultiPage.CurrentPage is still set after that page was removed");
-			Assert.That(current, Is.True, "CurrentPage property change did not fire");
-			Assert.That(selected, Is.True, "SelectedItem property change did not fire");
+			Assert.Null(page.SelectedItem);
+			Assert.Null(page.CurrentPage);
+			Assert.True(current, "CurrentPage property change did not fire");
+			Assert.True(selected, "SelectedItem property change did not fire");
 		}
 
 		[Fact("When ItemsSource is set with items, the first item should automatically be selected")]
@@ -226,10 +226,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.ItemsSource = new[] { "foo" };
 
-			Assert.That(page.SelectedItem, Is.SameAs(((string[])page.ItemsSource)[0]));
-			Assert.That(page.CurrentPage.BindingContext, Is.SameAs(page.SelectedItem));
-			Assert.That(current, Is.True, "CurrentPage property change did not fire");
-			Assert.That(selected, Is.True, "SelectedItem property change did not fire");
+			Assert.Same(page.SelectedItem, ((string[])page.ItemsSource)[0]);
+			Assert.Same(page.CurrentPage.BindingContext, page.SelectedItem);
+			Assert.True(current, "CurrentPage property change did not fire");
+			Assert.True(selected, "SelectedItem property change did not fire");
 		}
 
 		[Fact]
@@ -244,7 +244,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			items = new[] { "fad", "baz" };
 			page.ItemsSource = items;
 
-			Assert.That(page.SelectedItem, Is.SameAs(items[0]));
+			Assert.Same(page.SelectedItem, items[0]);
 		}
 
 		[Fact]
@@ -255,12 +255,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var items = new ObservableCollection<string> { "foo", "bar" };
 			page.ItemsSource = items;
 
-			Assert.That(page.SelectedItem, Is.SameAs(items[0]));
+			Assert.Same(page.SelectedItem, items[0]);
 			Assert.That(page.CurrentPage, Is.Not.Null);
-			Assert.That(page.CurrentPage.BindingContext, Is.SameAs(items[0]));
+			Assert.Same(page.CurrentPage.BindingContext, items[0]);
 
 			page.SelectedItem = items[1];
-			Assert.That(page.CurrentPage.BindingContext, Is.SameAs(items[1]));
+			Assert.Same(page.CurrentPage.BindingContext, items[1]);
 
 			items.Move(1, 0);
 

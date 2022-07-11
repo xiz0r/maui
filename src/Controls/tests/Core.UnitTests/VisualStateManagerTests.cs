@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var groups1 = VisualStateManager.GetVisualStateGroups(label1);
 
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, NormalStateName);
 		}
 
 		[Fact]
@@ -88,13 +88,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.NotSame(groups1, groups2);
 
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
-			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, NormalStateName);
+			Assert.Equal(groups2[0].CurrentState.Name, NormalStateName);
 
 			VisualStateManager.GoToState(label1, InvalidStateName);
 
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(InvalidStateName));
-			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, InvalidStateName);
+			Assert.Equal(groups2[0].CurrentState.Name, NormalStateName);
 		}
 
 		[Fact]
@@ -118,13 +118,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.NotSame(groups1, groups2);
 
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
-			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, NormalStateName);
+			Assert.Equal(groups2[0].CurrentState.Name, NormalStateName);
 
 			VisualStateManager.GoToState(label1, InvalidStateName);
 
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(InvalidStateName));
-			Assert.That(groups2[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, InvalidStateName);
+			Assert.Equal(groups2[0].CurrentState.Name, NormalStateName);
 		}
 
 		[Fact]
@@ -214,26 +214,26 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			VisualStateManager.SetVisualStateGroups(label1, CreateTestStateGroups());
 
 			var groups1 = VisualStateManager.GetVisualStateGroups(label1);
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, NormalStateName);
 
 			label1.IsEnabled = false;
 
 			groups1 = VisualStateManager.GetVisualStateGroups(label1);
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(DisabledStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, DisabledStateName);
 
 
 			label1.SetValue(VisualElement.IsFocusedPropertyKey, true);
 			groups1 = VisualStateManager.GetVisualStateGroups(label1);
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(DisabledStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, DisabledStateName);
 
 			label1.IsEnabled = true;
 			groups1 = VisualStateManager.GetVisualStateGroups(label1);
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(FocusedStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, FocusedStateName);
 
 
 			label1.SetValue(VisualElement.IsFocusedPropertyKey, false);
 			groups1 = VisualStateManager.GetVisualStateGroups(label1);
-			Assert.That(groups1[0].CurrentState.Name, Is.EqualTo(NormalStateName));
+			Assert.Equal(groups1[0].CurrentState.Name, NormalStateName);
 
 		}
 
@@ -254,7 +254,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			VisualStateManager.SetVisualStateGroups(label, list);
 
-			Assert.That(label.Margin.Bottom, Is.EqualTo(targetBottomMargin));
+			Assert.Equal(label.Margin.Bottom, targetBottomMargin);
 		}
 
 		[Fact]
@@ -283,8 +283,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			x.Apply(label1);
 			x.Apply(label2);
 
-			Assert.That(label1.Margin.Bottom, Is.EqualTo(targetBottomMargin));
-			Assert.That(label2.Margin.Bottom, Is.EqualTo(targetBottomMargin));
+			Assert.Equal(label1.Margin.Bottom, targetBottomMargin);
+			Assert.Equal(label2.Margin.Bottom, targetBottomMargin);
 		}
 
 		[Fact]
@@ -322,12 +322,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			VisualStateManager.SetVisualStateGroups(label1, list);
 
-			Assert.That(label1.Margin.Top, Is.EqualTo(defaultMargin));
-			Assert.That(label1.Margin.Bottom, Is.EqualTo(targetMargin));
-			Assert.That(label1.Margin.Left, Is.EqualTo(defaultMargin));
+			Assert.Equal(label1.Margin.Top, defaultMargin);
+			Assert.Equal(label1.Margin.Bottom, targetMargin);
+			Assert.Equal(label1.Margin.Left, defaultMargin);
 
-			Assert.That(label2.Margin.Top, Is.EqualTo(targetMargin));
-			Assert.That(label2.Margin.Bottom, Is.EqualTo(defaultMargin));
+			Assert.Equal(label2.Margin.Top, targetMargin);
+			Assert.Equal(label2.Margin.Bottom, defaultMargin);
 		}
 
 		[Fact]
@@ -411,11 +411,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			VisualStateManager.SetVisualStateGroups(label, list);
 
-			Assert.That(label.BackgroundColor, Is.EqualTo(Colors.Red));
+			Assert.Equal(label.BackgroundColor, Colors.Red);
 			VisualStateManager.GoToState(label, DisabledStateName);
-			Assert.That(label.BackgroundColor, Is.EqualTo(Colors.Purple));
+			Assert.Equal(label.BackgroundColor, Colors.Purple);
 			VisualStateManager.GoToState(label, NormalStateName);
-			Assert.That(label.BackgroundColor, Is.EqualTo(Colors.Red));
+			Assert.Equal(label.BackgroundColor, Colors.Red);
 		}
 
 		[Fact]
@@ -468,11 +468,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			label.Style = style0;
-			Assert.That(label.TextColor, Is.EqualTo(Colors.Black));
+			Assert.Equal(label.TextColor, Colors.Black);
 			VisualStateManager.GoToState(label, SelectedStateName);
-			Assert.That(label.TextColor, Is.EqualTo(Colors.Red));
+			Assert.Equal(label.TextColor, Colors.Red);
 			label.Style = style1;
-			Assert.That(label.TextColor, Is.EqualTo(Colors.Black));
+			Assert.Equal(label.TextColor, Colors.Black);
 		}
 
 		[Fact]
@@ -499,9 +499,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.That(VisualStateManager.GetVisualStateGroups(label), Is.Not.Null);
-			Assert.That(VisualStateManager.GetVisualStateGroups(label).Count, Is.EqualTo(1)); //the list applied by style has one group			
+			Assert.Equal(VisualStateManager.GetVisualStateGroups(label).Count, 1); //the list applied by style has one group			
 			label.ClearValue(Label.StyleProperty); //clear the style
-			Assert.That(VisualStateManager.GetVisualStateGroups(label).Count, Is.EqualTo(0)); //default style (created by defaultValueCreator) has no groups
+			Assert.Equal(VisualStateManager.GetVisualStateGroups(label).Count, 0); //default style (created by defaultValueCreator) has no groups
 		}
 
 		[Fact]
@@ -523,9 +523,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			});
 
 			VisualStateManager.GoToState(label, SelectedStateName);
-			Assert.That(label.TextColor, Is.EqualTo(Colors.HotPink));
+			Assert.Equal(label.TextColor, Colors.HotPink);
 			label.ClearValue(VisualStateManager.VisualStateGroupsProperty);
-			Assert.That(VisualStateManager.GetVisualStateGroups(label).Count, Is.EqualTo(0)); //default style (created by defaultValueCreator) has no groups
+			Assert.Equal(VisualStateManager.GetVisualStateGroups(label).Count, 0); //default style (created by defaultValueCreator) has no groups
 			Assert.That(label.TextColor, Is.Not.EqualTo(Colors.HotPink)); //setter should be unapplied
 		}
 
@@ -536,7 +536,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label = new Label { TextColor = Colors.HotPink };//Setting the color manually should prevents style override
 			var SelectedStateName = "Selected";
 
-			Assert.That(label.TextColor, Is.EqualTo(Colors.HotPink));
+			Assert.Equal(label.TextColor, Colors.HotPink);
 
 			label.Style = new Style(typeof(Label))
 			{
@@ -558,9 +558,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.That(label.TextColor, Is.EqualTo(Colors.HotPink)); //textcolor from Style isn't applied
+			Assert.Equal(label.TextColor, Colors.HotPink); //textcolor from Style isn't applied
 			VisualStateManager.GoToState(label, SelectedStateName);
-			Assert.That(label.TextColor, Is.EqualTo(Colors.HotPink)); //textcolor Style's VSM isn't applied
+			Assert.Equal(label.TextColor, Colors.HotPink); //textcolor Style's VSM isn't applied
 		}
 
 		[Theory(Skip = "This test was created to check performance characteristics; leaving it in because it may be useful again.")]

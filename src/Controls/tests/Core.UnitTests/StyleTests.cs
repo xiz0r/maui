@@ -788,8 +788,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			var label1 = new Label();
 
-			Assert.That(label0.TextColor, Is.EqualTo(Colors.Pink));
-			Assert.That(label1.TextColor, Is.EqualTo(null));
+			Assert.Equal(label0.TextColor, Colors.Pink);
+			Assert.Equal(label1.TextColor, null);
 
 			var rd0 = new ResourceDictionary {
 				new Style (typeof(Label)) {
@@ -819,15 +819,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			mockApp.LoadPage(new ContentPage { Content = layout });
-			//Assert.That(label0.TextColor, Is.EqualTo(Color.Pink));
-			//Assert.That(label1.TextColor, Is.EqualTo(null));
+			//Assert.Equal(label0.TextColor, Color.Pink);
+			//Assert.Equal(label1.TextColor, null);
 
-			Assert.That(label0.TextColor, Is.EqualTo(Colors.Pink));
-			Assert.That(label1.TextColor, Is.EqualTo(Colors.Olive));
+			Assert.Equal(label0.TextColor, Colors.Pink);
+			Assert.Equal(label1.TextColor, Colors.Olive);
 
 			mockApp.Resources = rd1;
-			Assert.That(label0.TextColor, Is.EqualTo(Colors.Pink));
-			Assert.That(label1.TextColor, Is.EqualTo(Colors.Lavender));
+			Assert.Equal(label0.TextColor, Colors.Pink);
+			Assert.Equal(label1.TextColor, Colors.Lavender);
 		}
 
 		[Fact]
@@ -1003,13 +1003,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				Children = { button },
 			};
 
-			Assert.That(button.BackgroundColor, Is.EqualTo(Colors.HotPink));
+			Assert.Equal(button.BackgroundColor, Colors.HotPink);
 			button.ClearValue(Button.BackgroundColorProperty);
-			Assert.That(button.BackgroundColor, Is.EqualTo(Colors.HotPink));
+			Assert.Equal(button.BackgroundColor, Colors.HotPink);
 			button.BackgroundColor = Colors.Red;
-			Assert.That(button.BackgroundColor, Is.EqualTo(Colors.Red));
+			Assert.Equal(button.BackgroundColor, Colors.Red);
 			button.ClearValue(Button.BackgroundColorProperty);
-			Assert.That(button.BackgroundColor, Is.EqualTo(Colors.HotPink));
+			Assert.Equal(button.BackgroundColor, Colors.HotPink);
 		}
 	}
 }

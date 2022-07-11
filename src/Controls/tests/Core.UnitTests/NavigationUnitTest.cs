@@ -470,7 +470,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				if (e.PropertyName == NavigationPage.CurrentPageProperty.PropertyName)
 				{
-					Assert.That(navPage.CurrentPage, Is.SameAs(root));
+					Assert.Same(navPage.CurrentPage, root);
 					changing = true;
 				}
 			};
@@ -482,15 +482,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				if (e.PropertyName == NavigationPage.CurrentPageProperty.PropertyName)
 				{
-					Assert.That(navPage.CurrentPage, Is.SameAs(next));
+					Assert.Same(navPage.CurrentPage, next);
 					changed = true;
 				}
 			};
 
 			await navPage.PushAsync(next);
 
-			Assert.That(changing, Is.True, "PropertyChanging was not raised for 'CurrentPage'");
-			Assert.That(changed, Is.True, "PropertyChanged was not raised for 'CurrentPage'");
+			Assert.True(changing, "PropertyChanging was not raised for 'CurrentPage'");
+			Assert.True(changed, "PropertyChanged was not raised for 'CurrentPage'");
 		}
 
 		[InlineData(true)]

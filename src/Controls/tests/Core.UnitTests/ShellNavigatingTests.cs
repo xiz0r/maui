@@ -48,7 +48,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			shell.Items.Add(one);
 			shell.Items.Add(two);
 
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//one/tabone/content");
 
 			shell.Navigating += (s, e) =>
 			{
@@ -57,7 +57,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			shell.GoToAsync(new ShellNavigationState("//two/tabfour/"));
 
-			Assert.That(shell.CurrentState.Location.ToString(), Is.EqualTo("//one/tabone/content"));
+			Assert.Equal(shell.CurrentState.Location.ToString(), "//one/tabone/content");
 		}
 
 		[Fact]
@@ -671,8 +671,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			{
 				Assert.IsType<PageWithDependencyAndMultipleConstructors>(page);
 				var testPage = page as PageWithDependencyAndMultipleConstructors;
-				Assert.That(testPage.TestDependency, Is.Not.Null);
-				Assert.That(testPage.OtherTestDependency, Is.Null);
+				Assert.NotNull(testPage.TestDependency);
+				Assert.Null(testPage.OtherTestDependency);
 			}
 
 			if (pageType == typeof(PageWithUnregisteredDependencyAndParameterlessConstructor))

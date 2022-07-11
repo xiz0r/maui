@@ -340,7 +340,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			_ = new Window(page);
 
-			Assert.That(sent, Is.True, "Busy message not sent when visible");
+			Assert.True(sent, "Busy message not sent when visible");
 		}
 
 		[Fact]
@@ -359,7 +359,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			((IPageController)page).SendDisappearing();
 
-			Assert.That(sent, Is.True, "Busy message not sent when visible");
+			Assert.True(sent, "Busy message not sent when visible");
 		}
 
 		[Fact]
@@ -376,7 +376,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.IsBusy = true;
 
-			Assert.That(sent, Is.True, "Busy message not sent when visible");
+			Assert.True(sent, "Busy message not sent when visible");
 		}
 
 		[Fact]

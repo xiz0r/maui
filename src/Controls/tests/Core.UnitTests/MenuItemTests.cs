@@ -38,7 +38,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var c = new Command(o =>
 			{
-				Assert.That(o, Is.SameAs(param));
+				Assert.Same(o, param);
 				executed = true;
 			});
 

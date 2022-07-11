@@ -204,8 +204,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Visual = Maui.Controls.VisualMarker.Material;
 
-			Assert.That(((IVisualController)layout).EffectiveVisual.IsMaterial());
-			Assert.That(((IVisualController)layout2).EffectiveVisual.IsMaterial());
+			Assert.True(((IVisualController)layout).EffectiveVisual.IsMaterial());
+			Assert.True(((IVisualController)layout2).EffectiveVisual.IsMaterial());
 
 			var target = view.EffectiveVisual;
 
@@ -229,11 +229,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Visual = Maui.Controls.VisualMarker.Default;
 
-			Assert.That(((IVisualController)layout).EffectiveVisual.IsDefault());
+			Assert.True(((IVisualController)layout).EffectiveVisual.IsDefault());
 
-			Assert.That(((IVisualController)layout2).EffectiveVisual.IsMaterial());
+			Assert.True(((IVisualController)layout2).EffectiveVisual.IsMaterial());
 
-			Assert.That(view.EffectiveVisual.IsMaterial());
+			Assert.True(view.EffectiveVisual.IsMaterial());
 
 			var target = ((View)view).Visual;
 
@@ -252,11 +252,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			AddImplicitToMaterial(layout2, (View)view);
 
 			layout2.Visual = Maui.Controls.VisualMarker.Material;
-			Assert.That(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
+			Assert.True(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
 
 			layout.Visual = Maui.Controls.VisualMarker.Default;
-			Assert.That(layout2.Visual == Maui.Controls.VisualMarker.Material, "Explicit Visual not respected on inner layout");
-			Assert.That(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
+			Assert.True(layout2.Visual == Maui.Controls.VisualMarker.Material, "Explicit Visual not respected on inner layout");
+			Assert.True(view.EffectiveVisual.IsMaterial(), "Implicit Visual not set on view");
 
 			var target = ((PropertyWatchingView)view).VisualPropertyChangedCount;
 

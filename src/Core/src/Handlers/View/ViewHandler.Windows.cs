@@ -1,6 +1,10 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using PlatformView = Microsoft.UI.Xaml.FrameworkElement;
 
 namespace Microsoft.Maui.Handlers
@@ -13,7 +17,75 @@ namespace Microsoft.Maui.Handlers
 			{
 				platformView.GotFocus += OnPlatformViewGotFocus;
 				platformView.LostFocus += OnPlatformViewLostFocus;
+
+				if (platformView is UIElement uiElement)
+				{
+					if (VirtualView is IContextActionContainer contextActionContainer)
+					{
+						if (contextActionContainer.ContextActions?.Any() == true)
+						{
+							var newFlyout = new MenuFlyout();
+							AddMenuItems(contextActionContainer.ContextActions, newFlyout.Items.Add);
+							uiElement.ContextFlyout = newFlyout;
+						}
+					}
+				}
 			}
+		}
+
+		void AddMenuItems(IList<IMenuElement> menuItems, Action<MenuFlyoutItemBase> addMenuItem)
+		{
+			foreach (var menuItem in menuItems)
+			{
+				if (menuItem is IMenuFlyoutSubItem menuFlyoutSubItem)
+				{
+					var newSubItem = new MenuFlyoutSubItem();
+
+					// TODO: Need this code more generic so that flyout items and other items can share code paths
+					//UpdateNativeMenuItem(menuItem, newItem);
+					newSubItem.Text = menuFlyoutSubItem.Text;
+					AddMenuItems(menuFlyoutSubItem, newSubItem.Items.Add);
+
+					addMenuItem(newSubItem);
+				}
+				else
+				{
+					var newItem = new MenuFlyoutItem();
+					UpdateNativeMenuItem(menuItem, newItem);
+					if (menuItem is INotifyPropertyChanged npc)
+					{
+						// TODO: Super hack. This is so that changes to the MAUI controls are reflected in the native menu items
+						// TODO: If we can move all this MenuItem code to the Controls package, we can more closely follow the pattern used in other controls
+						npc.PropertyChanged += (object? sender, PropertyChangedEventArgs e) =>
+						{
+							var changedMenuItem = (IMenuElement)sender!;
+							UpdateNativeMenuItem(changedMenuItem, newItem);
+						};
+					}
+					newItem.Click += (_, __) => menuItem.Clicked();
+
+					addMenuItem(newItem);
+				}
+			}
+		}
+
+		private void UpdateNativeMenuItem(IMenuElement source, MenuFlyoutItem destination)
+		{
+			// TODO: Respect these settings too, if possible
+			//menuItem.Font
+
+			destination.CharacterSpacing = source.CharacterSpacing.ToEm();
+			destination.IsEnabled = source.IsEnabled;
+			destination.Text = source.Text;
+			destination.Icon = source.Source?.ToIconSource(MauiContext!)?.CreateIconElement();
+
+			// TODO: How to expose this platform-specific property for Windows only? Maybe something like this: https://docs.microsoft.com/dotnet/maui/windows/platform-specifics/listview-selectionmode
+			destination.KeyboardAccelerators.Add(
+				new UI.Xaml.Input.KeyboardAccelerator
+				{
+					Modifiers = global::Windows.System.VirtualKeyModifiers.Control,
+					Key = (global::Windows.System.VirtualKey)(char.ToUpperInvariant(source.Text[0])),
+				});
 		}
 
 		partial void DisconnectingHandler(PlatformView platformView)

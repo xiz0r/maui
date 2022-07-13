@@ -1,9 +1,92 @@
-﻿using PlatformView = UIKit.UIView;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CoreGraphics;
+using Foundation;
+using ObjCRuntime;
+using UIKit;
+using PlatformView = UIKit.UIView;
 
 namespace Microsoft.Maui.Handlers
 {
 	public partial class ViewHandler
 	{
+#pragma warning disable CA1416 // Validate platform compatibility
+		private sealed class MyUIContextMenuInteractionDelegate : NSObject, IUIContextMenuInteractionDelegate
+		{
+			readonly Func<UIContextMenuConfiguration> _a;
+
+			public MyUIContextMenuInteractionDelegate(Func<UIContextMenuConfiguration> a)
+			{
+				_a = a;
+			}
+			public UIContextMenuConfiguration? GetConfigurationForMenu(UIContextMenuInteraction interaction, CGPoint location)
+			{
+				return _a();
+			}
+		}
+
+		partial void ConnectingHandler(PlatformView? platformView)
+		{
+			if (VirtualView is IContextActionContainer contextActionContainer)
+			{
+				if (contextActionContainer.ContextActions?.Any() == true)
+				{
+					var uiMenuElements = new List<UIMenuElement>();
+					AddMenuItems(contextActionContainer.ContextActions, uiMenuElements);
+					var uiMenu = UIMenu.Create(uiMenuElements.ToArray());
+
+					var newFlyout = new UIContextMenuInteraction(
+						@delegate:
+						new MyUIContextMenuInteractionDelegate(
+							() =>
+							{
+								return UIContextMenuConfiguration.Create(
+									identifier: null,
+									previewProvider: null,
+									actionProvider: _ => uiMenu);
+							}));
+
+					platformView!.AddInteraction(newFlyout);
+				}
+			}
+		}
+
+		void AddMenuItems(IList<IMenuElement> menuItems, List<UIMenuElement> destinationList)
+		{
+			foreach (var menuItem in menuItems)
+			{
+				if (menuItem is IMenuFlyoutSubItem menuFlyoutSubItem)
+				{
+					var uiSubMenuElements = new List<UIMenuElement>();
+
+					AddMenuItems(menuFlyoutSubItem, uiSubMenuElements);
+
+					var newSubMenuElement = UIMenu.Create(
+						title: menuFlyoutSubItem.Text,
+						image: menuFlyoutSubItem.Source?.GetPlatformMenuImage(MauiContext!),
+						identifier: UIMenuIdentifier.None,
+						options: 0, // show as regular menu items
+						children: uiSubMenuElements.ToArray());
+
+					destinationList.Add(newSubMenuElement);
+				}
+				else
+				{
+					var newMenuElement = UIAction.Create(
+						title: menuItem.Text,
+						image: menuItem.Source?.GetPlatformMenuImage(MauiContext!),
+						identifier: null,
+						handler: _ => { menuItem.Clicked(); });
+
+					//UpdateNativeMenuItem(menuItem, newItem);
+
+					destinationList.Add(newMenuElement);
+				}
+			}
+		}
+#pragma warning restore CA1416 // Validate platform compatibility
+
 		static partial void MappingFrame(IViewHandler handler, IView view)
 		{
 			UpdateTransformation(handler, view);

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 
 namespace Microsoft.Maui.Controls
 {
 	/// <include file="../../docs/Microsoft.Maui.Controls/View.xml" path="Type[@FullName='Microsoft.Maui.Controls.View']/Docs" />
-	public partial class View : VisualElement, IViewController, IGestureController, IGestureRecognizers
+	public partial class View : VisualElement, IViewController, IGestureController, IGestureRecognizers, IContextActionContainer
 	{
 		protected internal IGestureController GestureController => this;
 
@@ -183,7 +184,21 @@ namespace Microsoft.Maui.Controls
 		protected override void OnBindingContextChanged()
 		{
 			this.PropagateBindingContext(GestureRecognizers);
+
+			PropagateBindingContextToContextActions();
+
 			base.OnBindingContextChanged();
+		}
+
+		private void PropagateBindingContextToContextActions()
+		{
+			if (HasContextActions)
+			{
+				for (var i = 0; i < _contextActions.Count; i++)
+				{
+					SetInheritedBindingContext(_contextActions[i], BindingContext);
+				}
+			}
 		}
 
 		static void MarginPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -197,6 +212,65 @@ namespace Microsoft.Maui.Controls
 				return;
 			if (gesture is PinchGestureRecognizer && _gestureRecognizers.GetGesturesFor<PinchGestureRecognizer>().Count() > 1)
 				throw new InvalidOperationException($"Only one {nameof(PinchGestureRecognizer)} per view is allowed");
+		}
+
+		ObservableCollection<MenuItem> _contextActions;
+		List<MenuItem> _currentContextActions;
+
+		public IList<MenuItem> ContextActions
+		{
+			get
+			{
+				if (_contextActions == null)
+				{
+					_contextActions = new ObservableCollection<MenuItem>();
+					_contextActions.CollectionChanged += OnContextActionsChanged;
+				}
+
+				return _contextActions;
+			}
+		}
+
+		IList<IMenuElement> IContextActionContainer.ContextActions
+		{
+			get => ContextActions.Cast<IMenuElement>().ToList();
+		}
+
+		public bool HasContextActions
+		{
+			get { return _contextActions != null && _contextActions.Count > 0 && IsEnabled; }
+		}
+
+		void OnContextActionsChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			for (var i = 0; i < _contextActions.Count; i++)
+			{
+				SetInheritedBindingContext(_contextActions[i], BindingContext);
+				_contextActions[i].Parent = this;
+				_currentContextActions?.Remove(_contextActions[i]);
+			}
+
+			if (_currentContextActions != null)
+			{
+				foreach (MenuItem item in _currentContextActions)
+				{
+					item.Parent = null;
+				}
+			}
+
+			_currentContextActions = new List<MenuItem>(_contextActions);
+
+			OnPropertyChanged(nameof(HasContextActions));
+		}
+
+		protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			if (propertyName == nameof(IsEnabled))
+			{
+				OnPropertyChanged(nameof(HasContextActions));
+			}
+
+			base.OnPropertyChanged(propertyName);
 		}
 	}
 }

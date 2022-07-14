@@ -54,7 +54,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var model = new TestModel();
 			var cell = model.GetCell(0, 5);
 
-			Assert.That(cell, Is.TypeOf<TextCell>());
+			Assert.IsType<TextCell>(cell);
 
 			var textCell = (TextCell)cell;
 			Assert.Equal("Foo", textCell.Text);

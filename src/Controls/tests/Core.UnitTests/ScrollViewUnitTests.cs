@@ -271,8 +271,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var scrollView = new ScrollView();
 
-			Assert.That(() => scrollView.ScrollToAsync(new VisualElement(), ScrollToPosition.Center, true), Throws.ArgumentException);
-			Assert.That(() => scrollView.ScrollToAsync(null, (ScrollToPosition)500, true), Throws.ArgumentException);
+			Assert.ThrowsAsync<ArgumentException>(() => scrollView.ScrollToAsync(new VisualElement(), ScrollToPosition.Center, true));
+			Assert.ThrowsAsync<ArgumentException>(() => scrollView.ScrollToAsync(null, (ScrollToPosition)500, true));
 		}
 
 		[Fact]

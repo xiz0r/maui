@@ -11,15 +11,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void NullSpansNotAllowed()
 		{
 			var fs = new FormattedString();
-			Assert.That(() => fs.Spans.Add(null), Throws.InstanceOf<ArgumentNullException>());
+			Assert.Throws<ArgumentNullException>(() => fs.Spans.Add(null));
 
 			fs = new FormattedString();
 			fs.Spans.Add(new Span());
 
-			Assert.That(() =>
+			Assert.Throws<ArgumentNullException>(() =>
 			{
 				fs.Spans[0] = null;
-			}, Throws.InstanceOf<ArgumentNullException>());
+			});
 		}
 
 		[Fact]

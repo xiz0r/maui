@@ -124,7 +124,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var content = template.CreateContent();
 
 			Assert.NotNull(content);
-			Assert.That(content, Is.InstanceOf<TextCell>());
+			Assert.IsType<TextCell>(content);
 		}
 
 		[Fact]
@@ -134,7 +134,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(TextCell.DetailProperty, "detail");
 
 			TextCell cell = (TextCell)template.CreateContent();
-			Assert.Equal(cell.Detail, "detail");
+			Assert.Equal("detail", cell.Detail);
 		}
 
 		[Fact]
@@ -144,7 +144,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(TextCell.TextProperty, "text");
 
 			TextCell cell = (TextCell)template.CreateContent();
-			Assert.Equal(cell.Text, "text");
+			Assert.Equal("text", cell.Text);
 		}
 	}
 }

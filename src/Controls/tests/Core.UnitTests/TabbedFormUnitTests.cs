@@ -26,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			TabbedPage page = new TabbedPage();
 
-			Assert.That(page.Children, Is.Empty);
+			Assert.Empty(page.Children);
 		}
 	}
 }

@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				velocity: 100,
 				drag: 1);
 
-			Assert.That(resultList, Is.Not.Empty);
+			Assert.NotEmpty(resultList);
 			int checkVelo = 100;
 			int dragStep = 16;
 

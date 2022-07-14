@@ -74,7 +74,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column1Width = grid.ColumnDefinitions[1].ActualWidth;
 
 			Assert.Equal(column0Width, column1Width);
-			Assert.That(column0Width, Is.LessThan(gridWidth));
+			Assert.True(column0Width < gridWidth);
 		}
 
 		[Fact]
@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var column1Height = grid.RowDefinitions[1].ActualHeight;
 
 			Assert.Equal(column0Height, column1Height);
-			Assert.That(column0Height, Is.LessThan(gridHeight));
+			Assert.True(column0Height < gridHeight);
 		}
 
 		[Fact]
@@ -123,8 +123,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(bottomOfRowB, bottomOfLastLabelInRowB);
 
-			Assert.That(topOfRowA, Is.EqualTo(bottomOfRowB),
-				"B is on top of A, so the top of A should be the bottom of B");
+			Assert.Equal(topOfRowA, bottomOfRowB);
 		}
 
 		[Fact]
@@ -140,8 +139,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.Equal(bottomOfRowB, bottomOfLastLabelInRowB);
 
-			Assert.That(topOfRowB, Is.EqualTo(bottomOfRowA),
-				"A is on top of B, so the top of B should be the bottom of A");
+			Assert.Equal(topOfRowB, bottomOfRowA);
 		}
 
 		[Fact]

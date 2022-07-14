@@ -20,14 +20,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			TimePicker picker = new TimePicker();
 
-			Assert.That(() => picker.Time = new TimeSpan(1000, 0, 0), Throws.ArgumentException);
+			Assert.Throws<ArgumentException>(() => picker.Time = new TimeSpan(1000, 0, 0));
 			Assert.Equal(picker.Time, new TimeSpan());
 
 			picker.Time = new TimeSpan(8, 30, 0);
 
 			Assert.Equal(new TimeSpan(8, 30, 0), picker.Time);
 
-			Assert.That(() => picker.Time = new TimeSpan(-1, 0, 0), Throws.ArgumentException);
+			Assert.Throws<ArgumentException>(() => picker.Time = new TimeSpan(-1, 0, 0));
 			Assert.Equal(new TimeSpan(8, 30, 0), picker.Time);
 		}
 

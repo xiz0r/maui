@@ -26,10 +26,10 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var styleString = @"background-color: #ff0000;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assert.That(style, Is.Not.Null);
+			Assert.NotNull(style);
 
 			var ve = new VisualElement();
-			Assert.Equal(ve.BackgroundColor, null);
+			Assert.Null(ve.BackgroundColor);
 			style.Apply(ve);
 			Assert.Equal(ve.BackgroundColor, Colors.Red);
 		}
@@ -39,7 +39,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var styleString = @"background-color: #ff0000;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assert.That(style, Is.Not.Null);
+			Assert.NotNull(style);
 
 			var ve = new VisualElement() { BackgroundColor = Colors.Pink };
 			Assert.Equal(ve.BackgroundColor, Colors.Pink);
@@ -54,7 +54,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 			//color should cascade, background-color should not
 			var styleString = @"background-color: #ff0000; color: #00ff00;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assert.That(style, Is.Not.Null);
+			Assert.NotNull(style);
 
 			var label = new Label();
 			var layout = new StackLayout
@@ -64,13 +64,13 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 				}
 			};
 
-			Assert.Equal(layout.BackgroundColor, null);
-			Assert.Equal(label.BackgroundColor, null);
-			Assert.Equal(label.TextColor, null);
+			Assert.Null(layout.BackgroundColor);
+			Assert.Null(label.BackgroundColor);
+			Assert.Null(label.TextColor);
 
 			style.Apply(layout);
 			Assert.Equal(layout.BackgroundColor, Colors.Red);
-			Assert.Equal(label.BackgroundColor, null);
+			Assert.Null(label.BackgroundColor);
 			Assert.Equal(label.TextColor, Colors.Lime);
 		}
 
@@ -79,10 +79,10 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		{
 			var styleString = @"background-color: #ff0000; color: #00ff00;";
 			var style = Style.Parse(new CssReader(new StringReader(styleString)), '}');
-			Assert.That(style, Is.Not.Null);
+			Assert.NotNull(style);
 
 			var layout = new StackLayout();
-			Assert.Equal(layout.GetValue(TextElement.TextColorProperty), null);
+			Assert.Null(layout.GetValue(TextElement.TextColorProperty));
 		}
 
 		[Fact]

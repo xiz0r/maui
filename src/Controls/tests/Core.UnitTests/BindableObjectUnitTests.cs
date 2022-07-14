@@ -90,11 +90,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void BindingContextChangedEvent()
 		{
 			var mock = new MockBindable();
-			mock.BindingContextChanged += (sender, args) => Assert.Pass();
+			bool passed = false;
+			mock.BindingContextChanged += (sender, args) => passed = true;
 
 			mock.BindingContext = new object();
 
-			throw new XunitException("The BindingContextChanged event was not fired.");
+			if (!passed)
+			{
+				throw new XunitException("The BindingContextChanged event was not fired.");
+			}
 		}
 
 		[Fact]

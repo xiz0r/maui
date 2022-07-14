@@ -852,7 +852,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var parentPage = (ContentPage)MockApplication.Current.MainPage;
 			var pageContent = parentPage.Content;
-			Assert.That(Equals(pageContent?.Parent, parentPage));
+			Assert.Same(pageContent?.Parent, parentPage);
 		}
 
 		[Fact]
@@ -883,7 +883,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var parentView = (ContentView)((ContentPage)mockApp.MainPage).Content;
 			var content = parentView.Content;
-			Assert.That(Equals(content?.Parent, parentView));
+			Assert.Same(content?.Parent, parentView);
 		}
 
 		class MyPage : ContentPage
@@ -926,7 +926,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			t.Style = s;
 
-			Assert.That(MockApplication.MockLogger.Messages.Count, Is.EqualTo(0),
+			Assert.True(MockApplication.MockLogger.Messages.Count == 0,
 				"A warning was logged: " + MockApplication.MockLogger.Messages.FirstOrDefault());
 		}
 

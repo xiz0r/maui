@@ -100,7 +100,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.Children.Remove(child);
 
-			Assert.That(page.CurrentPage, Is.SameAs(child2), "MultiPage.CurrentPage is not set to a new page after current was removed");
+			Assert.Same(page.CurrentPage, child2);
 			Assert.True(property, "CurrentPage property change did not fire");
 		}
 
@@ -141,10 +141,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Action<Page, string> assertPage = (p, s) =>
 			{
-				Assert.That(p, Is.InstanceOf<ContentPage>());
+				Assert.IsType<ContentPage>(p);
 
 				var cp = (ContentPage)p;
-				Assert.That(cp.Content, Is.InstanceOf<Label>());
+				Assert.IsType<Label>(cp.Content);
 				Assert.Equal(((Label)cp.Content).Text, s);
 			};
 
@@ -256,7 +256,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			page.ItemsSource = items;
 
 			Assert.Same(page.SelectedItem, items[0]);
-			Assert.That(page.CurrentPage, Is.Not.Null);
+			Assert.NotNull(page.CurrentPage);
 			Assert.Same(page.CurrentPage.BindingContext, items[0]);
 
 			page.SelectedItem = items[1];

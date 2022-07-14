@@ -176,7 +176,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var result = Internals.Registrar.Registered.GetHandler(typeof(MockElement), null, null, context);
 			var typedRenderer = (MockRendererWithParam)result;
 
-			Assert.That(typedRenderer, Is.InstanceOf(typeof(MockRendererWithParam)));
+			Assert.IsType<MockRendererWithParam>(typedRenderer);
 		}
 	}
 }

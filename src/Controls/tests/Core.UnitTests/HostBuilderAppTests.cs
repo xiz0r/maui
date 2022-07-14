@@ -128,7 +128,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var app = builder.Build();
 
-			Assert.That(((IConfigurationRoot)app.Configuration).Providers.OfType<TrackingConfigurationProvider>(), Has.One.Items);
+			Assert.Single(((IConfigurationRoot)app.Configuration).Providers.OfType<TrackingConfigurationProvider>());
 		}
 
 		[Theory]

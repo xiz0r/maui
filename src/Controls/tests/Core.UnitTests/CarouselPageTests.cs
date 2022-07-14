@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestConstructor()
 		{
 			var page = new CarouselPage();
-			Assert.That(page.Children, Is.Empty);
+			Assert.Empty(page.Children);
 		}
 	}
 }

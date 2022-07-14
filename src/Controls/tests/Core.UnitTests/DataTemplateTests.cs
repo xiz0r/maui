@@ -10,11 +10,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void CtorInvalid()
 		{
-			Assert.Throws<ArgumentNullException>(() => new DataTemplate((Func<object>)null),
-				"Allowed null creator delegate");
+			Assert.Throws<ArgumentNullException>(() => new DataTemplate((Func<object>)null));
 
-			Assert.Throws<ArgumentNullException>(() => new DataTemplate((Type)null),
-				"Allowed null type");
+			Assert.Throws<ArgumentNullException>(() => new DataTemplate((Type)null));
 		}
 
 		[Fact]
@@ -66,8 +64,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void SetBindingInvalid()
 		{
 			var template = new DataTemplate(typeof(MockBindable));
-			Assert.That(() => template.SetBinding(null, new Binding(".")), Throws.InstanceOf<ArgumentNullException>());
-			Assert.That(() => template.SetBinding(MockBindable.TextProperty, null), Throws.InstanceOf<ArgumentNullException>());
+			Assert.Throws<ArgumentNullException>(() => template.SetBinding(null, new Binding(".")));
+			Assert.Throws<ArgumentNullException>(() => template.SetBinding(MockBindable.TextProperty, null));
 		}
 
 		[Fact]

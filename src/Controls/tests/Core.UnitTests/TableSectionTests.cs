@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var section = new TableSection("Title");
 			Assert.Equal("Title", section.Title);
-			Assert.That(section, Is.Empty);
+			Assert.Empty(section);
 		}
 
 		[Fact]
@@ -31,8 +31,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.Add(first = new TextCell { Text = "Text" });
 			section.Add(second = new TextCell { Text = "Text" });
 
-			Assert.That(section, NContains.Item(first));
-			Assert.That(section, NContains.Item(second));
+			Assert.Contains(first, section);
+			Assert.Contains(second, section);
 		}
 
 		[Fact]
@@ -45,7 +45,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var result = section.Remove(first);
 			Assert.True(result);
-			Assert.That(section, Has.No.Contains(first));
+			Assert.DoesNotContain(first, section);
 		}
 
 		[Fact]
@@ -53,7 +53,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var section = new TableSection { new TextCell { Text = "Text" }, new TextCell { Text = "Text" } };
 			section.Clear();
-			Assert.That(section, Is.Empty);
+			Assert.Empty(section);
 		}
 
 		[Fact]
@@ -101,7 +101,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section.Add(second = new TextCell { Text = "Text" });
 
 			section.RemoveAt(0);
-			Assert.That(section, Has.No.Contains(first));
+			Assert.DoesNotContain(first, section);
 		}
 
 		[Fact]
@@ -116,7 +116,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			section[1] = third;
 
 			Assert.Equal(third, section[1]);
-			Assert.That(section, Has.No.Contains(second));
+			Assert.DoesNotContain(second, section);
 		}
 
 		[Fact]

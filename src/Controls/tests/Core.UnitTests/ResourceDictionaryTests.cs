@@ -30,16 +30,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void ResourceDictionaryTriggersValueChangedOnAdd()
 		{
 			var rd = new ResourceDictionary();
+			var passed = false;
 			((IResourceDictionary)rd).ValuesChanged += (sender, e) =>
 			{
-				Assert.Equal(1, e.Values.Count());
+				Assert.Single(e.Values);
 				var kvp = e.Values.First();
 				Assert.Equal("foo", kvp.Key);
 				Assert.Equal("FOO", kvp.Value);
-				Assert.Pass();
+				passed = true;
 			};
 			rd.Add("foo", "FOO");
-			throw new XunitException();
+
+			if (!passed)
+			{
+				throw new XunitException();
+			}
 		}
 
 		[Fact]
@@ -47,16 +52,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var rd = new ResourceDictionary();
 			rd.Add("foo", "FOO");
+			var passed = false;
 			((IResourceDictionary)rd).ValuesChanged += (sender, e) =>
 			{
-				Assert.Equal(1, e.Values.Count());
+				Assert.Single(e.Values);
 				var kvp = e.Values.First();
 				Assert.Equal("foo", kvp.Key);
 				Assert.Equal("BAR", kvp.Value);
-				Assert.Pass();
+				passed = true;
 			};
 			rd["foo"] = "BAR";
-			throw new XunitException();
+
+			if (!passed)
+			{
+				throw new XunitException();
+			}
 		}
 
 		[Fact]
@@ -138,17 +148,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			elt.Parent = parent;
 
+			var passed = false;
+
 			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) =>
 			{
-				Assert.Equal(1, e.Values.Count());
+				Assert.Single(e.Values);
 				var kvp = e.Values.First();
 				Assert.Equal("baz", kvp.Key);
 				Assert.Equal("BAZ", kvp.Value);
-				Assert.Pass();
+				passed = true;
 			});
 
 			parent.Resources["baz"] = "BAZ";
-			throw new XunitException();
+
+			if (!passed)
+			{
+				throw new XunitException();
+			}
 		}
 
 		[Fact]
@@ -172,7 +188,6 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) => throw new XunitException());
 			parent.Resources["bar"] = "BAZ";
-			Assert.Pass();
 		}
 
 		[Fact]
@@ -194,15 +209,21 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
+			var passed = false;
+
 			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) =>
 			{
 				Assert.Equal(2, e.Values.Count());
 				Assert.Equal("FOO", e.Values.First(kvp => kvp.Key == "foo").Value);
 				Assert.Equal("BAZ", e.Values.First(kvp => kvp.Key == "baz").Value);
-				Assert.Pass();
+				passed = true;
 			});
 			elt.Parent = parent;
-			throw new XunitException();
+
+			if (!passed)
+			{
+				throw new XunitException();
+			}
 		}
 
 		[Fact]
@@ -219,17 +240,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			elt.Parent = parent;
 
+			var passed = false;
+
 			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) =>
 			{
 				Assert.Equal(3, e.Values.Count());
-				Assert.Pass();
+				passed = true;
 			});
 			elt.Resources = new ResourceDictionary {
 				{"foo", "FOO"},
 				{"baz", "BAZ"},
 				{"bar", "NEWBAR"}
 			};
-			throw new XunitException();
+
+			if (!passed)
+			{
+				throw new XunitException();
+			}
 		}
 
 		[Fact]
@@ -265,14 +292,20 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
+			var passed = false;
+
 			((IElementDefinition)elt).AddResourcesChangedListener((sender, e) =>
 			{
 				Assert.Equal(2, e.Values.Count());
-				Assert.Pass();
+				passed = true;
 			});
 
 			elt.Parent = parent;
-			throw new XunitException();
+
+			if (!passed)
+			{
+				throw new XunitException();
+			}
 		}
 
 		[Fact]
@@ -281,7 +314,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var rd = new ResourceDictionary();
 			rd.Add("foo", "bar");
 			var ex = Assert.Throws<KeyNotFoundException>(() => { var foo = rd["test_invalid_key"]; });
-			Assert.That(ex.Message, Does.Contain("test_invalid_key"));
+			Assert.Contains("test_invalid_key", ex.Message, StringComparison.InvariantCulture);
 		}
 
 		class MyRD : ResourceDictionary
@@ -308,9 +341,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			catch (ArgumentException ae)
 			{
 				Assert.Equal("A resource with the key 'foo' is already present in the ResourceDictionary.", ae.Message);
-				Assert.Pass();
 			}
-			throw new XunitException();
+			catch(Exception ex) 
+			{
+				throw new XunitException(ex.ToString());
+			}
 		}
 
 		[Fact]

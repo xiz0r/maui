@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var template = new DataTemplate(typeof(SwitchCell));
 			var content = template.CreateContent();
 
-			Assert.That(content, Is.InstanceOf<SwitchCell>());
+			Assert.IsType<SwitchCell>(content);
 		}
 
 		[Fact]
@@ -23,7 +23,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(SwitchCell.TextProperty, "text");
 
 			SwitchCell cell = (SwitchCell)template.CreateContent();
-			Assert.Equal(cell.Text, "text");
+			Assert.Equal("text", cell.Text);
 		}
 
 		[Fact]
@@ -33,7 +33,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			template.SetValue(SwitchCell.OnProperty, true);
 
 			SwitchCell cell = (SwitchCell)template.CreateContent();
-			Assert.Equal(cell.On, true);
+			Assert.True(cell.On);
 		}
 
 		[Theory]

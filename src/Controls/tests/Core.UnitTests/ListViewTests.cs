@@ -831,7 +831,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			IListViewController controller = lv;
 			Assert.NotNull(controller.HeaderElement);
-			Assert.That(controller.HeaderElement, Is.InstanceOf<Label>());
+			Assert.IsType<Label>(controller.HeaderElement);
 			Assert.Equal(((Label)controller.HeaderElement).Text, lv.Header);
 		}
 

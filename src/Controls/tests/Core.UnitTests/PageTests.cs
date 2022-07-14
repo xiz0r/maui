@@ -321,7 +321,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			new ContentPage { IsBusy = true };
 
-			Assert.That(sent, Is.False, "Busy message sent while not visible");
+			Assert.False(sent);
 		}
 
 		[Fact]
@@ -336,7 +336,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var page = new ContentPage { IsBusy = true, IsPlatformEnabled = true };
 
-			Assert.That(sent, Is.False, "Busy message sent while not visible");
+			Assert.False(sent);
 
 			_ = new Window(page);
 
@@ -372,7 +372,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			_ = new Window(page);
 			((IPageController)page).SendAppearing();
 
-			Assert.That(sent, Is.False, "Busy message sent appearing while not busy");
+			Assert.False(sent, "Busy message sent appearing while not busy");
 
 			page.IsBusy = true;
 

@@ -498,10 +498,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.That(VisualStateManager.GetVisualStateGroups(label), Is.Not.Null);
-			Assert.Equal(VisualStateManager.GetVisualStateGroups(label).Count, 1); //the list applied by style has one group			
+			Assert.NotNull(VisualStateManager.GetVisualStateGroups(label));
+			Assert.Equal(1, VisualStateManager.GetVisualStateGroups(label).Count); //the list applied by style has one group			
 			label.ClearValue(Label.StyleProperty); //clear the style
-			Assert.Equal(VisualStateManager.GetVisualStateGroups(label).Count, 0); //default style (created by defaultValueCreator) has no groups
+			Assert.Equal(0, VisualStateManager.GetVisualStateGroups(label).Count); //default style (created by defaultValueCreator) has no groups
 		}
 
 		[Fact]
@@ -525,8 +525,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			VisualStateManager.GoToState(label, SelectedStateName);
 			Assert.Equal(label.TextColor, Colors.HotPink);
 			label.ClearValue(VisualStateManager.VisualStateGroupsProperty);
-			Assert.Equal(VisualStateManager.GetVisualStateGroups(label).Count, 0); //default style (created by defaultValueCreator) has no groups
-			Assert.That(label.TextColor, Is.Not.EqualTo(Colors.HotPink)); //setter should be unapplied
+			Assert.Equal(0, VisualStateManager.GetVisualStateGroups(label).Count); //default style (created by defaultValueCreator) has no groups
+			Assert.False(label.TextColor == Colors.HotPink); //setter should be unapplied
 		}
 
 		[Fact]

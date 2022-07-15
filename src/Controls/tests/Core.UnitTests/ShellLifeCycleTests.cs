@@ -502,7 +502,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			testShell.Items.Add(base.CreateShellItem());
 
-			Assert.Equal(1, args.Count);
+			Assert.Single(args);
 		}
 
 

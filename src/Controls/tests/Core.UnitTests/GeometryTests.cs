@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				arcSegment.SweepDirection == SweepDirection.CounterClockwise,
 				1);
 
-			Assert.NotEqual(0, points.Count);
+			Assert.NotEmpty(points);
 		}
 
 		[Fact]

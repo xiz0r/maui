@@ -976,9 +976,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			int ucount = 0;
 			bindable.Unhooked += obj =>
 			{
-				Assert.That(obj.BindingContext,
-					Is.InstanceOf(typeof(TemplatedItemsList<ItemsView<BindableObject>, BindableObject>))
-						.Or.EqualTo("Foo"));
+				Assert.True(obj.BindingContext.GetType() == typeof(TemplatedItemsList<ItemsView<BindableObject>, BindableObject>)
+					|| (string)obj.BindingContext == "Foo");
 
 				ucount++;
 			};

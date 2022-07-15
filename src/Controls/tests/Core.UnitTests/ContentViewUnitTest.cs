@@ -17,7 +17,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var contentView = new ContentView();
 
 			Assert.Null(contentView.Content);
-			Assert.Equal(null, contentView.BackgroundColor);
+			Assert.Null(contentView.BackgroundColor);
 			Assert.Equal(new Thickness(0), contentView.Padding);
 		}
 

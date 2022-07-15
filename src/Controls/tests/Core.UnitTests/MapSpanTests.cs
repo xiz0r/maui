@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		public void Equals()
+		public void EqualsTest()
 		{
 			Assert.True(new MapSpan(new Position(1, 2), 3, 4) == new MapSpan(new Position(1, 2), 3, 4));
 			Assert.True(new MapSpan(new Position(1, 2), 3, 4) != new MapSpan(new Position(2, 3), 4, 5));

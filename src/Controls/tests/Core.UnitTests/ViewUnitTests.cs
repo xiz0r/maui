@@ -176,7 +176,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateTo(25);
 
-			Assert.Equal(view.Rotation, 25).Within(0.001);
+			AssertEqualWithTolerance(view.Rotation, 25, 0.001);
 		}
 
 		[Fact]
@@ -186,7 +186,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateYTo(25);
 
-			Assert.Equal(view.RotationY, 25).Within(0.001);
+			AssertEqualWithTolerance(view.RotationY, 25, 0.001);
 		}
 
 		[Fact]
@@ -196,7 +196,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RotateXTo(25);
 
-			Assert.Equal(view.RotationX, 25).Within(0.001);
+			AssertEqualWithTolerance(view.RotationX, 25, 0.001);
 		}
 
 		[Fact]
@@ -206,7 +206,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RelRotateTo(20);
 
-			Assert.Equal(view.Rotation, 50).Within(0.001);
+			AssertEqualWithTolerance(view.Rotation, 50, 0.001);
 		}
 
 		[Fact]
@@ -216,7 +216,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await view.RelScaleTo(1);
 
-			Assert.Equal(view.Scale, 2).Within(0.001);
+			AssertEqualWithTolerance(view.Scale, 2, 0.001);
 		}
 
 		class ParentSignalView : View
@@ -274,9 +274,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestOnIdiomDefault()
 		{
 			mockDeviceInfo.Idiom = DeviceIdiom.Tablet;
-			Assert.Equal((int)(new OnIdiom<int> { Tablet = 12, Default = 42 }), 12);
+			Assert.Equal(12, (int)(new OnIdiom<int> { Tablet = 12, Default = 42 }));
 			mockDeviceInfo.Idiom = DeviceIdiom.Watch;
-			Assert.Equal((int)(new OnIdiom<int> { Tablet = 12, Default = 42 }), 42);
+			Assert.Equal(42, (int)(new OnIdiom<int> { Tablet = 12, Default = 42 }));
 		}
 
 		[Fact]
@@ -579,7 +579,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			parent.Children.Add(child);
 
 			Assert.Same(child.BindingContext, parent.BindingContext);
-			Assert.Equal(child.Text, "test");
+			Assert.Equal("test", child.Text);
 		}
 
 		[Fact]
@@ -741,6 +741,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			Maui.IElement view = new View();
 			Assert.Throws<InvalidOperationException>(() => view.Handler = new ElementHandlerStub());
+		}
+
+		static void AssertEqualWithTolerance(double a, double b, double tolerance)
+		{
+			var diff = Math.Abs(a - b);
+			Assert.True(diff <= tolerance);
 		}
 	}
 }

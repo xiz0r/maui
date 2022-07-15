@@ -11,10 +11,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var swipeView = new SwipeView();
 
-			Assert.Equal(0, swipeView.LeftItems.Count);
-			Assert.Equal(0, swipeView.TopItems.Count);
-			Assert.Equal(0, swipeView.RightItems.Count);
-			Assert.Equal(0, swipeView.BottomItems.Count);
+			Assert.Empty(swipeView.LeftItems);
+			Assert.Empty(swipeView.TopItems);
+			Assert.Empty(swipeView.RightItems);
+			Assert.Empty(swipeView.BottomItems);
 		}
 
 		[Fact]
@@ -99,7 +99,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				swipeItem
 			};
 
-			Assert.NotEqual(0, swipeView.LeftItems.Count);
+			Assert.NotEmpty(swipeView.LeftItems);
 		}
 
 		[Fact]
@@ -118,7 +118,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				swipeItem
 			};
 
-			Assert.NotEqual(0, swipeView.RightItems.Count);
+			Assert.NotEmpty(swipeView.RightItems);
 		}
 
 		[Fact]
@@ -137,7 +137,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				swipeItem
 			};
 
-			Assert.NotEqual(0, swipeView.TopItems.Count);
+			Assert.NotEmpty(swipeView.TopItems);
 		}
 
 		[Fact]
@@ -156,7 +156,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				swipeItem
 			};
 
-			Assert.NotEqual(0, swipeView.BottomItems.Count);
+			Assert.NotEmpty(swipeView.BottomItems);
 		}
 
 		[Fact]
@@ -242,7 +242,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			Assert.NotNull(swipeItemView);
 			Assert.NotNull(swipeItemView.Content);
-			Assert.NotEqual(0, swipeView.LeftItems.Count);
+			Assert.NotEmpty(swipeView.LeftItems);
 		}
 	}
 }

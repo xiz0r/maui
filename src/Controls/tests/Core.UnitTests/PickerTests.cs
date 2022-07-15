@@ -203,7 +203,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			Assert.Equal(5, picker.Items.Count);
 			Assert.Equal("John", picker.Items[0]);
-			Assert.Equal(null, picker.Items[3]);
+			Assert.Null(picker.Items[3]);
 		}
 
 		[Fact]
@@ -468,13 +468,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			picker.SetBinding(Picker.SelectedItemProperty, "SelectedItem");
 			Assert.Equal(1, picker.Items.Count);
 			Assert.Equal(-1, picker.SelectedIndex);
-			Assert.Equal(null, picker.SelectedItem);
+			Assert.Null(picker.SelectedItem);
 			picker.SelectedItem = obj;
 			Assert.Equal(0, picker.SelectedIndex);
 			Assert.Equal(obj, picker.SelectedItem);
 			picker.SelectedIndex = -1;
 			Assert.Equal(-1, picker.SelectedIndex);
-			Assert.Equal(null, picker.SelectedItem);
+			Assert.Null(picker.SelectedItem);
 		}
 	}
 }

@@ -5,7 +5,6 @@ using System.Reflection;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Graphics;
 using Xunit;
-using NUnit.Framework.Constraints;
 using Xunit.Sdk;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests

@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
@@ -137,7 +137,15 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			new object[] { new DateTime (2006, 12, 20), new DateTime (2100, 12, 31) } // Maximum Date
 		};
 
-		[Theory, MemberData(nameof(DateTimes))]
+		public static IEnumerable<object[]> DateTimesData() 
+		{
+			foreach (var o in DateTimes)
+			{
+				yield return o as object[];
+			}
+		}
+
+		[Theory, MemberData(nameof(DateTimesData))]
 		public void DatePickerSelectedEventArgs(DateTime initialDate, DateTime finalDate)
 		{
 			var datePicker = new DatePicker();

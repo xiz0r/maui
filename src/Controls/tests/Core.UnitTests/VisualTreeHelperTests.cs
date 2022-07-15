@@ -145,7 +145,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.Content = button;
 
-			Assert.Equal(1, _treeEvents.Count);
+			Assert.Single(_treeEvents);
 
 			var (parent, args) = _treeEvents[0];
 			Assert.Equal(page, parent);
@@ -168,7 +168,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			page.Content = null;
 
-			Assert.Equal(1, _treeEvents.Count);
+			Assert.Single(_treeEvents);
 
 			var (parent, args) = _treeEvents[0];
 			Assert.Equal(page, parent);
@@ -237,7 +237,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var button = new Button();
 			layout.Insert(2, button);
 
-			Assert.Equal(1, _treeEvents.Count);
+			Assert.Single(_treeEvents);
 
 			var (parent, args) = _treeEvents[0];
 			Assert.Equal(layout, parent);
@@ -268,7 +268,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			layout.Remove(button);
 
-			Assert.Equal(1, _treeEvents.Count);
+			Assert.Single(_treeEvents);
 
 			var (parent, args) = _treeEvents[0];
 			Assert.Equal(layout, parent);

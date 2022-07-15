@@ -188,7 +188,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.Equal(3, rd.Count);
-			Assert.Contains("Microsoft.Maui.Controls.Label", (System.Collections.ICollection)rd.Keys);
+			Assert.Contains("Microsoft.Maui.Controls.Label", rd.Keys);
 		}
 
 		[Fact]
@@ -636,16 +636,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.Equal(Colors.Pink, button.TextColor);
-			Assert.Equal(null, button.BackgroundColor);
+			Assert.Null(button.BackgroundColor);
 
 			Assert.Equal(Colors.Pink, myButton.TextColor);
-			Assert.Equal(null, myButton.BackgroundColor);
+			Assert.Null(myButton.BackgroundColor);
 
 			Assert.Equal(Colors.Pink, label.BackgroundColor);
-			Assert.Equal(null, label.TextColor);
+			Assert.Null(label.TextColor);
 
-			Assert.Equal(null, myLabel.BackgroundColor);
-			Assert.Equal(null, myLabel.TextColor);
+			Assert.Null(myLabel.BackgroundColor);
+			Assert.Null(myLabel.TextColor);
 		}
 
 		[Fact]
@@ -691,10 +691,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 
 			Assert.Equal(Colors.Pink, button.TextColor);
-			Assert.Equal(null, button.BackgroundColor);
+			Assert.Null(button.BackgroundColor);
 
 			Assert.Equal(Colors.Pink, label.BackgroundColor);
-			Assert.Equal(null, label.TextColor);
+			Assert.Null(label.TextColor);
 		}
 
 		[Fact]
@@ -739,10 +739,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			(cv.Content as StackLayout).Children.Add(label);
 
 			Assert.Equal(Colors.Pink, button.TextColor);
-			Assert.Equal(null, button.BackgroundColor);
+			Assert.Null(button.BackgroundColor);
 
 			Assert.Equal(Colors.Pink, label.BackgroundColor);
-			Assert.Equal(null, label.TextColor);
+			Assert.Null(label.TextColor);
 		}
 
 		[Fact]
@@ -789,7 +789,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var label1 = new Label();
 
 			Assert.Equal(label0.TextColor, Colors.Pink);
-			Assert.Equal(label1.TextColor, null);
+			Assert.Null(label1.TextColor);
 
 			var rd0 = new ResourceDictionary {
 				new Style (typeof(Label)) {

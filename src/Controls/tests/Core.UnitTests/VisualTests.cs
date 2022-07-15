@@ -135,7 +135,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			ViewCell cell = lv.TemplatedItems[0] as ViewCell;
 			IVisualController target = cell.View;
-			Assert.Equal(Maui.Controls.VisualMarker.Material, target.EffectiveVisual, "ViewCell View is not Material");
+			Assert.True(Maui.Controls.VisualMarker.Material == target.EffectiveVisual, "ViewCell View is not Material");
 		}
 
 		[Fact]
@@ -147,7 +147,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			ViewCell cell = lv.TemplatedItems[0] as ViewCell;
 			IVisualController target = cell.View;
-			Assert.Equal(Maui.Controls.VisualMarker.Material, target.EffectiveVisual, "ViewCell View is not Material");
+			Assert.True(Maui.Controls.VisualMarker.Material == target.EffectiveVisual, "ViewCell View is not Material");
 		}
 
 		[Fact]

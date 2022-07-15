@@ -210,12 +210,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void SetOneWayBinding()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
 
 			platformView.SetBinding("Foo", new Binding("FFoo", mode: BindingMode.OneWay));
 			platformView.SetBinding("Bar", new Binding("BBar", mode: BindingMode.OneWay));
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
 
 			platformView.SetBindingContext(new { FFoo = "Foo", BBar = 42 });
@@ -240,7 +240,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void Set2WayBindings()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
 
 			var vm = new MockVMForPlatformBinding();
@@ -248,9 +248,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var inpc = new MockINPC();
 			platformView.SetBinding("Foo", new Binding("FFoo", mode: BindingMode.TwoWay), inpc);
 			platformView.SetBinding("Bar", new Binding("BBar", mode: BindingMode.TwoWay), inpc);
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
-			Assert.Equal(null, vm.FFoo);
+			Assert.Null(vm.FFoo);
 			Assert.Equal(0, vm.BBar);
 
 			platformView.Foo = "oof";
@@ -274,14 +274,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void Set2WayBindingsWithUpdateSourceEvent()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Baz);
+			Assert.Null(platformView.Baz);
 
 			var vm = new MockVMForPlatformBinding();
 			platformView.SetBindingContext(vm);
 
 			platformView.SetBinding("Baz", new Binding("FFoo", mode: BindingMode.TwoWay), "BazChanged");
-			Assert.Equal(null, platformView.Baz);
-			Assert.Equal(null, vm.FFoo);
+			Assert.Null(platformView.Baz);
+			Assert.Null(vm.FFoo);
 
 			platformView.Baz = "oof";
 			platformView.FireBazChanged();
@@ -297,14 +297,14 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void Set2WayBindingsWithUpdateSourceEventInBindingObject()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Baz);
+			Assert.Null(platformView.Baz);
 
 			var vm = new MockVMForPlatformBinding();
 			platformView.SetBindingContext(vm);
 
 			platformView.SetBinding("Baz", new Binding("FFoo", mode: BindingMode.TwoWay) { UpdateSourceEventName = "BazChanged" });
-			Assert.Equal(null, platformView.Baz);
-			Assert.Equal(null, vm.FFoo);
+			Assert.Null(platformView.Baz);
+			Assert.Null(vm.FFoo);
 
 			platformView.Baz = "oof";
 			platformView.FireBazChanged();
@@ -399,7 +399,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var vm = new MockVMForPlatformBinding();
 			platformView.SetBindingContext(vm, v => v.SubViews);
 
-			Assert.Equal(null, platformViewChild.Foo);
+			Assert.Null(platformViewChild.Foo);
 			Assert.Equal(0, platformViewChild.Bar);
 
 			platformView.SetBindingContext(new { FFoo = "Foo", BBar = 42 }, v => v.SubViews);
@@ -437,7 +437,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestConverter2WayWorks()
 		{
 			var platformView = new MockPlatformView();
-			Assert.Equal(null, platformView.Foo);
+			Assert.Null(platformView.Foo);
 			Assert.Equal(0, platformView.Bar);
 			var inpc = new MockINPC();
 			var vm = new MockVMForPlatformBinding();

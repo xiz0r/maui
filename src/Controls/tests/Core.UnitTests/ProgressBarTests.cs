@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
@@ -24,7 +25,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bar.ProgressTo(0.8, 250, Easing.Linear);
 
-			Assert.Equal(0.8, bar.Progress).Within(0.001);
+			AssertEqualWithTolerance(0.8, bar.Progress, 0.001);
+		}
+
+		static void AssertEqualWithTolerance(double a, double b, double tolerance)
+		{
+			var diff = Math.Abs(a - b);
+			Assert.True(diff <= tolerance);
 		}
 	}
 }

@@ -421,7 +421,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerGrid.Layout(new Rect(0, 0, firstMeasure.Width, firstMeasure.Height));
 
 			// Verify that the actual height of the label is what we would expect (within a tolerance)
-			Assert.Equal(label1.Height, label1.DesiredHeight(expectedColumnWidth)).Within(2);
+			AssertEqualWithTolerance(label1.DesiredHeight(expectedColumnWidth), label1.Height, 2);			
 
 			var label1OriginalHeight = label1.Height;
 
@@ -433,10 +433,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerGrid.Layout(new Rect(0, 0, secondMeasure.Width, secondMeasure.Height));
 
 			// Verify that the actual height of the label is what we would expect (within a tolerance)
-			Assert.Equal(label1.Height, label1.DesiredHeight(expectedColumnWidth)).Within(2);
+			AssertEqualWithTolerance(label1.Height, label1.DesiredHeight(expectedColumnWidth), 2);
 
 			// And that the new height is taller than the old one (since there's more text, and the column width did not change)
 			Assert.True(label1.Height >= (label1OriginalHeight));
+		}
+
+		static void AssertEqualWithTolerance(double a, double b, double tolerance) 
+		{
+			var diff = Math.Abs(a - b);
+			Assert.True(diff <= tolerance);
 		}
 
 		[Theory]
@@ -485,7 +491,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			// The containing ScrollView should measure a width of about 411; the absolute column at the end of the grid
 			// shouldn't expand the ScrollView's measure to 447-ish. It's this expansion of the ScrollView that causes
 			// all subsequent parts of layout to go pear-shaped.
-			Assert.Equal(411, layoutSize.Request.Width).Within(2);
+			AssertEqualWithTolerance(411, layoutSize.Request.Width, 2);
 		}
 
 		[Fact]
@@ -626,7 +632,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerGrid.Layout(new Rect(0, 0, sizeRequest.Request.Width, 1000));
 
 			Assert.Equal(innerGrid.Height, foreground.Height);
-			Assert.Equal(background.Height, foreground.Height * 0.6).Within(0.01);
+			AssertEqualWithTolerance(background.Height, foreground.Height * 0.6, 0.01);
 
 			Assert.Equal(165, background.Height);
 		}

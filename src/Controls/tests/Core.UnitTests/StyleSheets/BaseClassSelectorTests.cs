@@ -22,7 +22,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.StyleSheets
 		IStyleSelectable AbsoluteLayout0 => StackLayout.Children.Skip(2).First();
 
 		
-		public void SetUp()
+		public BaseClassSelectorTests()
 		{
 			Page = new MockStylable
 			{
@@ -57,6 +57,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.StyleSheets
 				SetParents(s, stylable);
 		}
 
+		[Theory]
 		[InlineData("stacklayout label", true, true, false, false, false)]
 		[InlineData("stacklayout>label", true, false, false, false, false)]
 		[InlineData("stacklayout ^label", true, true, true, true, false)]

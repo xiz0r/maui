@@ -672,7 +672,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			outerLayout.ForceLayout();
 
 			var afterSize = innerStack.Bounds.Size;
-			Assert.NotEqual(beforeSize, afterSize, "Padding was grow, so Size should be bigger");
+			Assert.True(beforeSize != afterSize, "Padding was grow, so Size should be bigger");
 		}
 
 		[Fact]
@@ -705,7 +705,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var before = child.Bounds;
 			innerStack.Padding = new Thickness(30);
 			var after = child.Bounds;
-			Assert.NotEqual(before, after, "child should be moved within padding size");
+			Assert.True(before != after, "child should be moved within padding size");
 		}
 
 		void AssertInvalidated(IViewHandler handler)

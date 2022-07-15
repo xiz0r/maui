@@ -356,8 +356,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			await shell.GoToAsync("ModalTestPage");
 
-			Assert.NotNull(shellNavigatingEventArgs, "Shell.Navigating never fired");
-			Assert.NotNull(shellNavigatedEventArgs, "Shell.Navigated never fired");
+			Assert.NotNull(shellNavigatingEventArgs);
+			Assert.NotNull(shellNavigatedEventArgs);
 
 			Assert.Equal("//NewRoute/Section/Content", shellNavigatingEventArgs.Current.FullLocation.ToString());
 			Assert.Equal("//NewRoute/Section/Content/ModalTestPage", shellNavigatedEventArgs.Current.FullLocation.ToString());

@@ -59,7 +59,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			wrapper.Add(btn);
 
 			Assert.Equal(btn, wrapper[0]);
-			Assert.Equal(1, wrapper.Count);
+			Assert.Single(wrapper);
 
 			Assert.Contains(btn, observableCollection);
 			Assert.Contains(view, observableCollection);
@@ -107,7 +107,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			wrapper.Add(btn);
 
 			Assert.Equal(btn, wrapper[0]);
-			Assert.Equal(1, wrapper.Count);
+			Assert.Single(wrapper);
 
 			Assert.Contains(btn, observableCollection);
 			Assert.Contains(view, observableCollection);
@@ -254,7 +254,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			oc.Add(child);
 
 			Assert.Equal(-1, addIndex);
-			Assert.Equal(null, addedResult);
+			Assert.Null(addedResult);
 		}
 
 		[Fact]
@@ -324,7 +324,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			oc.Remove(child);
 
 			Assert.Equal(-1, addIndex);
-			Assert.Equal(null, addedResult);
+			Assert.Null(addedResult);
 		}
 
 		[Fact]
@@ -419,8 +419,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			wrapper.Add(new Button());
 
 			wrapper.Clear();
-			Assert.Equal(1, oc.Count);
-			Assert.Equal(0, wrapper.Count);
+			Assert.Single(oc);
+			Assert.Empty(wrapper);
 		}
 
 		[Fact]

@@ -440,10 +440,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			public void TestCount(int count, string message = null)
 			{
-				Assert.Equal(count, OnNavigatedCount, $"OnNavigatedCount: {message}");
-				Assert.Equal(count, NavigatingCount, $"NavigatingCount: {message}");
-				Assert.Equal(count, OnNavigatingCount, $"OnNavigatingCount: {message}");
-				Assert.Equal(count, NavigatedCount, $"NavigatedCount: {message}");
+				Assert.True(count == OnNavigatedCount, $"OnNavigatedCount: {message}");
+				Assert.True(count == NavigatingCount, $"NavigatingCount: {message}");
+				Assert.True(count == OnNavigatingCount, $"OnNavigatingCount: {message}");
+				Assert.True(count == NavigatedCount, $"NavigatedCount: {message}");
 			}
 
 

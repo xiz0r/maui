@@ -5,6 +5,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	
 	public class TextDecorationUnitTests : BaseTestFixtureXUnit
 	{
+		[Theory]
 		[InlineData("strikethrough", TextDecorations.Strikethrough)]
 		[InlineData("underline", TextDecorations.Underline)]
 		[InlineData("line-through", TextDecorations.Strikethrough)]
@@ -13,7 +14,6 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[InlineData("underline strikethrough", TextDecorations.Underline | TextDecorations.Strikethrough)]
 		[InlineData("underline line-through", TextDecorations.Underline | TextDecorations.Strikethrough)]
 		[InlineData("line-through underline", TextDecorations.Underline | TextDecorations.Strikethrough)]
-
 		public void TestTextDecorationConverter(string input, TextDecorations expected)
 		{
 			var converter = new TextDecorationConverter();

@@ -11,8 +11,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var tap = new TapGestureRecognizer();
 
-			Assert.Equal(null, tap.Command);
-			Assert.Equal(null, tap.CommandParameter);
+			Assert.Null(tap.Command);
+			Assert.Null(tap.CommandParameter);
 			Assert.Equal(1, tap.NumberOfTapsRequired);
 		}
 

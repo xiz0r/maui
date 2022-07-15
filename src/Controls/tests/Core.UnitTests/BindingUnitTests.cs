@@ -6,8 +6,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
-using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {

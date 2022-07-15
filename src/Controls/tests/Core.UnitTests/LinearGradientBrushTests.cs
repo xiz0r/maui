@@ -10,8 +10,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			LinearGradientBrush linearGradientBrush = new LinearGradientBrush();
 
-			Assert.Equal(1.0d, linearGradientBrush.EndPoint.X, "EndPoint.X");
-			Assert.Equal(1.0d, linearGradientBrush.EndPoint.Y, "EndPoint.Y");
+			Assert.Equal(1.0d, linearGradientBrush.EndPoint.X);
+			Assert.Equal(1.0d, linearGradientBrush.EndPoint.Y);
 		}
 
 		[Fact]
@@ -25,16 +25,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			LinearGradientBrush linearGradientBrush = new LinearGradientBrush(gradientStops, new Point(0, 0), new Point(0, 1));
 
-			Assert.NotEqual(0, linearGradientBrush.GradientStops.Count, "GradientStops");
-			Assert.Equal(0.0d, linearGradientBrush.EndPoint.X, "EndPoint.X");
-			Assert.Equal(1.0d, linearGradientBrush.EndPoint.Y, "EndPoint.Y");
+			Assert.NotEmpty(linearGradientBrush.GradientStops);
+			Assert.Equal(0.0d, linearGradientBrush.EndPoint.X);
+			Assert.Equal(1.0d, linearGradientBrush.EndPoint.Y);
 		}
 
 		[Fact]
 		public void TestEmptyLinearGradientBrush()
 		{
 			LinearGradientBrush nullLinearGradientBrush = new LinearGradientBrush();
-			Assert.Equal(true, nullLinearGradientBrush.IsEmpty, "IsEmpty");
+			Assert.True(nullLinearGradientBrush.IsEmpty);
 
 			LinearGradientBrush linearGradientBrush = new LinearGradientBrush
 			{
@@ -47,17 +47,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.Equal(false, linearGradientBrush.IsEmpty, "IsEmpty");
+			Assert.False(linearGradientBrush.IsEmpty);
 		}
 
 		[Fact]
 		public void TestNullOrEmptyLinearGradientBrush()
 		{
 			LinearGradientBrush nullLinearGradientBrush = null;
-			Assert.Equal(true, Brush.IsNullOrEmpty(nullLinearGradientBrush), "IsNullOrEmpty");
+			Assert.True(Brush.IsNullOrEmpty(nullLinearGradientBrush));
 
 			LinearGradientBrush emptyLinearGradientBrush = new LinearGradientBrush();
-			Assert.Equal(true, Brush.IsNullOrEmpty(emptyLinearGradientBrush), "IsNullOrEmpty");
+			Assert.True(Brush.IsNullOrEmpty(emptyLinearGradientBrush));
 
 			LinearGradientBrush linearGradientBrush = new LinearGradientBrush
 			{
@@ -70,7 +70,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				}
 			};
 
-			Assert.Equal(false, Brush.IsNullOrEmpty(linearGradientBrush), "IsNullOrEmpty");
+			Assert.False(Brush.IsNullOrEmpty(linearGradientBrush));
 		}
 
 		[Fact]

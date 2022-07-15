@@ -44,7 +44,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 
 		[Fact]
-		public void Equals()
+		public void EqualsTest()
 		{
 			var position1 = new Position(78, 167);
 			var position2 = new Position(78, 167);

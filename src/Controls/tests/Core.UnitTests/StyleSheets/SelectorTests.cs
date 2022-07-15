@@ -18,7 +18,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 		IStyleSelectable ContentView0 => StackLayout.Children.Skip(2).First();
 
 		
-		public void SetUp()
+		public SelectorTests()
 		{
 			Page = new MockStylable
 			{
@@ -54,6 +54,7 @@ namespace Microsoft.Maui.Controls.StyleSheets.UnitTests
 				SetParents(s, stylable);
 		}
 
+		[Theory]
 		[InlineData("label", true, true, true, true, true, false)]
 		[InlineData(" label", true, true, true, true, true, false)]
 		[InlineData("label ", true, true, true, true, true, false)]

@@ -9,7 +9,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestConstructor()
 		{
 			SolidColorBrush solidColorBrush = new SolidColorBrush();
-			Assert.Null(solidColorBrush.Color, "Color");
+			Assert.Null(solidColorBrush.Color);
 		}
 
 		[Fact]
@@ -23,23 +23,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestEmptySolidColorBrush()
 		{
 			SolidColorBrush solidColorBrush = new SolidColorBrush();
-			Assert.Equal(true, solidColorBrush.IsEmpty, "IsEmpty");
+			Assert.True(solidColorBrush.IsEmpty);
 
 			SolidColorBrush red = Brush.Red;
-			Assert.Equal(false, red.IsEmpty, "IsEmpty");
+			Assert.False(red.IsEmpty);
 		}
 
 		[Fact]
 		public void TestNullOrEmptySolidColorBrush()
 		{
 			SolidColorBrush nullSolidColorBrush = null;
-			Assert.Equal(true, Brush.IsNullOrEmpty(nullSolidColorBrush), "IsNullOrEmpty");
+			Assert.True(Brush.IsNullOrEmpty(nullSolidColorBrush));
 
 			SolidColorBrush emptySolidColorBrush = new SolidColorBrush();
-			Assert.Equal(true, Brush.IsNullOrEmpty(emptySolidColorBrush), "IsNullOrEmpty");
+			Assert.True(Brush.IsNullOrEmpty(emptySolidColorBrush));
 
 			SolidColorBrush solidColorBrush = Brush.Yellow;
-			Assert.Equal(false, Brush.IsNullOrEmpty(solidColorBrush), "IsNullOrEmpty");
+			Assert.False(Brush.IsNullOrEmpty(solidColorBrush));
 		}
 
 		[Fact]

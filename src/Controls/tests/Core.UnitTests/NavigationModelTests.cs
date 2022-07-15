@@ -243,7 +243,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			navModel.PopModal();
 
 			Assert.Equal(child1, navModel.CurrentPage);
-			Assert.Equal(1, navModel.Roots.Count());
+			Assert.Single(navModel.Roots);
 		}
 
 		[Fact]

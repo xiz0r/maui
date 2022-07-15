@@ -30,13 +30,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Menu
 
 			menuBar.Add(child0);
 
-			Assert.Equal(menuBar, child0.Parent);
+			Assert.Same(menuBar, child0.Parent);
 			Assert.Null(child1.Parent);
 
 			menuBar[0] = child1;
 
 			Assert.Null(child0.Parent);
-			Assert.Equal(menuBar, child1.Parent);
+			Assert.Same(menuBar, child1.Parent);
 		}
 
 		[Fact]
@@ -50,8 +50,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Menu
 			menuBar.Add(child0);
 			menuBar.Add(child1);
 
-			Assert.Equal(menuBar, child0.Parent);
-			Assert.Equal(menuBar, child1.Parent);
+			Assert.Same(menuBar, child0.Parent);
+			Assert.Same(menuBar, child1.Parent);
 
 			menuBar.Clear();
 
@@ -73,7 +73,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Menu
 
 			menuBar.Add(child0);
 
-			Assert.Equal(1, events.Count);
+			Assert.Single(events);
 			var (name, args) = events[0];
 			Assert.Equal(nameof(IMenuBarHandler.Add), name);
 			Assert.Equal(0, GetIndex(args!));
@@ -95,7 +95,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Menu
 
 			menuBar.Remove(child0);
 
-			Assert.Equal(1, events.Count);
+			Assert.Single(events);
 			var (name, args) = events[0];
 			Assert.Equal(nameof(IMenuBarHandler.Remove), name);
 			Assert.Equal(0, GetIndex(args!));
@@ -121,7 +121,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Menu
 
 			menuBar.Insert(1, child1);
 
-			Assert.Equal(1, events.Count);
+			Assert.Single(events);
 			var (name, args) = events[0];
 			Assert.Equal(nameof(IMenuBarHandler.Insert), name);
 			Assert.Equal(1, GetIndex(args!));

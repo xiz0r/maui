@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Xunit;
 
-using NContains = NUnit.Framework.Contains;
-
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
 	

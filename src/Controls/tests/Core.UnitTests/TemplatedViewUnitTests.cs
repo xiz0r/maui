@@ -187,9 +187,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			};
 			cv.BindingContext = "Foo";
 
-			Assert.Equal(label.Text, "Foo");
+			Assert.Equal("Foo", label.Text);
 			cv.ControlTemplate = template1;
-			Assert.Equal(label.Text, "Foo");
+			Assert.Equal("Foo", label.Text);
 		}
 	}
 

@@ -37,13 +37,13 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void TestSystemFontOfSize()
 		{
 			var font = Font.SystemFontOfSize(12);
-			Assert.Equal(null, font.Family);
+			Assert.Null(font.Family);
 			Assert.Equal(12, font.Size);
 
 
 			var size = Device.GetNamedSize(NamedSize.Medium, null, false);
 			font = Font.SystemFontOfSize(size);
-			Assert.Equal(null, font.Family);
+			Assert.Null(font.Family);
 			Assert.Equal(size, font.Size);
 		}
 
@@ -53,12 +53,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
 
 			var font = Font.SystemFontOfSize(12.7);
-			Assert.Equal(null, font.Family);
+			Assert.Null(font.Family);
 			Assert.Equal(12.7, font.Size);
 
 			var size = Device.GetNamedSize(NamedSize.Medium, null, false);
 			font = Font.SystemFontOfSize(size);
-			Assert.Equal(null, font.Family);
+			Assert.Null(font.Family);
 			Assert.Equal(size, font.Size);
 		}
 

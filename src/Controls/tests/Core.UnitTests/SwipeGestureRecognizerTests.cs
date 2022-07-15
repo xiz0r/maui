@@ -11,9 +11,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			var swipe = new SwipeGestureRecognizer();
 
-			Assert.Equal(null, swipe.Command);
-			Assert.Equal(null, swipe.CommandParameter);
-			Assert.Equal(100, swipe.Threshold);
+			Assert.Null(swipe.Command);
+			Assert.Null(swipe.CommandParameter);
+			Assert.Equal((uint)100, swipe.Threshold);
 		}
 
 		[Fact]

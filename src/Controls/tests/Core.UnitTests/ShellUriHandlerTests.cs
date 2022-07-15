@@ -96,7 +96,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("//item1/section1/rootlevelcontent1");
 			var request = ShellUriHandler.GetNavigationRequest(shell, CreateUri("section1/edit"), true);
 
-			Assert.Equal(1, request.Request.GlobalRoutes.Count);
+			Assert.Single(request.Request.GlobalRoutes);
 			Assert.Equal("item1/section1/edit", request.Request.GlobalRoutes.First());
 		}
 
@@ -132,7 +132,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			await shell.GoToAsync("//rootlevelcontent1");
 			var request = ShellUriHandler.GetNavigationRequest(shell, CreateUri("edit"));
 
-			Assert.Equal(1, request.Request.GlobalRoutes.Count);
+			Assert.Single(request.Request.GlobalRoutes);
 			Assert.Equal("edit", request.Request.GlobalRoutes.First());
 		}
 
@@ -167,11 +167,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//rootlevelcontent1"));
 
-			Assert.Equal(1, builders.Count);
+			Assert.Single(builders);
 			Assert.Equal("//rootlevelcontent1", builders.First().PathNoImplicit);
 
 			builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//rootlevelcontent2"));
-			Assert.Equal(1, builders.Count);
+			Assert.Single(builders);
 			Assert.Equal("//rootlevelcontent2", builders.First().PathNoImplicit);
 		}
 
@@ -189,11 +189,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//section1/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
 
-			Assert.Equal(1, builders.Length);
+			Assert.Single(builders);
 			Assert.Contains("//section1/rootlevelcontent", builders);
 
 			builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//section2/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
-			Assert.Equal(1, builders.Length);
+			Assert.Single(builders);
 			Assert.Contains("//section2/rootlevelcontent", builders);
 		}
 
@@ -210,11 +210,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			var builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//item1/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
 
-			Assert.Equal(1, builders.Length);
+			Assert.Single(builders);
 			Assert.Contains("//item1/rootlevelcontent", builders);
 
 			builders = ShellUriHandler.GenerateRoutePaths(shell, CreateUri("//item2/rootlevelcontent")).Select(x => x.PathNoImplicit).ToArray();
-			Assert.Equal(1, builders.Length);
+			Assert.Single(builders);
 			Assert.Contains("//item2/rootlevelcontent", builders);
 		}
 
@@ -307,7 +307,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			foreach (var uri in TestUris)
 			{
-				Assert.Equal(new Uri("app://shell/IMPL_shell/path"), ShellUriHandler.ConvertToStandardFormat(shell, uri), $"{uri}");
+				Assert.Equal(new Uri("app://shell/IMPL_shell/path"), ShellUriHandler.ConvertToStandardFormat(shell, uri));
 
 				if (!uri.IsAbsoluteUri)
 				{

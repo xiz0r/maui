@@ -186,7 +186,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			label.SetDynamicResource(Label.TextProperty, "foo");
 			label.Resources = new ResourceDictionary { { "foo", "FOO" } };
 
-			Assert.Equal(label.Text, "FOO");
+			Assert.Equal("FOO", label.Text);
 
 			label.Resources["foo"] = "BAR";
 

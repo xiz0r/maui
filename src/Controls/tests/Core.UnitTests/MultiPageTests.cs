@@ -470,7 +470,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			items.Remove("Foo");
 
 			var pages = page.Children.ToArray();
-			Assert.Equal(1, pages.Length);
+			Assert.Single(pages);
 			assertPage(pages, 0, "Bar");
 		}
 

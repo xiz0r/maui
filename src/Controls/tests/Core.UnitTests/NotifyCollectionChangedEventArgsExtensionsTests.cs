@@ -29,7 +29,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Add("monkey");
 
-			CollectionAssert.Equal(items, applied);
+			Assert.Equal(items, applied);
 		}
 
 		[Fact]
@@ -50,7 +50,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Insert(1, "monkey");
 
-			CollectionAssert.Equal(items, applied);
+			Assert.Equal(items, applied);
 		}
 
 		[Fact]
@@ -72,7 +72,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items.Move(0, 2);
 
-			CollectionAssert.Equal(items, applied);
+			Assert.Equal(items, applied);
 		}
 
 		[Fact]
@@ -94,7 +94,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			items[1] = "monkey";
 
-			CollectionAssert.Equal(items, applied);
+			Assert.Equal(items, applied);
 		}
 	}
 }

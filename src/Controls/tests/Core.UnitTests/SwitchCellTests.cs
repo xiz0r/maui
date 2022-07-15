@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using NUnit.Framework.Constraints;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {

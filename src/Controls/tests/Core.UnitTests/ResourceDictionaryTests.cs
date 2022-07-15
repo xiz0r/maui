@@ -73,7 +73,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void ResourceDictionaryCtor()
 		{
 			var rd = new ResourceDictionary();
-			Assert.Equal(0, rd.Count());
+			Assert.Empty(rd);
 		}
 
 		[Fact]

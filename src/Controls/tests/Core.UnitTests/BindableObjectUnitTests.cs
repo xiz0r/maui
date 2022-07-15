@@ -225,8 +225,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(3, count);
 		}
 
-		[Fact]
-		[NUnit.Framework.Description("When the BindingContext changes, any bindings should be immediately applied.")]
+		[Fact("When the BindingContext changes, any bindings should be immediately applied.")]
 		public void BindingContextChangedBindingsApplied()
 		{
 			var mock = new MockBindable();
@@ -240,8 +239,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("Testing", mock.GetValue(MockBindable.TextProperty)); // "Bindings were not reapplied to the new binding context"
 		}
 
-		[Fact]
-		[NUnit.Framework.Description("When the BindingContext changes, the new context needs to listen for updates.")]
+		[Fact("When the BindingContext changes, the new context needs to listen for updates.")]
 		public void BindingContextChangedBindingsListening()
 		{
 			var mock = new MockBindable();
@@ -257,8 +255,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("test", mock.GetValue(MockBindable.TextProperty)); // "The new ViewModel was not being listened to after being set"
 		}
 
-		[Fact]
-		[NUnit.Framework.Description("When an INPC implementer is unset as the BindingContext, its changes shouldn't be listened to any further.")]
+		[Fact("When an INPC implementer is unset as the BindingContext, its changes shouldn't be listened to any further.")]
 		public void BindingContextUnsetStopsListening()
 		{
 			var mock = new MockBindable();

@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.Maui.Controls.Core.UnitTests
 {
-	
 	public class PointTests : BaseTestFixtureXUnit
 	{
 		[Fact]
@@ -19,7 +18,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		[Fact]
 		public void TestPointDistance()
 		{
-			Assert.Equal(5, new Point(2, 2).Distance(new Point(5, 6))).Within(0.001);
+			AssertEqualWithTolerance(5, new Point(2, 2).Distance(new Point(5, 6)), 0.001);
 		}
 
 		[Fact]
@@ -119,5 +118,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Throws<InvalidOperationException>(() => converter.ConvertFromInvariantString(""));
 		}
 
+		static void AssertEqualWithTolerance(double a, double b, double tolerance)
+		{
+			var diff = Math.Abs(a - b);
+			Assert.True(diff <= tolerance);
+		}
 	}
 }

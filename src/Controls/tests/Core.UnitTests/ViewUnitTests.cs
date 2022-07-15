@@ -534,7 +534,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[Fact]
-		public void StartTimerSimple()
+		public async Task StartTimerSimple()
 		{
 			var task = new TaskCompletionSource<bool>();
 
@@ -544,12 +544,12 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				return false;
 			}));
 
-			task.Task.Wait();
+			await task.Task;
 			Assert.False(task.Task.Result);
 		}
 
 		[Fact]
-		public void StartTimerMultiple()
+		public async Task StartTimerMultiple()
 		{
 			var task = new TaskCompletionSource<int>();
 
@@ -563,7 +563,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				return false;
 			}));
 
-			task.Task.Wait();
+			await task.Task;
 			Assert.Equal(2, task.Task.Result);
 		}
 

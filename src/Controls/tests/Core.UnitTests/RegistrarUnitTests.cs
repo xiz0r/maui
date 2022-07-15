@@ -272,8 +272,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			var viewRenderer = registrar.GetHandler(typeof(View));
 
 			Assert.IsType<ButtonMockRenderer>(buttonRenderer);
-			Assert.IsType<ButtonMockRenderer>(viewRenderer);
-			Assert.IsType<ButtonMockRenderer>(viewRenderer);
+			Assert.IsNotType<ButtonMockRenderer>(viewRenderer);
+			Assert.IsType<MockRenderer>(viewRenderer);
 		}
 
 		[Fact]

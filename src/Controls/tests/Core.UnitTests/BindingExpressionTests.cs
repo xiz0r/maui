@@ -131,7 +131,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		{
 			foreach (var testCase in TryConvertWithNumbersAndCulturesCases)
 			{
-				yield return new object[] { testCase };
+				yield return (object[])testCase;
 			}
 		}
 

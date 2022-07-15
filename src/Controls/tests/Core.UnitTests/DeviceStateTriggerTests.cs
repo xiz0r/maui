@@ -15,7 +15,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(trigger);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData("Android", true)]
 		[InlineData("iOS", false)]
 		public void CorrectStateIsAppliedWhenAttached(string triggerDevice, bool isApplied)

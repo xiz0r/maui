@@ -65,8 +65,8 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				yield return new object[] { RadioButton.ScaleProperty, 0.8 };
 				yield return new object[] { RadioButton.ScaleXProperty, 0.9 };
 				yield return new object[] { RadioButton.ScaleYProperty, 0.95 };
-				yield return new object[] { RadioButton.TranslationXProperty, 123 };
-				yield return new object[] { RadioButton.TranslationYProperty, 321 };
+				yield return new object[] { RadioButton.TranslationXProperty, 123d };
+				yield return new object[] { RadioButton.TranslationYProperty, 321d };
 			}
 
 			IEnumerator IEnumerable.GetEnumerator()

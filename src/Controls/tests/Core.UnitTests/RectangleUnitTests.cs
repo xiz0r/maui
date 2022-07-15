@@ -132,7 +132,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Rect.Zero, intersection);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(0, 0, true)]
 		[InlineData(0, 5, true)]
 		[InlineData(5, 0, true)]
@@ -142,7 +142,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(isEmpty, new Rect(0, 0, w, h).IsEmpty);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(0, 0, 8, 8, 0, 0, 5, 5, true)]
 		[InlineData(0, 0, 5, 5, 5, 5, 5, 5, false)]
 		[InlineData(0, 0, 2, 2, 3, 0, 5, 5, false)]
@@ -175,7 +175,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(new Rect(0, 3, 13, 10), new Rect(3, 3, 10, 10).Union(new Rect(0, 5, 2, 2)));
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(0, 0, 2, 2, "{X=0 Y=0 Width=2 Height=2}")]
 		[InlineData(1, 0, 3, 2, "{X=1 Y=0 Width=3 Height=2}")]
 		public void TestRectToString(double x, double y, double w, double h, string expected)

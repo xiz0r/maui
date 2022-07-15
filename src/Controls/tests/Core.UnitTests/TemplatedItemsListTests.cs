@@ -433,12 +433,18 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(leftOver, expectedLeftOver);
 		}
 
-		public static IEnumerable<object[]> GetGroupAndIndexOfItemData()
-		{
-			return TestDataHelpers.Combinations(new List<int>() { 0, 1, 2 });
-		}
+		
 
-		[Theory, MemberData(nameof(GetGroupAndIndexOfItemData))]
+		[Theory]
+		[InlineData(0, 0)]
+		[InlineData(0, 1)]
+		[InlineData(0, 2)]
+		[InlineData(1, 0)]
+		[InlineData(1, 1)]
+		[InlineData(1, 2)]
+		[InlineData(2, 0)]
+		[InlineData(2, 1)]
+		[InlineData(2, 2)]
 		public void GetGroupAndIndexOfItem(int group, int index)
 		{
 			var collection = new[] {

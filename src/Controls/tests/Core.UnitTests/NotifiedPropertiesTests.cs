@@ -167,17 +167,17 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 #pragma warning restore 0414
 
-		[Fact, MemberData(nameof(PropertyTestCases))]
+		[Theory, MemberData(nameof(PropertyTestCases))]
 		public void DefaultValues(PropertyTestCase property)
 		{
 			var view = property.CreateView();
 			var expected = property.ExpectedDefaultValue;
 			var actual = property.PropertyGetter(view);
 
-			Assert.True(property.ExpectedDefaultValue == property.PropertyGetter(view), property.DebugName);
+			Assert.True(object.Equals(property.ExpectedDefaultValue, actual), property.DebugName);
 		}
 
-		[Fact, MemberData(nameof(PropertyTestCases))]
+		[Theory, MemberData(nameof(PropertyTestCases))]
 		public void Set(PropertyTestCase property)
 		{
 			var view = property.CreateView();
@@ -193,10 +193,10 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			property.PropertySetter(view, testvalue);
 
 			Assert.True(changed, property.DebugName);
-			Assert.True(testvalue == property.PropertyGetter(view), property.DebugName);
+			Assert.True(object.Equals(testvalue, property.PropertyGetter(view)), property.DebugName);
 		}
 
-		[Fact, MemberData(nameof(PropertyTestCases))]
+		[Theory, MemberData(nameof(PropertyTestCases))]
 		public void DoubleSet(PropertyTestCase property)
 		{
 			var view = property.CreateView();
@@ -214,7 +214,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			property.PropertySetter(view, testvalue);
 
 			Assert.False(changed, property.DebugName);
-			Assert.True(testvalue == property.PropertyGetter(view), property.DebugName);
+			Assert.True(object.Equals(testvalue, property.PropertyGetter(view)), property.DebugName);
 		}
 	}
 }

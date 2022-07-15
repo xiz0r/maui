@@ -81,7 +81,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 				DeviceInfo.SetCurrent(null);
 				System.Threading.Thread.CurrentThread.CurrentCulture = _defaultCulture;
 				System.Threading.Thread.CurrentThread.CurrentUICulture = _defaultUICulture;
-				DispatcherProvider.SetCurrent(null);
+				//DispatcherProvider.SetCurrent(null);
 			}
 
 			_disposed = true;

@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Empty(MockApplication.MockLogger.Messages);
 		}
 
-		[Fact, Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		public void ValueSetOnOneWayToSourceWithComplexPathBinding(bool setContextFirst, bool isDefault)
 		{

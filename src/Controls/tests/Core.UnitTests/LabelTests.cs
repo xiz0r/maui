@@ -108,7 +108,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		public void FontSizeConverterTests()
 		{
 			var converter = new FontSizeConverter();
-			Assert.Equal(12, converter.ConvertFromInvariantString("12"));
+			Assert.Equal(12d, converter.ConvertFromInvariantString("12"));
 			Assert.Equal(10.7, converter.ConvertFromInvariantString("10.7"));
 		}
 

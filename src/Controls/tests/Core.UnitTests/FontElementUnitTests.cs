@@ -6,7 +6,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 	public abstract class FontElementUnitTests<TView> : BaseTestFixtureXUnit
 		where TView : IView, new()
 	{
-		[Fact]
+		[Theory]
 		[InlineData(nameof(IFontElement.FontAttributes), FontAttributes.Bold)]
 		[InlineData(nameof(IFontElement.FontAutoScalingEnabled), false)]
 		[InlineData(nameof(IFontElement.FontFamily), "Arial")]

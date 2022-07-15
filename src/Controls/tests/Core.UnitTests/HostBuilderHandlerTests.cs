@@ -44,7 +44,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(typeof(ButtonHandlerStub), specificHandler.GetType());
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(typeof(Label), typeof(LabelHandler))]
 		[InlineData(typeof(Button), typeof(ButtonHandler))]
 		[InlineData(typeof(ContentPage), typeof(PageHandler))]

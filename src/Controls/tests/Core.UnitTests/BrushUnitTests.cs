@@ -13,7 +13,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			_converter = new BrushTypeConverter();
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData("rgb(6, 201, 198)")]
 		[InlineData("rgba(6, 201, 188, 0.2)")]
 		[InlineData("hsl(6, 20%, 45%)")]
@@ -26,7 +26,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(_converter.ConvertFromInvariantString(colorDefinition));
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData("#ff00ff")]
 		[InlineData("#00FF33")]
 		[InlineData("#00FFff 40%")]
@@ -36,7 +36,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.NotNull(_converter.ConvertFromInvariantString(colorHex));
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData("linear-gradient(90deg, rgb(255, 0, 0),rgb(255, 153, 51))")]
 		[InlineData("radial-gradient(circle, rgb(255, 0, 0) 25%, rgb(0, 255, 0) 50%, rgb(0, 0, 255) 75%)")]
 		public void TestBrushTypeConverterWithBrush(string brush)

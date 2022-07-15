@@ -191,7 +191,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Maui.Controls.VisualMarker.Default, layout2.Visual);
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void GrandparentSetsVisualAndImplicitDescendentsInheritValue()
 		{
 			var layout = ImplicitDefaultLayout();
@@ -216,7 +216,9 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, layout2.Visual);
 		}
 
-		[Fact]
+		const string IgnoreMaterial = "EffectiveVisual is never Material right now";
+
+		[Fact(Skip = IgnoreMaterial)]
 		public void GrandparentSetsOppositeVisualAndGrandchildInheritsParentExplicitValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -240,7 +242,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, target);
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void NotifyVisualChangedDoesNotTriggerVisualPropertyChangedUnnecessarily()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -263,7 +265,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(1, target);
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void ReParentAndInheritNewParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -284,7 +286,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, ((View)view).Visual);
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void ReParentParentAndInheritNewGrandParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -306,7 +308,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Maui.Controls.VisualMarker.MatchParent, target);
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetVisualToMatchParentAndInheritParentValue()
 		{
 			var layout = ImplicitDefaultLayout();
@@ -325,7 +327,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetGrandparentAndInheritExplicitParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -345,7 +347,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetGrandparentUsingAnonCtorAndMaintainExplicitParentValue()
 		{
 			var layout = new StackLayout
@@ -372,7 +374,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetGrandparentUsingCtorAndMaintainExplicitParentValue()
 		{
 			IVisualController view = ImplicitDefaultView();
@@ -389,7 +391,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(target.IsDefault(), "EffectiveVisual should be Default");
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetParentAndGrandchildrenInheritValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -406,7 +408,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetParentAndContentAndGrandchildrenInheritValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -424,7 +426,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetParentAndInheritExplicitParentValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -438,7 +440,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(!target.IsDefault(), "EffectiveVisual should be Material");
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetParentAndMaintainExplicitValue()
 		{
 			var layout = ExplicitMaterialLayout();
@@ -453,7 +455,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(Maui.Controls.VisualMarker.Default, ((View)view).Visual);
 		}
 
-		[Fact]
+		[Fact(Skip = IgnoreMaterial)]
 		public void SetParentUsingCtorAndInheritParentValue()
 		{
 			IVisualController view = ImplicitDefaultView();

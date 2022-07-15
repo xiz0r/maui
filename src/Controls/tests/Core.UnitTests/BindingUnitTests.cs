@@ -121,7 +121,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal("Value", bindable.Text);
 		}
 
-		[Fact]
+		[Theory]
 		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
 		[Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayWithComplexPathBinding(
@@ -170,7 +170,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
-		[Fact, Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		public void ValueSetOnOneWayToSourceWithComplexPathBinding(
 			 bool setContextFirst,
 			 bool isDefault)
@@ -216,7 +216,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 		[MemberData(nameof(TestDataHelpers.TrueFalse), MemberType = typeof(TestDataHelpers))]
-		[Fact, Category("[Binding] Complex paths")]
+		[Theory, Category("[Binding] Complex paths")]
 		public void ValueSetOnTwoWayWithComplexPathBinding(
 			 bool setContextFirst,
 			 bool isDefault)
@@ -735,7 +735,11 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			AssertNoErrorsLogged();
 		}
 
-		[Fact, Category("[Binding] Self paths")]
+		[InlineData(true, true)]
+		[InlineData(true, false)]
+		[InlineData(false, true)]
+		[InlineData(false, false)]
+		[Theory, Category("[Binding] Self paths")]
 		public void ValueSetOnTwoWayWithSelfPathBinding(
 			 bool setContextFirst,
 			 bool isDefault)

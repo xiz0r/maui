@@ -25,7 +25,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.Equal(view, scrollView.Content);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(ScrollOrientation.Horizontal)]
 		[InlineData(ScrollOrientation.Both)]
 		public void GetsCorrectSizeRequestWithWrappingContent(ScrollOrientation orientation)

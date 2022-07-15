@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Maui.Graphics;
 using Xunit;
 
@@ -133,29 +134,23 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			Assert.Equal(expectedWidth, view1.Bounds.X);
 		}
 
-		static IEnumerable ExpansionYCases
+		static IEnumerable<object[]> ExpansionYCases()
 		{
-			get
-			{
-				yield return new object[] { LayoutOptions.StartAndExpand, 0 };
-				yield return new object[] { LayoutOptions.EndAndExpand, (TestAreaHeight / 2) - TestViewHeight };
-				yield return new object[] { LayoutOptions.CenterAndExpand, (TestAreaHeight / 4) - (TestViewHeight / 2) };
-				yield return new object[] { LayoutOptions.FillAndExpand, 0 };
-			}
+			yield return new object[] { LayoutOptions.StartAndExpand, 0 };
+			yield return new object[] { LayoutOptions.EndAndExpand, (TestAreaHeight / 2) - TestViewHeight };
+			yield return new object[] { LayoutOptions.CenterAndExpand, (TestAreaHeight / 4) - (TestViewHeight / 2) };
+			yield return new object[] { LayoutOptions.FillAndExpand, 0 };
 		}
 
-		static IEnumerable ExpansionXCases
+		static IEnumerable<object[]> ExpansionXCases()
 		{
-			get
-			{
 				yield return new object[] { LayoutOptions.StartAndExpand, 0 };
-				yield return new object[] { LayoutOptions.EndAndExpand, (TestViewWidth / 2) - TestViewWidth };
-				yield return new object[] { LayoutOptions.CenterAndExpand, (TestViewWidth / 4) - (TestViewWidth / 2) };
+				yield return new object[] { LayoutOptions.EndAndExpand, (TestAreaWidth / 2) - TestViewWidth };
+				yield return new object[] { LayoutOptions.CenterAndExpand, (TestAreaWidth / 4) - (TestViewWidth / 2) };
 				yield return new object[] { LayoutOptions.FillAndExpand, 0 };
-			}
 		}
 
-		[Fact, MemberData(nameof(ExpansionYCases))]
+		[Theory, MemberData(nameof(ExpansionYCases))]
 		public void AlignmentRespectedWithinVerticalSegment(LayoutOptions layoutOptions, double expectedY)
 		{
 			var view0 = new TestView
@@ -175,7 +170,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests.Layouts
 			Assert.Equal(expectedY, view0.Bounds.Y);
 		}
 
-		[Fact, MemberData(nameof(ExpansionYCases))]
+		[Theory, MemberData(nameof(ExpansionXCases))]
 		public void AlignmentRespectedWithinHorizontalSegment(LayoutOptions layoutOptions, double expectedX)
 		{
 			var view0 = new TestView

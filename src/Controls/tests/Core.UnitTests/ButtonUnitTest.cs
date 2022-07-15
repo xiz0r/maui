@@ -19,7 +19,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(fired);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void TestClickedvent(bool isEnabled)
@@ -37,7 +37,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(activated == isEnabled ? true : false);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void TestPressedEvent(bool isEnabled)
@@ -55,7 +55,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.True(pressed == isEnabled ? true : false);
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(true)]
 		[InlineData(false)]
 		public void TestReleasedEvent(bool isEnabled)

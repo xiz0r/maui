@@ -69,7 +69,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 		}
 
 
-		[Theory, MemberData(nameof(TestDataHelpers.Range), 3, 6, MemberType = typeof(TestDataHelpers))] // This will fail, we don't have a range method yet that will generated more than two parameters
+		[Theory, MemberData(nameof(TestDataHelpers.Range), 3, 6, 4, MemberType = typeof(TestDataHelpers))] // This will fail, we don't have a range method yet that will generated more than two parameters
 		public void TestPointHashCode(double x1, double y1, double x2, double y2)
 		{
 			bool result = new Point(x1, y1).GetHashCode() == new Point(x2, y2).GetHashCode();
@@ -98,7 +98,7 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 			Assert.False(point.Equals("Point"));
 		}
 
-		[Fact]
+		[Theory]
 		[InlineData(0, 0, "{X=0 Y=0}")]
 		[InlineData(5, 2, "{X=5 Y=2}")]
 		public void TestPointToString(double x, double y, string expectedResult)

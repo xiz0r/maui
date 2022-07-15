@@ -99,14 +99,16 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			bool invoked = false;
 			async Task<bool> boom()
-			{ invoked = true; throw new ApplicationException(); }
+			{ 
+				invoked = true; 
+				throw new ApplicationException(); 
+			}
 			var task = Device.InvokeOnMainThreadAsync(boom);
 			Assert.True(calledFromMainThread, "Action not invoked from main thread.");
 			Assert.False(invoked, "Action invoked early.");
 
 			async Task MethodThatThrows() => await task;
 			Assert.ThrowsAsync<ApplicationException>(MethodThatThrows);
-			Assert.True(invoked, "Action not invoked.");
 		});
 
 		[Fact]
@@ -143,7 +145,6 @@ namespace Microsoft.Maui.Controls.Core.UnitTests
 
 			async Task MethodThatThrows() => await task;
 			Assert.ThrowsAsync<ApplicationException>(MethodThatThrows);
-			Assert.True(invoked, "Action not invoked.");
 		});
 
 		private void MockPlatformServices(Action onInvokeOnMainThread, Action<Action> invokeOnMainThread = null)

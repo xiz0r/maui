@@ -47,7 +47,7 @@ namespace Microsoft.Maui.Platform
 			if (brush is null)
 			{
 				platformDatePicker.Resources.RemoveKeys(TextColorResourceKeys);
-				platformDatePicker.Foreground = null;
+				platformDatePicker.ClearValue(CalendarDatePicker.ForegroundProperty);
 			}
 			else
 			{
@@ -75,7 +75,7 @@ namespace Microsoft.Maui.Platform
 			if (brush is null)
 			{
 				platformDatePicker.Resources.RemoveKeys(BackgroundColorResourceKeys);
-				platformDatePicker.Background = null;
+				platformDatePicker.ClearValue(CalendarDatePicker.BackgroundProperty);
 			}
 			else
 			{

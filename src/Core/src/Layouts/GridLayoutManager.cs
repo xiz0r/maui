@@ -29,7 +29,7 @@ namespace Microsoft.Maui.Layouts
 
 		public override Size ArrangeChildren(Rect bounds)
 		{
-			if (_gridStructure  == null)
+			if (_gridStructure == null)
 			{
 				_gridStructure = new GridStructure(Grid, bounds.Width, bounds.Height);
 			}
@@ -69,7 +69,7 @@ namespace Microsoft.Maui.Layouts
 			readonly IGridLayout _grid;
 			readonly double _gridWidthConstraint;
 			readonly double _gridHeightConstraint;
-			
+
 			readonly double _explicitGridHeight;
 			readonly double _explicitGridWidth;
 			readonly double _gridMaxHeight;
@@ -693,7 +693,7 @@ namespace Microsoft.Maui.Layouts
 				return available + cellRowsHeight;
 			}
 
-			public void AdjustStarsForArrange(Size targetSize) 
+			public void AdjustStarsForArrange(Size targetSize)
 			{
 				if (_grid.VerticalLayoutAlignment == Primitives.LayoutAlignment.Fill)
 				{
@@ -722,7 +722,7 @@ namespace Microsoft.Maui.Layouts
 						ResolveStarRows(targetSize.Height);
 					}
 				}
-				
+
 				if (_grid.HorizontalLayoutAlignment == Primitives.LayoutAlignment.Fill)
 				{
 					if (_grid.DesiredSize.Width < targetSize.Width)

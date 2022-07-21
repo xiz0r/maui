@@ -68,6 +68,7 @@
                         <FontImageSource Glyph="X" FontFamily="Arial" Color="Blue" />
                     </MenuItem.IconImageSource>
                 </MenuItem>
+                <MenuFlyoutSeparator />
                 <MenuFlyoutSubItem Text="More colors">
                     <MenuFlyoutItem Text="Hot pink" Clicked="MakeLabelHotPink">
                         <MenuItem.IconImageSource>
@@ -88,6 +89,7 @@
         <Label Text="Choose menu image here" FontSize="30">
             <Label.ContextActions>
                 <MenuItem Text="Check menu happiness" IconImageSource="{Binding CurrentIconImageSource}" Clicked="OnHappinessMenuItemClicked"></MenuItem>
+                <MenuFlyoutSeparator />
                 <MenuItem Text="Make menu Happy" IconImageSource="{Binding HappyImageSource}" Clicked="OnChooseHappyMenuItemClicked"></MenuItem>
                 <MenuItem Text="Make menu Medium" IconImageSource="{Binding MediumImageSource}" Clicked="OnChooseMediumMenuItemClicked"></MenuItem>
                 <MenuItem Text="Make menu Not happy" IconImageSource="{Binding NotHappyImageSource}" Clicked="OnChooseNotHappyMenuItemClicked"></MenuItem>

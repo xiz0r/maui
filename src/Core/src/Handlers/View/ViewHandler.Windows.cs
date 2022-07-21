@@ -37,34 +37,41 @@ namespace Microsoft.Maui.Handlers
 		{
 			foreach (var menuItem in menuItems)
 			{
-				if (menuItem is IMenuFlyoutSubItem menuFlyoutSubItem)
+				switch (menuItem)
 				{
-					var newSubItem = new MenuFlyoutSubItem();
+					case IMenuFlyoutSubItem menuFlyoutSubItem:
+						var newSubItem = new MenuFlyoutSubItem();
 
-					// TODO: Need this code more generic so that flyout items and other items can share code paths
-					//UpdateNativeMenuItem(menuItem, newItem);
-					newSubItem.Text = menuFlyoutSubItem.Text;
-					AddMenuItems(menuFlyoutSubItem, newSubItem.Items.Add);
+						// TODO: Need this code more generic so that flyout items and other items can share code paths
+						//UpdateNativeMenuItem(menuItem, newItem);
+						newSubItem.Text = menuFlyoutSubItem.Text;
+						AddMenuItems(menuFlyoutSubItem, newSubItem.Items.Add);
 
-					addMenuItem(newSubItem);
-				}
-				else
-				{
-					var newItem = new MenuFlyoutItem();
-					UpdateNativeMenuItem(menuItem, newItem);
-					if (menuItem is INotifyPropertyChanged npc)
-					{
-						// TODO: Super hack. This is so that changes to the MAUI controls are reflected in the native menu items
-						// TODO: If we can move all this MenuItem code to the Controls package, we can more closely follow the pattern used in other controls
-						npc.PropertyChanged += (object? sender, PropertyChangedEventArgs e) =>
+						addMenuItem(newSubItem);
+						break;
+
+					case IMenuFlyoutSeparator menuFlyoutSeparator:
+						var newSeparator = new MenuFlyoutSeparator();
+						addMenuItem(newSeparator);
+						break;
+
+					default:
+						var newItem = new MenuFlyoutItem();
+						UpdateNativeMenuItem(menuItem, newItem);
+						if (menuItem is INotifyPropertyChanged npc)
 						{
-							var changedMenuItem = (IMenuElement)sender!;
-							UpdateNativeMenuItem(changedMenuItem, newItem);
-						};
-					}
-					newItem.Click += (_, __) => menuItem.Clicked();
+							// TODO: Super hack. This is so that changes to the MAUI controls are reflected in the native menu items
+							// TODO: If we can move all this MenuItem code to the Controls package, we can more closely follow the pattern used in other controls
+							npc.PropertyChanged += (object? sender, PropertyChangedEventArgs e) =>
+							{
+								var changedMenuItem = (IMenuElement)sender!;
+								UpdateNativeMenuItem(changedMenuItem, newItem);
+							};
+						}
+						newItem.Click += (_, __) => menuItem.Clicked();
 
-					addMenuItem(newItem);
+						addMenuItem(newItem);
+						break;
 				}
 			}
 		}

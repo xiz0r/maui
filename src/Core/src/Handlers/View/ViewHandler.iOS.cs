@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
@@ -56,32 +57,46 @@ namespace Microsoft.Maui.Handlers
 		{
 			foreach (var menuItem in menuItems)
 			{
-				if (menuItem is IMenuFlyoutSubItem menuFlyoutSubItem)
+				switch (menuItem)
 				{
-					var uiSubMenuElements = new List<UIMenuElement>();
+					case IMenuFlyoutSubItem menuFlyoutSubItem:
+						var uiSubMenuElements = new List<UIMenuElement>();
 
-					AddMenuItems(menuFlyoutSubItem, uiSubMenuElements);
+						AddMenuItems(menuFlyoutSubItem, uiSubMenuElements);
 
-					var newSubMenuElement = UIMenu.Create(
-						title: menuFlyoutSubItem.Text,
-						image: menuFlyoutSubItem.Source?.GetPlatformMenuImage(MauiContext!),
-						identifier: UIMenuIdentifier.None,
-						options: 0, // show as regular menu items
-						children: uiSubMenuElements.ToArray());
+						var newSubMenuElement = UIMenu.Create(
+							title: menuFlyoutSubItem.Text,
+							image: menuFlyoutSubItem.Source?.GetPlatformMenuImage(MauiContext!),
+							identifier: UIMenuIdentifier.None,
+							options: 0, // show as regular menu items
+							children: uiSubMenuElements.ToArray());
 
-					destinationList.Add(newSubMenuElement);
-				}
-				else
-				{
-					var newMenuElement = UIAction.Create(
-						title: menuItem.Text,
-						image: menuItem.Source?.GetPlatformMenuImage(MauiContext!),
-						identifier: null,
-						handler: _ => { menuItem.Clicked(); });
+						destinationList.Add(newSubMenuElement);
+						break;
 
-					//UpdateNativeMenuItem(menuItem, newItem);
+					case IMenuFlyoutSeparator menuFlyoutSeparator:
+						var newSeparator =
+							UIMenu.Create(
+								string.Empty,
+								image: null,
+								UIMenuIdentifier.None,
+								UIMenuOptions.DisplayInline,
+								children: Array.Empty<UIMenuElement>());
 
-					destinationList.Add(newMenuElement);
+						destinationList.Add(newSeparator);
+						break;
+
+					default:
+						var newMenuElement = UIAction.Create(
+							title: menuItem.Text,
+							image: menuItem.Source?.GetPlatformMenuImage(MauiContext!),
+							identifier: null,
+							handler: _ => { menuItem.Clicked(); });
+
+						//UpdateNativeMenuItem(menuItem, newItem);
+
+						destinationList.Add(newMenuElement);
+						break;
 				}
 			}
 		}
